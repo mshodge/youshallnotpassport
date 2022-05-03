@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-import config.proxies as set_proxies
 
 
 def check(proxy = False):
@@ -8,6 +7,7 @@ def check(proxy = False):
     url_premium = "https://www.passport.service.gov.uk/urgent/?_ga=2.165977918.1052226504.1651564347-663154096.1628163070"
 
     if proxy:
+        import config.proxies as set_proxies
         headers = requests.utils.default_headers()
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
