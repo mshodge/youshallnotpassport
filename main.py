@@ -3,7 +3,7 @@ import tweepy
 from datetime import datetime
 
 
-post_to_twitter = False
+post_to_twitter = True
 proxy = False
 github_action = True
 
