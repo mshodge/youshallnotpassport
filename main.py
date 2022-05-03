@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import csv
 
+
 post_to_twitter = True
 proxy = False
 github_action = True
@@ -68,6 +69,9 @@ def check(proxy):
     if "service is unavailable" in page_1_week.text:
         response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
+    elif "System busy" in page_1_week.text:
+        response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+        update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
     else:
         response = f"One week fast track service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         update_csv(service = "one week fast track", online = "True", timestamp = timestamp)
@@ -75,6 +79,9 @@ def check(proxy):
     if "service is unavailable" in page_premium.text:
         response += f"\nPremium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "False", timestamp = timestamp)
+    elif "System busy" in page_premium.text:
+        response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+        update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
     else:
         response += f"\nPremium service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "True", timestamp = timestamp)
