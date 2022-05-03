@@ -1,0 +1,15 @@
+# Directories #
+jh-project-notes/
+.idea/*
+config/proxies.py
+# Data files #
+
+*.pyc
+*.csv
+*.rds
+*.xlsx
+*.xlsm
+*.xml
+*.tsv
+*.spacy
+*.hyper
