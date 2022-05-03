@@ -2,6 +2,7 @@
 jh-project-notes/
 .idea/*
 config/proxies.py
+config/twitter_credentials.py
 # Data files #
 
 *.pyc
