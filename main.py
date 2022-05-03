@@ -6,8 +6,8 @@ import csv
 
 
 post_to_twitter = True
-proxy = True
-github_action = False
+proxy = False
+github_action = True
 
 def update_csv(service, online, timestamp):
 
