@@ -80,8 +80,8 @@ def check(proxy):
         response += f"\nPremium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "False", timestamp = timestamp)
     elif "System busy" in page_premium.text:
-        response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
+        response = f"Premium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
+        update_csv(service = "premium", online = "False", timestamp = timestamp)
     else:
         response += f"\nPremium service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "True", timestamp = timestamp)
