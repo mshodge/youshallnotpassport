@@ -1,6 +1,6 @@
 # youshallnotpass
 
-<center><img src="meta/youshallnotpass.png"></center>
+<center><img src="./meta/youshallnotpass.png"></center>
 
 A simple `requests` script to check whether the following [UK Passport](https://www.gov.uk/apply-renew-passport) services are available:
 
