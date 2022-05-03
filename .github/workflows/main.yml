@@ -2,7 +2,7 @@ name: check
 
 on:
   schedule:
-    - cron: "*/30 * * * *" #runs every 30 mins
+    - cron: "0,30 * * * *" #runs every 30 mins
   workflow_dispatch:
 
 jobs:
