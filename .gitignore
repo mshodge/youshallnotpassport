@@ -14,3 +14,5 @@ config/twitter_credentials.py
 *.tsv
 *.spacy
 *.hyper
+
+!data/data.csv
