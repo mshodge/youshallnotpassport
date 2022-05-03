@@ -36,4 +36,4 @@ def check(proxy = False):
 
 
 if __name__ == '__main__':
-    check(proxy = True)
+    check(proxy = False)
