@@ -56,30 +56,36 @@ def check(proxy):
         import config.proxies as set_proxies
 
         proxies = set_proxies.set_ons_proxies(ssl = False, headers = headers)
-        page_1_week = requests.get(url_one_week, proxies = proxies, verify = False, headers = headers)
-        page_premium = requests.get(url_premium, proxies = proxies, verify = False, headers = headers)
-
+        page_1_week = requests.get(url_one_week, proxies = proxies, verify = False, headers = headers, timeout=600)
+        page_premium = requests.get(url_premium, proxies = proxies, verify = False, headers = headers, timeout=600)
+        page_1_week_text = page_1_week.text
+        page_premium_text = page_premium.text
+        page_1_week.close()
+        page_premium.close()
     else:
-        page_1_week = requests.get(url_one_week, verify = False, headers = headers)
-        page_premium = requests.get(url_premium, verify = False, headers = headers)
-
+        page_1_week = requests.get(url_one_week, verify = False, headers = headers, timeout=600)
+        page_premium = requests.get(url_premium, verify = False, headers = headers, timeout=600)
+        page_1_week_text = page_1_week.text
+        page_premium_text = page_premium.text
+        page_1_week.close()
+        page_premium.close()
     timestamp = datetime.now().strftime('%d/%m/%Y %H:%M')
 
 
-    if "service is unavailable" in page_1_week.text:
+    if "service is unavailable" in page_1_week_text:
         response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
-    elif "System busy" in page_1_week.text:
+    elif "System busy" in page_1_week_text:
         response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         update_csv(service = "one week fast track", online = "False", timestamp = timestamp)
     else:
         response = f"One week fast track service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         update_csv(service = "one week fast track", online = "True", timestamp = timestamp)
 
-    if "service is unavailable" in page_premium.text:
+    if "service is unavailable" in page_premium_text:
         response += f"\nPremium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "False", timestamp = timestamp)
-    elif "System busy" in page_premium.text:
+    elif "System busy" in page_premium_text:
         response = f"Premium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         update_csv(service = "premium", online = "False", timestamp = timestamp)
     else:
