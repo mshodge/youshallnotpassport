@@ -1,6 +1,7 @@
 import requests
 import tweepy
 from datetime import datetime
+import os
 
 
 post_to_twitter = True
