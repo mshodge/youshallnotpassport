@@ -6,8 +6,8 @@ import csv
 
 
 post_to_twitter = True
-proxy = False
-github_action = True
+proxy = True
+github_action = False
 
 def update_csv(service, online, timestamp):
 
@@ -63,8 +63,8 @@ def check(proxy):
         page_1_week.close()
         page_premium.close()
     else:
-        page_1_week = requests.get(url_one_week, verify = False, headers = headers, timeout=600)
-        page_premium = requests.get(url_premium, verify = False, headers = headers, timeout=600)
+        page_1_week = requests.get(url_one_week, timeout=600)
+        page_premium = requests.get(url_premium, timeout=600)
         page_1_week_text = page_1_week.text
         page_premium_text = page_premium.text
         page_1_week.close()
