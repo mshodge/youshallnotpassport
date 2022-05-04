@@ -1,6 +1,6 @@
 import requests
 import tweepy
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import csv
 
@@ -43,7 +43,7 @@ def post(response, proxy, github_action):
     print("Posted to Twitter")
 
 
-def check(proxy):
+def check(proxy, github_action):
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     url_premium = "https://www.passport.service.gov.uk/urgent/?_ga=2.165977918.1052226504.1651564347-663154096.1628163070"
 
@@ -69,7 +69,13 @@ def check(proxy):
         page_premium_text = page_premium.text
         page_1_week.close()
         page_premium.close()
-    timestamp = datetime.now().strftime('%d/%m/%Y %H:%M')
+
+    if github_action:
+        timestamp = datetime.now() + timedelta(hours=1)
+        timestamp = timestamp.strftime('%d/%m/%Y %H:%M')
+
+    else:
+        timestamp = datetime.now().strftime('%d/%m/%Y %H:%M')
 
 
     if "service is unavailable" in page_1_week_text:
@@ -96,7 +102,7 @@ def check(proxy):
     return response
 
 if __name__ == '__main__':
-    response = check(proxy)
+    response = check(proxy, github_action)
 
     if post_to_twitter:
         post(response, proxy, github_action)
