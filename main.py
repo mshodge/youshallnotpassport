@@ -6,9 +6,9 @@ from github import Github
 import pandas as pd
 
 
-post_to_twitter = False
-proxy = True
-github_action = False
+post_to_twitter = True
+proxy = False
+github_action = True
 
 def df_to_csv_string(df):
     """
@@ -34,7 +34,7 @@ def df_to_csv_string(df):
 
     return df_string
 
-def update_csv(service, online, timestamp, github_action):
+def update_csv(df_new, github_action):
     """
     Updates csv file on GitHub and local
     :param service: <string> The service as a string
@@ -53,12 +53,10 @@ def update_csv(service, online, timestamp, github_action):
     csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
     df = pd.read_csv(csv_url)
 
-    df_new = pd.DataFrame([[service, online, timestamp]], columns = ['service', 'online', 'timestamp'])
-
     df = df.append(df_new, ignore_index = True)
 
     if github_action:
-        token = os.environ['github_token']
+        token = os.environ['access_token_github']
     else:
         import config.github_credentials as github_credentials
         token = github_credentials.access_token
@@ -152,23 +150,29 @@ def check(proxy, github_action):
 
     if "service is unavailable" in page_1_week_text:
         response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        update_csv(service = "one week fast track", online = "False", timestamp = timestamp, github_action = github_action)
+        one_week_online = "False"
     elif "System busy" in page_1_week_text:
         response = f"One week fast track service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        update_csv(service = "one week fast track", online = "False", timestamp = timestamp, github_action = github_action)
+        one_week_online = "False"
     else:
         response = f"One week fast track service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        update_csv(service = "one week fast track", online = "True", timestamp = timestamp, github_action = github_action)
+        one_week_online = "True"
 
     if "service is unavailable" in page_premium_text:
         response += f"\nPremium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        update_csv(service = "premium", online = "False", timestamp = timestamp, github_action = github_action)
+        premium_online = "False"
     elif "System busy" in page_premium_text:
         response = f"Premium service is unavailable ❌ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        update_csv(service = "premium", online = "False", timestamp = timestamp, github_action = github_action)
+        premium_online = "False"
     else:
         response += f"\nPremium service is available ✅ ({timestamp}) https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        update_csv(service = "premium", online = "True", timestamp = timestamp, github_action = github_action)
+        premium_online = "True"
+
+    df_new = pd.DataFrame([["one week fast track", one_week_online, timestamp],
+                           ["premium", premium_online, timestamp]],
+                          columns = ['service', 'online', 'timestamp'])
+
+    update_csv(df_new, github_action)
 
     print(response)
     return response
