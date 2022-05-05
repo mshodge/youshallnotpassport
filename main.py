@@ -8,9 +8,9 @@ import urllib3
 
 urllib3.disable_warnings()
 
-post_to_twitter = False
+post_to_twitter = True
 proxy = False
-github_action = False
+github_action = True
 save_csv = True
 
 
