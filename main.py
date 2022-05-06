@@ -9,9 +9,9 @@ import urllib3
 urllib3.disable_warnings()
 
 proxy = False
-github_action = True
-save_csv = True
-post_to_twitter = True
+github_action = False
+save_csv = False
+post_to_twitter = False
 
 def df_to_csv_string(df):
     """
@@ -185,8 +185,17 @@ def check(proxy, github_action):
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
 
+
+
     # Reports if premiunm service is online or not
     if "service is unavailable" in page_premium_text:
+        response += f"\n" \
+                    f"\n" \
+                    f"Premium service is unavailable ❌ ({timestamp}) " \
+                    f"\n" \
+                    f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
+        premium_online = "False"
+    elif "Sorry, there are no available appointments" in page_premium_text:
         response += f"\n" \
                     f"\n" \
                     f"Premium service is unavailable ❌ ({timestamp}) " \
