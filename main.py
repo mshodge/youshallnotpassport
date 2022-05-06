@@ -8,11 +8,10 @@ import urllib3
 
 urllib3.disable_warnings()
 
-post_to_twitter = True
 proxy = False
-github_action = True
-save_csv = True
-
+github_action = False
+save_csv = False
+post_to_twitter = True
 
 def df_to_csv_string(df):
     """
@@ -220,12 +219,12 @@ def check(proxy, github_action):
     if save_csv:
         update_csv(df_response_from_check, github_action)
 
-    return response
+    return response, premium_online, one_week_online
 
 
 if __name__ == '__main__':
 
-    response = check(proxy, github_action)
+    response, premium_online, one_week_online = check(proxy, github_action)
 
-    if post_to_twitter:
+    if one_week_online == 'True' or premium_online == 'True':
         post(response, proxy, github_action)

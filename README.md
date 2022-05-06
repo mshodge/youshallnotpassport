@@ -23,7 +23,7 @@ A simple `requests` script to check whether the following [UK Passport](https://
 
 ### Twitter
 
-If you want to post to Twitter. You will need elevated v1 access on the Twitter Developer site. Then create a
+To post to Twitter you will need elevated v1 access on the Twitter Developer site. Then create a
 file called `twitter_credentials.py` in `/config/` with the following:
 
 ```
@@ -32,8 +32,6 @@ consumer_secret = ""
 access_token = ""
 access_token_secret = ""
 ```
-
-Change the `post_to_twitter` to be `True` in `main.py`. If running locally change `github_action` to `False`.
 
 ### Proxy
 
