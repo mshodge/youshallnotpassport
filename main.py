@@ -9,8 +9,8 @@ import urllib3
 urllib3.disable_warnings()
 
 proxy = False
-github_action = False
-save_csv = False
+github_action = True
+save_csv = True
 post_to_twitter = True
 
 def df_to_csv_string(df):
