@@ -152,8 +152,8 @@ def check(proxy, github_action):
         page_one_week.close()
         page_premium.close()
     else:
-        page_one_week = requests.get(url_one_week, verify=False, headers=headers, timeout=600)
-        page_premium = requests.get(url_premium, verify=False, headers=headers, timeout=600)
+        page_one_week = requests.get(url_one_week, timeout=600)
+        page_premium = requests.get(url_premium, timeout=600)
         page_one_text = page_one_week.text
         page_premium_text = page_premium.text
         page_one_week.close()
@@ -175,10 +175,10 @@ def check(proxy, github_action):
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
     elif "System busy" in page_one_text:
-        response = f"One week fast track service is unavailable ❌ ({timestamp}) " \
+        response = f"One week fast track service is online but busy ⚠️ ({timestamp}) " \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "False"
+        one_week_online = "Busy"
     else:
         response = f"One week fast track service is available ✅ ({timestamp}) " \
                    f"\n" \
@@ -194,12 +194,12 @@ def check(proxy, github_action):
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "System busy" in page_premium_text:
-        response = f"\n" \
+        response += f"\n" \
                    f"\n" \
-                   f"Premium service is unavailable ❌ ({timestamp}) " \
+                   f"Premium service is online but busy ⚠️ ({timestamp}) " \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        premium_online = "False"
+        premium_online = "Busy"
     else:
         response += f"\n" \
                     f"\n" \
@@ -226,5 +226,5 @@ if __name__ == '__main__':
 
     response, premium_online, one_week_online = check(proxy, github_action)
 
-    if one_week_online == 'True' or premium_online == 'True':
+    if one_week_online != 'False' or premium_online != 'False':
         post(response, proxy, github_action)

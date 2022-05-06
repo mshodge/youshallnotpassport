@@ -1,281 +1,297 @@
-service,online,timestamp
-one week fast track,False,03/05/2022 11:30
-premium,False,03/05/2022 11:30
-one week fast track,False,03/05/2022 12:00
-premium,False,03/05/2022 12:00
-one week fast track,False,03/05/2022 12:30
-premium,False,03/05/2022 12:30
-one week fast track,True,03/05/2022 13:00
-premium,False,03/05/2022 13:00
-one week fast track,True,03/05/2022 13:30
-premium,False,03/05/2022 13:30
-one week fast track,True,03/05/2022 14:00
-premium,False,03/05/2022 14:00
-one week fast track,False,03/05/2022 14:30
-premium,False,03/05/2022 14:30
-one week fast track,False,03/05/2022 15:00
-premium,False,03/05/2022 15:00
-one week fast track,False,03/05/2022 15:30
-premium,False,03/05/2022 15:30
-one week fast track,False,03/05/2022 16:00
-premium,False,03/05/2022 16:00
-one week fast track,False,03/05/2022 16:30
-premium,False,03/05/2022 16:30
-one week fast track,False,03/05/2022 17:00
-premium,False,03/05/2022 17:00
-one week fast track,False,03/05/2022 17:30
-premium,False,03/05/2022 17:30
-one week fast track,False,03/05/2022 18:00
-premium,False,03/05/2022 18:00
-one week fast track,False,03/05/2022 18:30
-premium,False,03/05/2022 18:30
-one week fast track,False,03/05/2022 19:00
-premium,False,03/05/2022 19:00
-one week fast track,False,03/05/2022 19:30
-premium,False,03/05/2022 19:30
-one week fast track,False,03/05/2022 20:00
-premium,False,03/05/2022 20:00
-one week fast track,False,03/05/2022 20:30
-premium,False,03/05/2022 20:30
-one week fast track,False,03/05/2022 21:00
-premium,False,03/05/2022 21:00
-one week fast track,False,03/05/2022 21:30
-premium,False,03/05/2022 21:30
-one week fast track,False,03/05/2022 22:00
-premium,False,03/05/2022 22:00
-one week fast track,False,03/05/2022 22:30
-premium,False,03/05/2022 22:30
-one week fast track,False,03/05/2022 23:00
-premium,False,03/05/2022 23:00
-one week fast track,False,03/05/2022 23:30
-premium,False,03/05/2022 23:30
-one week fast track,False,04/05/2022 00:00
-premium,False,04/05/2022 00:00
-one week fast track,False,04/05/2022 00:30
-premium,False,04/05/2022 00:30
-one week fast track,False,04/05/2022 01:00
-premium,False,04/05/2022 01:00
-one week fast track,False,04/05/2022 01:30
-premium,False,04/05/2022 01:30
-one week fast track,False,04/05/2022 02:00
-premium,False,04/05/2022 02:00
-one week fast track,False,04/05/2022 02:30
-premium,False,04/05/2022 02:30
-one week fast track,False,04/05/2022 03:00
-premium,False,04/05/2022 03:00
-one week fast track,False,04/05/2022 03:30
-premium,False,04/05/2022 03:30
-one week fast track,False,04/05/2022 04:00
-premium,False,04/05/2022 04:00
-one week fast track,False,04/05/2022 04:30
-premium,False,04/05/2022 04:30
-one week fast track,False,04/05/2022 05:00
-premium,False,04/05/2022 05:00
-one week fast track,False,04/05/2022 05:30
-premium,False,04/05/2022 05:30
-one week fast track,False,04/05/2022 06:00
-premium,True,04/05/2022 06:00
-one week fast track,False,04/05/2022 06:30
-premium,True,04/05/2022 06:30
-one week fast track,False,04/05/2022 07:00
-premium,False,04/05/2022 07:00
-one week fast track,False,04/05/2022 07:30
-premium,False,04/05/2022 07:30
-one week fast track,False,04/05/2022 08:00
-premium,False,04/05/2022 08:00
-one week fast track,False,04/05/2022 08:30
-premium,False,04/05/2022 08:30
-one week fast track,False,04/05/2022 09:00
-premium,False,04/05/2022 09:00
-one week fast track,False,04/05/2022 09:30
-premium,False,04/05/2022 09:30
-one week fast track,False,04/05/2022 10:00
-premium,False,04/05/2022 10:00
-one week fast track,False,04/05/2022 10:30
-premium,False,04/05/2022 10:30
-one week fast track,False,04/05/2022 11:00
-premium,False,04/05/2022 11:00
-one week fast track,False,04/05/2022 11:30
-premium,False,04/05/2022 11:30
-one week fast track,False,04/05/2022 12:00
-premium,False,04/05/2022 12:00
-one week fast track,False,04/05/2022 12:30
-premium,False,04/05/2022 12:30
-one week fast track,False,04/05/2022 13:00
-premium,False,04/05/2022 13:00
-one week fast track,False,04/05/2022 13:30
-premium,False,04/05/2022 13:30
-one week fast track,False,04/05/2022 14:00
-premium,False,04/05/2022 14:00
-one week fast track,False,04/05/2022 14:30
-premium,False,04/05/2022 14:30
-one week fast track,False,04/05/2022 15:00
-premium,False,04/05/2022 15:00
-one week fast track,False,04/05/2022 15:30
-premium,False,04/05/2022 15:30
-one week fast track,False,04/05/2022 16:00
-premium,False,04/05/2022 16:00
-one week fast track,False,04/05/2022 16:30
-premium,False,04/05/2022 16:30
-one week fast track,False,04/05/2022 17:00
-premium,False,04/05/2022 17:00
-one week fast track,False,04/05/2022 17:30
-premium,False,04/05/2022 17:30
-one week fast track,True,04/05/2022 18:00
-premium,False,04/05/2022 18:00
-one week fast track,False,04/05/2022 18:30
-premium,False,04/05/2022 18:30
-one week fast track,False,04/05/2022 19:00
-premium,False,04/05/2022 19:00
-one week fast track,False,04/05/2022 19:30
-premium,False,04/05/2022 19:30
-one week fast track,False,04/05/2022 20:00
-premium,False,04/05/2022 20:00
-one week fast track,False,04/05/2022 20:30
-premium,False,04/05/2022 20:30
-one week fast track,False,04/05/2022 21:00
-premium,False,04/05/2022 21:00
-one week fast track,False,04/05/2022 21:30
-premium,False,04/05/2022 21:30
-one week fast track,False,04/05/2022 22:00
-premium,False,04/05/2022 22:00
-one week fast track,False,04/05/2022 22:30
-premium,False,04/05/2022 22:30
-one week fast track,False,04/05/2022 23:00
-premium,False,04/05/2022 23:00
-one week fast track,False,04/05/2022 23:30
-premium,False,04/05/2022 23:30
-one week fast track,False,05/05/2022 00:00
-premium,False,05/05/2022 00:00
-one week fast track,False,05/05/2022 00:30
-premium,False,05/05/2022 00:30
-one week fast track,False,05/05/2022 01:00
-premium,False,05/05/2022 01:00
-one week fast track,False,05/05/2022 01:30
-premium,False,05/05/2022 01:30
-one week fast track,False,05/05/2022 02:00
-premium,False,05/05/2022 02:00
-one week fast track,False,05/05/2022 02:30
-premium,False,05/05/2022 02:30
-one week fast track,False,05/05/2022 03:00
-premium,False,05/05/2022 03:00
-one week fast track,False,05/05/2022 03:30
-premium,False,05/05/2022 03:30
-one week fast track,False,05/05/2022 04:00
-premium,False,05/05/2022 04:00
-one week fast track,False,05/05/2022 04:30
-premium,False,05/05/2022 04:30
-one week fast track,False,05/05/2022 05:00
-premium,False,05/05/2022 05:00
-one week fast track,False,05/05/2022 05:30
-premium,False,05/05/2022 05:30
-one week fast track,True,05/05/2022 06:00
-premium,False,05/05/2022 06:00
-one week fast track,False,05/05/2022 06:30
-premium,False,05/05/2022 06:30
-one week fast track,False,05/05/2022 07:00
-premium,False,05/05/2022 07:00
-one week fast track,False,05/05/2022 07:30
-premium,False,05/05/2022 07:30
-one week fast track,False,05/05/2022 08:00
-premium,False,05/05/2022 08:00
-one week fast track,False,05/05/2022 08:30
-premium,False,05/05/2022 08:30
-one week fast track,False,05/05/2022 09:00
-premium,False,05/05/2022 09:00
-one week fast track,False,05/05/2022 09:30
-premium,False,05/05/2022 09:30
-one week fast track,False,05/05/2022 10:00
-premium,False,05/05/2022 10:00
-one week fast track,False,05/05/2022 10:30
-premium,False,05/05/2022 10:30
-one week fast track,False,05/05/2022 11:15
-premium,False,05/05/2022 11:15
-one week fast track,False,05/05/2022 11:41
-premium,False,05/05/2022 11:41
-one week fast track,False,05/05/2022 12:11
-premium,False,05/05/2022 12:11
-one week fast track,False,05/05/2022 12:36
-premium,False,05/05/2022 12:36
-one week fast track,False,05/05/2022 13:27
-premium,False,05/05/2022 13:27
-one week fast track,True,05/05/2022 14:11
-premium,False,05/05/2022 14:11
-one week fast track,False,05/05/2022 14:51
-premium,False,05/05/2022 14:51
-one week fast track,False,05/05/2022 15:12
-premium,False,05/05/2022 15:12
-one week fast track,False,05/05/2022 15:37
-premium,False,05/05/2022 15:37
-one week fast track,False,05/05/2022 16:13
-premium,False,05/05/2022 16:13
-one week fast track,False,05/05/2022 16:41
-premium,False,05/05/2022 16:41
-one week fast track,False,05/05/2022 17:18
-premium,False,05/05/2022 17:18
-one week fast track,False,05/05/2022 17:59
-premium,False,05/05/2022 17:59
-one week fast track,False,05/05/2022 18:27
-premium,False,05/05/2022 18:27
-one week fast track,False,05/05/2022 18:44
-premium,False,05/05/2022 18:44
-one week fast track,False,05/05/2022 19:16
-premium,False,05/05/2022 19:16
-one week fast track,False,05/05/2022 19:45
-premium,False,05/05/2022 19:45
-one week fast track,False,05/05/2022 20:11
-premium,False,05/05/2022 20:11
-one week fast track,False,05/05/2022 20:35
-premium,False,05/05/2022 20:35
-one week fast track,False,05/05/2022 21:14
-premium,False,05/05/2022 21:14
-one week fast track,False,05/05/2022 21:39
-premium,False,05/05/2022 21:39
-one week fast track,False,05/05/2022 22:12
-premium,True,05/05/2022 22:12
-one week fast track,False,05/05/2022 22:38
-premium,True,05/05/2022 22:38
-one week fast track,False,05/05/2022 23:14
-premium,True,05/05/2022 23:14
-one week fast track,False,05/05/2022 23:40
-premium,False,05/05/2022 23:40
-one week fast track,False,06/05/2022 00:13
-premium,False,06/05/2022 00:13
-one week fast track,False,06/05/2022 00:39
-premium,False,06/05/2022 00:39
-one week fast track,False,06/05/2022 01:59
-premium,False,06/05/2022 01:59
-one week fast track,False,06/05/2022 03:46
-premium,False,06/05/2022 03:46
-one week fast track,False,06/05/2022 04:37
-premium,False,06/05/2022 04:37
-one week fast track,False,06/05/2022 05:17
-premium,False,06/05/2022 05:17
-one week fast track,False,06/05/2022 05:49
-premium,False,06/05/2022 05:49
-one week fast track,False,06/05/2022 06:13
-premium,False,06/05/2022 06:13
-one week fast track,False,06/05/2022 06:37
-premium,False,06/05/2022 06:37
-one week fast track,False,06/05/2022 07:19
-premium,False,06/05/2022 07:19
-one week fast track,False,06/05/2022 07:49
-premium,False,06/05/2022 07:49
-one week fast track,False,06/05/2022 08:13
-premium,False,06/05/2022 08:13
-one week fast track,False,06/05/2022 08:37
-premium,False,06/05/2022 08:37
-one week fast track,False,06/05/2022 09:22
-premium,False,06/05/2022 09:22
-one week fast track,False,06/05/2022 09:44
-premium,False,06/05/2022 09:44
-one week fast track,False,06/05/2022 10:14
-premium,False,06/05/2022 10:14
-one week fast track,False,06/05/2022 10:40
-premium,False,06/05/2022 10:40
-one week fast track,False,06/05/2022 11:14
-premium,False,06/05/2022 11:14
-one week fast track,False,06/05/2022 11:41
-premium,False,06/05/2022 11:41
-one week fast track,False,06/05/2022 11:54
-premium,False,06/05/2022 11:54
+,service,online,timestamp
+0,one week fast track,False,03/05/2022 11:30
+1,premium,False,03/05/2022 11:30
+2,one week fast track,False,03/05/2022 12:00
+3,premium,False,03/05/2022 12:00
+4,one week fast track,False,03/05/2022 12:30
+5,premium,False,03/05/2022 12:30
+6,one week fast track,True,03/05/2022 13:00
+7,premium,False,03/05/2022 13:00
+8,one week fast track,True,03/05/2022 13:30
+9,premium,False,03/05/2022 13:30
+10,one week fast track,True,03/05/2022 14:00
+11,premium,False,03/05/2022 14:00
+12,one week fast track,False,03/05/2022 14:30
+13,premium,False,03/05/2022 14:30
+14,one week fast track,False,03/05/2022 15:00
+15,premium,False,03/05/2022 15:00
+16,one week fast track,False,03/05/2022 15:30
+17,premium,False,03/05/2022 15:30
+18,one week fast track,False,03/05/2022 16:00
+19,premium,False,03/05/2022 16:00
+20,one week fast track,False,03/05/2022 16:30
+21,premium,False,03/05/2022 16:30
+22,one week fast track,False,03/05/2022 17:00
+23,premium,False,03/05/2022 17:00
+24,one week fast track,False,03/05/2022 17:30
+25,premium,False,03/05/2022 17:30
+26,one week fast track,False,03/05/2022 18:00
+27,premium,False,03/05/2022 18:00
+28,one week fast track,False,03/05/2022 18:30
+29,premium,False,03/05/2022 18:30
+30,one week fast track,False,03/05/2022 19:00
+31,premium,False,03/05/2022 19:00
+32,one week fast track,False,03/05/2022 19:30
+33,premium,False,03/05/2022 19:30
+34,one week fast track,False,03/05/2022 20:00
+35,premium,False,03/05/2022 20:00
+36,one week fast track,False,03/05/2022 20:30
+37,premium,False,03/05/2022 20:30
+38,one week fast track,False,03/05/2022 21:00
+39,premium,False,03/05/2022 21:00
+40,one week fast track,False,03/05/2022 21:30
+41,premium,False,03/05/2022 21:30
+42,one week fast track,False,03/05/2022 22:00
+43,premium,False,03/05/2022 22:00
+44,one week fast track,False,03/05/2022 22:30
+45,premium,False,03/05/2022 22:30
+46,one week fast track,False,03/05/2022 23:00
+47,premium,False,03/05/2022 23:00
+48,one week fast track,False,03/05/2022 23:30
+49,premium,False,03/05/2022 23:30
+50,one week fast track,False,04/05/2022 00:00
+51,premium,False,04/05/2022 00:00
+52,one week fast track,False,04/05/2022 00:30
+53,premium,False,04/05/2022 00:30
+54,one week fast track,False,04/05/2022 01:00
+55,premium,False,04/05/2022 01:00
+56,one week fast track,False,04/05/2022 01:30
+57,premium,False,04/05/2022 01:30
+58,one week fast track,False,04/05/2022 02:00
+59,premium,False,04/05/2022 02:00
+60,one week fast track,False,04/05/2022 02:30
+61,premium,False,04/05/2022 02:30
+62,one week fast track,False,04/05/2022 03:00
+63,premium,False,04/05/2022 03:00
+64,one week fast track,False,04/05/2022 03:30
+65,premium,False,04/05/2022 03:30
+66,one week fast track,False,04/05/2022 04:00
+67,premium,False,04/05/2022 04:00
+68,one week fast track,False,04/05/2022 04:30
+69,premium,False,04/05/2022 04:30
+70,one week fast track,False,04/05/2022 05:00
+71,premium,False,04/05/2022 05:00
+72,one week fast track,False,04/05/2022 05:30
+73,premium,False,04/05/2022 05:30
+74,one week fast track,False,04/05/2022 06:00
+75,premium,True,04/05/2022 06:00
+76,one week fast track,False,04/05/2022 06:30
+77,premium,True,04/05/2022 06:30
+78,one week fast track,False,04/05/2022 07:00
+79,premium,False,04/05/2022 07:00
+80,one week fast track,False,04/05/2022 07:30
+81,premium,False,04/05/2022 07:30
+82,one week fast track,False,04/05/2022 08:00
+83,premium,False,04/05/2022 08:00
+84,one week fast track,False,04/05/2022 08:30
+85,premium,False,04/05/2022 08:30
+86,one week fast track,False,04/05/2022 09:00
+87,premium,False,04/05/2022 09:00
+88,one week fast track,False,04/05/2022 09:30
+89,premium,False,04/05/2022 09:30
+90,one week fast track,False,04/05/2022 10:00
+91,premium,False,04/05/2022 10:00
+92,one week fast track,False,04/05/2022 10:30
+93,premium,False,04/05/2022 10:30
+94,one week fast track,False,04/05/2022 11:00
+95,premium,False,04/05/2022 11:00
+96,one week fast track,False,04/05/2022 11:30
+97,premium,False,04/05/2022 11:30
+98,one week fast track,False,04/05/2022 12:00
+99,premium,False,04/05/2022 12:00
+100,one week fast track,False,04/05/2022 12:30
+101,premium,False,04/05/2022 12:30
+102,one week fast track,False,04/05/2022 13:00
+103,premium,False,04/05/2022 13:00
+104,one week fast track,False,04/05/2022 13:30
+105,premium,False,04/05/2022 13:30
+106,one week fast track,False,04/05/2022 14:00
+107,premium,False,04/05/2022 14:00
+108,one week fast track,False,04/05/2022 14:30
+109,premium,False,04/05/2022 14:30
+110,one week fast track,False,04/05/2022 15:00
+111,premium,False,04/05/2022 15:00
+112,one week fast track,False,04/05/2022 15:30
+113,premium,False,04/05/2022 15:30
+114,one week fast track,False,04/05/2022 16:00
+115,premium,False,04/05/2022 16:00
+116,one week fast track,False,04/05/2022 16:30
+117,premium,False,04/05/2022 16:30
+118,one week fast track,False,04/05/2022 17:00
+119,premium,False,04/05/2022 17:00
+120,one week fast track,False,04/05/2022 17:30
+121,premium,False,04/05/2022 17:30
+122,one week fast track,True,04/05/2022 18:00
+123,premium,False,04/05/2022 18:00
+124,one week fast track,False,04/05/2022 18:30
+125,premium,False,04/05/2022 18:30
+126,one week fast track,False,04/05/2022 19:00
+127,premium,False,04/05/2022 19:00
+128,one week fast track,False,04/05/2022 19:30
+129,premium,False,04/05/2022 19:30
+130,one week fast track,False,04/05/2022 20:00
+131,premium,False,04/05/2022 20:00
+132,one week fast track,False,04/05/2022 20:30
+133,premium,False,04/05/2022 20:30
+134,one week fast track,False,04/05/2022 21:00
+135,premium,False,04/05/2022 21:00
+136,one week fast track,False,04/05/2022 21:30
+137,premium,False,04/05/2022 21:30
+138,one week fast track,False,04/05/2022 22:00
+139,premium,False,04/05/2022 22:00
+140,one week fast track,False,04/05/2022 22:30
+141,premium,False,04/05/2022 22:30
+142,one week fast track,False,04/05/2022 23:00
+143,premium,False,04/05/2022 23:00
+144,one week fast track,False,04/05/2022 23:30
+145,premium,False,04/05/2022 23:30
+146,one week fast track,False,05/05/2022 00:00
+147,premium,False,05/05/2022 00:00
+148,one week fast track,False,05/05/2022 00:30
+149,premium,False,05/05/2022 00:30
+150,one week fast track,False,05/05/2022 01:00
+151,premium,False,05/05/2022 01:00
+152,one week fast track,False,05/05/2022 01:30
+153,premium,False,05/05/2022 01:30
+154,one week fast track,False,05/05/2022 02:00
+155,premium,False,05/05/2022 02:00
+156,one week fast track,False,05/05/2022 02:30
+157,premium,False,05/05/2022 02:30
+158,one week fast track,False,05/05/2022 03:00
+159,premium,False,05/05/2022 03:00
+160,one week fast track,False,05/05/2022 03:30
+161,premium,False,05/05/2022 03:30
+162,one week fast track,False,05/05/2022 04:00
+163,premium,False,05/05/2022 04:00
+164,one week fast track,False,05/05/2022 04:30
+165,premium,False,05/05/2022 04:30
+166,one week fast track,False,05/05/2022 05:00
+167,premium,False,05/05/2022 05:00
+168,one week fast track,False,05/05/2022 05:30
+169,premium,False,05/05/2022 05:30
+170,one week fast track,True,05/05/2022 06:00
+171,premium,False,05/05/2022 06:00
+172,one week fast track,False,05/05/2022 06:30
+173,premium,False,05/05/2022 06:30
+174,one week fast track,False,05/05/2022 07:00
+175,premium,False,05/05/2022 07:00
+176,one week fast track,False,05/05/2022 07:30
+177,premium,False,05/05/2022 07:30
+178,one week fast track,False,05/05/2022 08:00
+179,premium,False,05/05/2022 08:00
+180,one week fast track,False,05/05/2022 08:30
+181,premium,False,05/05/2022 08:30
+182,one week fast track,False,05/05/2022 09:00
+183,premium,False,05/05/2022 09:00
+184,one week fast track,False,05/05/2022 09:30
+185,premium,False,05/05/2022 09:30
+186,one week fast track,False,05/05/2022 10:00
+187,premium,False,05/05/2022 10:00
+188,one week fast track,False,05/05/2022 10:30
+189,premium,False,05/05/2022 10:30
+190,one week fast track,False,05/05/2022 11:15
+191,premium,False,05/05/2022 11:15
+192,one week fast track,False,05/05/2022 11:41
+193,premium,False,05/05/2022 11:41
+194,one week fast track,False,05/05/2022 12:11
+195,premium,False,05/05/2022 12:11
+196,one week fast track,False,05/05/2022 12:36
+197,premium,False,05/05/2022 12:36
+198,one week fast track,False,05/05/2022 13:27
+199,premium,False,05/05/2022 13:27
+200,one week fast track,True,05/05/2022 14:11
+201,premium,False,05/05/2022 14:11
+202,one week fast track,False,05/05/2022 14:51
+203,premium,False,05/05/2022 14:51
+204,one week fast track,False,05/05/2022 15:12
+205,premium,False,05/05/2022 15:12
+206,one week fast track,False,05/05/2022 15:37
+207,premium,False,05/05/2022 15:37
+208,one week fast track,False,05/05/2022 16:13
+209,premium,False,05/05/2022 16:13
+210,one week fast track,False,05/05/2022 16:41
+211,premium,False,05/05/2022 16:41
+212,one week fast track,False,05/05/2022 17:18
+213,premium,False,05/05/2022 17:18
+214,one week fast track,False,05/05/2022 17:59
+215,premium,False,05/05/2022 17:59
+216,one week fast track,False,05/05/2022 18:27
+217,premium,False,05/05/2022 18:27
+218,one week fast track,False,05/05/2022 18:44
+219,premium,False,05/05/2022 18:44
+220,one week fast track,False,05/05/2022 19:16
+221,premium,False,05/05/2022 19:16
+222,one week fast track,False,05/05/2022 19:45
+223,premium,False,05/05/2022 19:45
+224,one week fast track,False,05/05/2022 20:11
+225,premium,False,05/05/2022 20:11
+226,one week fast track,False,05/05/2022 20:35
+227,premium,False,05/05/2022 20:35
+228,one week fast track,False,05/05/2022 21:14
+229,premium,False,05/05/2022 21:14
+230,one week fast track,False,05/05/2022 21:39
+231,premium,False,05/05/2022 21:39
+232,one week fast track,False,05/05/2022 22:12
+233,premium,True,05/05/2022 22:12
+234,one week fast track,False,05/05/2022 22:38
+235,premium,True,05/05/2022 22:38
+236,one week fast track,False,05/05/2022 23:14
+237,premium,True,05/05/2022 23:14
+238,one week fast track,False,05/05/2022 23:40
+239,premium,False,05/05/2022 23:40
+240,one week fast track,False,06/05/2022 00:13
+241,premium,False,06/05/2022 00:13
+242,one week fast track,False,06/05/2022 00:39
+243,premium,False,06/05/2022 00:39
+244,one week fast track,False,06/05/2022 01:59
+245,premium,False,06/05/2022 01:59
+246,one week fast track,False,06/05/2022 03:46
+247,premium,False,06/05/2022 03:46
+248,one week fast track,False,06/05/2022 04:37
+249,premium,False,06/05/2022 04:37
+250,one week fast track,False,06/05/2022 05:17
+251,premium,False,06/05/2022 05:17
+252,one week fast track,False,06/05/2022 05:49
+253,premium,False,06/05/2022 05:49
+254,one week fast track,False,06/05/2022 06:13
+255,premium,False,06/05/2022 06:13
+256,one week fast track,False,06/05/2022 06:37
+257,premium,False,06/05/2022 06:37
+258,one week fast track,False,06/05/2022 07:19
+259,premium,False,06/05/2022 07:19
+260,one week fast track,False,06/05/2022 07:49
+261,premium,False,06/05/2022 07:49
+262,one week fast track,False,06/05/2022 08:13
+263,premium,False,06/05/2022 08:13
+264,one week fast track,False,06/05/2022 08:37
+265,premium,False,06/05/2022 08:37
+266,one week fast track,False,06/05/2022 09:22
+267,premium,False,06/05/2022 09:22
+268,one week fast track,False,06/05/2022 09:44
+269,premium,False,06/05/2022 09:44
+270,one week fast track,False,06/05/2022 10:14
+271,premium,False,06/05/2022 10:14
+272,one week fast track,False,06/05/2022 10:40
+273,premium,False,06/05/2022 10:40
+274,one week fast track,False,06/05/2022 11:14
+275,premium,False,06/05/2022 11:14
+276,one week fast track,False,06/05/2022 11:41
+277,premium,False,06/05/2022 11:41
+278,one week fast track,False,06/05/2022 11:54
+279,premium,False,06/05/2022 11:54
+280,one week fast track,False,06/05/2022 12:11
+281,premium,False,06/05/2022 12:11
+282,one week fast track,False,06/05/2022 12:36
+283,premium,False,06/05/2022 12:36
+284,one week fast track,False,06/05/2022 13:25
+285,premium,False,06/05/2022 13:25
+286,one week fast track,False,06/05/2022 14:06
+287,premium,False,06/05/2022 14:06
+288,one week fast track,False,06/05/2022 14:48
+289,premium,False,06/05/2022 14:48
+290,one week fast track,False,06/05/2022 15:17
+291,premium,False,06/05/2022 15:17
+292,one week fast track,False,06/05/2022 15:20
+293,premium,False,06/05/2022 15:20
+294,one week fast track,True,06/05/2022 15:26
+295,premium,False,06/05/2022 15:26
