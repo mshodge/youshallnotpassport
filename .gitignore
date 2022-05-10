@@ -6,6 +6,7 @@ config/*_credentials.py
 # Data files #
 
 *.pyc
+*.png
 *.csv
 *.rds
 *.xlsx
