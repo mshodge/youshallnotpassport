@@ -2,5 +2,6 @@ datetime
 pandas
 pygithub
 requests
+seaborn
 tweepy
 urllib3

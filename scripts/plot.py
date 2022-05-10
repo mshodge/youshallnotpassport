@@ -1,7 +1,6 @@
 import numpy as np
 import seaborn as sns; sns.set_theme()
 import pandas as pd
-import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import tweepy
 import requests
