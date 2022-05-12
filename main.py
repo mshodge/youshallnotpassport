@@ -5,6 +5,7 @@ import os
 from github import Github
 import pandas as pd
 import urllib3
+import json
 
 urllib3.disable_warnings()
 
@@ -131,7 +132,7 @@ def check(proxy, github_action):
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     url_premium = "https://www.passport.service.gov.uk/urgent/" \
                   "?_ga=2.165977918.1052226504.1651564347-663154096.1628163070"
-    url_webchat = "https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
+    url_webchat = "https://omni.eckoh.uk/v03.5/providers/HMPO/api/availability.php"
 
     headers = requests.utils.default_headers()
     headers.update({
@@ -151,7 +152,7 @@ def check(proxy, github_action):
         page_webchat = requests.get(url_webchat, proxies=proxies, verify=False, headers=headers, timeout=600)
         page_one_text = page_one_week.text
         page_premium_text = page_premium.text
-        page_webchat_text = page_webchat.text
+        page_webchat_text = json.loads(page_webchat.text)
         page_one_week.close()
         page_premium.close()
         page_webchat.close()
@@ -161,7 +162,7 @@ def check(proxy, github_action):
         page_webchat = requests.get(url_webchat, timeout=600)
         page_one_text = page_one_week.text
         page_premium_text = page_premium.text
-        page_webchat_text = page_webchat.text
+        page_webchat_text = json.loads(page_webchat.text)
         page_one_week.close()
         page_premium.close()
         page_webchat.close()
@@ -223,20 +224,21 @@ def check(proxy, github_action):
         premium_online = "True"
 
     # Reports if webchat service is online or not
-    if "webchat advisers are busy" in page_webchat_text:
-        response += f"\n" \
-                    f"\n" \
-                    f"Webchat service is unavailable ❌" \
-                    f"\n" \
-                    f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
-        webchat_online = "False"
-    else:
+    if "AVAILABLE" in page_webchat_text['response']:
         response += f"\n" \
                     f"\n" \
                     f"Webchat service is available ✅" \
                     f"\n" \
                     f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
         webchat_online = "True"
+
+    else:
+        response += f"\n" \
+                    f"\n" \
+                    f"Webchat service is unavailable ❌" \
+                    f"\n" \
+                    f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
+        webchat_online = "False"
 
     print(response)
 
