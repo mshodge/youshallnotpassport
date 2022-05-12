@@ -224,40 +224,40 @@ def check(proxy, github_action):
         premium_online = "True"
 
     # Reports if webchat service is online or not
-    if "AVAILABLE" in page_webchat_text['response']:
-        response += f"\n" \
-                    f"\n" \
-                    f"Webchat service is available ✅" \
-                    f"\n" \
-                    f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
-        webchat_online = "True"
-
-    else:
-        response += f"\n" \
-                    f"\n" \
-                    f"Webchat service is unavailable ❌" \
-                    f"\n" \
-                    f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
-        webchat_online = "False"
+    # if "AVAILABLE" in page_webchat_text['response']:
+    #     response += f"\n" \
+    #                 f"\n" \
+    #                 f"Webchat service is available ✅" \
+    #                 f"\n" \
+    #                 f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
+    #     webchat_online = "True"
+    #
+    # else:
+    #     response += f"\n" \
+    #                 f"\n" \
+    #                 f"Webchat service is unavailable ❌" \
+    #                 f"\n" \
+    #                 f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
+    #     webchat_online = "False"
 
     print(response)
 
     # Creates a DataFrame from the response checks
+
     df_response_from_check = pd.DataFrame(
         [["one week fast track", one_week_online, timestamp],
-         ["premium", premium_online, timestamp],
-         ["webchat", webchat_online, timestamp]],
+         ["premium", premium_online, timestamp]],
         columns=['service', 'online', 'timestamp'])
 
     if save_csv:
         update_csv(df_response_from_check, github_action)
 
-    return response, premium_online, one_week_online, webchat_online
+    return response, premium_online, one_week_online
 
 
 if __name__ == '__main__':
 
-    response, premium_online, one_week_online, webchat_online = check(proxy, github_action)
+    response, premium_online, one_week_online = check(proxy, github_action)
 
-    if one_week_online != 'False' or premium_online != 'False' or webchat_online != 'False':
+    if one_week_online != 'False' or premium_online != 'False':
         post(response, proxy, github_action)
