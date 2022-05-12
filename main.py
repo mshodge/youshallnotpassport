@@ -178,17 +178,17 @@ def check(proxy, github_action):
 
     # Reports if one week service is online or not
     if "service is unavailable" in page_one_text:
-        response = f"One week fast track service is unavailable ❌" \
+        response = f"One week fast track service is unavailable ❌ ({timestamp})" \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
     elif "System busy" in page_one_text:
-        response = f"One week fast track service is online but busy ⚠️" \
+        response = f"One week fast track service is online but busy ⚠️ ({timestamp})" \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "Busy"
     else:
-        response = f"One week fast track service is available ✅" \
+        response = f"One week fast track service is available ✅ ({timestamp})" \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
@@ -197,28 +197,28 @@ def check(proxy, github_action):
     if "service is unavailable" in page_premium_text:
         response += f"\n" \
                     f"\n" \
-                    f"Premium service is unavailable ❌" \
+                    f"Premium service is unavailable ❌ ({timestamp})" \
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "Sorry, there are no available appointments" in page_premium_text:
         response += f"\n" \
                     f"\n" \
-                    f"Premium service is unavailable ❌" \
+                    f"Premium service is unavailable ❌ ({timestamp})" \
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "System busy" in page_premium_text:
         response += f"\n" \
                    f"\n" \
-                   f"Premium service is online but busy ⚠️" \
+                   f"Premium service is online but busy ⚠️ ({timestamp})" \
                    f"\n" \
                    f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "Busy"
     else:
         response += f"\n" \
                     f"\n" \
-                    f"Premium service is available ✅" \
+                    f"Premium service is available ✅ ({timestamp})" \
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
