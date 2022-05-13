@@ -37,4 +37,4 @@ access_token_secret = ""
 
 Add proxy settings to a `proxies.py` file in `/config/` if you require them.
 
-Change the `proxy` to be `True` in `main.py`.
+Change the `is_proxy` to be `True` in `main.py`.
