@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 import tweepy
 import requests
 
-github_action = False
-proxy = True
+github_action = True
+proxy = False
+twitter = True
 today = datetime.now().strftime("%d/%m/%Y")
 last_week = datetime.now() - timedelta(days = 8)
 last_week = last_week.strftime("%d/%m/%Y")
@@ -93,4 +94,5 @@ if __name__ == '__main__':
     for service in ["one week fast track", "premium"]:
         df_service = reduce_and_pivot(df, service)
         plot(df_service, service)
-    post_to_twitter(github_action, proxy)
+    if twitter:
+        post_to_twitter(github_action, proxy)
