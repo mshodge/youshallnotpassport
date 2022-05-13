@@ -1,4 +1,5 @@
 datetime
+numpy
 pandas
 pygithub
 requests

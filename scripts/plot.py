@@ -1,23 +1,27 @@
-import numpy as np
-import seaborn as sns; sns.set_theme()
-import pandas as pd
 from datetime import datetime, timedelta
-import tweepy
+import numpy as np
+import os
+import pandas as pd
 import requests
+import seaborn as sns
+import tweepy
+sns.set_theme()
 
-github_action = True
-proxy = False
-twitter = True
+
+is_github_action = True
+is_proxy = False
+is_twitter = True
 today = datetime.now().strftime("%d/%m/%Y")
-last_week = datetime.now() - timedelta(days = 8)
+last_week = datetime.now() - timedelta(days=8)
 last_week = last_week.strftime("%d/%m/%Y")
+
 
 def post_to_twitter(github_action, proxy):
     """
         Posts response to Twitter
-        :param response: <string> The string response to post
+        :param github_action: <Boolean> Whether it is on GitHub action or not
         :param proxy: <Boolean> Whether to use a proxy or not, default is False
-        :param github_action: <Boolean> Whether this will be deployed as a automated GitHub Action
+        :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
         :return: <string> The response of whether the service is online or not
         """
 
@@ -39,14 +43,13 @@ def post_to_twitter(github_action, proxy):
 
     if proxy:
         import config.proxies as set_proxies
-        proxies = set_proxies.set_ons_proxies(ssl = False, headers = headers)
-        api = tweepy.API(auth, wait_on_rate_limit = True, proxy = proxies.get('https'))
+        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
+        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
         api.session.verify = False
     else:
-        api = tweepy.API(auth, wait_on_rate_limit = True)
+        api = tweepy.API(auth, wait_on_rate_limit=True)
 
     # Posts image to Twitter
-    status = f"This plot shows when the {service} service was online in the last week"
     filenames = ["../data/latest_one week fast track_plot.png", "../data/latest_premium_plot.png"]
 
     media_ids = []
@@ -54,11 +57,12 @@ def post_to_twitter(github_action, proxy):
         res = api.media_upload(filename)
         media_ids.append(res.media_id)
 
-    api.update_status(status = 'Plots of when each service was online in the last week', media_ids = media_ids)
+    api.update_status(status='Plots of when each service was online in the last week', media_ids=media_ids)
+
 
 def read_data():
     df = pd.read_csv("../data/data.csv")
-    df['count'] = np.where(df['online']!= 'False', 1, 0)
+    df['count'] = np.where(df['online'] != 'False', 1, 0)
     df['date_col'] = pd.to_datetime(df['timestamp'], format='%d/%m/%Y %H:%M')
     df['date'] = df.timestamp.apply(lambda x: str(x).split(" ")[0])
     df['hour'] = df.timestamp.apply(lambda x: str(x).split(" ")[1].split(":")[0])
@@ -68,14 +72,16 @@ def read_data():
     df = df[df['date'] > last_week]
     return df
 
+
 def reduce_and_pivot(df, service):
     df_service = df[df['service'] == service]
     df_service_pivot = pd.pivot_table(df_service, values='count',
                                       index='date_dow', columns='hour', aggfunc=np.sum, fill_value=0)
     return df_service_pivot
 
+
 def plot(df, service):
-    sns.set(rc={'figure.figsize':(18,8)})
+    sns.set(rc={'figure.figsize': (18, 8)})
     ax = sns.heatmap(df, linewidths=.5, cbar=False, annot=True, cmap="Blues")
     ax.text(x=0.5, y=1.1, s=f'When was the {service} service online in the last week?',
             fontsize=18, weight='bold', ha='center', va='bottom', transform=ax.transAxes)
@@ -88,11 +94,12 @@ def plot(df, service):
     fig.clf()
     return None
 
+
 if __name__ == '__main__':
 
-    df = read_data()
-    for service in ["one week fast track", "premium"]:
-        df_service = reduce_and_pivot(df, service)
-        plot(df_service, service)
-    if twitter:
-        post_to_twitter(github_action, proxy)
+    df_of_raw_data = read_data()
+    for service_type in ["one week fast track", "premium"]:
+        df_by_service = reduce_and_pivot(df_of_raw_data, service_type)
+        plot(df_by_service, service_type)
+    if is_twitter:
+        post_to_twitter(is_github_action, is_proxy)

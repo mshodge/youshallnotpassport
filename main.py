@@ -1,18 +1,18 @@
+from datetime import datetime, timedelta
+from github import Github
+import os
+import pandas as pd
 import requests
 import tweepy
-from datetime import datetime, timedelta
-import os
-from github import Github
-import pandas as pd
 import urllib3
-import json
 
 urllib3.disable_warnings()
 
-proxy = False
-github_action = True
-save_csv = True
-post_to_twitter = True
+is_proxy = False
+is_github_action = True
+to_save_csv = True
+is_twitter = True
+
 
 def df_to_csv_string(df):
     """
@@ -88,7 +88,7 @@ def post(response, proxy, github_action):
     Posts response to Twitter
     :param response: <string> The string response to post
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
-    :param github_action: <Boolean> Whether this will be deployed as a automated GitHub Action
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
     :return: <string> The response of whether the service is online or not
     """
 
@@ -126,13 +126,12 @@ def check(proxy, github_action):
     """
     Checks if the passport services are online or not
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
-    :param github_action: <Boolean> Whether this will be deployed as a automated GitHub Action
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
     :return: <string> The response of whether the service is online or not
     """
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     url_premium = "https://www.passport.service.gov.uk/urgent/" \
                   "?_ga=2.165977918.1052226504.1651564347-663154096.1628163070"
-    url_webchat = "https://omni.eckoh.uk/v03.5/providers/HMPO/api/availability.php"
 
     headers = requests.utils.default_headers()
     headers.update({
@@ -149,23 +148,17 @@ def check(proxy, github_action):
                                      verify=False, headers=headers,
                                      timeout=600)
         page_premium = requests.get(url_premium, proxies=proxies, verify=False, headers=headers, timeout=600)
-        page_webchat = requests.get(url_webchat, proxies=proxies, verify=False, headers=headers, timeout=600)
         page_one_text = page_one_week.text
         page_premium_text = page_premium.text
-        page_webchat_text = json.loads(page_webchat.text)
         page_one_week.close()
         page_premium.close()
-        page_webchat.close()
     else:
         page_one_week = requests.get(url_one_week, timeout=600)
         page_premium = requests.get(url_premium, timeout=600)
-        page_webchat = requests.get(url_webchat, timeout=600)
         page_one_text = page_one_week.text
         page_premium_text = page_premium.text
-        page_webchat_text = json.loads(page_webchat.text)
         page_one_week.close()
         page_premium.close()
-        page_webchat.close()
 
     # GitHub uses GMT and not BST so adjusting for that here
     # //TODO: Make this more dynamic and not hard coded, as when BST ends this will trip up
@@ -210,10 +203,10 @@ def check(proxy, github_action):
         premium_online = "False"
     elif "System busy" in page_premium_text:
         response += f"\n" \
-                   f"\n" \
-                   f"Premium service is online but busy ⚠️ ({timestamp})" \
-                   f"\n" \
-                   f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
+                    f"\n" \
+                    f"Premium service is online but busy ⚠️ ({timestamp})" \
+                    f"\n" \
+                    f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "Busy"
     else:
         response += f"\n" \
@@ -222,23 +215,6 @@ def check(proxy, github_action):
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
-
-    # Reports if webchat service is online or not
-    # if "AVAILABLE" in page_webchat_text['response']:
-    #     response += f"\n" \
-    #                 f"\n" \
-    #                 f"Webchat service is available ✅" \
-    #                 f"\n" \
-    #                 f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
-    #     webchat_online = "True"
-    #
-    # else:
-    #     response += f"\n" \
-    #                 f"\n" \
-    #                 f"Webchat service is unavailable ❌" \
-    #                 f"\n" \
-    #                 f"https://www.gov.uk/government/organisations/hm-passport-office/contact/hm-passport-office-webchat"
-    #     webchat_online = "False"
 
     print(response)
 
@@ -249,7 +225,7 @@ def check(proxy, github_action):
          ["premium", premium_online, timestamp]],
         columns=['service', 'online', 'timestamp'])
 
-    if save_csv:
+    if to_save_csv:
         update_csv(df_response_from_check, github_action)
 
     return response, premium_online, one_week_online
@@ -257,7 +233,8 @@ def check(proxy, github_action):
 
 if __name__ == '__main__':
 
-    response, premium_online, one_week_online = check(proxy, github_action)
+    response_from_check, premium_online_check, one_week_online_check = check(is_proxy, is_github_action)
 
-    if one_week_online != 'False' or premium_online != 'False':
-        post(response, proxy, github_action)
+    if is_twitter:
+        if one_week_online_check != 'False' or premium_online_check != 'False':
+            post(response_from_check, is_proxy, is_github_action)
