@@ -60,7 +60,11 @@ def post_to_twitter(github_action, proxy):
         api = tweepy.API(auth, wait_on_rate_limit=True)
 
     # Posts image to Twitter
-    filenames = ["../data/latest_one week fast track_plot.png", "../data/latest_premium_plot.png"]
+    if github_action:
+        filenames = ["/home/runner/work/youshallnotpassport/youshallnotpassport/data/latest_one week fast track_plot.png",
+                     "/home/runner/work/youshallnotpassport/youshallnotpassport/data/latest_premium_plot.png"]
+    else:
+        filenames = ["../data/latest_one week fast track_plot.png", "../data/latest_premium_plot.png"]
 
     media_ids = []
     for filename in filenames:
@@ -90,7 +94,7 @@ def reduce_and_pivot(df, service):
     return df_service_pivot
 
 
-def plot(df, service):
+def plot(df, service, github_action):
     sns.set(rc={'figure.figsize': (18, 8)})
     ax = sns.heatmap(df, linewidths=.5, cbar=False, annot=True, cmap="Blues")
     ax.text(x=0.5, y=1.1, s=f'When was the {service} service online in the last week?',
@@ -101,7 +105,11 @@ def plot(df, service):
     ax.set_ylabel('Date', fontsize=16)
     fig = ax.get_figure()
     print_current_files()
-    fig.savefig(f"../data/latest_{service}_plot.png")
+
+    if github_action:
+        fig.savefig(f"/home/runner/work/youshallnotpassport/youshallnotpassport/data/latest_{service}_plot.png")
+    else:
+        fig.savefig(f"../data/latest_{service}_plot.png")
     fig.clf()
     return None
 
@@ -111,6 +119,6 @@ if __name__ == '__main__':
     df_of_raw_data = read_data()
     for service_type in ["one week fast track", "premium"]:
         df_by_service = reduce_and_pivot(df_of_raw_data, service_type)
-        plot(df_by_service, service_type)
+        plot(df_by_service, service_type, is_github_action)
     if is_twitter:
         post_to_twitter(is_github_action, is_proxy)
