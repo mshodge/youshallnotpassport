@@ -5,10 +5,11 @@ import pandas as pd
 import requests
 import seaborn as sns
 import tweepy
+
 sns.set_theme()
 
 
-is_github_action = True
+is_github_action = False
 is_proxy = False
 is_twitter = True
 today = datetime.now().strftime("%d/%m/%Y")
@@ -48,6 +49,15 @@ def post_to_twitter(github_action, proxy):
         api.session.verify = False
     else:
         api = tweepy.API(auth, wait_on_rate_limit=True)
+
+    current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"..")
+    # prints all files to check
+    listOfFiles = list()
+    for (dirpath, dirnames, filenames) in os.walk(os.path.join(current_dir)):
+        listOfFiles += [os.path.join(dirpath, file) for file in filenames]
+
+    for file_name in listOfFiles:
+        print(file_name)
 
     # Posts image to Twitter
     filenames = ["../data/latest_one week fast track_plot.png", "../data/latest_premium_plot.png"]
