@@ -9,7 +9,7 @@ import tweepy
 sns.set_theme()
 
 
-is_github_action = False
+is_github_action = True
 is_proxy = False
 is_twitter = True
 today = datetime.now().strftime("%d/%m/%Y")
