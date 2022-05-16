@@ -16,6 +16,15 @@ today = datetime.now().strftime("%d/%m/%Y")
 last_week = datetime.now() - timedelta(days=8)
 last_week = last_week.strftime("%d/%m/%Y")
 
+def print_current_files():
+    current_dir = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+    # prints all files to check
+    listOfFiles = list()
+    for (dirpath, dirnames, filenames) in os.walk(os.path.join(current_dir)):
+        listOfFiles += [os.path.join(dirpath, file) for file in filenames]
+
+    for file_name in listOfFiles:
+        print(file_name)
 
 def post_to_twitter(github_action, proxy):
     """
@@ -49,15 +58,6 @@ def post_to_twitter(github_action, proxy):
         api.session.verify = False
     else:
         api = tweepy.API(auth, wait_on_rate_limit=True)
-
-    current_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),"..")
-    # prints all files to check
-    listOfFiles = list()
-    for (dirpath, dirnames, filenames) in os.walk(os.path.join(current_dir)):
-        listOfFiles += [os.path.join(dirpath, file) for file in filenames]
-
-    for file_name in listOfFiles:
-        print(file_name)
 
     # Posts image to Twitter
     filenames = ["../data/latest_one week fast track_plot.png", "../data/latest_premium_plot.png"]
@@ -100,6 +100,7 @@ def plot(df, service):
     ax.set_xlabel('Hour', fontsize=16)
     ax.set_ylabel('Date', fontsize=16)
     fig = ax.get_figure()
+    print_current_files()
     fig.savefig(f"../data/latest_{service}_plot.png")
     fig.clf()
     return None
