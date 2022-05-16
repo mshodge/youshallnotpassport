@@ -61,7 +61,7 @@ def post_to_twitter(github_action, proxy):
 
 
 def read_data():
-    df = pd.read_csv("../data/data.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/data.csv")
     df['count'] = np.where(df['online'] != 'False', 1, 0)
     df['date_col'] = pd.to_datetime(df['timestamp'], format='%d/%m/%Y %H:%M')
     df['date'] = df.timestamp.apply(lambda x: str(x).split(" ")[0])
