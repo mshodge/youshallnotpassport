@@ -9,9 +9,9 @@ import urllib3
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = True
-to_save_csv = True
-is_twitter = True
+is_github_action = False
+to_save_csv = False
+is_twitter = False
 
 
 def df_to_csv_string(df):
@@ -171,52 +171,66 @@ def check(proxy, github_action):
 
     # Reports if one week service is online or not
     if "service is unavailable" in page_one_text:
-        response = f"One week fast track service is unavailable ❌ ({timestamp})" \
-                   f"\n" \
-                   f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+        response_one_week = f"One week fast track service is unavailable ❌ ({timestamp})" \
+                    f"\n" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
+                    f"\n" \
+                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
     elif "System busy" in page_one_text:
-        response = f"One week fast track service is online but busy ⚠️ ({timestamp})" \
-                   f"\n" \
-                   f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+        response_one_week = f"One week fast track service is online but busy ⚠️ ({timestamp})" \
+                    f"\n" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
+                    f"\n" \
+                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "Busy"
     else:
-        response = f"One week fast track service is available ✅ ({timestamp})" \
-                   f"\n" \
-                   f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+        response_one_week = f"One week fast track service is available ✅ ({timestamp})" \
+                    f"\n" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
+                    f"\n" \
+                    f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
 
     # Reports if premium service is online or not
     if "service is unavailable" in page_premium_text:
-        response += f"\n" \
+        response_premium = f"Premium service is unavailable ❌ ({timestamp})" \
                     f"\n" \
-                    f"Premium service is unavailable ❌ ({timestamp})" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "Sorry, there are no available appointments" in page_premium_text:
-        response += f"\n" \
+        response_premium = f"Premium service is unavailable ❌ ({timestamp})" \
                     f"\n" \
-                    f"Premium service is unavailable ❌ ({timestamp})" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "System busy" in page_premium_text:
-        response += f"\n" \
+        response_premium = f"Premium service is online but busy ⚠️ ({timestamp})" \
                     f"\n" \
-                    f"Premium service is online but busy ⚠️ ({timestamp})" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "Busy"
     else:
-        response += f"\n" \
+        response_premium = f"Premium service is available ✅ ({timestamp})" \
                     f"\n" \
-                    f"Premium service is available ✅ ({timestamp})" \
+                    f"\n" \
+                    f"Status only valid for the next 30 mins."\
                     f"\n" \
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
 
-    print(response)
+    print(response_one_week)
+    print(response_premium)
 
     # Creates a DataFrame from the response checks
 
@@ -228,13 +242,16 @@ def check(proxy, github_action):
     if to_save_csv:
         update_csv(df_response_from_check, github_action)
 
-    return response, premium_online, one_week_online
+    return response_one_week, response_premium, premium_online, one_week_online
 
 
 if __name__ == '__main__':
 
-    response_from_check, premium_online_check, one_week_online_check = check(is_proxy, is_github_action)
+    response_one_week_check, response_premium_check, premium_online_check, one_week_online_check = \
+        check(is_proxy, is_github_action)
 
     if is_twitter:
-        if one_week_online_check != 'False' or premium_online_check != 'False':
-            post(response_from_check, is_proxy, is_github_action)
+        if one_week_online_check != 'False':
+            post(response_one_week_check, is_proxy, is_github_action)
+        if premium_online_check != 'False':
+            post(response_premium_check, is_proxy, is_github_action)
