@@ -1,8 +1,6 @@
 name: plot
 
 on:
-  schedule:
-    - cron: "0 7 * * 1" #runs every 30 mins
   workflow_dispatch:
 
 jobs:
