@@ -2,7 +2,7 @@ name: check_dev
 
 on:
   schedule:
-    - cron: "0,5 * * * *" #runs every 5 mins
+    - cron: "0/5 * * * *" #runs every 5 mins
   workflow_dispatch:
 
 jobs:
