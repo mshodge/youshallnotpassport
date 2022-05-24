@@ -266,7 +266,7 @@ def check(proxy, github_action):
                     f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     elif "Sorry, there are no available appointments" in page_premium_text:
-        response_premium = f"Premium service is unavailable ❌ ({timestamp})" \
+        response_premium = f"Premium service now offline ❌ ({timestamp})" \
                     f"\n" \
                     f"\n" \
                     f"Bot checks every 5 mins, and will post again if status changes"\
