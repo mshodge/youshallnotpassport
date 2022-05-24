@@ -49,9 +49,7 @@ def update_online_status(df, github_action):
     repo = "youshallnotpassport"
     branch = "main"
     file_path = "data/online.csv"
-    csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
 
-    df = pd.read_csv(csv_url)
     df_string = df_to_csv_string(df)
 
     if github_action:
@@ -315,9 +313,11 @@ if __name__ == '__main__':
 
     if is_twitter:
         # Now only posts if there has been a status change
-        if one_week_online_check != online_status_on_last_check(df, 'fast_track'):
+        if one_week_online_check == online_status_on_last_check(df, 'fast_track'):
             print('\n\nOne week service status has changed, will post to Twitter!\n\n')
             post(response_one_week_check, is_proxy, is_github_action)
-        if premium_online_check != online_status_on_last_check(df, 'premium'):
+            update_online_status(df)
+        if premium_online_check == online_status_on_last_check(df, 'premium'):
             print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
+            update_online_status(df)
