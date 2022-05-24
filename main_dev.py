@@ -316,6 +316,8 @@ if __name__ == '__main__':
     if is_twitter:
         # Now only posts if there has been a status change
         if one_week_online_check != online_status_on_last_check(df, 'fast_track'):
+            print('\n\nOne week service status has changed, will post to Twitter!\n\n')
             post(response_one_week_check, is_proxy, is_github_action)
         if premium_online_check != online_status_on_last_check(df, 'premium'):
+            print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
