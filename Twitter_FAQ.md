@@ -2,6 +2,9 @@
 
 Here are the most commonly asked questions I get on Twitter, and the answers to them.
 
+Before booking anything please make sure you have read through <a href="https://www.gov.uk/get-a-passport-urgently">
+The UK Government Official website on getting an urgent passport.</a>
+
 ## General
 
 <details>
