@@ -41,14 +41,14 @@ def update_twitter_bio(github_action, one_week_status, premium_status):
     if premium_status == "False":
         premium_status_symbol = f"Premium ❌,"
     elif premium_status == "Busy":
-        premium_status_symbol = f"Premium ⚠️,"️
+        premium_status_symbol = f"Premium ⚠️️,"
     elif premium_status == "True":
         premium_status_symbol = f"Premium ✅,"
 
     if one_week_status == "False":
         one_week_status_symbol = f"Fast Track ❌."
     elif one_week_status == "Busy":
-        one_week_status_symbol = f"Fast Track ⚠️."️
+        one_week_status_symbol = f"Fast Track ⚠️️."
     elif one_week_status == "True":
         one_week_status_symbol = f"Fast Track ✅."
 
