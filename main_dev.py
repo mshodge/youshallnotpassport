@@ -58,7 +58,7 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     # Posts status to Twitter
     api.update_profile(description = new_bio)
 
-    print("Posted update to Twitter")
+    print("Updated bio on Twitter")
 
 def read_online_status():
     """
