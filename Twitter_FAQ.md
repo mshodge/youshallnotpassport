@@ -50,17 +50,19 @@ Michael ❤️
 </summary>
 <br>
 This is just my advice and so please use your own judgement.
-<br>
+<br><br>
 <b><u>If 2 weeks</u></b><br>
 If you can use the Premium Service you may be able to get an appointment in time.
 Fast Track is unlikely as it takes a week from the appointment to receive the passport.
 Another option is to contact your local Passport Office to get an emergency 
 appointment as you are within 2 weeks of travel.
+<br><br>
 <b><u>If 2-10 weeks</u></b><br>
 For this, I would recommend booking a Fast Track appointment. Although closer to
 10 weeks you are the more likely it is you will get your passport back in time
 using the standard service. If you fall within 2 weeks of travel you can contact the
 Passport Office to ask for a Fast Track upgrade.
+<br><br>
 <b><u>10+ weeks</u></b><br>
 For this, you should be able to get your passport back in time using the standard
 service. If you fall within 2 weeks of travel you can contact the
