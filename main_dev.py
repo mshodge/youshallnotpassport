@@ -14,6 +14,13 @@ to_save_csv = False
 is_twitter = True
 
 def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
+    if github_action:
+        timestamp = datetime.now() + timedelta(hours=1)
+        timestamp = timestamp.strftime('%H:%M')
+
+    else:
+        timestamp = datetime.now().strftime('%H:%M')
+
     # Uses GitHub Secrets to store and load credentials
     if github_action:
         auth = tweepy.OAuthHandler(os.environ['bio_consumer_key'], os.environ['bio_consumer_secret'])
@@ -46,11 +53,11 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
         premium_status_symbol = f"Premium is online,"
 
     if one_week_status == "False":
-        one_week_status_symbol = f"Fast Track is offline."
+        one_week_status_symbol = f"Fast Track is offline (updated {timestamp})."
     elif one_week_status == "Busy":
-        one_week_status_symbol = f"Fast Track is busy."
+        one_week_status_symbol = f"Fast Track is busy (updated {timestamp})."
     elif one_week_status == "True":
-        one_week_status_symbol = f"Fast Track is online."
+        one_week_status_symbol = f"Fast Track is online (updated {timestamp})."
 
     new_bio = f"Unofficial bot. Runs approx every 30 mins. Please check http://gov.uk/get-a-passport-urgently before " \
               f"booking. {premium_status_symbol} {one_week_status_symbol}"
