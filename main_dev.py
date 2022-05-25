@@ -9,7 +9,7 @@ import urllib3
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = False
+is_github_action = True
 to_save_csv = False
 is_twitter = True
 
