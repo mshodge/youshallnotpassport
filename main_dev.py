@@ -39,18 +39,18 @@ def update_twitter_bio(github_action, one_week_status, premium_status):
         api = tweepy.API(auth, wait_on_rate_limit=True)
 
     if premium_status == "False":
-        premium_status_symbol = f"Premium ❌,"
+        premium_status_symbol = f"Premium is offline,"
     elif premium_status == "Busy":
-        premium_status_symbol = f"Premium ⚠️️,"
+        premium_status_symbol = f"Premium ️is busy,"
     elif premium_status == "True":
-        premium_status_symbol = f"Premium ✅,"
+        premium_status_symbol = f"Premium is online,"
 
     if one_week_status == "False":
-        one_week_status_symbol = f"Fast Track ❌."
+        one_week_status_symbol = f"Fast Track is offline."
     elif one_week_status == "Busy":
-        one_week_status_symbol = f"Fast Track ⚠️️."
+        one_week_status_symbol = f"Fast Track is busy."
     elif one_week_status == "True":
-        one_week_status_symbol = f"Fast Track ✅."
+        one_week_status_symbol = f"Fast Track is online."
 
     new_bio = f"Unofficial bot. Runs approx every 30 mins. Please check http://gov.uk/get-a-passport-urgently before " \
               f"booking. {premium_status_symbol} {one_week_status_symbol}"
