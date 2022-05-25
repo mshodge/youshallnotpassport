@@ -57,7 +57,7 @@ Michael ❤️
 <br>
 This is just my advice and so please use your own judgement.
 <br><br>
-<b><u>If 2 weeks</u></b><br>
+<b><u>If under 2 weeks</u></b><br>
 If you can use the Premium Service you may be able to get an appointment in time.
 Fast Track is unlikely as it takes a week from the appointment to receive the passport.
 Another option is to contact the
