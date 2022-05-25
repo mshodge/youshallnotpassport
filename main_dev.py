@@ -13,7 +13,7 @@ is_github_action = True
 to_save_csv = False
 is_twitter = True
 
-def update_twitter_bio(github_action, one_week_status, premium_status):
+def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     # Uses GitHub Secrets to store and load credentials
     if github_action:
         auth = tweepy.OAuthHandler(os.environ['bio_consumer_key'], os.environ['bio_consumer_secret'])
@@ -367,4 +367,4 @@ if __name__ == '__main__':
             print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
             update_online_status(df, is_github_action)
-        update_twitter_bio(is_github_action, one_week_online_check, premium_online_check)
+        update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
