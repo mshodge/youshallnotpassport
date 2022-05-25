@@ -39,18 +39,18 @@ def update_twitter_bio(github_action, one_week_status, premium_status):
         api = tweepy.API(auth, wait_on_rate_limit=True)
 
     if premium_status == "False":
-        premium_status_symbol = "❌"
+        premium_status_symbol = f"❌"
     elif premium_status == "Busy":
-        premium_status_symbol = "⚠️"️
+        premium_status_symbol = f"⚠️"️
     elif premium_status == "True":
-        premium_status_symbol = "✅"
+        premium_status_symbol = f"✅"
 
     if one_week_status == "False":
-        one_week_status_symbol = "❌"
+        one_week_status_symbol = f"❌"
     elif one_week_status == "Busy":
-        one_week_status_symbol = "⚠️"️
+        one_week_status_symbol = f"⚠️"️
     elif one_week_status == "True":
-        one_week_status_symbol = "✅"
+        one_week_status_symbol = f"✅"
 
     new_bio = f"Unofficial bot. Runs approx every 30 mins. Please check http://gov.uk/get-a-passport-urgently before " \
               f"booking. Premium {premium_status_symbol}, Fast Track {one_week_status_symbol}"
