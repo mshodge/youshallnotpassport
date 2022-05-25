@@ -14,7 +14,40 @@ to_save_csv = False
 is_twitter = True
 
 
-# //TODO: Add in auth Twitter function
+def authenticate_twitter(github_action, proxy):
+    """
+    Authenticates Twitter
+    :param github_action: <Boolean> Whether a GitHub action or not, for auth
+    :param proxy: <Boolean> Whether to use a proxy or not
+    :return: api <tweepy.api> the tweepy api response
+    """
+
+    # Uses GitHub Secrets to store and load credentials
+    if github_action:
+        auth = tweepy.OAuthHandler(os.environ['bio_consumer_key'], os.environ['bio_consumer_secret'])
+        auth.set_access_token(os.environ['bio_access_token'], os.environ['bio_access_token_secret'])
+
+    # Else uses local twitter_credentials.py file
+    else:
+        import config.twitter_credentials as twitter_credentials
+        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
+        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
+
+    headers = requests.utils.default_headers()
+    headers.update({
+        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
+    })
+
+    if proxy:
+        import config.proxies as set_proxies
+        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
+        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
+        api.session.verify = False
+    else:
+        api = tweepy.API(auth, wait_on_rate_limit=True)
+
+    return api
+
 
 def get_timestamp(github_action, timestamp_string_format='%H:%M'):
     """
