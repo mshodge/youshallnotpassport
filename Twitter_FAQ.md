@@ -60,8 +60,9 @@ This is just my advice and so please use your own judgement.
 <b><u>If 2 weeks</u></b><br>
 If you can use the Premium Service you may be able to get an appointment in time.
 Fast Track is unlikely as it takes a week from the appointment to receive the passport.
-Another option is to contact your local Passport Office to get an emergency 
-appointment as you are within 2 weeks of travel.
+Another option is to contact the
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
+to get an emergency appointment as you are within 2 weeks of travel.
 <br><br>
 <b><u>If 2-10 weeks</u></b><br>
 For this, I would recommend booking a Fast Track appointment. Although closer to
@@ -82,7 +83,8 @@ Passport Office to ask for a Fast Track upgrade.
 </summary>
 <br>
 If you have screenshot proof of your appointment on the confirmation page, and/or
-confirmation of payment, then you should be ok. But ring the passport advice line
+confirmation of payment, then you should be ok. But contact the 
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
 to be sure. HMPO are starting to email people in this position now with more
 information.
 <br>
@@ -140,8 +142,9 @@ not clear it can be done.
 <summary>How do I cancel my appointment?
 </summary>
 <br>
-You will need to ring up the Passport Advice Line and let them know why you need to
-cancel.
+You will need to contact the 
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
+and let them know why you need to cancel.
 </details>
 
 ## Advice about delays in standard passport applications
@@ -150,8 +153,9 @@ cancel.
 what can I do?
 </summary>
 <br>
-If you are within two weeks of travel, you should ring the Passport Advice Line and
-they should be able to offer you a Fast Track upgrade. Otherwise you can write and
+If you are within two weeks of travel, you should contact the 
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> and
+they should be able to offer you a Fast Track upgrade. Otherwise, you can write and
 request to withdraw your standard application in order to book an online urgent
 appointment. However, it can take up to 3 weeks for your original application
 to be cancelled.
@@ -164,8 +168,9 @@ to be cancelled.
 or premium?
 </summary>
 <br>
-You cannot have more than one application in progress. You would need to write and
-withdraw your original application to use the Fast Track or Premium service. This
+You cannot have more than one application in progress. You would need to contact
+the <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
+and withdraw your original application to use the Fast Track or Premium service. This
 can take up to 3 weeks to complete.
 <br>
 </details>
