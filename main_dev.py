@@ -41,7 +41,7 @@ def update_twitter_bio(github_action, one_week_status, premium_status):
     if premium_status == "False":
         premium_status_symbol = "❌"
     elif premium_status == "Busy":
-        premium_status_symbol = "⚠"️
+        premium_status_symbol = "⚠️"️
     elif premium_status == "True":
         premium_status_symbol = "✅"
 
