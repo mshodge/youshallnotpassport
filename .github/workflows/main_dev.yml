@@ -31,4 +31,8 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN_DEV }} # if run.py requires passwords..etc, set it as secrets
           access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET_DEV }} # if run.py requires passwords..etc, set it as secrets
           access_token_github: ${{ secrets.ACCESS_TOKEN_GITHUB }} # if run.py requires passwords..etc, set it as secrets
+          bio_consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
+          bio_consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          bio_access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
+          bio_access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
 

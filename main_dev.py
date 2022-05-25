@@ -13,6 +13,52 @@ is_github_action = True
 to_save_csv = False
 is_twitter = True
 
+def update_twitter_bio(github_action, one_week_status, premium_status):
+    # Uses GitHub Secrets to store and load credentials
+    if github_action:
+        auth = tweepy.OAuthHandler(os.environ['bio_consumer_key'], os.environ['bio_consumer_secret'])
+        auth.set_access_token(os.environ['bio_access_token'], os.environ['bio_access_token_secret'])
+
+    # Else uses local twitter_credentials.py file
+    else:
+        import config.twitter_credentials as twitter_credentials
+        auth = tweepy.OAuthHandler(twitter_credentials.bio_consumer_key, twitter_credentials.bio_consumer_secret)
+        auth.set_access_token(twitter_credentials.bio_access_token, twitter_credentials.bio_access_token_secret)
+
+    headers = requests.utils.default_headers()
+    headers.update({
+        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
+    })
+
+    if proxy:
+        import config.proxies as set_proxies
+        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
+        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
+        api.session.verify = False
+    else:
+        api = tweepy.API(auth, wait_on_rate_limit=True)
+
+    if premium_status == "False":
+        premium_status_symbol = "❌"
+    elif premium_status == "Busy":
+        premium_status_symbol = "⚠"️
+    elif premium_status == "True":
+        premium_status_symbol = "✅"
+
+    if one_week_status == "False":
+        one_week_status_symbol = "❌"
+    elif one_week_status == "Busy":
+        one_week_status_symbol = "⚠"️
+    elif one_week_status == "True":
+        one_week_status_symbol = "✅"
+
+    new_bio = f"Unofficial bot. Runs approx every 30 mins. Please check http://gov.uk/get-a-passport-urgently before " \
+              f"booking. Premium {premium_status_symbol}, Fast Track {one_week_status_symbol}"
+
+    # Posts status to Twitter
+    api.update_profile(description = new_bio)
+
+    print("Posted update to Twitter")
 
 def read_online_status():
     """
@@ -321,3 +367,4 @@ if __name__ == '__main__':
             print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
             update_online_status(df, is_github_action)
+        update_twitter_bio(is_github_action, one_week_online_check, premium_online_check)
