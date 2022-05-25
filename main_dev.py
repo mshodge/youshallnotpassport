@@ -53,14 +53,14 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
         premium_status_symbol = f"Premium is online,"
 
     if one_week_status == "False":
-        one_week_status_symbol = f"Fast Track is offline (updated {timestamp})."
+        one_week_status_symbol = f"Fast Track is offline"
     elif one_week_status == "Busy":
-        one_week_status_symbol = f"Fast Track is busy (updated {timestamp})."
+        one_week_status_symbol = f"Fast Track is busy"
     elif one_week_status == "True":
-        one_week_status_symbol = f"Fast Track is online (updated {timestamp})."
+        one_week_status_symbol = f"Fast Track is online"
 
     new_bio = f"Unofficial bot. Runs approx every 30 mins. Please check http://gov.uk/get-a-passport-urgently before " \
-              f"booking. {premium_status_symbol} {one_week_status_symbol}"
+              f"booking. {premium_status_symbol} {one_week_status_symbol} (updated {timestamp})."
 
     # Posts status to Twitter
     api.update_profile(description = new_bio)
