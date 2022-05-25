@@ -9,7 +9,7 @@ import urllib3
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 to_save_csv = False
 is_twitter = True
 
@@ -139,7 +139,7 @@ def online_status_on_last_check(df_old_online_status, service):
     :return: <string> Whether the status is online ('True', 'Busy') or not ('False')
     """
 
-    return str(df_old_online_status[df_old_online_status['service'] == service]['online'].bool())
+    return str(df_old_online_status[df_old_online_status['service'] == service]['online'].values[0])
 
 
 def update_online_status(df_status, github_action):
@@ -336,7 +336,7 @@ def check(proxy, github_action):
         response_one_week = f"One week fast track service is now offline ❌ ({timestamp})" \
                             f"\n" \
                             f"\n" \
-                            f"Bot checks every 5 mins, and will post again if status changes." \
+                            f"Bot checks every minute, and will post again if status changes." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
@@ -344,7 +344,7 @@ def check(proxy, github_action):
         response_one_week = f"One week fast track service is still online but busy ⚠️ ({timestamp})" \
                             f"\n" \
                             f"\n" \
-                            f"Bot checks every 5 mins, and will post again if status changes." \
+                            f"Bot checks every minute, and will post again if status changes." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "Busy"
@@ -352,7 +352,7 @@ def check(proxy, github_action):
         response_one_week = f"One week fast track service is now online! ✅ ({timestamp})" \
                             f"\n" \
                             f"\n" \
-                            f"Bot checks every 5 mins, and will post again if status changes." \
+                            f"Bot checks every minute, and will post again if status changes." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
@@ -362,7 +362,7 @@ def check(proxy, github_action):
         response_premium = f"Premium service is now offline ❌ ({timestamp})" \
                            f"\n" \
                            f"\n" \
-                           f"Bot checks every 5 mins, and will post again if status changes." \
+                           f"Bot checks every minute, and will post again if status changes." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
@@ -370,7 +370,7 @@ def check(proxy, github_action):
         response_premium = f"Premium service now offline ❌ ({timestamp})" \
                            f"\n" \
                            f"\n" \
-                           f"Bot checks every 5 mins, and will post again if status changes" \
+                           f"Bot checks every minute, and will post again if status changes" \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
@@ -378,7 +378,7 @@ def check(proxy, github_action):
         response_premium = f"Premium service is still online but busy ⚠️ ({timestamp})" \
                            f"\n" \
                            f"\n" \
-                           f"Bot checks every 5 mins, and will post again if status changes." \
+                           f"Bot checks every minute, and will post again if status changes." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "Busy"
@@ -386,7 +386,7 @@ def check(proxy, github_action):
         response_premium = f"Premium service is now online! ✅ ({timestamp})" \
                            f"\n" \
                            f"\n" \
-                           f"Bot checks every 5 mins, and will post again if status changes." \
+                           f"Bot checks every minute, and will post again if status changes." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
