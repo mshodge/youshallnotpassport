@@ -71,7 +71,7 @@ using the standard service. If you fall within 2 weeks of travel you can contact
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a> to ask for a Fast Track upgrade.
 <br><br>
 <b><u>If 6-10 weeks</u></b><br>
-There is no real advice or perfect option for this time framer I'm afraid. The closer to
+There is no real advice or perfect option for this time-frame I'm afraid. The closer to
 10 weeks you are the more likely it is you will get your passport back in time
 using the standard service. If you fall within 2 weeks of travel you can contact the
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
