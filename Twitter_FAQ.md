@@ -64,16 +64,22 @@ Another option is to contact the
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
 to get an emergency appointment as you are within 2 weeks of travel.
 <br><br>
-<b><u>If 2-10 weeks</u></b><br>
-For this, I would recommend booking a Fast Track appointment. Although closer to
+<b><u>If 2-6 weeks</u></b><br>
+For this, I would recommend booking a Fast Track appointment (released up to 3 weeks in advance). 
+Although closer to 6 weeks you are the more likely it is you will get your passport back in time
+using the standard service. If you fall within 2 weeks of travel you can contact the
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> to ask for a Fast Track upgrade.
+<br><br>
+<b><u>If 6-10 weeks</u></b><br>
+There is no real advice or perfect option for this time framer I'm afraid. The closer to
 10 weeks you are the more likely it is you will get your passport back in time
 using the standard service. If you fall within 2 weeks of travel you can contact the
-Passport Office to ask for a Fast Track upgrade.
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
 <br><br>
 <b><u>10+ weeks</u></b><br>
 For this, you should be able to get your passport back in time using the standard
 service. If you fall within 2 weeks of travel you can contact the
-Passport Office to ask for a Fast Track upgrade.
+<a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
 <br>
 </details>
 <br>
