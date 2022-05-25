@@ -401,15 +401,20 @@ def check(proxy, github_action):
          ["premium", premium_online, timestamp]],
         columns=['service', 'online', 'timestamp'])
 
+    df_status = pd.DataFrame(
+        [["fast_track", one_week_online],
+         ["premium", premium_online]],
+        columns=['service', 'online'])
+
     if to_save_csv:
         update_csv(df_response_from_check, github_action)
 
-    return response_one_week, response_premium, premium_online, one_week_online
+    return response_one_week, response_premium, premium_online, one_week_online, df_status
 
 
 if __name__ == '__main__':
 
-    response_one_week_check, response_premium_check, premium_online_check, one_week_online_check = \
+    response_one_week_check, response_premium_check, premium_online_check, one_week_online_check, df_status_is = \
         check(is_proxy, is_github_action)
 
     df = read_online_status()
@@ -419,9 +424,8 @@ if __name__ == '__main__':
         if one_week_online_check != online_status_on_last_check(df, 'fast_track'):
             print('\n\nOne week service status has changed, will post to Twitter!\n\n')
             post(response_one_week_check, is_proxy, is_github_action)
-            update_online_status(df, is_github_action)
         if premium_online_check != online_status_on_last_check(df, 'premium'):
             print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
-            update_online_status(df, is_github_action)
+        update_online_status(df_status_is, is_github_action)
         update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
