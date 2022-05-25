@@ -14,6 +14,7 @@ You can click the bell symbol (🔔) on the profile if you're using the Twitter 
 app, this will then send you a push notification when the account tweets.
 <br>
 </details>
+<br>
 
 <details>
 <summary>Can you book for me?</summary>
@@ -21,6 +22,7 @@ app, this will then send you a push notification when the account tweets.
 No, I do not book for other people.
 <br>
 </details>
+<br>
 
 <details>
 <summary>How can I pay you back for this service?</summary>
@@ -44,6 +46,7 @@ Thank you,
 Michael ❤️
 <br>
 </details>
+<br>
 
 <details>
 <summary>I have X number of days until I travel. What shall I do?
@@ -69,6 +72,7 @@ service. If you fall within 2 weeks of travel you can contact the
 Passport Office to ask for a Fast Track upgrade.
 <br>
 </details>
+<br>
 
 <details>
 <summary>I’ve not received a confirmation email of my booking, what do I do?
@@ -90,6 +94,7 @@ information.
 There is no set time. Typically, they go online during working hours during weekdays.
 <br>
 </details>
+<br>
 
 <details>
 <summary>I heard that they go online at midnight, is this true?</summary>
@@ -98,6 +103,7 @@ Over the several weeks this bot has been running it hasn't yet seen any evidence
 that the services go online at midnight, or any set time.
 <br>
 </details>
+<br>
 
 <details>
 <summary>Will there be appointments today?</summary>
@@ -105,6 +111,7 @@ that the services go online at midnight, or any set time.
 I'm afraid I don't have any knowledge of when they will go online next.
 <br>
 </details>
+<br>
 
 <details>
 <summary>Your tweet says the service is online but I keep getting System Busy, what 
@@ -124,7 +131,7 @@ an appointment.
 I don't think this is possible. Some people have had success doing this, but it is
 not clear it can be done.
 </details>
-
+<br>
 
 <details>
 <summary>How do I cancel my appointment?
@@ -147,6 +154,7 @@ appointment. However, it can take up to 3 weeks for your original application
 to be cancelled.
 <br>
 </details>
+<br>
 
 <details>
 <summary>I have a standard application being processed, can I book a fast track 
@@ -158,6 +166,7 @@ withdraw your original application to use the Fast Track or Premium service. Thi
 can take up to 3 weeks to complete.
 <br>
 </details>
+<br>
 
 <details>
 <summary>I’ve contacted the upgrades team, but they haven’t got back to me, 
