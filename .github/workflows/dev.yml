@@ -10,7 +10,9 @@ jobs:
 
     steps:
       - name: checkout repo develop
-        uses: actions/checkout@v2 # checkout the repository content to github runner.
+        uses: actions/checkout@v2
+        with:
+          ref: develop # checkout the repository content to github runner.
       - name: setup python
         uses: actions/setup-python@v2
         with:
