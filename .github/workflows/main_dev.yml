@@ -1,8 +1,6 @@
 name: check_dev
 
 on:
-  schedule:
-    - cron: "* * * * *" #runs every 5 mins
   repository_dispatch:
   workflow_dispatch:
 
