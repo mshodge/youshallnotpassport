@@ -95,7 +95,25 @@ to be sure. HMPO are starting to email people in this position now with more
 information.
 <br>
 </details>
+<br>
 
+<details>
+<summary>I have a damaged passport, can I used the Premium Service?
+</summary>
+<br>
+During the process of applying for a Premium appointment, they classify damaged passport as:
+<br>
+
+HM Passport Office classes your passport as damaged if:<br>
+	•	you can’t read any of your details<br>
+	•	the laminate cover has come away<br>
+	•	there’s an ink or chemical spillage on any of the pages<br>
+	•	there’s discolouring of your personal details (for example your name or date of birth) or on the official observations page<br>
+	•	any of the pages are ripped, missing or detached<br>
+	•	the chip is damaged or showing through the back cover (e-passports only)<br>
+	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
+	•	there’s excess water damage<br>
+</details>
 
 ## Service availability
 
@@ -135,6 +153,17 @@ an appointment.
 </details>
 
 ## Transfers and Cancellations
+<details>
+<summary>Can I change the date of my Fast Track appointment?
+</summary>
+<br>
+Yes, as long as you're not within 48 hours of the appointment. You can
+change the appointment date by clicking the link in your confirmation email
+when the Fast Track service is next online. Then you will be able to select
+a different date.
+</details>
+<br>
+
 <details>
 <summary>Can I transfer my appointment to someone else?
 </summary>

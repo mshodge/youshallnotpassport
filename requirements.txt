@@ -1,8 +1,0 @@
-datetime
-numpy
-pandas
-pygithub
-requests
-seaborn
-tweepy
-urllib3
