@@ -96,8 +96,6 @@ information.
 <summary>I have a damaged passport, can I used the Premium Service?
 </summary>
 <br><br>
-During the process of applying for a Premium appointment, they classify damaged passport as:
-<br><br>
 HM Passport Office classes your passport as damaged if:<br>
 	•	you can’t read any of your details<br>
 	•	the laminate cover has come away<br>
@@ -106,7 +104,10 @@ HM Passport Office classes your passport as damaged if:<br>
 	•	any of the pages are ripped, missing or detached<br>
 	•	the chip is damaged or showing through the back cover (e-passports only)<br>
 	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
-	•	there’s excess water damage<br><br>
+	•	there’s excess water damage
+<br><br>
+If any of these are true, then you will need to use the Fast Track service.
+<br><br>
 </details>
 
 ## Service availability
