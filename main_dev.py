@@ -347,7 +347,7 @@ def check(proxy, github_action):
                             f"Bot checks every minute, and will post again if status changes." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "Busy"
+        one_week_online = "True"
     else:
         response_one_week = f"One week fast track service is now online! ✅ ({timestamp})" \
                             f"\n" \
@@ -381,7 +381,7 @@ def check(proxy, github_action):
                            f"Bot checks every minute, and will post again if status changes." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        premium_online = "Busy"
+        premium_online = "True"
     else:
         response_premium = f"Premium service is now online! ✅ ({timestamp})" \
                            f"\n" \
