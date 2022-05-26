@@ -357,7 +357,7 @@ def check(proxy, github_action):
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
-    if "appointments will be available soon" in page_premium_text:
+    elif "appointments will be available soon" in page_premium_text:
         response_premium = f"Premium service will appear online soon ⏳ ({timestamp})" \
                            f"\n" \
                            f"\n" \
