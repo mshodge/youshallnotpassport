@@ -340,14 +340,6 @@ def check(proxy, github_action):
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
-    elif "System busy" in page_one_text:
-        response_one_week = f"One week fast track service is still online but busy ⚠️ ({timestamp})" \
-                            f"\n" \
-                            f"\n" \
-                            f"Bot checks every minute, and will post again if status changes." \
-                            f"\n" \
-                            f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "True"
     else:
         response_one_week = f"One week fast track service is now online! ✅ ({timestamp})" \
                             f"\n" \
@@ -358,15 +350,7 @@ def check(proxy, github_action):
         one_week_online = "True"
 
     # Reports if premium service is online or not
-    if "service is unavailable" in page_premium_text:
-        response_premium = f"Premium service is now offline ❌ ({timestamp})" \
-                           f"\n" \
-                           f"\n" \
-                           f"Bot checks every minute, and will post again if status changes." \
-                           f"\n" \
-                           f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        premium_online = "False"
-    elif "Sorry, there are no available appointments" in page_premium_text:
+    if "there are no available appointments" in page_premium_text:
         response_premium = f"Premium service now offline ❌ ({timestamp})" \
                            f"\n" \
                            f"\n" \
@@ -374,14 +358,14 @@ def check(proxy, github_action):
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
-    elif "System busy" in page_premium_text:
-        response_premium = f"Premium service is still online but busy ⚠️ ({timestamp})" \
+    if "appointments will be available soon" in page_premium_text:
+        response_premium = f"Premium service will appear online soon ⏳ ({timestamp})" \
                            f"\n" \
                            f"\n" \
-                           f"Bot checks every minute, and will post again if status changes." \
+                           f"Bot checks every minute, and will post again if status changes" \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        premium_online = "True"
+        premium_online = "Wait"
     else:
         response_premium = f"Premium service is now online! ✅ ({timestamp})" \
                            f"\n" \
