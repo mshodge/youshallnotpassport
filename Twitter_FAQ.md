@@ -15,17 +15,15 @@ are online, or online and busy, the bot will post a tweet. It will then check ag
 30 minutes later. The statuses on the tweets are therefore only valid for 30 minutes.
 You can click the bell symbol (🔔) on the profile if you're using the Twitter mobile
 app, this will then send you a push notification when the account tweets.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>Can you book for me?</summary>
 <br>
 No, I do not book for other people.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>How can I pay you back for this service?</summary>
@@ -47,9 +45,8 @@ passports and spending £££ doing so. I’m sharing this for those who are abl
 Thank you,
 <br><br>
 Michael ❤️
-<br>
+<br><br><br>
 </details>
-<br>
 
 <details>
 <summary>I have X number of days until I travel. What shall I do?
@@ -80,9 +77,8 @@ using the standard service. If you fall within 2 weeks of travel you can contact
 For this, you should be able to get your passport back in time using the standard
 service. If you fall within 2 weeks of travel you can contact the
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>I’ve not received a confirmation email of my booking, what do I do?
@@ -93,17 +89,15 @@ confirmation of payment, then you should be ok. But contact the
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
 to be sure. HMPO are starting to email people in this position now with more
 information.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>I have a damaged passport, can I used the Premium Service?
 </summary>
-<br>
+<br><br>
 During the process of applying for a Premium appointment, they classify damaged passport as:
-<br>
-
+<br><br>
 HM Passport Office classes your passport as damaged if:<br>
 	•	you can’t read any of your details<br>
 	•	the laminate cover has come away<br>
@@ -112,7 +106,7 @@ HM Passport Office classes your passport as damaged if:<br>
 	•	any of the pages are ripped, missing or detached<br>
 	•	the chip is damaged or showing through the back cover (e-passports only)<br>
 	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
-	•	there’s excess water damage<br>
+	•	there’s excess water damage<br><br>
 </details>
 
 ## Service availability
@@ -121,26 +115,23 @@ HM Passport Office classes your passport as damaged if:<br>
 <summary>When do services go online?</summary>
 <br>
 There is no set time. Typically, they go online during working hours during weekdays.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>I heard that they go online at midnight, is this true?</summary>
 <br>
 Over the several weeks this bot has been running it hasn't yet seen any evidence
 that the services go online at midnight, or any set time.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>Will there be appointments today?</summary>
 <br>
 I'm afraid I don't have any knowledge of when they will go online next.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>Your tweet says the service is online but I keep getting System Busy, what 
@@ -149,7 +140,7 @@ do I do?</summary>
 That means the service is online but many people are trying to access it.
 Keep refreshing and you should hopefully get through and be able to book
 an appointment.
-<br>
+<br><br>
 </details>
 
 ## Transfers and Cancellations
@@ -161,8 +152,8 @@ Yes, as long as you're not within 48 hours of the appointment. You can
 change the appointment date by clicking the link in your confirmation email
 when the Fast Track service is next online. Then you will be able to select
 a different date.
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>Can I transfer my appointment to someone else?
@@ -170,8 +161,8 @@ a different date.
 <br>
 I don't think this is possible. Some people have had success doing this, but it is
 not clear it can be done.
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>How do I cancel my appointment?
@@ -180,6 +171,7 @@ not clear it can be done.
 You will need to contact the 
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
 and let them know why you need to cancel.
+<br><br>
 </details>
 
 ## Advice about delays in standard passport applications
@@ -194,9 +186,8 @@ they should be able to offer you a Fast Track upgrade. Otherwise, you can write 
 request to withdraw your standard application in order to book an online urgent
 appointment. However, it can take up to 3 weeks for your original application
 to be cancelled.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>I have a standard application being processed, can I book a fast track 
@@ -207,9 +198,8 @@ You cannot have more than one application in progress. You would need to contact
 the <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
 and withdraw your original application to use the Fast Track or Premium service. This
 can take up to 3 weeks to complete.
-<br>
+<br><br>
 </details>
-<br>
 
 <details>
 <summary>I’ve contacted the upgrades team, but they haven’t got back to me, 
@@ -217,6 +207,6 @@ what do I do?
 </summary>
 <br>
 Unfortunately, I am unable to help. You will have to keep trying to get hold of them.
-<br>
+<br><br>
 </details>
 
