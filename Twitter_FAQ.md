@@ -16,6 +16,10 @@ are online, or online and busy, the bot will post a tweet. It will then check ag
 You can click the bell symbol (🔔) on the profile if you're using the Twitter mobile
 app, this will then send you a push notification when the account tweets.
 <br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/youshallnotpass.png" alt="Process diagram"/>
+</p>
+<br><br>
 </details>
 
 <details>
@@ -26,7 +30,7 @@ The UK Government Official website on getting an urgent passport explains the di
 But below is a small infographic which may also help.
 <br><br>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infograpic"/>
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infographic"/>
 </p>
 <br><br>
 </details>
