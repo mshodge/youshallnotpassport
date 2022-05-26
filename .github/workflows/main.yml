@@ -1,8 +1,7 @@
-name: check
+name: check_dev
 
 on:
-  schedule:
-    - cron: "0,30 * * * *" #runs every 30 mins
+  repository_dispatch:
   workflow_dispatch:
 
 jobs:
@@ -10,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo main
+      - name: checkout repo develop
         uses: actions/checkout@v2 # checkout the repository content to github runner.
       - name: setup python
         uses: actions/setup-python@v2
@@ -25,9 +24,13 @@ jobs:
         run: |
           python main.py
         env:
-          consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
-          consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
-          access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
-          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          consumer_key: ${{ secrets.CONSUMER_KEY_DEV }} # if run.py requires passwords..etc, set it as secrets
+          consumer_secret: ${{ secrets.CONSUMER_SECRET_DEV }} # if run.py requires passwords..etc, set it as secrets
+          access_token: ${{ secrets.ACCESS_TOKEN_DEV }} # if run.py requires passwords..etc, set it as secrets
+          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET_DEV }} # if run.py requires passwords..etc, set it as secrets
           access_token_github: ${{ secrets.ACCESS_TOKEN_GITHUB }} # if run.py requires passwords..etc, set it as secrets
+          bio_consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
+          bio_consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          bio_access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
+          bio_access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
 
