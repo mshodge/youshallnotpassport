@@ -297,8 +297,7 @@ def check(proxy, github_action):
     :return: <string> The response of whether the service is online or not
     """
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
-    url_premium = "https://www.passport.service.gov.uk/urgent/" \
-                  "?_ga=2.165977918.1052226504.1651564347-663154096.1628163070"
+    url_premium = "https://www.passport.service.gov.uk/urgent/"
 
     headers = requests.utils.default_headers()
     headers.update({
@@ -332,7 +331,7 @@ def check(proxy, github_action):
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
 
     # Reports if one week service is online or not
-    if "service is unavailable" in page_one_text:
+    if "there are no available appointments" in page_one_text:
         response_one_week = f"One week fast track service is now offline ❌ ({timestamp})" \
                             f"\n" \
                             f"\n" \
