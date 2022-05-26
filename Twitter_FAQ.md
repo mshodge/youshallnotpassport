@@ -198,9 +198,9 @@ and let them know why you need to cancel.
 what can I do?
 </summary>
 <br>
-If you are within two weeks of travel, you should contact the 
+If you are within two weeks of travel, contact the 
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a> and
-they should be able to offer you a Fast Track upgrade. Otherwise, you can write and
+they may be able to offer you a Fast Track upgrade. Otherwise, you can write and
 request to withdraw your standard application in order to book an online urgent
 appointment. However, it can take up to 3 weeks for your original application
 to be cancelled.
