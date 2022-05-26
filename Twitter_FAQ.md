@@ -26,7 +26,7 @@ The UK Government Official website on getting an urgent passport explains the di
 But below is a small infographic which may also help.
 <br><br>
 <p align="center">
-  <img src="https://github.com/mshodge/youshallnotpass/blob/gh_pages/img/services_infographic.png?raw=true" alt="Services infograpic"/>
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infograpic"/>
 </p>
 <br><br>
 </details>
