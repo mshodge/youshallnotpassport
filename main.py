@@ -357,14 +357,6 @@ def check(proxy, github_action):
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
-    elif "appointments will be available soon" in page_premium_text:
-        response_premium = f"Premium service will appear online soon ⏳ ({timestamp})" \
-                           f"\n" \
-                           f"\n" \
-                           f"Bot checks every minute, and will post again if status changes" \
-                           f"\n" \
-                           f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
-        premium_online = "Wait"
     else:
         response_premium = f"Premium service is now online! ✅ ({timestamp})" \
                            f"\n" \
