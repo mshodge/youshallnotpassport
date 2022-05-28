@@ -172,6 +172,18 @@ If any of these are true, then you will need to use the Fast Track service.
 <br><br>
 </details>
 
+<details>
+<summary>Does the Premium service reserve my appointment selection?</summary>
+<br>
+<blockquote>
+Yes, it appears as though when you click an appointment time and date this is reserved
+for you once you confirm your selection. You then have X minutes to complete your 
+application (photo upload, application details and pay). The slot will be made open 
+to booking for someone else if you do not finish in time. Therefore, please have your
+photo and payment details ready at hand.</blockquote>
+<br><br>
+</details>
+
 ## Service availability
 
 <details>
