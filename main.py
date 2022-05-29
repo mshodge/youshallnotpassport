@@ -13,10 +13,11 @@ def check_if_half_hour_or_hour():
     time_now = datetime.now().strftime("%S")
     mins = int(time_now)
     if mins == 30 or mins == 0:
-        print('saving data')
+        print("It's half past or at the hour, so I am saving data")
         to_save_csv = True
     else:
         to_save_csv = False
+        print("It's not half past or at the hour, so I am not saving data")
     return to_save_csv
 
 is_proxy = False
