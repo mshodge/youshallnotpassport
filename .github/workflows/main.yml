@@ -1,7 +1,6 @@
 name: check_dev
 
 on:
-  repository_dispatch:
   workflow_dispatch:
 
 jobs:
