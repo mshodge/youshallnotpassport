@@ -14,6 +14,7 @@ to_save_csv = os.environ['to_save_csv']
 is_twitter = True
 
 print(to_save_csv)
+print(type(to_save_csv))
 
 def authenticate_twitter(github_action, proxy):
     """
