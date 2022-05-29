@@ -29,6 +29,6 @@ jobs:
           access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
           access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
           access_token_github: ${{ secrets.ACCESS_TOKEN_GITHUB }} # if run.py requires passwords..etc, set it as secrets
-          to_save_csv: False # if run.py requires passwords..etc, set it as secrets
+          to_save_csv: ${{ False }} # if run.py requires passwords..etc, set it as secrets
 
 
