@@ -8,13 +8,21 @@ import urllib3
 
 urllib3.disable_warnings()
 
+def check_if_half_hour_or_hour():
+    # Get date time and convert to a string
+    time_now = datetime.now().strftime("%S")
+    mins = int(time_now)
+    if mins == 30 or mins == 0:
+        print('saving data')
+        to_save_csv = True
+    else:
+        to_save_csv = False
+    return to_save_csv
+
 is_proxy = False
 is_github_action = True
-to_save_csv = os.environ['to_save_csv']
 is_twitter = True
-
-print(to_save_csv)
-print(type(to_save_csv))
+to_save_csv = check_if_half_hour_or_hour()
 
 def authenticate_twitter(github_action, proxy):
     """
@@ -391,6 +399,7 @@ def check(proxy, github_action):
 
 
 if __name__ == '__main__':
+
 
     response_one_week_check, response_premium_check, premium_online_check, one_week_online_check, df_status_is = \
         check(is_proxy, is_github_action)
