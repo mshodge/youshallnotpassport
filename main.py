@@ -248,7 +248,7 @@ def update_csv(df_response_from_check, github_action):
                      sha=contents.sha)
 
     # Also, saves to local disk
-    df.to_csv(file_path)
+    df_data.to_csv(file_path)
 
 
 def post(response, proxy, github_action):
