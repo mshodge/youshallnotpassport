@@ -10,7 +10,7 @@ urllib3.disable_warnings()
 
 is_proxy = False
 is_github_action = True
-to_save_csv = False
+to_save_csv = os.environ['to_save_csv']
 is_twitter = True
 
 
