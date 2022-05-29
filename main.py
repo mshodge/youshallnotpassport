@@ -139,7 +139,7 @@ def read_online_status():
     """
 
     df_online_status = pd.read_csv(
-        "https://raw.githubusercontent.com/mshodge/youshallnotpassport/develop/data/online.csv")
+        "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/online.csv")
     return df_online_status
 
 
@@ -167,7 +167,7 @@ def update_online_status(df_status, github_action):
     # Gets current csv file from open repo
     org = "mshodge"
     repo = "youshallnotpassport"
-    branch = "develop"
+    branch = "main"
     file_path = "data/online.csv"
 
     df_string = df_to_csv_string(df_status)
@@ -233,7 +233,7 @@ def update_csv(df_response_from_check, github_action):
     # Gets current csv file from open repo
     org = "mshodge"
     repo = "youshallnotpassport"
-    branch = "develop"
+    branch = "main"
     file_path = "data/data.csv"
     csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
 
