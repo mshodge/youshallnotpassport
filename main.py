@@ -179,7 +179,7 @@ def update_online_status(df_status, github_action):
                      sha=contents.sha)
 
     # Also, saves to local disk
-    df.to_csv(file_path)
+    df_status.to_csv(file_path)
 
 
 def df_to_csv_string(df_to_convert):
