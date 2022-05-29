@@ -10,7 +10,7 @@ urllib3.disable_warnings()
 
 def check_if_half_hour_or_hour():
     # Get date time and convert to a string
-    time_now = datetime.now().strftime("%S")
+    time_now = datetime.now().strftime("%M")
     mins = int(time_now)
     if mins in [29,30,31,59,0,1]:
         print("It's half past or at the hour, so I am saving data")
