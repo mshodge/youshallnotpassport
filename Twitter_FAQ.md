@@ -27,6 +27,18 @@ app, this will then send you a push notification when the account tweets.
 </details>
 
 <details>
+<summary>The bot hasn't posted in a while, is it still working?</summary>
+<br>
+<blockquote>
+Unless I've changed the code on the main, working code (which I don't unless there is
+a big update, then it should be working all the time. To verify, check the account
+bio, is the updated time up-to-date? If so, then the code is still working. If not, DM
+me.
+<br><br>
+</blockquote>
+</details>
+
+<details>
 <summary>Are you allowed to scrape information from a GOV.UK site?</summary>
 <br>
 <blockquote>
