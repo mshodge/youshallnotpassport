@@ -409,11 +409,19 @@ if __name__ == '__main__':
 
     if is_twitter:
         # Now only posts if there has been a status change
-        if one_week_online_check != online_status_on_last_check(df, 'fast_track'):
+        one_week_online_check_last = online_status_on_last_check(df, 'fast_track')
+        premium_online_check_last = online_status_on_last_check(df, 'premium')
+
+        print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n\n')
+        print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n\n')
+
+        if one_week_online_check != one_week_online_check_last:
             print('\n\nOne week service status has changed, will post to Twitter!\n\n')
             post(response_one_week_check, is_proxy, is_github_action)
-        if premium_online_check != online_status_on_last_check(df, 'premium'):
+
+        if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n\n')
             post(response_premium_check, is_proxy, is_github_action)
+
         update_online_status(df_status_is, is_github_action)
         update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
