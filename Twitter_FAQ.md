@@ -203,6 +203,17 @@ photo and payment details ready at hand.</blockquote>
 <br>
 <blockquote>
 There is no set time. Typically, they go online during working hours during weekdays.
+<br><br>
+Lately (30/05/2022), some patterns may be emerging with:<br>
+1. Fast Track going online between 16:00 and 17:00<br>
+2. Premium going online between 07:00 and 09:00<br>
+<br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
+</p>
 </blockquote>
 <br><br>
 </details>
