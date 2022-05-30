@@ -8,22 +8,25 @@ import urllib3
 
 urllib3.disable_warnings()
 
+is_proxy = False
+is_github_action = False
+is_twitter = True
+
 def check_if_half_hour_or_hour():
+    """
+    Checks if the time is 30 past or 0 past and returns a variable based on that
+    :return: to_save_csv <boolean> Returns True if 30 or 0
+    """
     # Get date time and convert to a string
     time_now = datetime.now().strftime("%M")
     mins = int(time_now)
     if mins in [29,30,31,59,0,1]:
-        print("It's half past or at the hour, so I am saving data")
+        print("It's half past or at the hour, so I am saving data\n")
         to_save_csv = True
     else:
         to_save_csv = False
-        print("It's not half past or at the hour, so I am not saving data")
+        print("It's not half past or at the hour, so I am not saving data\n")
     return to_save_csv
-
-is_proxy = False
-is_github_action = True
-is_twitter = True
-to_save_csv = check_if_half_hour_or_hour()
 
 def authenticate_twitter(github_action, proxy):
     """
@@ -85,29 +88,7 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     """
     timestamp = get_timestamp(github_action, timestamp_string_format='%H:%M')
 
-    # Uses GitHub Secrets to store and load credentials
-    if github_action:
-        auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
-        auth.set_access_token(os.environ['access_token'], os.environ['access_token_secret'])
-
-    # Else uses local twitter_credentials.py file
-    else:
-        import config.twitter_credentials as twitter_credentials
-        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
-        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
-
-    headers = requests.utils.default_headers()
-    headers.update({
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
-    })
-
-    if proxy:
-        import config.proxies as set_proxies
-        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
-        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
-        api.session.verify = False
-    else:
-        api = tweepy.API(auth, wait_on_rate_limit=True)
+    api = authenticate_twitter(github_action, proxy)
 
     if premium_status == "Busy":
         premium_status_symbol = f"OP ️is busy,"
@@ -142,6 +123,32 @@ def read_online_status():
         "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/online.csv")
     return df_online_status
 
+
+def online_status_on_last_check_twitter(service, github_action, proxy):
+    """
+    Returns string value depending if the Twitter bio says a service is online or offline
+    :param service: <string> Either fast track or premium to check
+    :param github_action: <Boolean> Whether a GitHub action or not, for auth
+    :param proxy: <Boolean> Whether using a proxy or not
+    :return: <string> True or False string based on what is in the bio
+    """
+    # Uses GitHub Secrets to store and load credentials
+    api = authenticate_twitter(github_action, proxy)
+
+    id = "1521412356361920516"
+    user = api.get_user(user_id=id)
+    bio_desc = user.description
+
+    if service == "fast track":
+        if "FT is online" in bio_desc:
+            return 'True'
+        else:
+            return 'False'
+    elif service == "premium":
+        if "OP is online" in bio_desc:
+            return 'True'
+        else:
+            return 'False'
 
 def online_status_on_last_check(df_old_online_status, service):
     """
@@ -271,29 +278,7 @@ def post(response, proxy, github_action):
     :return: <string> The response of whether the service is online or not
     """
 
-    # Uses GitHub Secrets to store and load credentials
-    if github_action:
-        auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
-        auth.set_access_token(os.environ['access_token'], os.environ['access_token_secret'])
-
-    # Else uses local twitter_credentials.py file
-    else:
-        import config.twitter_credentials as twitter_credentials
-        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
-        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
-
-    headers = requests.utils.default_headers()
-    headers.update({
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
-    })
-
-    if proxy:
-        import config.proxies as set_proxies
-        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
-        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
-        api.session.verify = False
-    else:
-        api = tweepy.API(auth, wait_on_rate_limit=True)
+    api = authenticate_twitter(github_action, proxy)
 
     # Posts status to Twitter
     api.update_status(response)
@@ -301,7 +286,7 @@ def post(response, proxy, github_action):
     print("Posted update to Twitter")
 
 
-def check(proxy, github_action):
+def check(proxy, github_action, to_save_csv):
     """
     Checks if the passport services are online or not
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
@@ -401,26 +386,28 @@ def check(proxy, github_action):
 
 if __name__ == '__main__':
 
+    check_if_save = check_if_half_hour_or_hour()
 
     response_one_week_check, response_premium_check, premium_online_check, one_week_online_check, df_status_is = \
-        check(is_proxy, is_github_action)
+        check(is_proxy, is_github_action, check_if_save)
 
     df = read_online_status()
 
     if is_twitter:
         # Now only posts if there has been a status change
-        one_week_online_check_last = online_status_on_last_check(df, 'fast_track')
-        premium_online_check_last = online_status_on_last_check(df, 'premium')
+        one_week_online_check_last = online_status_on_last_check_twitter("fast track", is_github_action, is_proxy)
+        premium_online_check_last = online_status_on_last_check_twitter("premium", is_github_action,
+                                                                           is_proxy)
 
-        print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n\n')
-        print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n\n')
+        print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n')
+        print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n')
 
         if one_week_online_check != one_week_online_check_last:
-            print('\n\nOne week service status has changed, will post to Twitter!\n\n')
+            print('\n\nOne week service status has changed, will post to Twitter!\n')
             post(response_one_week_check, is_proxy, is_github_action)
 
         if premium_online_check != premium_online_check_last:
-            print('\n\nPremium service status has changed, will post to Twitter!\n\n')
+            print('\n\nPremium service status has changed, will post to Twitter!\n')
             post(response_premium_check, is_proxy, is_github_action)
 
         update_online_status(df_status_is, is_github_action)
