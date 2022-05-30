@@ -9,7 +9,7 @@ import urllib3
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = False
+is_github_action = True
 is_twitter = True
 
 def check_if_half_hour_or_hour():
