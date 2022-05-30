@@ -9,9 +9,9 @@ import tweepy
 sns.set_theme()
 
 
-is_github_action = True
+is_github_action = False
 is_proxy = False
-is_twitter = True
+is_twitter = False
 today = datetime.now().strftime("%d/%m/%Y")
 last_week = datetime.now() - timedelta(days=8)
 last_week = last_week.strftime("%d/%m/%Y")
@@ -83,9 +83,19 @@ def read_data():
     df['day_of_week'] = pd.Series(df.date_col).dt.day_name()
     df['date_dow'] = df['date'] + " (" + df['day_of_week'] + ")"
     df = df[df['date'] < today]
-    df = df[df['date'] > last_week]
     return df
 
+def read_data_last_week():
+    df = pd.read_csv("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/data.csv")
+    df['count'] = np.where(df['online'] != 'False', 1, 0)
+    df['date_col'] = pd.to_datetime(df['timestamp'], format='%d/%m/%Y %H:%M')
+    df['date'] = df.timestamp.apply(lambda x: str(x).split(" ")[0])
+    df['hour'] = df.timestamp.apply(lambda x: str(x).split(" ")[1].split(":")[0])
+    df['day_of_week'] = pd.Series(df.date_col).dt.day_name()
+    df['date_dow'] = df['date'] + " (" + df['day_of_week'] + ")"
+    df = df[df['date'] < today]
+    df = df[df['date'] > last_week]
+    return df
 
 def reduce_and_pivot(df, service):
     df_service = df[df['service'] == service]
@@ -94,12 +104,12 @@ def reduce_and_pivot(df, service):
     return df_service_pivot
 
 
-def plot(df, service, github_action):
+def plot(df, service, github_action, when):
     sns.set(rc={'figure.figsize': (18, 8)})
     ax = sns.heatmap(df, linewidths=.5, cbar=False, annot=True, cmap="Blues")
-    ax.text(x=0.5, y=1.1, s=f'When was the {service} service online in the last week?',
+    ax.text(x=0.5, y=1.1, s=f'When was the {service} service online?',
             fontsize=18, weight='bold', ha='center', va='bottom', transform=ax.transAxes)
-    ax.text(x=0.5, y=1.05, s='Count indicates how many times it was online last week for every day and hour (max 2)',
+    ax.text(x=0.5, y=1.05, s=f'Count indicates how many times it was online {when} for every day and hour (max 2)',
             fontsize=12, alpha=0.75, ha='center', va='bottom', transform=ax.transAxes)
     ax.set_xlabel('Hour', fontsize=16)
     ax.set_ylabel('Date', fontsize=16)
@@ -107,9 +117,9 @@ def plot(df, service, github_action):
     print_current_files()
 
     if github_action:
-        fig.savefig(f"/home/runner/work/youshallnotpassport/youshallnotpassport/data/latest_{service}_plot.png")
+        fig.savefig(f"/home/runner/work/youshallnotpassport/youshallnotpassport/data/latest_{service}_plot_{when.replace(' ', '_')}.png")
     else:
-        fig.savefig(f"../data/latest_{service}_plot.png")
+        fig.savefig(f"../data/latest_{service}_plot_{when.replace(' ', '_')}.png")
     fig.clf()
     return None
 
@@ -117,8 +127,13 @@ def plot(df, service, github_action):
 if __name__ == '__main__':
 
     df_of_raw_data = read_data()
+    df_of_raw_data_last_week = read_data_last_week()
+
     for service_type in ["one week fast track", "premium"]:
         df_by_service = reduce_and_pivot(df_of_raw_data, service_type)
-        plot(df_by_service, service_type, is_github_action)
+        df_by_service_last_week = reduce_and_pivot(df_of_raw_data_last_week, service_type)
+
+        plot(df_by_service, service_type, is_github_action, when = "for the whole time-series")
+        plot(df_by_service_last_week, service_type, is_github_action, when="last week")
     if is_twitter:
         post_to_twitter(is_github_action, is_proxy)
