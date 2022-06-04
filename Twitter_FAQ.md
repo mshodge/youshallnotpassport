@@ -13,9 +13,8 @@ The UK Government Official website on getting an urgent passport.</a>
 <summary>How does this work Twitter Bot/Account?</summary>
 <br>
 <blockquote>
-The bot checks the Premium and Fast Track websites every 30 minutes. If the websites 
-are online, or online and busy, the bot will post a tweet. It will then check again
-30 minutes later. The statuses on the tweets are therefore only valid for 30 minutes.
+The bot checks the Premium and Fast Track websites every minute. If the websites 
+have a status change (online to offline, or offline to online) the bot will post a tweet. 
 You can click the bell symbol (🔔) on the profile if you're using the Twitter mobile
 app, this will then send you a push notification when the account tweets.
 <br><br>
@@ -204,9 +203,9 @@ photo and payment details ready at hand.</blockquote>
 <blockquote>
 There is no set time. Typically, they go online during working hours during weekdays.
 <br><br>
-Lately (30/05/2022), some patterns may be emerging with:<br>
-1. Fast Track going online between 16:00 and 17:00<br>
-2. Premium going online between 07:00 and 09:00<br>
+Lately (as of 04/06/2022), some patterns may be emerging with:<br>
+1. Fast Track going online at around 16:00 until 18:00<br>
+2. Premium going online at around 08:00<br>
 <br><br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
@@ -223,7 +222,7 @@ Lately (30/05/2022), some patterns may be emerging with:<br>
 <br>
 <blockquote>
 Over the several weeks this bot has been running it hasn't yet seen any evidence
-that the services go online at midnight, or any set time.
+that the services go online at midnight, or any set time. See above.
 </blockquote>
 <br><br>
 </details>
