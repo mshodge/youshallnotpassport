@@ -195,6 +195,15 @@ photo and payment details ready at hand.</blockquote>
 <br><br>
 </details>
 
+<details>
+<summary>After completing the Premium checkboxes I get sent to the Standard Passport service/I get a "Sorry, you'll have to start again" message</summary>
+<br>
+<blockquote>
+The is a known glitch. Just go back to the main Premium webpage and click the green button to start again. You won't have to queue again. 
+<br><br>
+</blockquote>
+</details>
+
 ## Service availability
 
 <details>
