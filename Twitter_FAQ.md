@@ -103,7 +103,9 @@ This is just my advice and so please use your own judgement.
 <br><br>
 <b><u>If under 2 weeks</u></b><br>
 If you can use the Premium Service you may be able to get an appointment in time.
+However, it is hard to get Premium appointments at the moment.
 Fast Track is unlikely as it takes a week from the appointment to receive the passport.
+However, sometimes same week appointments do come up.
 Another option is to contact the
 <a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
 to get an emergency appointment as you are within 2 weeks of travel.
@@ -127,10 +129,6 @@ service. If you fall within 2 weeks of travel you can contact the
 </blockquote>
 <br><br>
 </details>
-
-
-
-
 
 ## One week Fast Track service
 
@@ -156,7 +154,7 @@ But below is a small infographic which may also help.
 There is no set time. Typically, they go online during working hours during weekdays.
 <br><br>
 Lately (as of 04/06/2022), some patterns may be emerging with:<br>
-1. Fast Track going online at around 16:00 until 18:00<br>
+1. Fast Track going online at around 15:00 to 16:00 until 18:00<br>
 2. Premium going online at around 08:00<br>
 <br><br>
 <p align="center">
@@ -170,12 +168,12 @@ Lately (as of 04/06/2022), some patterns may be emerging with:<br>
 </details>
 
 <details>
-<summary>Your tweet says the service is online but I keep getting System Busy, what 
+<summary>Your tweet says the service is online, but I keep getting System Busy, what 
 do I do?</summary>
 <br>
 <blockquote>
 That means the service is online but many people are trying to access it.
-Keep refreshing and you should hopefully get through and be able to book
+Keep refreshing, and you should hopefully get through and be able to book
 an appointment.
 </blockquote>
 <br><br>
@@ -185,7 +183,7 @@ an appointment.
 <summary>I heard that they go online at midnight, is this true?</summary>
 <br>
 <blockquote>
-Over the several weeks this bot has been running it hasn't yet seen any evidence
+Since the start of May this bot hasn't yet seen any evidence
 that the services go online at midnight, or any set time. See above.
 </blockquote>
 <br><br>
@@ -196,6 +194,15 @@ that the services go online at midnight, or any set time. See above.
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of when they will go online next.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Will there be appointments for X office?</summary>
+<br>
+<blockquote>
+I'm afraid I don't have any knowledge of what offices the appointments will go online for.
 </blockquote>
 <br><br>
 </details>
