@@ -179,6 +179,16 @@ an appointment.
 <br><br>
 </details>
 
+
+<details>
+<summary>I need more than one appointment, can I book more than one at the same time?</summary>
+<br>
+<blockquote>
+You can book more than one online in the same session, but you need to book two separate slots, one for each person you are applying for.
+</blockquote>
+<br><br>
+</details>
+
 <details>
 <summary>I heard that they go online at midnight, is this true?</summary>
 <br>
