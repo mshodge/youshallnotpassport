@@ -26,6 +26,20 @@ app, this will then send you a push notification when the account tweets.
 </details>
 
 <details>
+<summary>I have a standard application being processed, can I book a fast track 
+or premium?
+</summary>
+<br>
+<blockquote>
+You cannot have more than one application in progress. You would need to contact
+the <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
+and withdraw your original application to use the Fast Track or Premium service. This
+can take up to 3 weeks to complete.
+</blockquote>
+<br><br>
+</details>
+
+<details>
 <summary>The bot hasn't posted in a while, is it still working?</summary>
 <br>
 <blockquote>
@@ -42,21 +56,6 @@ me.
 <br>
 <blockquote>
 Yes, as long as you abide by their <a href="https://www.gov.uk/help/reuse-govuk-content">terms and conditions for web scraping</a>.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>What's the difference between Fast Track and Premium?</summary>
-<br>
-<blockquote>
-<a href="https://www.gov.uk/get-a-passport-urgently">
-The UK Government Official website on getting an urgent passport explains the difference.</a>
-But below is a small infographic which may also help.
-<br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infographic"/>
-</p>
 </blockquote>
 <br><br>
 </details>
@@ -129,6 +128,78 @@ service. If you fall within 2 weeks of travel you can contact the
 <br><br>
 </details>
 
+
+
+
+
+## One week Fast Track service
+
+<details>
+<summary>What's the difference between Fast Track and Premium?</summary>
+<br>
+<blockquote>
+<a href="https://www.gov.uk/get-a-passport-urgently">
+The UK Government Official website on getting an urgent passport explains the difference.</a>
+But below is a small infographic which may also help.
+<br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infographic"/>
+</p>
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>When do services go online?</summary>
+<br>
+<blockquote>
+There is no set time. Typically, they go online during working hours during weekdays.
+<br><br>
+Lately (as of 04/06/2022), some patterns may be emerging with:<br>
+1. Fast Track going online at around 16:00 until 18:00<br>
+2. Premium going online at around 08:00<br>
+<br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
+</p>
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Your tweet says the service is online but I keep getting System Busy, what 
+do I do?</summary>
+<br>
+<blockquote>
+That means the service is online but many people are trying to access it.
+Keep refreshing and you should hopefully get through and be able to book
+an appointment.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>I heard that they go online at midnight, is this true?</summary>
+<br>
+<blockquote>
+Over the several weeks this bot has been running it hasn't yet seen any evidence
+that the services go online at midnight, or any set time. See above.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Will there be appointments today?</summary>
+<br>
+<blockquote>
+I'm afraid I don't have any knowledge of when they will go online next.
+</blockquote>
+<br><br>
+</details>
+
 <details>
 <summary>I’ve not received a confirmation email of my booking, what do I do?
 </summary>
@@ -163,92 +234,6 @@ HM Passport Office
 <br><br>
 </details>
 
-<details>
-<summary>I have a damaged passport, can I used the Premium Service?
-</summary>
-<br>
-<blockquote>
-HM Passport Office classes your passport as damaged if:<br>
-	•	you can’t read any of your details<br>
-	•	the laminate cover has come away<br>
-	•	there’s an ink or chemical spillage on any of the pages<br>
-	•	there’s discolouring of your personal details (for example your name or date of birth) or on the official observations page<br>
-	•	any of the pages are ripped, missing or detached<br>
-	•	the chip is damaged or showing through the back cover (e-passports only)<br>
-	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
-	•	there’s excess water damage
-<br><br>
-If any of these are true, then you will need to use the Fast Track service.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>Does the Premium service reserve my appointment selection?</summary>
-<br>
-<blockquote>
-Yes, it appears as though when you click an appointment time and date this is reserved
-for you once you confirm your selection. You then have X minutes to complete your 
-application (photo upload, application details and pay). The slot will be made open 
-to booking for someone else if you do not finish in time. Therefore, please have your
-photo and payment details ready at hand.</blockquote>
-<br><br>
-</details>
-
-## Service availability
-
-<details>
-<summary>When do services go online?</summary>
-<br>
-<blockquote>
-There is no set time. Typically, they go online during working hours during weekdays.
-<br><br>
-Lately (as of 04/06/2022), some patterns may be emerging with:<br>
-1. Fast Track going online at around 16:00 until 18:00<br>
-2. Premium going online at around 08:00<br>
-<br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
-</p>
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>I heard that they go online at midnight, is this true?</summary>
-<br>
-<blockquote>
-Over the several weeks this bot has been running it hasn't yet seen any evidence
-that the services go online at midnight, or any set time. See above.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>Will there be appointments today?</summary>
-<br>
-<blockquote>
-I'm afraid I don't have any knowledge of when they will go online next.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>Your tweet says the service is online but I keep getting System Busy, what 
-do I do?</summary>
-<br>
-<blockquote>
-That means the service is online but many people are trying to access it.
-Keep refreshing and you should hopefully get through and be able to book
-an appointment.
-</blockquote>
-<br><br>
-</details>
-
-## Transfers and Cancellations
 <details>
 <summary>Can I change the date of my Fast Track appointment?
 </summary>
@@ -285,7 +270,87 @@ and let them know why you need to cancel.
 <br><br>
 </details>
 
-## Advice about delays in standard passport applications
+## Same day Premium service
+
+<details>
+<summary>What's the difference between Fast Track and Premium?</summary>
+<br>
+<blockquote>
+<a href="https://www.gov.uk/get-a-passport-urgently">
+The UK Government Official website on getting an urgent passport explains the difference.</a>
+But below is a small infographic which may also help.
+<br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infographic"/>
+</p>
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>When do services go online?</summary>
+<br>
+<blockquote>
+There is no set time. Typically, they go online during working hours during weekdays.
+<br><br>
+Lately (as of 04/06/2022), some patterns may be emerging with:<br>
+1. Fast Track going online at around 16:00 until 18:00<br>
+2. Premium going online at around 08:00<br>
+<br><br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
+</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
+</p>
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Does the Premium service reserve my appointment selection?</summary>
+<br>
+<blockquote>
+Yes, it appears as though when you click an appointment time and date this is reserved
+for you once you confirm your selection. You then have X minutes to complete your 
+application (photo upload, application details and pay). The slot will be made open 
+to booking for someone else if you do not finish in time. Therefore, please have your
+photo and payment details ready at hand.</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>I have a damaged passport, can I used the Premium Service?
+</summary>
+<br>
+<blockquote>
+HM Passport Office classes your passport as damaged if:<br>
+	•	you can’t read any of your details<br>
+	•	the laminate cover has come away<br>
+	•	there’s an ink or chemical spillage on any of the pages<br>
+	•	there’s discolouring of your personal details (for example your name or date of birth) or on the official observations page<br>
+	•	any of the pages are ripped, missing or detached<br>
+	•	the chip is damaged or showing through the back cover (e-passports only)<br>
+	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
+	•	there’s excess water damage
+<br><br>
+If any of these are true, then you will need to use the Fast Track service.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Can I change the date of my Premium appointment?
+</summary>
+<br>
+<blockquote>
+Unfortunately, you cannot.
+</blockquote>
+<br><br>
+</details>
+
+
+## Advice about delays in Standard passport service
 <details>
 <summary>I have a standard application in progress but haven’t received it yet, 
 what can I do?
@@ -298,20 +363,6 @@ they may be able to offer you a Fast Track upgrade. Otherwise, you can write and
 request to withdraw your standard application in order to book an online urgent
 appointment. However, it can take up to 3 weeks for your original application
 to be cancelled.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>I have a standard application being processed, can I book a fast track 
-or premium?
-</summary>
-<br>
-<blockquote>
-You cannot have more than one application in progress. You would need to contact
-the <a href="https://www.gov.uk/passport-advice-line">passport advice line</a>
-and withdraw your original application to use the Fast Track or Premium service. This
-can take up to 3 weeks to complete.
 </blockquote>
 <br><br>
 </details>
