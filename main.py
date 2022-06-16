@@ -344,7 +344,7 @@ def check(proxy, github_action, to_save_csv):
                             f"I will post again when it goes offline." \
                             f"\n" \
                             f"\n" \
-                            f"(If System Busy message, then keep Refreshing! If 503 error, then Wait!)." \
+                            f"(If System Busy message, then keep Refreshing! If 503 error, then Wait!)" \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
@@ -364,7 +364,7 @@ def check(proxy, github_action, to_save_csv):
                            f"\n"\
                            f"I will post again when it goes offline." \
                            f"\n" \
-                           f"(If sent to normal route, go back and try again)." \
+                           f"(If sent to normal route, go back and try again)" \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
