@@ -326,39 +326,45 @@ def check(proxy, github_action, to_save_csv):
     # GitHub uses GMT and not BST so adjusting for that here
     # //TODO: Make this more dynamic and not hard coded, as when BST ends this will trip up
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
+    timestamp_tweet = get_timestamp(github_action, timestamp_string_format='%d/%m %H:%M')
 
     # Reports if one week service is online or not
     if "there are no available appointments" in page_one_text:
-        response_one_week = f"One week fast track service is now offline ❌ ({timestamp})" \
+        response_one_week = f"One-week Fast Track is now offline ❌ ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"Bot checks every minute, and will post again if status changes." \
+                            f"I will post again when it goes online next." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
     else:
-        response_one_week = f"One week fast track service is now online! ✅ ({timestamp})" \
+        response_one_week = f"One-week Fast Track is now online! ✅ ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"Bot checks every minute, and will post again if status changes." \
+                            f"I will post again when it goes offline." \
+                            f"\n" \
+                            f"\n" \
+                            f"(If System Busy message, then keep Refreshing! If 503 error, then Wait!)." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
 
     # Reports if premium service is online or not
     if "there are no available appointments" in page_premium_text:
-        response_premium = f"Premium service now offline ❌ ({timestamp})" \
+        response_premium = f"Same day Premium service is now offline ❌ ({timestamp_tweet})" \
                            f"\n" \
-                           f"\n" \
-                           f"Bot checks every minute, and will post again if status changes" \
+                           f"\n"\
+                           f"I will post again when it goes online next." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "False"
     else:
-        response_premium = f"Premium service is now online! ✅ ({timestamp})" \
+        response_premium = f"Same day Premium service is now online! ✅ ({timestamp_tweet})" \
                            f"\n" \
+                           f"\n"\
+                           f"I will post again when it goes offline." \
                            f"\n" \
-                           f"Bot checks every minute, and will post again if status changes." \
+                           f"(If sent to normal route, go back and try again)." \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
