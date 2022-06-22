@@ -4,5 +4,6 @@ pandas
 pygithub
 requests
 seaborn
+selenium
 tweepy
 urllib3
