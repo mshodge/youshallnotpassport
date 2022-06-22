@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import urllib3
 
-from scripts.utils.twitter import post, update_twitter_bio, online_status_on_last_check_twitter
+from scripts.utils.twitter import post_status, update_twitter_bio, online_status_on_last_check_twitter
 from scripts.utils.time import get_timestamp, check_if_half_hour_or_hour
 from scripts.utils.github import read_online_status, update_online_status
 from scripts.utils.dataframes import update_csv
@@ -23,6 +23,7 @@ def online_status_on_last_check(df_old_online_status, service):
     """
 
     return str(df_old_online_status[df_old_online_status['service'] == service]['online'].values[0])
+
 
 def check(proxy, github_action, to_save_csv):
     """
@@ -152,7 +153,7 @@ if __name__ == '__main__':
 
         if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n')
-            post(response_premium_check, is_proxy, is_github_action)
+            post_status(response_premium_check, is_proxy, is_github_action)
 
         update_online_status(df_status_is, is_github_action)
         update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)

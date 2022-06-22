@@ -39,7 +39,23 @@ def authenticate_twitter(github_action, proxy):
     return api
 
 
-def post(proxy, github_action, service):
+def post_status(response, proxy, github_action):
+    """
+    Posts response to Twitter
+    :param response: <string> The string response to post
+    :param proxy: <Boolean> Whether to use a proxy or not, default is False
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :return: <string> The response of whether the service is online or not
+    """
+
+    api = authenticate_twitter(github_action, proxy)
+
+    # Posts status to Twitter
+    api.update_status(response)
+
+    print("Posted update to Twitter")
+
+def post_media(proxy, github_action, service):
     """
     Posts response to Twitter
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
