@@ -1,4 +1,4 @@
-name: check
+name: checkv2
 
 on:
   repository_dispatch:
