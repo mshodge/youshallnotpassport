@@ -16,7 +16,7 @@ chromedriver_autoinstaller.install()
 
 is_proxy = False
 is_github_action = True
-is_twitter = True
+is_twitter = False
 
 
 def get_page(the_url, wait_time=1):
