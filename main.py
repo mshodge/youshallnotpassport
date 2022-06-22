@@ -172,7 +172,7 @@ if __name__ == '__main__':
         if one_week_online_check != one_week_online_check_last:
             print('\n\nOne week service status has changed, will post to Twitter!\n')
             post_status(response_one_week_check, is_proxy, is_github_action)
-            run_selenium_code(workflow_id = "28775018", is_github_action)
+            run_selenium_code("28775018", is_github_action)
 
         if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n')
