@@ -23,7 +23,6 @@ jobs:
       - name: execute py script # run the run.py to get the latest data
         run: |
           python find_appointments_fast_track.py
-        working-directory: ./scripts
         env:
           consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
           consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
