@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import requests
 import urllib3
@@ -12,6 +13,26 @@ urllib3.disable_warnings()
 is_proxy = False
 is_github_action = True
 is_twitter = True
+
+
+def run_selenium_code(id, github_action):
+    """
+    Returns value from dataframe
+    :param id: <string> the workflow id for github actions
+    :param github_action: <Boolean> If using github actions or not
+    """
+
+    if github_action:
+        token = os.environ['access_token_github']
+    else:
+        import config.github_credentials as github_credentials
+        token = github_credentials.access_token
+
+    url = f"https://api.github.com/repos/mshodge/youshallnotpassport/actions/workflows/{id}/dispatches"
+    headers = {"Authorization": "bearer " + token}
+    json = {"ref":"main"}
+    r = requests.post(url, headers=headers, json=json)
+    print(r)
 
 
 def online_status_on_last_check(df_old_online_status, service):
@@ -151,10 +172,12 @@ if __name__ == '__main__':
         if one_week_online_check != one_week_online_check_last:
             print('\n\nOne week service status has changed, will post to Twitter!\n')
             post_status(response_one_week_check, is_proxy, is_github_action)
+            run_selenium_code(workflow_id = "28775018", is_github_action)
 
         if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n')
             post_status(response_premium_check, is_proxy, is_github_action)
+            # run_selenium_code(workflow_id, is_github_action)
 
         update_online_status(df_status_is, is_github_action)
         update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
