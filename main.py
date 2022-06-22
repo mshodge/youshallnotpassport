@@ -1,154 +1,18 @@
-from datetime import datetime, timedelta
-from github import Github
-import os
 import pandas as pd
 import requests
-import tweepy
 import urllib3
+
+from scripts.utils.twitter import post, update_twitter_bio, online_status_on_last_check_twitter
+from scripts.utils.time import get_timestamp, check_if_half_hour_or_hour
+from scripts.utils.github import read_online_status, update_online_status
+from scripts.utils.dataframes import update_csv
 
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = True
 
-def check_if_half_hour_or_hour():
-    """
-    Checks if the time is 30 past or 0 past and returns a variable based on that
-    :return: to_save_csv <boolean> Returns True if 30 or 0
-    """
-    # Get date time and convert to a string
-    time_now = datetime.now().strftime("%M")
-    mins = int(time_now)
-    if mins in [29,30,31,59,0,1]:
-        print("It's half past or at the hour, so I am saving data\n")
-        to_save_csv = True
-    else:
-        to_save_csv = False
-        print("It's not half past or at the hour, so I am not saving data\n")
-    return to_save_csv
-
-def authenticate_twitter(github_action, proxy):
-    """
-    Authenticates Twitter
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param proxy: <Boolean> Whether to use a proxy or not
-    :return: api <tweepy.api> the tweepy api response
-    """
-
-    # Uses GitHub Secrets to store and load credentials
-    if github_action:
-        auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
-        auth.set_access_token(os.environ['access_token'], os.environ['access_token_secret'])
-
-    # Else uses local twitter_credentials.py file
-    else:
-        import config.twitter_credentials as twitter_credentials
-        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
-        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
-
-    headers = requests.utils.default_headers()
-    headers.update({
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
-    })
-
-    if proxy:
-        import config.proxies as set_proxies
-        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
-        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
-        api.session.verify = False
-    else:
-        api = tweepy.API(auth, wait_on_rate_limit=True)
-
-    return api
-
-
-def get_timestamp(github_action, timestamp_string_format='%H:%M'):
-    """
-    Gets timestamp
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param timestamp_string_format: <string> The datetime format to return
-    :return: timestamp <string> The formatted datetime
-    """
-    if github_action:
-        timestamp = datetime.now() + timedelta(hours=1)
-        timestamp = timestamp.strftime(timestamp_string_format)
-    else:
-        timestamp = datetime.now().strftime(timestamp_string_format)
-    return timestamp
-
-
-def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
-    """
-    Update Twitter Bio
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param proxy: <Boolean> Whether using a proxy or not
-    :param one_week_status: <string> The status of the one week service
-    :param premium_status: <string> The status of the premium service
-    """
-    timestamp = get_timestamp(github_action, timestamp_string_format='%H:%M')
-
-    api = authenticate_twitter(github_action, proxy)
-
-    if premium_status == "Busy":
-        premium_status_symbol = f"OP ️is busy,"
-    elif premium_status == "True":
-        premium_status_symbol = f"OP is online,"
-    else:
-        premium_status_symbol = f"OP is offline,"
-
-    if one_week_status == "Busy":
-        one_week_status_symbol = f"FT is busy"
-    elif one_week_status == "True":
-        one_week_status_symbol = f"FT is online"
-    else:
-        one_week_status_symbol = f"FT is offline"
-
-    new_bio = f"Unofficial bot. Runs every minute. Please check http://gov.uk/get-a-passport-urgently before " \
-              f"booking. {premium_status_symbol} {one_week_status_symbol} (updated {timestamp})."
-
-    # Posts status to Twitter
-    api.update_profile(description=new_bio)
-
-    print("Updated bio on Twitter")
-
-
-def read_online_status():
-    """
-    Loads online status file
-    :return: df_online_status <DataFrame> The Dataframe with online status in
-    """
-
-    df_online_status = pd.read_csv(
-        "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/online.csv")
-    return df_online_status
-
-
-def online_status_on_last_check_twitter(service, github_action, proxy):
-    """
-    Returns string value depending if the Twitter bio says a service is online or offline
-    :param service: <string> Either fast track or premium to check
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param proxy: <Boolean> Whether using a proxy or not
-    :return: <string> True or False string based on what is in the bio
-    """
-    # Uses GitHub Secrets to store and load credentials
-    api = authenticate_twitter(github_action, proxy)
-
-    id = "1521412356361920516"
-    user = api.get_user(user_id=id)
-    bio_desc = user.description
-
-    if service == "fast track":
-        if "FT is online" in bio_desc:
-            return 'True'
-        else:
-            return 'False'
-    elif service == "premium":
-        if "OP is online" in bio_desc:
-            return 'True'
-        else:
-            return 'False'
 
 def online_status_on_last_check(df_old_online_status, service):
     """
@@ -159,132 +23,6 @@ def online_status_on_last_check(df_old_online_status, service):
     """
 
     return str(df_old_online_status[df_old_online_status['service'] == service]['online'].values[0])
-
-
-def update_online_status(df_status, github_action):
-    """
-    Updates csv file on GitHub and local
-    :param df_status: <DataFrame> The DataFrame from the current check
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :return: <string> The response of whether the service is online or not
-    """
-
-    print("Updating online status csv file both locally and on GitHub")
-
-    # Gets current csv file from open repo
-    org = "mshodge"
-    repo = "youshallnotpassport"
-    branch = "main"
-    file_path = "data/online.csv"
-
-    df_string = df_to_csv_string(df_status)
-
-    if github_action:
-        token = os.environ['access_token_github']
-    else:
-        import config.github_credentials as github_credentials
-        token = github_credentials.access_token
-
-    # Authenticates GitHub and updates file with df_string
-    g = Github(token)
-    repo = g.get_repo(f"{org}/{repo}")
-    contents = repo.get_contents(file_path, ref=branch)
-
-    repo.update_file(path=file_path,
-                     message="updating online status",
-                     content=df_string,
-                     branch=branch,
-                     sha=contents.sha)
-
-    # Also, saves to local disk
-    df_status.to_csv(file_path)
-
-
-def df_to_csv_string(df_to_convert):
-    """
-    Converts a pandas DataFrame into a csv string for upload to GitHub
-    :param df_to_convert: <DataFrame> The DataFrame
-    :return: df_string <string> The rDa
-    """
-
-    df_string = ""
-
-    # For columns
-    for idx, value in enumerate(df_to_convert.columns.to_list()):
-        if idx < df_to_convert.columns.shape[0] - 1:
-            df_string += value + ","
-        else:
-            df_string += value + "\n"
-
-    # For all rows in DataFrame
-    for index, row in df_to_convert.iterrows():
-        for idx, value in enumerate(row.to_list()):
-            if idx < df_to_convert.columns.shape[0] - 1:
-                df_string += str(value) + ","
-            else:
-                df_string += str(value) + "\n"
-
-    return df_string
-
-
-def update_csv(df_response_from_check, github_action):
-    """
-    Updates csv file on GitHub and local
-    :param df_response_from_check: <DataFrame> The DataFrame from the current check
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :return: <string> The response of whether the service is online or not
-    """
-
-    print("Updating csv file both locally and on GitHub")
-
-    # Gets current csv file from open repo
-    org = "mshodge"
-    repo = "youshallnotpassport"
-    branch = "main"
-    file_path = "data/data.csv"
-    csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
-
-    df_data = pd.read_csv(csv_url)
-    df_data = pd.concat([df_data, df_response_from_check], ignore_index=True)
-    df_string = df_to_csv_string(df_data)
-
-    if github_action:
-        token = os.environ['access_token_github']
-    else:
-        import config.github_credentials as github_credentials
-        token = github_credentials.access_token
-
-    # Authenticates GitHub and updates file with df_string
-    g = Github(token)
-    repo = g.get_repo(f"{org}/{repo}")
-    contents = repo.get_contents(file_path, ref=branch)
-
-    repo.update_file(path=file_path,
-                     message="updating data",
-                     content=df_string,
-                     branch=branch,
-                     sha=contents.sha)
-
-    # Also, saves to local disk
-    df_data.to_csv(file_path)
-
-
-def post(response, proxy, github_action):
-    """
-    Posts response to Twitter
-    :param response: <string> The string response to post
-    :param proxy: <Boolean> Whether to use a proxy or not, default is False
-    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
-    :return: <string> The response of whether the service is online or not
-    """
-
-    api = authenticate_twitter(github_action, proxy)
-
-    # Posts status to Twitter
-    api.update_status(response)
-
-    print("Posted update to Twitter")
-
 
 def check(proxy, github_action, to_save_csv):
     """
@@ -385,7 +123,7 @@ def check(proxy, github_action, to_save_csv):
         columns=['service', 'online'])
 
     if to_save_csv:
-        update_csv(df_response_from_check, github_action)
+        update_csv(df_response_from_check, github_action, "data/data.csv", "updating data")
 
     return response_one_week, response_premium, premium_online, one_week_online, df_status
 
