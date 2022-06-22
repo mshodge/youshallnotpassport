@@ -30,6 +30,7 @@ def check(proxy, github_action, to_save_csv):
     Checks if the passport services are online or not
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
     :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :param to_save_csv: <Boolean>
     :return: <string> The response of whether the service is online or not
     """
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
@@ -142,14 +143,14 @@ if __name__ == '__main__':
         # Now only posts if there has been a status change
         one_week_online_check_last = online_status_on_last_check_twitter("fast track", is_github_action, is_proxy)
         premium_online_check_last = online_status_on_last_check_twitter("premium", is_github_action,
-                                                                           is_proxy)
+                                                                        is_proxy)
 
         print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n')
         print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n')
 
         if one_week_online_check != one_week_online_check_last:
             print('\n\nOne week service status has changed, will post to Twitter!\n')
-            post(response_one_week_check, is_proxy, is_github_action)
+            post_status(response_one_week_check, is_proxy, is_github_action)
 
         if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n')
