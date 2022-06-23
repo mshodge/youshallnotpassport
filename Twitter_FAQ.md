@@ -7,16 +7,18 @@
 The UK Government Official website on getting an urgent passport.</a>
 </blockquote>
 
-## General
+-----
+
+![General](img/general.png)
+
+![How does it work](img/how.png)
 
 <details>
 <summary>How does this work Twitter Bot/Account?</summary>
 <br>
 <blockquote>
 The bot checks the Premium and Fast Track websites every minute. If the websites 
-have a status change (online to offline, or offline to online) the bot will post a tweet. 
-You can click the bell symbol (🔔) on the profile if you're using the Twitter mobile
-app, this will then send you a push notification when the account tweets.
+have a status change (online to offline, or offline to online) the bot will post a tweet.
 <br><br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/youshallnotpass.png" alt="Process diagram"/>
@@ -26,7 +28,19 @@ app, this will then send you a push notification when the account tweets.
 </details>
 
 <details>
-<summary>I have a standard application being processed, can I book a fast track 
+<summary>How do I get notifications of tweets?</summary>
+<br>
+<blockquote>
+You can click the bell symbol (🔔) on the profile if you're using the Twitter mobile
+app, this will then send you a push notification when the account tweets.
+<br><br>
+</blockquote>
+</details>
+
+![Can I use it](img/use.png)
+
+<details>
+<summary>I have a standard application being processed, can I book a online fast track 
 or premium?
 </summary>
 <br>
@@ -40,56 +54,10 @@ can take up to 3 weeks to complete.
 </details>
 
 <details>
-<summary>The bot hasn't posted in a while, is it still working?</summary>
-<br>
-<blockquote>
-Unless I've changed the code on the main, working code (which I don't unless there is
-a big update, then it should be working all the time. To verify, check the account
-bio, is the updated time up-to-date? If so, then the code is still working. If not, DM
-me.
-<br><br>
-</blockquote>
-</details>
-
-<details>
-<summary>Are you allowed to scrape information from a GOV.UK site?</summary>
-<br>
-<blockquote>
-Yes, as long as you abide by their <a href="https://www.gov.uk/help/reuse-govuk-content">terms and conditions for web scraping</a>.
-</blockquote>
-<br><br>
-</details>
-
-<details>
 <summary>Can you book for me?</summary>
 <br>
 <blockquote>
 No, I do not book for other people.
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>How can I pay you back for this service?</summary>
-<br>
-<blockquote>
-Many people ask about how to thank me; I reply charity donations if possible. 
-Many have donated to the Trussell Trust on my request but there is also a charity 
-close to mine and my families heart too. Almost six years ago my nephew was born 
-via emergency c section, he battled hard, but sadly passed away a week later. 
-His name was Zachary 💙 and our family often raise money for The Grand Appeal  in his 
-memory. I’ve set up a pot here:
-<br><br>
-<a href="https://www.justgiving.com/fundraising/donationsforzahary">
-Just Giving Page</a>
-<br><br>
-It’s not my intentions for people to feel they have to donate to that page, 
-Trussell Trust, or anywhere. You’re all travelling far and wide to get your 
-passports and spending £££ doing so. I’m sharing this for those who are able to.
-<br><br>
-Thank you,
-<br><br>
-Michael ❤️
 </blockquote>
 <br><br>
 </details>
@@ -130,7 +98,61 @@ service. If you fall within 2 weeks of travel you can contact the
 <br><br>
 </details>
 
-## One week Fast Track service
+![Other questions](img/other.png)
+
+<details>
+<summary>The bot hasn't posted in a while, is it still working?</summary>
+<br>
+<blockquote>
+Unless I've changed the code on the main, working code (which I don't unless there is
+a big update, then it should be working all the time. To verify, check the account
+bio, is the updated time up-to-date? If so, then the code is still working. If not, DM
+me.
+<br><br>
+</blockquote>
+</details>
+
+<details>
+<summary>Are you allowed to scrape information from a GOV.UK site?</summary>
+<br>
+<blockquote>
+Yes, as long as you abide by their <a href="https://www.gov.uk/help/reuse-govuk-content">terms and conditions for web scraping</a>.
+</blockquote>
+<br><br>
+</details>
+
+-----
+![Thank you](img/thanks.png)
+
+
+<details>
+<summary>How can I pay you back for this service?</summary>
+<br>
+<blockquote>
+Many people ask about how to thank me; I reply charity donations if possible. 
+Many have donated to the Trussell Trust on my request but there is also a charity 
+close to mine and my families heart too. Almost six years ago my nephew was born 
+via emergency c section, he battled hard, but sadly passed away a week later. 
+His name was Zachary 💙 and our family often raise money for The Grand Appeal  in his 
+memory. I’ve set up a pot here:
+<br><br>
+<a href="https://www.justgiving.com/fundraising/donationsforzahary">
+Just Giving Page</a>
+<br><br>
+It’s not my intentions for people to feel they have to donate to that page, 
+Trussell Trust, or anywhere. You’re all travelling far and wide to get your 
+passports and spending £££ doing so. I’m sharing this for those who are able to.
+<br><br>
+Thank you,
+<br><br>
+Michael ❤️
+</blockquote>
+<br><br>
+</details>
+
+-----
+
+![Service questions](img/services.png)
 
 <details>
 <summary>What's the difference between Fast Track and Premium?</summary>
@@ -154,8 +176,8 @@ But below is a small infographic which may also help.
 There is no set time. Typically, they go online during working hours during weekdays.
 <br><br>
 Lately (as of 04/06/2022), some patterns may be emerging with:<br>
-1. Fast Track going online at around 15:00 to 16:00 until 18:00<br>
-2. Premium going online at around 08:00<br>
+1. Fast Track going online at around 15:00<br>
+2. Premium going online at 08:00<br>
 <br><br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
@@ -163,28 +185,6 @@ Lately (as of 04/06/2022), some patterns may be emerging with:<br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
 </p>
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>Your tweet says the service is online, but I keep getting System Busy, what 
-do I do?</summary>
-<br>
-<blockquote>
-That means the service is online but many people are trying to access it.
-Keep refreshing, and you should hopefully get through and be able to book
-an appointment.
-</blockquote>
-<br><br>
-</details>
-
-
-<details>
-<summary>I need more than one appointment, can I book more than one at the same time?</summary>
-<br>
-<blockquote>
-You can book more than one online in the same session, but you need to book two separate slots, one for each person you are applying for.
 </blockquote>
 <br><br>
 </details>
@@ -213,6 +213,39 @@ I'm afraid I don't have any knowledge of when they will go online next.
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of what offices the appointments will go online for.
+</blockquote>
+<br><br>
+</details>
+
+![Fast Track](img/fasttrack.png)
+
+<details>
+<summary>Your tweet says the service is online, but I keep getting System Busy, what 
+do I do?</summary>
+<br>
+<blockquote>
+That means the service is online but many people are trying to access it.
+Keep refreshing, and you should hopefully get through and be able to book
+an appointment.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>Your tweet says the service is online, but I keep getting a 503 error, what 
+do I do?</summary>
+<br>
+<blockquote>
+This means the server is down. Please wait.
+</blockquote>
+<br><br>
+</details>
+
+<details>
+<summary>I need more than one appointment, can I book more than one at the same time?</summary>
+<br>
+<blockquote>
+You can book more than one online in the same session, but you need to book two separate slots, one for each person you are applying for.
 </blockquote>
 <br><br>
 </details>
@@ -287,39 +320,44 @@ and let them know why you need to cancel.
 <br><br>
 </details>
 
-## Same day Premium service
+![Premium](img/premium.png)
 
 <details>
-<summary>What's the difference between Fast Track and Premium?</summary>
+<summary>I have a lost or damaged passport, can I used the Premium Service?
+</summary>
 <br>
 <blockquote>
-<a href="https://www.gov.uk/get-a-passport-urgently">
-The UK Government Official website on getting an urgent passport explains the difference.</a>
-But below is a small infographic which may also help.
+You cannot use the service for a lost or damaged passport. HM Passport Office classes your passport as damaged if:<br>
+	•	you can’t read any of your details<br>
+	•	the laminate cover has come away<br>
+	•	there’s an ink or chemical spillage on any of the pages<br>
+	•	there’s discolouring of your personal details (for example your name or date of birth) or on the official observations page<br>
+	•	any of the pages are ripped, missing or detached<br>
+	•	the chip is damaged or showing through the back cover (e-passports only)<br>
+	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
+	•	there’s excess water damage
 <br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/services_infographic.png" alt="Services infographic"/>
-</p>
+If any of these are true, then you will need to use the Fast Track service.
 </blockquote>
 <br><br>
 </details>
 
 <details>
-<summary>When do services go online?</summary>
+<summary>Can I use this for a first time Adult or Child renewal passport?
+</summary>
 <br>
 <blockquote>
-There is no set time. Typically, they go online during working hours during weekdays.
+No. You can use the Fast Track Service though.
+</blockquote>
 <br><br>
-Lately (as of 04/06/2022), some patterns may be emerging with:<br>
-1. Fast Track going online at around 16:00 until 18:00<br>
-2. Premium going online at around 08:00<br>
-<br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
-</p>
+</details>
+
+<details>
+<summary>My old passport was a Childs one, now I am an Adult and need a renewal. Can I use Premium for this?
+</summary>
+<br>
+<blockquote>
+Yes. You can.
 </blockquote>
 <br><br>
 </details>
@@ -337,26 +375,6 @@ photo and payment details ready at hand.</blockquote>
 </details>
 
 <details>
-<summary>I have a damaged passport, can I used the Premium Service?
-</summary>
-<br>
-<blockquote>
-HM Passport Office classes your passport as damaged if:<br>
-	•	you can’t read any of your details<br>
-	•	the laminate cover has come away<br>
-	•	there’s an ink or chemical spillage on any of the pages<br>
-	•	there’s discolouring of your personal details (for example your name or date of birth) or on the official observations page<br>
-	•	any of the pages are ripped, missing or detached<br>
-	•	the chip is damaged or showing through the back cover (e-passports only)<br>
-	•	there’s any damage to the back cover (for example ripped, bite marks or staple holes)<br>
-	•	there’s excess water damage
-<br><br>
-If any of these are true, then you will need to use the Fast Track service.
-</blockquote>
-<br><br>
-</details>
-
-<details>
 <summary>Can I change the date of my Premium appointment?
 </summary>
 <br>
@@ -366,8 +384,10 @@ Unfortunately, you cannot.
 <br><br>
 </details>
 
+-----
 
-## Advice about delays in Standard passport service
+![Standard applications](img/standard.png)
+
 <details>
 <summary>I have a standard application in progress but haven’t received it yet, 
 what can I do?
