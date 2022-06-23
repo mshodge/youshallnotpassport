@@ -83,7 +83,7 @@ def update_csv(df, github_action, file_path, message):
                      sha=contents.sha)
 
     # Also, saves to local disk
-    df_data.to_csv(f"/{file_path}")
+    df_data.to_csv(f"{file_path}")
 
 
 def run_selenium_code(id, github_action):
