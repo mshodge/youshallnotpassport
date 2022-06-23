@@ -8,11 +8,10 @@ The UK Government Official website on getting an urgent passport.</a>
 </blockquote>
 
 -----
-
-![General](img/general.png)
-
-![How does it work](img/how.png)
-
+<img src="img/general.png" alt="General" width=300>
+<br><br>
+<img src="img/how.png" alt="How does it work" width=200>
+<br><br>
 <details>
 <summary>How does this work Twitter Bot/Account?</summary>
 <br>
@@ -36,8 +35,10 @@ app, this will then send you a push notification when the account tweets.
 <br><br>
 </blockquote>
 </details>
+<br><br>
 
-![Can I use it](img/use.png)
+<img src="img/use.png" alt="Can I use it" width=200>
+<br><br>
 
 <details>
 <summary>I have a standard application being processed, can I book a online fast track 
@@ -97,8 +98,10 @@ service. If you fall within 2 weeks of travel you can contact the
 </blockquote>
 <br><br>
 </details>
+<br><br>
 
-![Other questions](img/other.png)
+<img alt="Other questions" src="img/other.png" width = 200>
+<br><br>
 
 <details>
 <summary>The bot hasn't posted in a while, is it still working?</summary>
@@ -120,10 +123,11 @@ Yes, as long as you abide by their <a href="https://www.gov.uk/help/reuse-govuk-
 </blockquote>
 <br><br>
 </details>
+<br><br>
 
 -----
-![Thank you](img/thanks.png)
-
+<img alt="Thank you" src="img/thanks.png" width=300>
+<br><br>
 
 <details>
 <summary>How can I pay you back for this service?</summary>
@@ -149,11 +153,12 @@ Michael ❤️
 </blockquote>
 <br><br>
 </details>
+<br><br>
 
 -----
 
-![Service questions](img/services.png)
-
+<img alt="Service questions" src="img/services.png" width = 300>
+<br><br>
 <details>
 <summary>What's the difference between Fast Track and Premium?</summary>
 <br>
@@ -217,7 +222,9 @@ I'm afraid I don't have any knowledge of what offices the appointments will go o
 <br><br>
 </details>
 
-![Fast Track](img/fasttrack.png)
+<br><br>
+<img alt="Fast Track" src="img/fasttrack.png" width = 200>
+<br><br>
 
 <details>
 <summary>Your tweet says the service is online, but I keep getting System Busy, what 
@@ -320,7 +327,9 @@ and let them know why you need to cancel.
 <br><br>
 </details>
 
-![Premium](img/premium.png)
+<br><br>
+<img alt="Premium" src="img/premium.png" width = 200>
+<br><br>
 
 <details>
 <summary>I have a lost or damaged passport, can I used the Premium Service?
@@ -383,10 +392,12 @@ Unfortunately, you cannot.
 </blockquote>
 <br><br>
 </details>
+<br><br>
 
 -----
 
-![Standard applications](img/standard.png)
+<img alt="Standard applications" src="img/standard.png" width = 300>
+<br><br>
 
 <details>
 <summary>I have a standard application in progress but haven’t received it yet, 
