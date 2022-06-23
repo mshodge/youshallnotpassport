@@ -3,8 +3,9 @@ from datetime import datetime
 import pandas as pd
 import seaborn as sns
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 import time
 
@@ -15,7 +16,7 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = False
 
 
@@ -30,7 +31,13 @@ def get_page(the_url, wait_time=1):
     keep_trying = True
 
     while keep_trying:
-        this_driver = webdriver.Chrome()
+        options = Options()
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--no-sandbox')
+
+        this_driver = webdriver.Chrome(chrome_options=options)
+
         this_driver.get(the_url)
         body = get_body(this_driver)
         time.sleep(wait_time)
