@@ -16,7 +16,7 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = False
+is_github_action = True
 is_twitter = False
 
 
