@@ -36,7 +36,7 @@ def get_page(the_url, wait_time=1):
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
 
-        this_driver = webdriver.Chrome(chrome_options=options)
+        this_driver = webdriver.Chrome(options=options)
 
         this_driver.get(the_url)
         body = get_body(this_driver)
