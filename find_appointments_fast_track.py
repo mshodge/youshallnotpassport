@@ -17,7 +17,7 @@ chromedriver_autoinstaller.install()
 
 is_proxy = False
 is_github_action = True
-is_twitter = True
+is_twitter = False
 
 
 def get_page(the_url, wait_time=1):
@@ -35,7 +35,7 @@ def get_page(the_url, wait_time=1):
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
-
+        options.add_argument('--window-size=1920,1080')
         this_driver = webdriver.Chrome(options=options)
 
         this_driver.get(the_url)
@@ -157,7 +157,7 @@ def get_appointments(the_driver):
     :return df: <pandas.dataframe> The pandas dataframe
     """
 
-    for i in range(0, 4):
+    for i in range(0, 6):
         time.sleep(2)
         html = the_driver.page_source
         table = pd.read_html(html)
@@ -175,8 +175,10 @@ def get_appointments(the_driver):
         time.sleep(1)
 
         try:
+            # the_driver.find_element(by=By.CLASS_NAME, value='datetablenext')
             the_driver.find_element(by=By.XPATH, value='//*[@id="Date_Table_Next_6__link"]')
-            click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 4)
+            # click_page_element(the_driver, 'datetablenext', 4, by_what="class")
+            click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 4, by_what="xpath")
         except NoSuchElementException:
             df_col_order = list(dict.fromkeys(df_col_order))
             df = df.reindex(df_col_order, axis=1)

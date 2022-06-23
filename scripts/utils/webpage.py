@@ -13,7 +13,7 @@ def get_body(the_driver):
     return body
 
 
-def click_page_element(the_driver, path_value, wait_time):
+def click_page_element(the_driver, path_value, wait_time, by_what="xpath"):
     """
     Click the page element
     :param the_driver: <Selenium.webdriver> The selenium webdriver
@@ -22,11 +22,14 @@ def click_page_element(the_driver, path_value, wait_time):
     """
 
     time.sleep(wait_time)
-    element = the_driver.find_element(by=By.XPATH, value=path_value)
+    if by_what == "xpath":
+        element = the_driver.find_element(by=By.XPATH, value=path_value)
+    elif by_what == "class":
+        element = the_driver.find_element(by=By.CLASS_NAME, value=path_value)
     element.click()
 
 
-def enter_page_element(the_driver, path_value, value_to_enter, wait_time):
+def enter_page_element(the_driver, path_value, value_to_enter, wait_time, by_what="xpath"):
     """
     Enter a value on the page
     :param the_driver: <Selenium.webdriver> The selenium webdriver
@@ -36,5 +39,8 @@ def enter_page_element(the_driver, path_value, value_to_enter, wait_time):
     """
 
     time.sleep(wait_time)
-    element = the_driver.find_element(by=By.XPATH, value=path_value)
+    if by_what == "xpath":
+        element = the_driver.find_element(by=By.XPATH, value=path_value)
+    elif by_what == "class":
+        element = the_driver.find_element(by=By.CLASS_NAME, value=path_value)
     element.send_keys(value_to_enter)
