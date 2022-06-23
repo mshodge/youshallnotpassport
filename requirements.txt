@@ -1,6 +1,6 @@
 chromedriver-autoinstaller
 datetime
-False
+lxml
 numpy
 pandas
 pygithub
