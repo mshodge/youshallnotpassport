@@ -6,7 +6,7 @@ import urllib3
 
 from scripts.utils.twitter import post_status, update_twitter_bio, online_status_on_last_check_twitter
 from scripts.utils.time import get_timestamp, check_if_half_hour_or_hour
-from scripts.utils.github import read_online_status, update_online_status
+from scripts.utils.github import read_online_status, update_online_status, update_tweet_id
 
 urllib3.disable_warnings()
 
@@ -242,12 +242,14 @@ if __name__ == '__main__':
 
         if one_week_online_check != one_week_online_check_last:
             print('\n\nOne week service status has changed, will post to Twitter!\n')
-            post_status(response_one_week_check, is_proxy, is_github_action)
+            tweet_id = post_status(response_one_week_check, is_proxy, is_github_action)
+            update_tweet_id(tweet_id)
             run_selenium_code("28775018", is_github_action)
 
         if premium_online_check != premium_online_check_last:
             print('\n\nPremium service status has changed, will post to Twitter!\n')
-            post_status(response_premium_check, is_proxy, is_github_action)
+            tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
+            update_tweet_id(tweet_id)
             # run_selenium_code(workflow_id, is_github_action)
 
         update_online_status(df_status_is, is_github_action)

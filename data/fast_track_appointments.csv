@@ -1,220 +1,484 @@
-location,appt_date,count,scrape_date
-London,Tue 28 Jun,0.0,22/06/2022
-Peterborough,Tue 28 Jun,0.0,22/06/2022
-Newport,Tue 28 Jun,15.0,22/06/2022
-Liverpool,Tue 28 Jun,1.0,22/06/2022
-Durham,Tue 28 Jun,0.0,22/06/2022
-Glasgow,Tue 28 Jun,0.0,22/06/2022
-Belfast,Tue 28 Jun,4.0,22/06/2022
-Birmingham,Tue 28 Jun,0.0,22/06/2022
-London,Wed 29 Jun,0.0,22/06/2022
-Peterborough,Wed 29 Jun,0.0,22/06/2022
-Newport,Wed 29 Jun,16.0,22/06/2022
-Liverpool,Wed 29 Jun,0.0,22/06/2022
-Durham,Wed 29 Jun,0.0,22/06/2022
-Glasgow,Wed 29 Jun,12.0,22/06/2022
-Belfast,Wed 29 Jun,15.0,22/06/2022
-Birmingham,Wed 29 Jun,0.0,22/06/2022
-London,Thu 30 Jun,7.0,22/06/2022
-Peterborough,Thu 30 Jun,1.0,22/06/2022
-Newport,Thu 30 Jun,16.0,22/06/2022
-Liverpool,Thu 30 Jun,0.0,22/06/2022
-Durham,Thu 30 Jun,6.0,22/06/2022
-Glasgow,Thu 30 Jun,17.0,22/06/2022
-Belfast,Thu 30 Jun,15.0,22/06/2022
-Birmingham,Thu 30 Jun,0.0,22/06/2022
-London,Fri 1 Jul,10.0,22/06/2022
-Peterborough,Fri 1 Jul,0.0,22/06/2022
-Newport,Fri 1 Jul,16.0,22/06/2022
-Liverpool,Fri 1 Jul,0.0,22/06/2022
-Durham,Fri 1 Jul,7.0,22/06/2022
-Glasgow,Fri 1 Jul,16.0,22/06/2022
-Belfast,Fri 1 Jul,15.0,22/06/2022
-Birmingham,Fri 1 Jul,0.0,22/06/2022
-London,Sat 2 Jul,0.0,22/06/2022
-Peterborough,Sat 2 Jul,0.0,22/06/2022
-Newport,Sat 2 Jul,12.0,22/06/2022
-Liverpool,Sat 2 Jul,0.0,22/06/2022
-Durham,Sat 2 Jul,0.0,22/06/2022
-Glasgow,Sat 2 Jul,0.0,22/06/2022
-Belfast,Sat 2 Jul,10.0,22/06/2022
-Birmingham,Sat 2 Jul,0.0,22/06/2022
-London,Mon 4 Jul,0.0,22/06/2022
-Peterborough,Mon 4 Jul,0.0,22/06/2022
-Newport,Mon 4 Jul,0.0,22/06/2022
-Liverpool,Mon 4 Jul,0.0,22/06/2022
-Durham,Mon 4 Jul,11.0,22/06/2022
-Glasgow,Mon 4 Jul,17.0,22/06/2022
-Belfast,Mon 4 Jul,15.0,22/06/2022
-Birmingham,Mon 4 Jul,0.0,22/06/2022
-London,Tue 5 Jul,0.0,22/06/2022
-Peterborough,Tue 5 Jul,0.0,22/06/2022
-Newport,Tue 5 Jul,0.0,22/06/2022
-Liverpool,Tue 5 Jul,0.0,22/06/2022
-Durham,Tue 5 Jul,12.0,22/06/2022
-Glasgow,Tue 5 Jul,17.0,22/06/2022
-Belfast,Tue 5 Jul,15.0,22/06/2022
-Birmingham,Tue 5 Jul,0.0,22/06/2022
-London,Wed 6 Jul,0.0,22/06/2022
-Peterborough,Wed 6 Jul,4.0,22/06/2022
-Newport,Wed 6 Jul,0.0,22/06/2022
-Liverpool,Wed 6 Jul,0.0,22/06/2022
-Durham,Wed 6 Jul,12.0,22/06/2022
-Glasgow,Wed 6 Jul,17.0,22/06/2022
-Belfast,Wed 6 Jul,15.0,22/06/2022
-Birmingham,Wed 6 Jul,0.0,22/06/2022
-London,Thu 7 Jul,0.0,22/06/2022
-Peterborough,Thu 7 Jul,18.0,22/06/2022
-Newport,Thu 7 Jul,0.0,22/06/2022
-Liverpool,Thu 7 Jul,0.0,22/06/2022
-Durham,Thu 7 Jul,13.0,22/06/2022
-Glasgow,Thu 7 Jul,17.0,22/06/2022
-Belfast,Thu 7 Jul,15.0,22/06/2022
-Birmingham,Thu 7 Jul,0.0,22/06/2022
-London,Fri 8 Jul,0.0,22/06/2022
-Peterborough,Fri 8 Jul,19.0,22/06/2022
-Newport,Fri 8 Jul,0.0,22/06/2022
-Liverpool,Fri 8 Jul,0.0,22/06/2022
-Durham,Fri 8 Jul,12.0,22/06/2022
-Glasgow,Fri 8 Jul,17.0,22/06/2022
-Belfast,Fri 8 Jul,15.0,22/06/2022
-Birmingham,Fri 8 Jul,0.0,22/06/2022
-London,Sat 9 Jul,0.0,22/06/2022
-Peterborough,Sat 9 Jul,4.0,22/06/2022
-Newport,Sat 9 Jul,0.0,22/06/2022
-Liverpool,Sat 9 Jul,0.0,22/06/2022
-Durham,Sat 9 Jul,10.0,22/06/2022
-Glasgow,Sat 9 Jul,9.0,22/06/2022
-Belfast,Sat 9 Jul,11.0,22/06/2022
-Birmingham,Sat 9 Jul,0.0,22/06/2022
-London,Mon 11 Jul,0.0,22/06/2022
-Peterborough,Mon 11 Jul,19.0,22/06/2022
-Newport,Mon 11 Jul,0.0,22/06/2022
-Liverpool,Mon 11 Jul,17.0,22/06/2022
-Durham,Mon 11 Jul,12.0,22/06/2022
-Glasgow,Mon 11 Jul,17.0,22/06/2022
-Belfast,Mon 11 Jul,15.0,22/06/2022
-Birmingham,Mon 11 Jul,0.0,22/06/2022
-London,Tue 12 Jul,0.0,22/06/2022
-Peterborough,Tue 12 Jul,19.0,22/06/2022
-Newport,Tue 12 Jul,1.0,22/06/2022
-Liverpool,Tue 12 Jul,19.0,22/06/2022
-Durham,Tue 12 Jul,13.0,22/06/2022
-Glasgow,Tue 12 Jul,17.0,22/06/2022
-Belfast,Tue 12 Jul,0.0,22/06/2022
-Birmingham,Tue 12 Jul,0.0,22/06/2022
-London,Wed 13 Jul,0.0,22/06/2022
-Peterborough,Wed 13 Jul,19.0,22/06/2022
-Newport,Wed 13 Jul,11.0,22/06/2022
-Liverpool,Wed 13 Jul,19.0,22/06/2022
-Durham,Wed 13 Jul,12.0,22/06/2022
-Glasgow,Wed 13 Jul,17.0,22/06/2022
-Belfast,Wed 13 Jul,15.0,22/06/2022
-Birmingham,Wed 13 Jul,0.0,22/06/2022
-London,Tue 28 Jun,0.0,22/06/2022 20:41
-Peterborough,Tue 28 Jun,1.0,22/06/2022 20:41
-Newport,Tue 28 Jun,0.0,22/06/2022 20:41
-Liverpool,Tue 28 Jun,0.0,22/06/2022 20:41
-Durham,Tue 28 Jun,0.0,22/06/2022 20:41
-Glasgow,Tue 28 Jun,0.0,22/06/2022 20:41
-Belfast,Tue 28 Jun,0.0,22/06/2022 20:41
-Birmingham,Tue 28 Jun,0.0,22/06/2022 20:41
-London,Wed 29 Jun,0.0,22/06/2022 20:41
-Peterborough,Wed 29 Jun,0.0,22/06/2022 20:41
-Newport,Wed 29 Jun,0.0,22/06/2022 20:41
-Liverpool,Wed 29 Jun,0.0,22/06/2022 20:41
-Durham,Wed 29 Jun,0.0,22/06/2022 20:41
-Glasgow,Wed 29 Jun,0.0,22/06/2022 20:41
-Belfast,Wed 29 Jun,2.0,22/06/2022 20:41
-Birmingham,Wed 29 Jun,0.0,22/06/2022 20:41
-London,Thu 30 Jun,0.0,22/06/2022 20:41
-Peterborough,Thu 30 Jun,0.0,22/06/2022 20:41
-Newport,Thu 30 Jun,0.0,22/06/2022 20:41
-Liverpool,Thu 30 Jun,0.0,22/06/2022 20:41
-Durham,Thu 30 Jun,0.0,22/06/2022 20:41
-Glasgow,Thu 30 Jun,0.0,22/06/2022 20:41
-Belfast,Thu 30 Jun,15.0,22/06/2022 20:41
-Birmingham,Thu 30 Jun,0.0,22/06/2022 20:41
-London,Fri 1 Jul,0.0,22/06/2022 20:41
-Peterborough,Fri 1 Jul,0.0,22/06/2022 20:41
-Newport,Fri 1 Jul,0.0,22/06/2022 20:41
-Liverpool,Fri 1 Jul,0.0,22/06/2022 20:41
-Durham,Fri 1 Jul,0.0,22/06/2022 20:41
-Glasgow,Fri 1 Jul,10.0,22/06/2022 20:41
-Belfast,Fri 1 Jul,15.0,22/06/2022 20:41
-Birmingham,Fri 1 Jul,0.0,22/06/2022 20:41
-London,Sat 2 Jul,0.0,22/06/2022 20:41
-Peterborough,Sat 2 Jul,0.0,22/06/2022 20:41
-Newport,Sat 2 Jul,0.0,22/06/2022 20:41
-Liverpool,Sat 2 Jul,0.0,22/06/2022 20:41
-Durham,Sat 2 Jul,0.0,22/06/2022 20:41
-Glasgow,Sat 2 Jul,0.0,22/06/2022 20:41
-Belfast,Sat 2 Jul,10.0,22/06/2022 20:41
-Birmingham,Sat 2 Jul,0.0,22/06/2022 20:41
-London,Mon 4 Jul,0.0,22/06/2022 20:41
-Peterborough,Mon 4 Jul,0.0,22/06/2022 20:41
-Newport,Mon 4 Jul,0.0,22/06/2022 20:41
-Liverpool,Mon 4 Jul,0.0,22/06/2022 20:41
-Durham,Mon 4 Jul,6.0,22/06/2022 20:41
-Glasgow,Mon 4 Jul,17.0,22/06/2022 20:41
-Belfast,Mon 4 Jul,15.0,22/06/2022 20:41
-Birmingham,Mon 4 Jul,0.0,22/06/2022 20:41
-London,Tue 5 Jul,0.0,22/06/2022 20:41
-Peterborough,Tue 5 Jul,0.0,22/06/2022 20:41
-Newport,Tue 5 Jul,0.0,22/06/2022 20:41
-Liverpool,Tue 5 Jul,0.0,22/06/2022 20:41
-Durham,Tue 5 Jul,11.0,22/06/2022 20:41
-Glasgow,Tue 5 Jul,17.0,22/06/2022 20:41
-Belfast,Tue 5 Jul,15.0,22/06/2022 20:41
-Birmingham,Tue 5 Jul,0.0,22/06/2022 20:41
-London,Wed 6 Jul,0.0,22/06/2022 20:41
-Peterborough,Wed 6 Jul,0.0,22/06/2022 20:41
-Newport,Wed 6 Jul,0.0,22/06/2022 20:41
-Liverpool,Wed 6 Jul,0.0,22/06/2022 20:41
-Durham,Wed 6 Jul,12.0,22/06/2022 20:41
-Glasgow,Wed 6 Jul,17.0,22/06/2022 20:41
-Belfast,Wed 6 Jul,15.0,22/06/2022 20:41
-Birmingham,Wed 6 Jul,0.0,22/06/2022 20:41
-London,Thu 7 Jul,0.0,22/06/2022 20:41
-Peterborough,Thu 7 Jul,0.0,22/06/2022 20:41
-Newport,Thu 7 Jul,0.0,22/06/2022 20:41
-Liverpool,Thu 7 Jul,0.0,22/06/2022 20:41
-Durham,Thu 7 Jul,12.0,22/06/2022 20:41
-Glasgow,Thu 7 Jul,17.0,22/06/2022 20:41
-Belfast,Thu 7 Jul,15.0,22/06/2022 20:41
-Birmingham,Thu 7 Jul,0.0,22/06/2022 20:41
-London,Fri 8 Jul,0.0,22/06/2022 20:41
-Peterborough,Fri 8 Jul,1.0,22/06/2022 20:41
-Newport,Fri 8 Jul,0.0,22/06/2022 20:41
-Liverpool,Fri 8 Jul,0.0,22/06/2022 20:41
-Durham,Fri 8 Jul,12.0,22/06/2022 20:41
-Glasgow,Fri 8 Jul,17.0,22/06/2022 20:41
-Belfast,Fri 8 Jul,15.0,22/06/2022 20:41
-Birmingham,Fri 8 Jul,0.0,22/06/2022 20:41
-London,Sat 9 Jul,0.0,22/06/2022 20:41
-Peterborough,Sat 9 Jul,0.0,22/06/2022 20:41
-Newport,Sat 9 Jul,0.0,22/06/2022 20:41
-Liverpool,Sat 9 Jul,0.0,22/06/2022 20:41
-Durham,Sat 9 Jul,0.0,22/06/2022 20:41
-Glasgow,Sat 9 Jul,0.0,22/06/2022 20:41
-Belfast,Sat 9 Jul,11.0,22/06/2022 20:41
-Birmingham,Sat 9 Jul,0.0,22/06/2022 20:41
-London,Mon 11 Jul,0.0,22/06/2022 20:41
-Peterborough,Mon 11 Jul,14.0,22/06/2022 20:41
-Newport,Mon 11 Jul,0.0,22/06/2022 20:41
-Liverpool,Mon 11 Jul,0.0,22/06/2022 20:41
-Durham,Mon 11 Jul,12.0,22/06/2022 20:41
-Glasgow,Mon 11 Jul,17.0,22/06/2022 20:41
-Belfast,Mon 11 Jul,15.0,22/06/2022 20:41
-Birmingham,Mon 11 Jul,0.0,22/06/2022 20:41
-London,Wed 13 Jul,0.0,22/06/2022 20:41
-Peterborough,Wed 13 Jul,17.0,22/06/2022 20:41
-Newport,Wed 13 Jul,0.0,22/06/2022 20:41
-Liverpool,Wed 13 Jul,16.0,22/06/2022 20:41
-Durham,Wed 13 Jul,11.0,22/06/2022 20:41
-Glasgow,Wed 13 Jul,17.0,22/06/2022 20:41
-Belfast,Wed 13 Jul,15.0,22/06/2022 20:41
-Birmingham,Wed 13 Jul,0.0,22/06/2022 20:41
+,location,appt_date,count,scrape_date
+0,London,Tue 28 Jun,0.0,22/06/2022
+1,Peterborough,Tue 28 Jun,0.0,22/06/2022
+2,Newport,Tue 28 Jun,15.0,22/06/2022
+3,Liverpool,Tue 28 Jun,1.0,22/06/2022
+4,Durham,Tue 28 Jun,0.0,22/06/2022
+5,Glasgow,Tue 28 Jun,0.0,22/06/2022
+6,Belfast,Tue 28 Jun,4.0,22/06/2022
+7,Birmingham,Tue 28 Jun,0.0,22/06/2022
+8,London,Wed 29 Jun,0.0,22/06/2022
+9,Peterborough,Wed 29 Jun,0.0,22/06/2022
+10,Newport,Wed 29 Jun,16.0,22/06/2022
+11,Liverpool,Wed 29 Jun,0.0,22/06/2022
+12,Durham,Wed 29 Jun,0.0,22/06/2022
+13,Glasgow,Wed 29 Jun,12.0,22/06/2022
+14,Belfast,Wed 29 Jun,15.0,22/06/2022
+15,Birmingham,Wed 29 Jun,0.0,22/06/2022
+16,London,Thu 30 Jun,7.0,22/06/2022
+17,Peterborough,Thu 30 Jun,1.0,22/06/2022
+18,Newport,Thu 30 Jun,16.0,22/06/2022
+19,Liverpool,Thu 30 Jun,0.0,22/06/2022
+20,Durham,Thu 30 Jun,6.0,22/06/2022
+21,Glasgow,Thu 30 Jun,17.0,22/06/2022
+22,Belfast,Thu 30 Jun,15.0,22/06/2022
+23,Birmingham,Thu 30 Jun,0.0,22/06/2022
+24,London,Fri 1 Jul,10.0,22/06/2022
+25,Peterborough,Fri 1 Jul,0.0,22/06/2022
+26,Newport,Fri 1 Jul,16.0,22/06/2022
+27,Liverpool,Fri 1 Jul,0.0,22/06/2022
+28,Durham,Fri 1 Jul,7.0,22/06/2022
+29,Glasgow,Fri 1 Jul,16.0,22/06/2022
+30,Belfast,Fri 1 Jul,15.0,22/06/2022
+31,Birmingham,Fri 1 Jul,0.0,22/06/2022
+32,London,Sat 2 Jul,0.0,22/06/2022
+33,Peterborough,Sat 2 Jul,0.0,22/06/2022
+34,Newport,Sat 2 Jul,12.0,22/06/2022
+35,Liverpool,Sat 2 Jul,0.0,22/06/2022
+36,Durham,Sat 2 Jul,0.0,22/06/2022
+37,Glasgow,Sat 2 Jul,0.0,22/06/2022
+38,Belfast,Sat 2 Jul,10.0,22/06/2022
+39,Birmingham,Sat 2 Jul,0.0,22/06/2022
+40,London,Mon 4 Jul,0.0,22/06/2022
+41,Peterborough,Mon 4 Jul,0.0,22/06/2022
+42,Newport,Mon 4 Jul,0.0,22/06/2022
+43,Liverpool,Mon 4 Jul,0.0,22/06/2022
+44,Durham,Mon 4 Jul,11.0,22/06/2022
+45,Glasgow,Mon 4 Jul,17.0,22/06/2022
+46,Belfast,Mon 4 Jul,15.0,22/06/2022
+47,Birmingham,Mon 4 Jul,0.0,22/06/2022
+48,London,Tue 5 Jul,0.0,22/06/2022
+49,Peterborough,Tue 5 Jul,0.0,22/06/2022
+50,Newport,Tue 5 Jul,0.0,22/06/2022
+51,Liverpool,Tue 5 Jul,0.0,22/06/2022
+52,Durham,Tue 5 Jul,12.0,22/06/2022
+53,Glasgow,Tue 5 Jul,17.0,22/06/2022
+54,Belfast,Tue 5 Jul,15.0,22/06/2022
+55,Birmingham,Tue 5 Jul,0.0,22/06/2022
+56,London,Wed 6 Jul,0.0,22/06/2022
+57,Peterborough,Wed 6 Jul,4.0,22/06/2022
+58,Newport,Wed 6 Jul,0.0,22/06/2022
+59,Liverpool,Wed 6 Jul,0.0,22/06/2022
+60,Durham,Wed 6 Jul,12.0,22/06/2022
+61,Glasgow,Wed 6 Jul,17.0,22/06/2022
+62,Belfast,Wed 6 Jul,15.0,22/06/2022
+63,Birmingham,Wed 6 Jul,0.0,22/06/2022
+64,London,Thu 7 Jul,0.0,22/06/2022
+65,Peterborough,Thu 7 Jul,18.0,22/06/2022
+66,Newport,Thu 7 Jul,0.0,22/06/2022
+67,Liverpool,Thu 7 Jul,0.0,22/06/2022
+68,Durham,Thu 7 Jul,13.0,22/06/2022
+69,Glasgow,Thu 7 Jul,17.0,22/06/2022
+70,Belfast,Thu 7 Jul,15.0,22/06/2022
+71,Birmingham,Thu 7 Jul,0.0,22/06/2022
+72,London,Fri 8 Jul,0.0,22/06/2022
+73,Peterborough,Fri 8 Jul,19.0,22/06/2022
+74,Newport,Fri 8 Jul,0.0,22/06/2022
+75,Liverpool,Fri 8 Jul,0.0,22/06/2022
+76,Durham,Fri 8 Jul,12.0,22/06/2022
+77,Glasgow,Fri 8 Jul,17.0,22/06/2022
+78,Belfast,Fri 8 Jul,15.0,22/06/2022
+79,Birmingham,Fri 8 Jul,0.0,22/06/2022
+80,London,Sat 9 Jul,0.0,22/06/2022
+81,Peterborough,Sat 9 Jul,4.0,22/06/2022
+82,Newport,Sat 9 Jul,0.0,22/06/2022
+83,Liverpool,Sat 9 Jul,0.0,22/06/2022
+84,Durham,Sat 9 Jul,10.0,22/06/2022
+85,Glasgow,Sat 9 Jul,9.0,22/06/2022
+86,Belfast,Sat 9 Jul,11.0,22/06/2022
+87,Birmingham,Sat 9 Jul,0.0,22/06/2022
+88,London,Mon 11 Jul,0.0,22/06/2022
+89,Peterborough,Mon 11 Jul,19.0,22/06/2022
+90,Newport,Mon 11 Jul,0.0,22/06/2022
+91,Liverpool,Mon 11 Jul,17.0,22/06/2022
+92,Durham,Mon 11 Jul,12.0,22/06/2022
+93,Glasgow,Mon 11 Jul,17.0,22/06/2022
+94,Belfast,Mon 11 Jul,15.0,22/06/2022
+95,Birmingham,Mon 11 Jul,0.0,22/06/2022
+96,London,Tue 12 Jul,0.0,22/06/2022
+97,Peterborough,Tue 12 Jul,19.0,22/06/2022
+98,Newport,Tue 12 Jul,1.0,22/06/2022
+99,Liverpool,Tue 12 Jul,19.0,22/06/2022
+100,Durham,Tue 12 Jul,13.0,22/06/2022
+101,Glasgow,Tue 12 Jul,17.0,22/06/2022
+102,Belfast,Tue 12 Jul,0.0,22/06/2022
+103,Birmingham,Tue 12 Jul,0.0,22/06/2022
+104,London,Wed 13 Jul,0.0,22/06/2022
+105,Peterborough,Wed 13 Jul,19.0,22/06/2022
+106,Newport,Wed 13 Jul,11.0,22/06/2022
+107,Liverpool,Wed 13 Jul,19.0,22/06/2022
+108,Durham,Wed 13 Jul,12.0,22/06/2022
+109,Glasgow,Wed 13 Jul,17.0,22/06/2022
+110,Belfast,Wed 13 Jul,15.0,22/06/2022
+111,Birmingham,Wed 13 Jul,0.0,22/06/2022
+112,London,Tue 28 Jun,0.0,22/06/2022 20:41
+113,Peterborough,Tue 28 Jun,1.0,22/06/2022 20:41
+114,Newport,Tue 28 Jun,0.0,22/06/2022 20:41
+115,Liverpool,Tue 28 Jun,0.0,22/06/2022 20:41
+116,Durham,Tue 28 Jun,0.0,22/06/2022 20:41
+117,Glasgow,Tue 28 Jun,0.0,22/06/2022 20:41
+118,Belfast,Tue 28 Jun,0.0,22/06/2022 20:41
+119,Birmingham,Tue 28 Jun,0.0,22/06/2022 20:41
+120,London,Wed 29 Jun,0.0,22/06/2022 20:41
+121,Peterborough,Wed 29 Jun,0.0,22/06/2022 20:41
+122,Newport,Wed 29 Jun,0.0,22/06/2022 20:41
+123,Liverpool,Wed 29 Jun,0.0,22/06/2022 20:41
+124,Durham,Wed 29 Jun,0.0,22/06/2022 20:41
+125,Glasgow,Wed 29 Jun,0.0,22/06/2022 20:41
+126,Belfast,Wed 29 Jun,2.0,22/06/2022 20:41
+127,Birmingham,Wed 29 Jun,0.0,22/06/2022 20:41
+128,London,Thu 30 Jun,0.0,22/06/2022 20:41
+129,Peterborough,Thu 30 Jun,0.0,22/06/2022 20:41
+130,Newport,Thu 30 Jun,0.0,22/06/2022 20:41
+131,Liverpool,Thu 30 Jun,0.0,22/06/2022 20:41
+132,Durham,Thu 30 Jun,0.0,22/06/2022 20:41
+133,Glasgow,Thu 30 Jun,0.0,22/06/2022 20:41
+134,Belfast,Thu 30 Jun,15.0,22/06/2022 20:41
+135,Birmingham,Thu 30 Jun,0.0,22/06/2022 20:41
+136,London,Fri 1 Jul,0.0,22/06/2022 20:41
+137,Peterborough,Fri 1 Jul,0.0,22/06/2022 20:41
+138,Newport,Fri 1 Jul,0.0,22/06/2022 20:41
+139,Liverpool,Fri 1 Jul,0.0,22/06/2022 20:41
+140,Durham,Fri 1 Jul,0.0,22/06/2022 20:41
+141,Glasgow,Fri 1 Jul,10.0,22/06/2022 20:41
+142,Belfast,Fri 1 Jul,15.0,22/06/2022 20:41
+143,Birmingham,Fri 1 Jul,0.0,22/06/2022 20:41
+144,London,Sat 2 Jul,0.0,22/06/2022 20:41
+145,Peterborough,Sat 2 Jul,0.0,22/06/2022 20:41
+146,Newport,Sat 2 Jul,0.0,22/06/2022 20:41
+147,Liverpool,Sat 2 Jul,0.0,22/06/2022 20:41
+148,Durham,Sat 2 Jul,0.0,22/06/2022 20:41
+149,Glasgow,Sat 2 Jul,0.0,22/06/2022 20:41
+150,Belfast,Sat 2 Jul,10.0,22/06/2022 20:41
+151,Birmingham,Sat 2 Jul,0.0,22/06/2022 20:41
+152,London,Mon 4 Jul,0.0,22/06/2022 20:41
+153,Peterborough,Mon 4 Jul,0.0,22/06/2022 20:41
+154,Newport,Mon 4 Jul,0.0,22/06/2022 20:41
+155,Liverpool,Mon 4 Jul,0.0,22/06/2022 20:41
+156,Durham,Mon 4 Jul,6.0,22/06/2022 20:41
+157,Glasgow,Mon 4 Jul,17.0,22/06/2022 20:41
+158,Belfast,Mon 4 Jul,15.0,22/06/2022 20:41
+159,Birmingham,Mon 4 Jul,0.0,22/06/2022 20:41
+160,London,Tue 5 Jul,0.0,22/06/2022 20:41
+161,Peterborough,Tue 5 Jul,0.0,22/06/2022 20:41
+162,Newport,Tue 5 Jul,0.0,22/06/2022 20:41
+163,Liverpool,Tue 5 Jul,0.0,22/06/2022 20:41
+164,Durham,Tue 5 Jul,11.0,22/06/2022 20:41
+165,Glasgow,Tue 5 Jul,17.0,22/06/2022 20:41
+166,Belfast,Tue 5 Jul,15.0,22/06/2022 20:41
+167,Birmingham,Tue 5 Jul,0.0,22/06/2022 20:41
+168,London,Wed 6 Jul,0.0,22/06/2022 20:41
+169,Peterborough,Wed 6 Jul,0.0,22/06/2022 20:41
+170,Newport,Wed 6 Jul,0.0,22/06/2022 20:41
+171,Liverpool,Wed 6 Jul,0.0,22/06/2022 20:41
+172,Durham,Wed 6 Jul,12.0,22/06/2022 20:41
+173,Glasgow,Wed 6 Jul,17.0,22/06/2022 20:41
+174,Belfast,Wed 6 Jul,15.0,22/06/2022 20:41
+175,Birmingham,Wed 6 Jul,0.0,22/06/2022 20:41
+176,London,Thu 7 Jul,0.0,22/06/2022 20:41
+177,Peterborough,Thu 7 Jul,0.0,22/06/2022 20:41
+178,Newport,Thu 7 Jul,0.0,22/06/2022 20:41
+179,Liverpool,Thu 7 Jul,0.0,22/06/2022 20:41
+180,Durham,Thu 7 Jul,12.0,22/06/2022 20:41
+181,Glasgow,Thu 7 Jul,17.0,22/06/2022 20:41
+182,Belfast,Thu 7 Jul,15.0,22/06/2022 20:41
+183,Birmingham,Thu 7 Jul,0.0,22/06/2022 20:41
+184,London,Fri 8 Jul,0.0,22/06/2022 20:41
+185,Peterborough,Fri 8 Jul,1.0,22/06/2022 20:41
+186,Newport,Fri 8 Jul,0.0,22/06/2022 20:41
+187,Liverpool,Fri 8 Jul,0.0,22/06/2022 20:41
+188,Durham,Fri 8 Jul,12.0,22/06/2022 20:41
+189,Glasgow,Fri 8 Jul,17.0,22/06/2022 20:41
+190,Belfast,Fri 8 Jul,15.0,22/06/2022 20:41
+191,Birmingham,Fri 8 Jul,0.0,22/06/2022 20:41
+192,London,Sat 9 Jul,0.0,22/06/2022 20:41
+193,Peterborough,Sat 9 Jul,0.0,22/06/2022 20:41
+194,Newport,Sat 9 Jul,0.0,22/06/2022 20:41
+195,Liverpool,Sat 9 Jul,0.0,22/06/2022 20:41
+196,Durham,Sat 9 Jul,0.0,22/06/2022 20:41
+197,Glasgow,Sat 9 Jul,0.0,22/06/2022 20:41
+198,Belfast,Sat 9 Jul,11.0,22/06/2022 20:41
+199,Birmingham,Sat 9 Jul,0.0,22/06/2022 20:41
+200,London,Mon 11 Jul,0.0,22/06/2022 20:41
+201,Peterborough,Mon 11 Jul,14.0,22/06/2022 20:41
+202,Newport,Mon 11 Jul,0.0,22/06/2022 20:41
+203,Liverpool,Mon 11 Jul,0.0,22/06/2022 20:41
+204,Durham,Mon 11 Jul,12.0,22/06/2022 20:41
+205,Glasgow,Mon 11 Jul,17.0,22/06/2022 20:41
+206,Belfast,Mon 11 Jul,15.0,22/06/2022 20:41
+207,Birmingham,Mon 11 Jul,0.0,22/06/2022 20:41
+208,London,Wed 13 Jul,0.0,22/06/2022 20:41
+209,Peterborough,Wed 13 Jul,17.0,22/06/2022 20:41
+210,Newport,Wed 13 Jul,0.0,22/06/2022 20:41
+211,Liverpool,Wed 13 Jul,16.0,22/06/2022 20:41
+212,Durham,Wed 13 Jul,11.0,22/06/2022 20:41
+213,Glasgow,Wed 13 Jul,17.0,22/06/2022 20:41
+214,Belfast,Wed 13 Jul,15.0,22/06/2022 20:41
+215,Birmingham,Wed 13 Jul,0.0,22/06/2022 20:41
+216,London,Wed 29 Jun,0.0,23/06/2022 15:05
+217,Peterborough,Wed 29 Jun,0.0,23/06/2022 15:05
+218,Newport,Wed 29 Jun,0.0,23/06/2022 15:05
+219,Liverpool,Wed 29 Jun,0.0,23/06/2022 15:05
+220,Durham,Wed 29 Jun,0.0,23/06/2022 15:05
+221,Glasgow,Wed 29 Jun,0.0,23/06/2022 15:05
+222,Belfast,Wed 29 Jun,1.0,23/06/2022 15:05
+223,Birmingham,Wed 29 Jun,0.0,23/06/2022 15:05
+224,London,Thu 30 Jun,0.0,23/06/2022 15:05
+225,Peterborough,Thu 30 Jun,0.0,23/06/2022 15:05
+226,Newport,Thu 30 Jun,0.0,23/06/2022 15:05
+227,Liverpool,Thu 30 Jun,0.0,23/06/2022 15:05
+228,Durham,Thu 30 Jun,0.0,23/06/2022 15:05
+229,Glasgow,Thu 30 Jun,0.0,23/06/2022 15:05
+230,Belfast,Thu 30 Jun,15.0,23/06/2022 15:05
+231,Birmingham,Thu 30 Jun,0.0,23/06/2022 15:05
+232,London,Fri 1 Jul,0.0,23/06/2022 15:05
+233,Peterborough,Fri 1 Jul,0.0,23/06/2022 15:05
+234,Newport,Fri 1 Jul,1.0,23/06/2022 15:05
+235,Liverpool,Fri 1 Jul,0.0,23/06/2022 15:05
+236,Durham,Fri 1 Jul,1.0,23/06/2022 15:05
+237,Glasgow,Fri 1 Jul,6.0,23/06/2022 15:05
+238,Belfast,Fri 1 Jul,15.0,23/06/2022 15:05
+239,Birmingham,Fri 1 Jul,0.0,23/06/2022 15:05
+240,London,Sat 2 Jul,0.0,23/06/2022 15:05
+241,Peterborough,Sat 2 Jul,0.0,23/06/2022 15:05
+242,Newport,Sat 2 Jul,0.0,23/06/2022 15:05
+243,Liverpool,Sat 2 Jul,0.0,23/06/2022 15:05
+244,Durham,Sat 2 Jul,0.0,23/06/2022 15:05
+245,Glasgow,Sat 2 Jul,0.0,23/06/2022 15:05
+246,Belfast,Sat 2 Jul,9.0,23/06/2022 15:05
+247,Birmingham,Sat 2 Jul,0.0,23/06/2022 15:05
+248,London,Mon 4 Jul,0.0,23/06/2022 15:05
+249,Peterborough,Mon 4 Jul,0.0,23/06/2022 15:05
+250,Newport,Mon 4 Jul,0.0,23/06/2022 15:05
+251,Liverpool,Mon 4 Jul,0.0,23/06/2022 15:05
+252,Durham,Mon 4 Jul,7.0,23/06/2022 15:05
+253,Glasgow,Mon 4 Jul,16.0,23/06/2022 15:05
+254,Belfast,Mon 4 Jul,15.0,23/06/2022 15:05
+255,Birmingham,Mon 4 Jul,0.0,23/06/2022 15:05
+256,London,Tue 5 Jul,0.0,23/06/2022 15:05
+257,Peterborough,Tue 5 Jul,0.0,23/06/2022 15:05
+258,Newport,Tue 5 Jul,0.0,23/06/2022 15:05
+259,Liverpool,Tue 5 Jul,0.0,23/06/2022 15:05
+260,Durham,Tue 5 Jul,11.0,23/06/2022 15:05
+261,Glasgow,Tue 5 Jul,17.0,23/06/2022 15:05
+262,Belfast,Tue 5 Jul,15.0,23/06/2022 15:05
+263,Birmingham,Tue 5 Jul,0.0,23/06/2022 15:05
+264,London,Wed 6 Jul,0.0,23/06/2022 15:05
+265,Peterborough,Wed 6 Jul,0.0,23/06/2022 15:05
+266,Newport,Wed 6 Jul,0.0,23/06/2022 15:05
+267,Liverpool,Wed 6 Jul,0.0,23/06/2022 15:05
+268,Durham,Wed 6 Jul,12.0,23/06/2022 15:05
+269,Glasgow,Wed 6 Jul,17.0,23/06/2022 15:05
+270,Belfast,Wed 6 Jul,15.0,23/06/2022 15:05
+271,Birmingham,Wed 6 Jul,0.0,23/06/2022 15:05
+272,London,Thu 7 Jul,0.0,23/06/2022 15:05
+273,Peterborough,Thu 7 Jul,0.0,23/06/2022 15:05
+274,Newport,Thu 7 Jul,0.0,23/06/2022 15:05
+275,Liverpool,Thu 7 Jul,0.0,23/06/2022 15:05
+276,Durham,Thu 7 Jul,12.0,23/06/2022 15:05
+277,Glasgow,Thu 7 Jul,17.0,23/06/2022 15:05
+278,Belfast,Thu 7 Jul,15.0,23/06/2022 15:05
+279,Birmingham,Thu 7 Jul,0.0,23/06/2022 15:05
+280,London,Fri 8 Jul,0.0,23/06/2022 15:05
+281,Peterborough,Fri 8 Jul,0.0,23/06/2022 15:05
+282,Newport,Fri 8 Jul,0.0,23/06/2022 15:05
+283,Liverpool,Fri 8 Jul,0.0,23/06/2022 15:05
+284,Durham,Fri 8 Jul,12.0,23/06/2022 15:05
+285,Glasgow,Fri 8 Jul,17.0,23/06/2022 15:05
+286,Belfast,Fri 8 Jul,15.0,23/06/2022 15:05
+287,Birmingham,Fri 8 Jul,0.0,23/06/2022 15:05
+288,London,Sat 9 Jul,0.0,23/06/2022 15:05
+289,Peterborough,Sat 9 Jul,0.0,23/06/2022 15:05
+290,Newport,Sat 9 Jul,0.0,23/06/2022 15:05
+291,Liverpool,Sat 9 Jul,0.0,23/06/2022 15:05
+292,Durham,Sat 9 Jul,1.0,23/06/2022 15:05
+293,Glasgow,Sat 9 Jul,0.0,23/06/2022 15:05
+294,Belfast,Sat 9 Jul,11.0,23/06/2022 15:05
+295,Birmingham,Sat 9 Jul,0.0,23/06/2022 15:05
+296,London,Mon 11 Jul,0.0,23/06/2022 15:05
+297,Peterborough,Mon 11 Jul,12.0,23/06/2022 15:05
+298,Newport,Mon 11 Jul,0.0,23/06/2022 15:05
+299,Liverpool,Mon 11 Jul,0.0,23/06/2022 15:05
+300,Durham,Mon 11 Jul,12.0,23/06/2022 15:05
+301,Glasgow,Mon 11 Jul,17.0,23/06/2022 15:05
+302,Belfast,Mon 11 Jul,15.0,23/06/2022 15:05
+303,Birmingham,Mon 11 Jul,0.0,23/06/2022 15:05
+304,London,Tue 12 Jul,0.0,23/06/2022 15:05
+305,Peterborough,Tue 12 Jul,18.0,23/06/2022 15:05
+306,Newport,Tue 12 Jul,0.0,23/06/2022 15:05
+307,Liverpool,Tue 12 Jul,0.0,23/06/2022 15:05
+308,Durham,Tue 12 Jul,13.0,23/06/2022 15:05
+309,Glasgow,Tue 12 Jul,17.0,23/06/2022 15:05
+310,Belfast,Tue 12 Jul,0.0,23/06/2022 15:05
+311,Birmingham,Tue 12 Jul,0.0,23/06/2022 15:05
+312,London,Wed 13 Jul,0.0,23/06/2022 15:05
+313,Peterborough,Wed 13 Jul,17.0,23/06/2022 15:05
+314,Newport,Wed 13 Jul,0.0,23/06/2022 15:05
+315,Liverpool,Wed 13 Jul,17.0,23/06/2022 15:05
+316,Durham,Wed 13 Jul,11.0,23/06/2022 15:05
+317,Glasgow,Wed 13 Jul,17.0,23/06/2022 15:05
+318,Belfast,Wed 13 Jul,15.0,23/06/2022 15:05
+319,Birmingham,Wed 13 Jul,0.0,23/06/2022 15:05
+320,London,Thu 14 Jul,0.0,23/06/2022 15:05
+321,Peterborough,Thu 14 Jul,19.0,23/06/2022 15:05
+322,Newport,Thu 14 Jul,11.0,23/06/2022 15:05
+323,Liverpool,Thu 14 Jul,19.0,23/06/2022 15:05
+324,Durham,Thu 14 Jul,12.0,23/06/2022 15:05
+325,Glasgow,Thu 14 Jul,17.0,23/06/2022 15:05
+326,Belfast,Thu 14 Jul,15.0,23/06/2022 15:05
+327,Birmingham,Thu 14 Jul,0.0,23/06/2022 15:05
+328,London,Thu 30 Jun,0.0,23/06/2022 15:16
+329,Peterborough,Thu 30 Jun,0.0,23/06/2022 15:16
+330,Newport,Thu 30 Jun,0.0,23/06/2022 15:16
+331,Liverpool,Thu 30 Jun,0.0,23/06/2022 15:16
+332,Durham,Thu 30 Jun,0.0,23/06/2022 15:16
+333,Glasgow,Thu 30 Jun,0.0,23/06/2022 15:16
+334,Belfast,Thu 30 Jun,15.0,23/06/2022 15:16
+335,Birmingham,Thu 30 Jun,0.0,23/06/2022 15:16
+336,London,Fri 1 Jul,0.0,23/06/2022 15:16
+337,Peterborough,Fri 1 Jul,0.0,23/06/2022 15:16
+338,Newport,Fri 1 Jul,0.0,23/06/2022 15:16
+339,Liverpool,Fri 1 Jul,1.0,23/06/2022 15:16
+340,Durham,Fri 1 Jul,0.0,23/06/2022 15:16
+341,Glasgow,Fri 1 Jul,2.0,23/06/2022 15:16
+342,Belfast,Fri 1 Jul,15.0,23/06/2022 15:16
+343,Birmingham,Fri 1 Jul,0.0,23/06/2022 15:16
+344,London,Sat 2 Jul,0.0,23/06/2022 15:16
+345,Peterborough,Sat 2 Jul,0.0,23/06/2022 15:16
+346,Newport,Sat 2 Jul,0.0,23/06/2022 15:16
+347,Liverpool,Sat 2 Jul,0.0,23/06/2022 15:16
+348,Durham,Sat 2 Jul,0.0,23/06/2022 15:16
+349,Glasgow,Sat 2 Jul,0.0,23/06/2022 15:16
+350,Belfast,Sat 2 Jul,7.0,23/06/2022 15:16
+351,Birmingham,Sat 2 Jul,0.0,23/06/2022 15:16
+352,London,Mon 4 Jul,0.0,23/06/2022 15:16
+353,Peterborough,Mon 4 Jul,0.0,23/06/2022 15:16
+354,Newport,Mon 4 Jul,0.0,23/06/2022 15:16
+355,Liverpool,Mon 4 Jul,0.0,23/06/2022 15:16
+356,Durham,Mon 4 Jul,3.0,23/06/2022 15:16
+357,Glasgow,Mon 4 Jul,16.0,23/06/2022 15:16
+358,Belfast,Mon 4 Jul,15.0,23/06/2022 15:16
+359,Birmingham,Mon 4 Jul,0.0,23/06/2022 15:16
+360,London,Tue 5 Jul,0.0,23/06/2022 15:16
+361,Peterborough,Tue 5 Jul,0.0,23/06/2022 15:16
+362,Newport,Tue 5 Jul,0.0,23/06/2022 15:16
+363,Liverpool,Tue 5 Jul,0.0,23/06/2022 15:16
+364,Durham,Tue 5 Jul,11.0,23/06/2022 15:16
+365,Glasgow,Tue 5 Jul,17.0,23/06/2022 15:16
+366,Belfast,Tue 5 Jul,15.0,23/06/2022 15:16
+367,Birmingham,Tue 5 Jul,0.0,23/06/2022 15:16
+368,London,Wed 6 Jul,0.0,23/06/2022 15:16
+369,Peterborough,Wed 6 Jul,0.0,23/06/2022 15:16
+370,Newport,Wed 6 Jul,0.0,23/06/2022 15:16
+371,Liverpool,Wed 6 Jul,0.0,23/06/2022 15:16
+372,Durham,Wed 6 Jul,12.0,23/06/2022 15:16
+373,Glasgow,Wed 6 Jul,17.0,23/06/2022 15:16
+374,Belfast,Wed 6 Jul,15.0,23/06/2022 15:16
+375,Birmingham,Wed 6 Jul,0.0,23/06/2022 15:16
+376,London,Thu 30 Jun,0.0,23/06/2022 15:32
+377,Peterborough,Thu 30 Jun,0.0,23/06/2022 15:32
+378,Newport,Thu 30 Jun,0.0,23/06/2022 15:32
+379,Liverpool,Thu 30 Jun,0.0,23/06/2022 15:32
+380,Durham,Thu 30 Jun,0.0,23/06/2022 15:32
+381,Glasgow,Thu 30 Jun,0.0,23/06/2022 15:32
+382,Belfast,Thu 30 Jun,15.0,23/06/2022 15:32
+383,Birmingham,Thu 30 Jun,0.0,23/06/2022 15:32
+384,London,Fri 1 Jul,0.0,23/06/2022 15:32
+385,Peterborough,Fri 1 Jul,0.0,23/06/2022 15:32
+386,Newport,Fri 1 Jul,0.0,23/06/2022 15:32
+387,Liverpool,Fri 1 Jul,0.0,23/06/2022 15:32
+388,Durham,Fri 1 Jul,0.0,23/06/2022 15:32
+389,Glasgow,Fri 1 Jul,0.0,23/06/2022 15:32
+390,Belfast,Fri 1 Jul,15.0,23/06/2022 15:32
+391,Birmingham,Fri 1 Jul,0.0,23/06/2022 15:32
+392,London,Sat 2 Jul,0.0,23/06/2022 15:32
+393,Peterborough,Sat 2 Jul,0.0,23/06/2022 15:32
+394,Newport,Sat 2 Jul,0.0,23/06/2022 15:32
+395,Liverpool,Sat 2 Jul,0.0,23/06/2022 15:32
+396,Durham,Sat 2 Jul,0.0,23/06/2022 15:32
+397,Glasgow,Sat 2 Jul,0.0,23/06/2022 15:32
+398,Belfast,Sat 2 Jul,8.0,23/06/2022 15:32
+399,Birmingham,Sat 2 Jul,0.0,23/06/2022 15:32
+400,London,Mon 4 Jul,0.0,23/06/2022 15:32
+401,Peterborough,Mon 4 Jul,0.0,23/06/2022 15:32
+402,Newport,Mon 4 Jul,0.0,23/06/2022 15:32
+403,Liverpool,Mon 4 Jul,0.0,23/06/2022 15:32
+404,Durham,Mon 4 Jul,1.0,23/06/2022 15:32
+405,Glasgow,Mon 4 Jul,13.0,23/06/2022 15:32
+406,Belfast,Mon 4 Jul,15.0,23/06/2022 15:32
+407,Birmingham,Mon 4 Jul,0.0,23/06/2022 15:32
+408,London,Tue 5 Jul,0.0,23/06/2022 15:32
+409,Peterborough,Tue 5 Jul,0.0,23/06/2022 15:32
+410,Newport,Tue 5 Jul,0.0,23/06/2022 15:32
+411,Liverpool,Tue 5 Jul,0.0,23/06/2022 15:32
+412,Durham,Tue 5 Jul,11.0,23/06/2022 15:32
+413,Glasgow,Tue 5 Jul,17.0,23/06/2022 15:32
+414,Belfast,Tue 5 Jul,15.0,23/06/2022 15:32
+415,Birmingham,Tue 5 Jul,0.0,23/06/2022 15:32
+416,London,Wed 6 Jul,0.0,23/06/2022 15:32
+417,Peterborough,Wed 6 Jul,0.0,23/06/2022 15:32
+418,Newport,Wed 6 Jul,0.0,23/06/2022 15:32
+419,Liverpool,Wed 6 Jul,0.0,23/06/2022 15:32
+420,Durham,Wed 6 Jul,12.0,23/06/2022 15:32
+421,Glasgow,Wed 6 Jul,17.0,23/06/2022 15:32
+422,Belfast,Wed 6 Jul,15.0,23/06/2022 15:32
+423,Birmingham,Wed 6 Jul,0.0,23/06/2022 15:32
+424,London,Thu 7 Jul,0.0,23/06/2022 15:32
+425,Peterborough,Thu 7 Jul,0.0,23/06/2022 15:32
+426,Newport,Thu 7 Jul,0.0,23/06/2022 15:32
+427,Liverpool,Thu 7 Jul,0.0,23/06/2022 15:32
+428,Durham,Thu 7 Jul,12.0,23/06/2022 15:32
+429,Glasgow,Thu 7 Jul,17.0,23/06/2022 15:32
+430,Belfast,Thu 7 Jul,15.0,23/06/2022 15:32
+431,Birmingham,Thu 7 Jul,0.0,23/06/2022 15:32
+432,London,Fri 8 Jul,0.0,23/06/2022 15:32
+433,Peterborough,Fri 8 Jul,0.0,23/06/2022 15:32
+434,Newport,Fri 8 Jul,0.0,23/06/2022 15:32
+435,Liverpool,Fri 8 Jul,0.0,23/06/2022 15:32
+436,Durham,Fri 8 Jul,12.0,23/06/2022 15:32
+437,Glasgow,Fri 8 Jul,17.0,23/06/2022 15:32
+438,Belfast,Fri 8 Jul,15.0,23/06/2022 15:32
+439,Birmingham,Fri 8 Jul,0.0,23/06/2022 15:32
+440,London,Sat 9 Jul,0.0,23/06/2022 15:32
+441,Peterborough,Sat 9 Jul,0.0,23/06/2022 15:32
+442,Newport,Sat 9 Jul,0.0,23/06/2022 15:32
+443,Liverpool,Sat 9 Jul,0.0,23/06/2022 15:32
+444,Durham,Sat 9 Jul,0.0,23/06/2022 15:32
+445,Glasgow,Sat 9 Jul,0.0,23/06/2022 15:32
+446,Belfast,Sat 9 Jul,11.0,23/06/2022 15:32
+447,Birmingham,Sat 9 Jul,0.0,23/06/2022 15:32
+448,London,Mon 11 Jul,0.0,23/06/2022 15:32
+449,Peterborough,Mon 11 Jul,6.0,23/06/2022 15:32
+450,Newport,Mon 11 Jul,0.0,23/06/2022 15:32
+451,Liverpool,Mon 11 Jul,0.0,23/06/2022 15:32
+452,Durham,Mon 11 Jul,12.0,23/06/2022 15:32
+453,Glasgow,Mon 11 Jul,17.0,23/06/2022 15:32
+454,Belfast,Mon 11 Jul,15.0,23/06/2022 15:32
+455,Birmingham,Mon 11 Jul,0.0,23/06/2022 15:32
+456,London,Tue 12 Jul,0.0,23/06/2022 15:32
+457,Peterborough,Tue 12 Jul,18.0,23/06/2022 15:32
+458,Newport,Tue 12 Jul,0.0,23/06/2022 15:32
+459,Liverpool,Tue 12 Jul,0.0,23/06/2022 15:32
+460,Durham,Tue 12 Jul,13.0,23/06/2022 15:32
+461,Glasgow,Tue 12 Jul,17.0,23/06/2022 15:32
+462,Belfast,Tue 12 Jul,0.0,23/06/2022 15:32
+463,Birmingham,Tue 12 Jul,0.0,23/06/2022 15:32
+464,London,Wed 13 Jul,0.0,23/06/2022 15:32
+465,Peterborough,Wed 13 Jul,17.0,23/06/2022 15:32
+466,Newport,Wed 13 Jul,0.0,23/06/2022 15:32
+467,Liverpool,Wed 13 Jul,12.0,23/06/2022 15:32
+468,Durham,Wed 13 Jul,11.0,23/06/2022 15:32
+469,Glasgow,Wed 13 Jul,17.0,23/06/2022 15:32
+470,Belfast,Wed 13 Jul,15.0,23/06/2022 15:32
+471,Birmingham,Wed 13 Jul,0.0,23/06/2022 15:32
+472,London,Thu 14 Jul,0.0,23/06/2022 15:32
+473,Peterborough,Thu 14 Jul,19.0,23/06/2022 15:32
+474,Newport,Thu 14 Jul,0.0,23/06/2022 15:32
+475,Liverpool,Thu 14 Jul,19.0,23/06/2022 15:32
+476,Durham,Thu 14 Jul,12.0,23/06/2022 15:32
+477,Glasgow,Thu 14 Jul,17.0,23/06/2022 15:32
+478,Belfast,Thu 14 Jul,15.0,23/06/2022 15:32
+479,Birmingham,Thu 14 Jul,0.0,23/06/2022 15:32
 London,Wed 29 Jun,0.0,23/06/2022 15:05
 Peterborough,Wed 29 Jun,0.0,23/06/2022 15:05
 Newport,Wed 29 Jun,0.0,23/06/2022 15:05

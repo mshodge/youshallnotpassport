@@ -45,15 +45,18 @@ def post_status(response, proxy, github_action):
     :param response: <string> The string response to post
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
     :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
-    :return: <string> The response of whether the service is online or not
+    :return: <string> The tweet id
     """
 
     api = authenticate_twitter(github_action, proxy)
 
     # Posts status to Twitter
-    api.update_status(response)
+    tweet = api.update_status(response)
+    tweet_id = tweet.id_str
 
     print("Posted update to Twitter")
+
+    return tweet_id
 
 def post_media(proxy, github_action, service):
     """
@@ -64,13 +67,26 @@ def post_media(proxy, github_action, service):
     :return: <string> The response of whether the service is online or not
     """
 
+    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id.md").\
+        text.replace("\n","")
+
     api = authenticate_twitter(github_action, proxy)
 
     # Posts status to Twitter
     media = api.media_upload(filename='out.png')
 
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
-    api.update_status(status=f'The latest {service} slots as of {timestamp}', media_ids=[media.media_id])
+
+    if service == "fast track":
+        message = f"The latest Fast Track appointment slots as of {timestamp}. More may be added whilst the service" \
+                  f"is online. Keep checking yourself if no suitable ones are here."
+    elif service == "premium":
+        message = f"The following locations have Premium appointment slots as of {timestamp}. We are unable to give" \
+                  f"exact number of appointments."
+
+    api.update_status(status=message,
+                      media_ids=[media.media_id],
+                      in_reply_to_status_id=tweetid)
 
     print("Posted update to Twitter")
 
