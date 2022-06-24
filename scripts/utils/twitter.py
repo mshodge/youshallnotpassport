@@ -79,7 +79,7 @@ def post_media(proxy, github_action, service):
 
     if service == "fast track":
         message = f"The latest Fast Track appointment slots as of {timestamp}. More may be added whilst the service" \
-                  f"is online. Keep checking yourself if no suitable ones are here."
+                  f" is online. Keep checking yourself if no suitable ones are here."
     elif service == "premium":
         message = f"The following locations have Premium appointment slots as of {timestamp}. We are unable to give" \
                   f"exact number of appointments."

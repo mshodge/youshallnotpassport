@@ -150,7 +150,6 @@ def make_figure(the_df, numdays):
     days_list = list(range(0, 10))
     days_list2 = list(range(10, numdays))
 
-    sns.set(font="Gills Sans")
     the_df[the_df.eq(0)] = np.nan
     appts = sns.heatmap(the_df, annot=True,
                         cbar=False, cmap="Blues", linewidths=1, linecolor="white",
