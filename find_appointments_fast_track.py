@@ -1,5 +1,6 @@
 import chromedriver_autoinstaller
-from datetime import datetime
+from datetime import datetime, timedelta
+import numpy as np
 import pandas as pd
 import seaborn as sns
 from selenium import webdriver
@@ -17,7 +18,7 @@ chromedriver_autoinstaller.install()
 
 is_proxy = False
 is_github_action = False
-is_twitter = True
+is_twitter = False
 
 
 def get_page(the_url, wait_time=1):
@@ -95,13 +96,18 @@ def clean_dataframe(unclean_df):
     return unclean_df
 
 
-def nice_dataframe(not_nice_df):
+def nice_dataframe(not_nice_df, numdays):
     """
     Makes a nice dataframe
     :param not_nice_df: <pandas.dataframe> The pandas dataframe
+    :param numdays: <int> The number of days forward from today
     :return df: <pandas.dataframe> The pandas dataframe
     """
-    nice_df = pd.DataFrame(columns=not_nice_df.columns,
+
+    base = datetime.today()
+    date_list = [(base + timedelta(days=x)).strftime("%a %-d %b") for x in range(numdays)]
+
+    nice_df = pd.DataFrame(columns=date_list,
                            index=["London", "Peterborough", "Newport", "Liverpool", "Durham", "Glasgow", "Belfast",
                                   "Birmingham"])
 
@@ -135,20 +141,32 @@ def long_dataframe(wide_df):
     return long_df
 
 
-def make_figure(the_df):
+def make_figure(the_df, numdays):
     """
     Makes a seaborn heatmap figure from appointments dataframe
     :param the_df: <pandas.dataframe> The pandas dataframe
+    :param numdays: <int> The number of days forward from today
     """
+    days_list = list(range(0, 10))
+    days_list2 = list(range(10, numdays))
 
+    sns.set(font="Gills Sans")
+    the_df[the_df.eq(0)] = np.nan
     appts = sns.heatmap(the_df, annot=True,
                         cbar=False, cmap="Blues", linewidths=1, linecolor="white",
-                        vmin=0, vmax=30)
-    appts.set_title("The number of Fast Track appointments per location and date")
+                        vmin=0, vmax=30, annot_kws={"fontsize": 8})
+    appts.set_title("The number of Fast Track appointments \n\n")
+
+    for i in range(len(days_list)):
+        appts.text(i + 0.3, -0.1, str(days_list[i]), fontsize=8)
+
+    for i in range(len(days_list2)):
+        appts.text(i + 10.1, -0.1, str(days_list2[i]), fontsize=8)
+
+    appts.text(10, -0.5, "(Days from Today)", fontsize=10)
     appts.figure.tight_layout()
     fig = appts.get_figure()
     fig.savefig("out.png")
-
 
 def get_appointments(the_driver):
     """
@@ -191,9 +209,10 @@ if __name__ == "__main__":
     if driver is not None:
         driver_info = input_information(driver)
         appointments_df = get_appointments(driver_info)
-        nice_appointments_df = nice_dataframe(appointments_df)
+        number_of_days_forward = 28
+        nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
         print(nice_appointments_df)
-        make_figure(nice_appointments_df)
+        make_figure(nice_appointments_df, number_of_days_forward)
         if is_twitter:
             post_media(is_proxy, is_github_action, "fast track")
         long_appointments_df = long_dataframe(nice_appointments_df)

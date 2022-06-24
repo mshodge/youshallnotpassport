@@ -55,7 +55,7 @@ def update_online_status(df_status, github_action):
     df_status.to_csv(file_path)
 
 
-def update_tweet_id(tweet_id):
+def update_tweet_id(github_action, tweet_id):
     """
     Updates md file on GitHub
     :param tweet_id: <string> The original tweet id
