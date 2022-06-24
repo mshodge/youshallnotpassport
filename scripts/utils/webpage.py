@@ -19,6 +19,7 @@ def click_page_element(the_driver, path_value, wait_time, by_what="xpath"):
     :param the_driver: <Selenium.webdriver> The selenium webdriver
     :param path_value: <string> the path value
     :param wait_time: <int> the wait time
+    :param by_what: <string> what you want to select
     """
 
     time.sleep(wait_time)
@@ -36,6 +37,7 @@ def enter_page_element(the_driver, path_value, value_to_enter, wait_time, by_wha
     :param path_value: <string> the path value
     :param value_to_enter: <string> the value to enter
     :param wait_time: <int> the wait time
+    :param by_what: <string> what you want to select
     """
 
     time.sleep(wait_time)
