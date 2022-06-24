@@ -17,8 +17,8 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = False
-is_twitter = False
+is_github_action = True
+is_twitter = True
 
 
 def get_page(the_url, wait_time=1):
