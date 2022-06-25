@@ -39,6 +39,7 @@ def get_page(the_url, wait_time, sleep_time):
     the_driver = webdriver.Chrome(options=options)
 
     while keep_trying:
+        the_driver.get(the_url)
         body = get_body(the_driver)
         time.sleep(wait_time)
         if "Status last updated" in body.text:
