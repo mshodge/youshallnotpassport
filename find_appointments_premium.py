@@ -5,6 +5,7 @@ import pandas as pd
 import seaborn as sns
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 import time
 
@@ -30,8 +31,12 @@ def get_page(the_url, wait_time, sleep_time):
 
     keep_trying = True
 
-    the_driver = webdriver.Chrome()
-    the_driver.get(the_url)
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--window-size=1920,1080')
+    the_driver = webdriver.Chrome(options=options)
 
     while keep_trying:
         body = get_body(the_driver)
