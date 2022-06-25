@@ -82,7 +82,7 @@ def post_media(proxy, github_action, service):
                   f" is online. Keep checking yourself if no suitable ones are here."
     elif service == "premium":
         message = f"The following locations have Premium appointment slots as of {timestamp}. We are unable to give" \
-                  f"exact number of appointments."
+                  f" exact number of appointments."
 
     api.update_status(status=message,
                       media_ids=[media.media_id],

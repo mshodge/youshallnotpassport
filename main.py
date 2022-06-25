@@ -250,7 +250,7 @@ if __name__ == '__main__':
             print('\n\nPremium service status has changed, will post to Twitter!\n')
             tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
             update_tweet_id(is_github_action, tweet_id)
-            # run_selenium_code(workflow_id, is_github_action)
+            run_selenium_code("28968845", is_github_action)
 
         update_online_status(df_status_is, is_github_action)
         update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
