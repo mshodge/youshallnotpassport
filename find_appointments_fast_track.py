@@ -64,20 +64,20 @@ def input_information(the_driver):
     click_page_element(the_driver, '//*[@id="F_Passport_count-row"]/div[4]/div/fieldset/label[1]', 1)
 
     # Applicant details page
-    enter_page_element(the_driver, '//*[@id="F_Applicant1_firstname"]', 'M', 1)
-    enter_page_element(the_driver, '//*[@id="F_Applicant1_lastname"]', 'M', 1)
-    enter_page_element(the_driver, '//*[@id="FD_Applicant1_dob"]', '01', 1)
-    enter_page_element(the_driver, '//*[@id="FM_Applicant1_dob"]', '01', 1)
-    enter_page_element(the_driver, '//*[@id="FY_Applicant1_dob"]', '1990', 1)
-    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 2)
+    enter_page_element(the_driver, '//*[@id="F_Applicant1_firstname"]', 'M', 0)
+    enter_page_element(the_driver, '//*[@id="F_Applicant1_lastname"]', 'M', 0)
+    enter_page_element(the_driver, '//*[@id="FD_Applicant1_dob"]', '01', 0)
+    enter_page_element(the_driver, '//*[@id="FM_Applicant1_dob"]', '01', 0)
+    enter_page_element(the_driver, '//*[@id="FY_Applicant1_dob"]', '1990', 0)
+    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 0)
 
     # Passport before page
-    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_apptype_rb"]', 5)
-    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_redpassport__nosumm"]', 1)
-    click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 1)
+    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_apptype_rb"]', 2)
+    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_redpassport__nosumm"]', 0)
+    click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 0)
 
     # Go to appointments page
-    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 1)
+    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 0)
 
     return the_driver
 
@@ -195,7 +195,7 @@ def get_appointments(the_driver):
             # the_driver.find_element(by=By.CLASS_NAME, value='datetablenext')
             the_driver.find_element(by=By.XPATH, value='//*[@id="Date_Table_Next_6__link"]')
             # click_page_element(the_driver, 'datetablenext', 4, by_what="class")
-            click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 4, by_what="xpath")
+            click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 1, by_what="xpath")
         except NoSuchElementException:
             df_col_order = list(dict.fromkeys(df_col_order))
             df = df.reindex(df_col_order, axis=1)

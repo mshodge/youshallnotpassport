@@ -73,46 +73,46 @@ def input_information(the_driver):
     click_page_element(the_driver, '//*[@id="main-content"]/div/div/a', 0)
 
     # live in UK page
-    click_page_element(the_driver, '//*[@id="is-uk-application-true-label"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="is-uk-application-true-label"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Applicant details page
     enter_page_element(the_driver, '//*[@id="date-of-birth-day"]', '01', 0)
     enter_page_element(the_driver, '//*[@id="date-of-birth-month"]', '01', 0)
     enter_page_element(the_driver, '//*[@id="date-of-birth-year"]', '1990', 0)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Passport before page
-    click_page_element(the_driver, '//*[@id="previous-passport"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="previous-passport"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Lost or stolen
-    click_page_element(the_driver, '//*[@id="passport-lost-false"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="passport-lost-false"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Name changed
-    click_page_element(the_driver, '//*[@id="name-changed-false"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="name-changed-false"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Issued details page
     enter_page_element(the_driver, '//*[@id="passport-issue-day"]', '01', 0)
     enter_page_element(the_driver, '//*[@id="passport-issue-month"]', '01', 0)
     enter_page_element(the_driver, '//*[@id="passport-issue-year"]', '2010', 0)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Damaged
-    click_page_element(the_driver, '//*[@id="damaged-false"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="damaged-false"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Other passports
-    click_page_element(the_driver, '//*[@id="other-passports-false"]', 1)
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="other-passports-false"]', 0)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Go to appointments page
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/form/button', 0)
 
     # Go to appointments page
-    click_page_element(the_driver, '//*[@id="main-content"]/div/div/div/form/button', 1)
+    click_page_element(the_driver, '//*[@id="main-content"]/div/div/div/form/button', 0)
 
     return the_driver
 
@@ -221,11 +221,11 @@ def get_appointments(the_driver):
 
         if start_page:
             the_driver.find_element(by=By.XPATH, value='//*[@id="main-content"]/form/div/div/a')
-            click_page_element(the_driver, '//*[@id="main-content"]/form/div/div/a', 4)
+            click_page_element(the_driver, '//*[@id="main-content"]/form/div/div/a', 2)
         else:
             if the_driver.find_element(by=By.XPATH, value='//*[@id="main-content"]/form/div/div[2]/a').size.get("height") != 0:
                 the_driver.find_element(by=By.XPATH, value='//*[@id="main-content"]/form/div/div[2]/a')
-                click_page_element(the_driver, '//*[@id="main-content"]/form/div/div[2]/a', 4)
+                click_page_element(the_driver, '//*[@id="main-content"]/form/div/div[2]/a', 2)
             else:
                 df_col_order = list(dict.fromkeys(df_col_order))
                 df = df.reindex(df_col_order, axis=1)
@@ -258,7 +258,7 @@ def make_figure(the_df, numdays):
 
 if __name__ == "__main__":
     url = "https://www.passport.service.gov.uk/urgent/"
-    driver = get_page(url, 1, 10)
+    driver = get_page(url, 1, 1)
     if driver is not None:
         driver_info = input_information(driver)
         appointments_df = get_appointments(driver_info)
