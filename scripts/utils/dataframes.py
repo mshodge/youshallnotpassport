@@ -70,5 +70,3 @@ def update_csv(df, github_action, file_path, message):
                      branch=branch,
                      sha=contents.sha)
 
-    # Also, saves to local disk
-    df_data.to_csv(f"/{file_path}")

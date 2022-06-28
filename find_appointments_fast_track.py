@@ -17,7 +17,7 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = True
 
 
@@ -73,11 +73,11 @@ def input_information(the_driver):
 
     # Passport before page
     click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_apptype_rb"]', 2)
-    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_redpassport__nosumm"]', 0)
+    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_redpassport__nosumm"]', 2)
     click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 0)
 
     # Go to appointments page
-    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 0)
+    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 2)
 
     return the_driver
 
