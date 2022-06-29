@@ -176,7 +176,7 @@ def check(proxy, github_action, to_save_csv):
                             f"I will post again when it goes online next." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "False"
+        one_week_online = "Error"
     elif "503" in page_one_text:
         response_one_week = f"One-week Fast Track website has an 503 error ⏸️ ({timestamp_tweet})" \
                             f"\n" \
@@ -184,7 +184,7 @@ def check(proxy, github_action, to_save_csv):
                             f"I will post again when it goes online next." \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "False"
+        one_week_online = "Error"
     else:
         response_one_week = f"One-week Fast Track is now online! ✅ ({timestamp_tweet})" \
                             f"\n" \
