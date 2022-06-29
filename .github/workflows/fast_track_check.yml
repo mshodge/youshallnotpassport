@@ -1,4 +1,4 @@
-name: fasttrack
+name: fasttrackcheck
 
 on:
   repository_dispatch:
