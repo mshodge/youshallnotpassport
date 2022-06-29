@@ -17,7 +17,7 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = True
 
 
@@ -33,7 +33,7 @@ def get_page(the_url, wait_time=1):
 
     while keep_trying:
         options = Options()
-        options.add_argument('--headless')
+        # options.add_argument('--headless')
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
         options.add_argument('--window-size=1920,1080')
