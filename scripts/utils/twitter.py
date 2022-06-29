@@ -145,7 +145,7 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     else:
         one_week_status_symbol = f"FT is offline"
 
-    new_bio = f"Unofficial bot. Runs every minute. Please check http://gov.uk/get-a-passport-urgently before " \
+    new_bio = f"Non-profit bot. Runs every minute. Please check http://gov.uk/get-a-passport-urgently before " \
               f"booking. {premium_status_symbol} {one_week_status_symbol} (updated {timestamp})."
 
     # Posts status to Twitter
