@@ -172,8 +172,11 @@ def online_status_on_last_check_twitter(service, github_action, proxy):
     if service == "fast track":
         if "FT is online" in bio_desc:
             return 'True'
-        else:
+        elif "FT is offline" in bio_desc:
             return 'False'
+        elif "FT is error" in bio_desc:
+            return 'Error'
+
     elif service == "premium":
         if "OP is online" in bio_desc:
             return 'True'
