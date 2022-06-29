@@ -227,10 +227,10 @@ def get_appointments(the_driver):
 def check_diff_in_loc_counts(df):
     df_old = get_csv("data/fast_track_appointments_locations.csv")
     df_diff = df_old.copy()
-    df_diff['count'] = df['count'] - df2['count']
+    df_diff['count'] = df['count'] - df_old['count']
     locs_added = []
     for index, row in df_diff.iterrows():
-        if row['count'] > 3:
+        if row['count'] > 10:
             locs_added.append(row['location'])
 
     return locs_added
@@ -252,6 +252,9 @@ def pipeline(first=True):
         if first is False:
             locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
             if len(locs_added_checked) == 0:
+                time.sleep(5 * 60)  # wait 5 mins before calling again
+                run_selenium_code("29224896", is_github_action)
+                print("No new appointments added, will, check again in 5 mins")
                 return None
         else:
             locs_added_checked = []
