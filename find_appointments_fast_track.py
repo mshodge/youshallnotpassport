@@ -1,17 +1,19 @@
 import chromedriver_autoinstaller
 from datetime import datetime, timedelta
 import numpy as np
+import os
 import pandas as pd
+import requests
 import seaborn as sns
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-
+import sys
 import time
 
-from scripts.utils.twitter import post_media
-from scripts.utils.dataframes import update_csv
+from scripts.utils.twitter import post_media, post_media_update
+from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.webpage import get_body, click_page_element, enter_page_element
 
 chromedriver_autoinstaller.install()
@@ -19,6 +21,26 @@ chromedriver_autoinstaller.install()
 is_proxy = False
 is_github_action = True
 is_twitter = True
+
+
+def run_selenium_code(id, github_action):
+    """
+    Returns value from dataframe
+    :param id: <string> the workflow id for github actions
+    :param github_action: <Boolean> If using github actions or not
+    """
+
+    if github_action:
+        token = os.environ['access_token_github']
+    else:
+        import config.github_credentials as github_credentials
+        token = github_credentials.access_token
+
+    url = f"https://api.github.com/repos/mshodge/youshallnotpassport/actions/workflows/{id}/dispatches"
+    headers = {"Authorization": "bearer " + token}
+    json = {"ref":"main"}
+    r = requests.post(url, headers=headers, json=json)
+    print(r)
 
 
 def get_page(the_url, wait_time=1):
@@ -64,17 +86,17 @@ def input_information(the_driver):
     click_page_element(the_driver, '//*[@id="F_Passport_count-row"]/div[4]/div/fieldset/label[1]', 1)
 
     # Applicant details page
-    enter_page_element(the_driver, '//*[@id="F_Applicant1_firstname"]', 'M', 0)
-    enter_page_element(the_driver, '//*[@id="F_Applicant1_lastname"]', 'M', 0)
-    enter_page_element(the_driver, '//*[@id="FD_Applicant1_dob"]', '01', 0)
-    enter_page_element(the_driver, '//*[@id="FM_Applicant1_dob"]', '01', 0)
-    enter_page_element(the_driver, '//*[@id="FY_Applicant1_dob"]', '1990', 0)
-    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 0)
+    enter_page_element(the_driver, '//*[@id="F_Applicant1_firstname"]', 'M', 1)
+    enter_page_element(the_driver, '//*[@id="F_Applicant1_lastname"]', 'M', 1)
+    enter_page_element(the_driver, '//*[@id="FD_Applicant1_dob"]', '01', 1)
+    enter_page_element(the_driver, '//*[@id="FM_Applicant1_dob"]', '01', 1)
+    enter_page_element(the_driver, '//*[@id="FY_Applicant1_dob"]', '1990', 1)
+    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 1)
 
     # Passport before page
     click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_apptype_rb"]', 2)
-    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_redpassport__nosumm"]', 2)
-    click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 0)
+    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_redpassport__nosumm"]', 4)
+    click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 1)
 
     # Go to appointments page
     click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 2)
@@ -202,7 +224,19 @@ def get_appointments(the_driver):
             return df
 
 
-if __name__ == "__main__":
+def check_diff_in_loc_counts(df):
+    df_old = get_csv("data/fast_track_appointments_locations.csv")
+    df_diff = df_old.copy()
+    df_diff['count'] = df['count'] - df2['count']
+    locs_added = []
+    for index, row in df_diff.iterrows():
+        if row['count'] > 3:
+            locs_added.append(row['location'])
+
+    return locs_added
+
+
+def pipeline(first=True):
     url = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     driver = get_page(url, 1)
     if driver is not None:
@@ -211,10 +245,42 @@ if __name__ == "__main__":
         number_of_days_forward = 28
         nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
         print(nice_appointments_df)
+
+        appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
+        appointments_per_location.columns = ['location', 'count']
+
+        if first is False:
+            locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
+            if len(locs_added_checked) == 0:
+                return None
+        else:
+            locs_added_checked = []
+
         make_figure(nice_appointments_df, number_of_days_forward)
-        if is_twitter:
+
+        # Posts a first graph
+        if is_twitter and first:
             post_media(is_proxy, is_github_action, "fast track")
+
+        # Posts a graph if new appointments have been added
+        if is_twitter and len(locs_added_checked) > 0:
+            post_media_update(is_proxy, is_github_action, locs_added_checked)
+
         long_appointments_df = long_dataframe(nice_appointments_df)
         update_csv(long_appointments_df, is_github_action,
                    "data/fast_track_appointments.csv",
-                   "updating fast track appointment data")
+                   "updating fast track appointment data", replace=False)
+        update_csv(appointments_per_location, is_github_action,
+                   "data/fast_track_appointments_locations.csv",
+                   "updating fast track appointment location data", replace=True)
+        time.sleep(5*60)  # wait 5 mins before calling again
+        run_selenium_code("29224896", is_github_action)
+
+
+if __name__ == "__main__":
+    if sys.argv[1:][0] == 'True':
+        is_first = True
+    else:
+        is_first = False
+
+    pipeline(first=is_first)
