@@ -170,21 +170,11 @@ def check(proxy, github_action, to_save_csv):
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "False"
     elif "is temporarily unavailable" in page_one_text:
-        response_one_week = f"One-week Fast Track website has an error ⏸️ ({timestamp_tweet})" \
-                            f"\n" \
-                            f"\n" \
-                            f"I will post again when it goes online next." \
-                            f"\n" \
-                            f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "False"
+        response_one_week = None
+        one_week_online = None
     elif "503" in page_one_text:
-        response_one_week = f"One-week Fast Track website has an 503 error ⏸️ ({timestamp_tweet})" \
-                            f"\n" \
-                            f"\n" \
-                            f"I will post again when it goes online next." \
-                            f"\n" \
-                            f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
-        one_week_online = "False"
+        response_one_week = None
+        one_week_online = None
     else:
         response_one_week = f"One-week Fast Track is now online! ✅ ({timestamp_tweet})" \
                             f"\n" \
@@ -245,28 +235,30 @@ if __name__ == '__main__':
     response_one_week_check, response_premium_check, premium_online_check, one_week_online_check, df_status_is = \
         check(is_proxy, is_github_action, check_if_save)
 
-    df = read_online_status()
+    if response_one_week_check is not None and response_premium_check is not None:
 
-    if is_twitter:
-        # Now only posts if there has been a status change
-        one_week_online_check_last = online_status_on_last_check_twitter("fast track", is_github_action, is_proxy)
-        premium_online_check_last = online_status_on_last_check_twitter("premium", is_github_action,
-                                                                        is_proxy)
+        df = read_online_status()
 
-        print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n')
-        print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n')
+        if is_twitter:
+            # Now only posts if there has been a status change
+            one_week_online_check_last = online_status_on_last_check_twitter("fast track", is_github_action, is_proxy)
+            premium_online_check_last = online_status_on_last_check_twitter("premium", is_github_action,
+                                                                            is_proxy)
 
-        if one_week_online_check != one_week_online_check_last:
-            print('\n\nOne week service status has changed, will post to Twitter!\n')
-            tweet_id = post_status(response_one_week_check, is_proxy, is_github_action)
-            update_tweet_id(is_github_action, tweet_id)
-            run_selenium_code("28775018", is_github_action)
+            print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n')
+            print(f'\n\nNew premium status is {premium_online_check}, old was {premium_online_check_last}\n')
 
-        if premium_online_check != premium_online_check_last:
-            print('\n\nPremium service status has changed, will post to Twitter!\n')
-            tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
-            update_tweet_id(is_github_action, tweet_id)
-            run_selenium_code("28968845", is_github_action)
+            if one_week_online_check != one_week_online_check_last:
+                print('\n\nOne week service status has changed, will post to Twitter!\n')
+                tweet_id = post_status(response_one_week_check, is_proxy, is_github_action)
+                update_tweet_id(is_github_action, tweet_id)
+                run_selenium_code("28775018", is_github_action)
 
-        update_online_status(df_status_is, is_github_action)
-        update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
+            if premium_online_check != premium_online_check_last:
+                print('\n\nPremium service status has changed, will post to Twitter!\n')
+                tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
+                update_tweet_id(is_github_action, tweet_id)
+                run_selenium_code("28968845", is_github_action)
+
+            update_online_status(df_status_is, is_github_action)
+            update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
