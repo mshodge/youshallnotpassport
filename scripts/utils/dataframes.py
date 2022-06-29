@@ -30,13 +30,14 @@ def df_to_csv_string(df_to_convert):
     return df_string
 
 
-def update_csv(df, github_action, file_path, message):
+def update_csv(df, github_action, file_path, message, replace):
     """
     Updates csv file on GitHub and local
     :param df: <DataFrame> The DataFrame from the current check
     :param github_action: <Boolean> Whether a GitHub action or not, for auth
     :param file_path: <string> The path to upload the file to
     :param message: <string> The post message
+    :param replace: <Boolean> replace file or not
     :return: <string> The response of whether the service is online or not
     """
 
@@ -47,11 +48,20 @@ def update_csv(df, github_action, file_path, message):
     repo = "youshallnotpassport"
     branch = "main"
     file_path = file_path
-    csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
 
-    df_data = pd.read_csv(csv_url)
-    df_data = pd.concat([df_data, df], ignore_index=True)
-    df_string = df_to_csv_string(df_data)
+    if replace:
+        csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
+
+        df_data = pd.read_csv(csv_url)
+        df_data = pd.concat([df_data, df], ignore_index=True)
+        df_string = df_to_csv_string(df_data)
+
+    else:
+        csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
+        df_data = pd.read_csv(csv_url)
+        df_data['count'] = df['count']
+        df_string = df_to_csv_string(df_data)
+
 
     if github_action:
         token = os.environ['access_token_github']
@@ -69,4 +79,27 @@ def update_csv(df, github_action, file_path, message):
                      content=df_string,
                      branch=branch,
                      sha=contents.sha)
+
+
+
+def get_csv(file_path):
+    """
+    Updates csv file on GitHub and local
+    :param df: <DataFrame> The DataFrame from the current check
+    :param github_action: <Boolean> Whether a GitHub action or not, for auth
+    :param file_path: <string> The path to upload the file to
+    :return: <string> The response of whether the service is online or not
+    """
+
+    # Gets current csv file from open repo
+    org = "mshodge"
+    repo = "youshallnotpassport"
+    branch = "main"
+    file_path = file_path
+
+    csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
+
+    df = pd.read_csv(csv_url)
+    return df
+
 
