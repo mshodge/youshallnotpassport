@@ -237,6 +237,7 @@ def check_diff_in_loc_counts(df):
 
 
 def pipeline(first=True):
+    print(first)
     url = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     driver = get_page(url, 1)
     if driver is not None:
