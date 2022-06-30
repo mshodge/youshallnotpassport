@@ -51,15 +51,14 @@ def update_csv(df, github_action, file_path, message, replace):
 
     if replace:
         csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
+        df_data = pd.read_csv(csv_url)
+        df_data['count'] = df['count']
+        df_string = df_to_csv_string(df_data)
+    else:
+        csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
 
         df_data = pd.read_csv(csv_url)
         df_data = pd.concat([df_data, df], ignore_index=True)
-        df_string = df_to_csv_string(df_data)
-
-    else:
-        csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
-        df_data = pd.read_csv(csv_url)
-        df_data['count'] = df['count']
         df_string = df_to_csv_string(df_data)
 
 
