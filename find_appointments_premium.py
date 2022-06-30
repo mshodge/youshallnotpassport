@@ -268,6 +268,6 @@ if __name__ == "__main__":
         make_figure(nice_appointments_df, number_of_days_forward)
         if is_twitter:
             post_media(is_proxy, is_github_action, "premium")
-        long_appointments_df = long_dataframe(appointments_df)
+        long_appointments_df = long_dataframe(nice_appointments_df)
         update_csv(long_appointments_df, is_github_action, "data/premium_appointments.csv",
                    "updating premium appointment data", replace=False)
