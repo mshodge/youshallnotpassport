@@ -99,7 +99,7 @@ def input_information(the_driver):
     click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 1)
 
     # Go to appointments page
-    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 2)
+    click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 3)
 
     return the_driver
 
