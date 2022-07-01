@@ -277,7 +277,7 @@ def pipeline(first=True):
         update_csv(appointments_per_location, is_github_action,
                    "data/fast_track_appointments_locations.csv",
                    "updating fast track appointment location data", replace=True)
-        # time.sleep(5*60)  # wait 5 mins before calling again
+        time.sleep(2*60)  # wait 2 mins before calling again
         run_selenium_code("29224896", is_github_action)
 
 
