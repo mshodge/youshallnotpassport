@@ -94,8 +94,7 @@ def input_information(the_driver):
     click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 1)
 
     # Passport before page
-    click_page_element(the_driver, '//*[@id="FLR_0_Applicant1_apptype_rb"]', 2)
-    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_redpassport__nosumm"]', 4)
+    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_apptype_rb"]', 2)
     click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 1)
 
     # Go to appointments page
