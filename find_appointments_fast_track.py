@@ -91,16 +91,21 @@ def input_information(the_driver):
     enter_page_element(the_driver, '//*[@id="FD_Applicant1_dob"]', '01', 1)
     enter_page_element(the_driver, '//*[@id="FM_Applicant1_dob"]', '01', 1)
     enter_page_element(the_driver, '//*[@id="FY_Applicant1_dob"]', '1990', 1)
-    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 1)
+    click_page_element(the_driver, '//*[@id="BTB_BB_Next"]', 2)
 
     # Passport before page
-    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_apptype_rb"]', 3)
+    click_page_element(the_driver, '//*[@id="FLR_1_Applicant1_apptype_rb"]', 2)
     click_page_element(the_driver, '//*[@id="BTB_BA_Bnconfirmapptypes__pca"]', 1)
 
     # Go to appointments page
     click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 3)
 
-    return the_driver
+    try:
+        # Go to appointments page
+        click_page_element(the_driver, '//*[@id="BTB_BA_Bn_select_service__pca"]', 3)
+        return the_driver
+    except NoSuchElementException:
+        return the_driver
 
 
 def clean_dataframe(unclean_df):
