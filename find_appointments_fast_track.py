@@ -55,7 +55,8 @@ def get_page(the_url, wait_time=1):
 
     while keep_trying:
         options = Options()
-        options.add_argument('--headless')
+        if is_github_action:
+            options.add_argument('--headless')
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
         options.add_argument('--window-size=1920,1080')
@@ -145,8 +146,12 @@ def nice_dataframe(not_nice_df, numdays):
                 nice_df.at[location, col] = number_of_appts
 
     nice_df = nice_df.fillna(0)
-    nice_df = nice_df.astype(float)
-    return nice_df
+    try:
+        nice_df = nice_df.astype(float)
+        return nice_df
+    except ValueError:
+        return None
+
 
 
 def long_dataframe(wide_df):
@@ -249,6 +254,11 @@ def pipeline(first=True):
         appointments_df = get_appointments(driver_info)
         number_of_days_forward = 28
         nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
+        if nice_appointments_df is None:
+            run_selenium_code("29224896", is_github_action)
+            print("Error. Will try again.")
+            return None
+
         print(nice_appointments_df)
 
         appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
