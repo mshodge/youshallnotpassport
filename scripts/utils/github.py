@@ -55,10 +55,11 @@ def update_online_status(df_status, github_action):
     df_status.to_csv(file_path)
 
 
-def update_tweet_id(github_action, tweet_id):
+def update_tweet_id(github_action, tweet_id, service):
     """
     Updates md file on GitHub
     :param tweet_id: <string> The original tweet id
+    :param service: <string> The service
     """
 
     print("Updating online status csv file both locally and on GitHub")
@@ -67,7 +68,10 @@ def update_tweet_id(github_action, tweet_id):
     org = "mshodge"
     repo = "youshallnotpassport"
     branch = "main"
-    file_path = "data/tweet_id.md"
+    if service == 'fast track':
+        file_path = "data/tweet_id_ft.md"
+    elif service == 'premium':
+        file_path = "data/tweet_id_pr.md"
 
     if github_action:
         token = os.environ['access_token_github']
