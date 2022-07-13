@@ -99,7 +99,7 @@ def post_media_update(proxy, github_action, locs_added_checked):
     :return: <string> The response of whether the service is online or not
     """
 
-    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id.md").\
+    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
         text.replace("\n","")
 
     api = authenticate_twitter(github_action, proxy)
