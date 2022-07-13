@@ -71,7 +71,7 @@ def update_tweet_id(github_action, tweet_id, service):
     if service == 'fast track':
         file_path = "data/tweet_id_ft.md"
     elif service == 'premium':
-        file_path = "data/tweet_id_pr.md"
+        file_path = "data/tweet_id_op.md"
 
     if github_action:
         token = os.environ['access_token_github']
