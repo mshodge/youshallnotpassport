@@ -165,9 +165,10 @@ def check(proxy, github_action, to_save_csv):
         response_one_week = f"One-week Fast Track is now offline ❌ ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"I will post again when it goes online next." \
+                            f"I will post again when it goes online next. Have some feedback, or got an appointment? " \
+                            f"Please fill in:" \
                             f"\n" \
-                            f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
+                            f"https://forms.gle/o1hY5DzWy1thfXwV7"
         one_week_online = "False"
     elif "is temporarily unavailable" in page_one_text:
         response_one_week = None
@@ -192,9 +193,10 @@ def check(proxy, github_action, to_save_csv):
         response_premium = f"Same day Premium service is now offline ❌ ({timestamp_tweet})" \
                            f"\n" \
                            f"\n"\
-                           f"I will post again when it goes online next." \
+                           f"I will post again when it goes online next. Have some feedback, or got an appointment? " \
+                           f"Please fill in:" \
                            f"\n" \
-                           f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
+                           f"https://forms.gle/o1hY5DzWy1thfXwV7"
         premium_online = "False"
     else:
         response_premium = f"Same day Premium service is now online! ✅ ({timestamp_tweet})" \
