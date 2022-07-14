@@ -67,7 +67,12 @@ def post_media(proxy, github_action, service):
     :return: <string> The response of whether the service is online or not
     """
 
-    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id.md").\
+    if service == 'fast track':
+        url = "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md"
+    elif service == 'premium':
+        url = "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_op.md"
+
+    tweetid = requests.get(url).\
         text.replace("\n","")
 
     api = authenticate_twitter(github_action, proxy)
