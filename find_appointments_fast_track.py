@@ -115,10 +115,15 @@ def clean_dataframe(unclean_df):
     :param unclean_df: <pandas.dataframe> The pandas dataframe
     """
 
-    if sum(c.isdigit() for c in unclean_df.columns[0]) == 2:
-        unclean_df = unclean_df.rename(columns=lambda x: x[-9:])
-    else:
-        unclean_df = unclean_df.rename(columns=lambda x: x[-10:])
+    clean_col_names = []
+
+    for cols in unclean_df.columns:
+        if sum(c.isdigit() for c in cols) == 2:
+            clean_col_names.append(cols[-9:])
+        else:
+            clean_col_names.append(cols[-10:])
+
+    unclean_df.columns = clean_col_names
     unclean_df = unclean_df.rename(columns=lambda x: x.replace("y", ""))
     unclean_df = unclean_df.replace({"appointments": ""}, regex=True)
     unclean_df = unclean_df.replace({"appointment": ""}, regex=True)
