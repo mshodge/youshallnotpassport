@@ -116,7 +116,7 @@ def post_media_update(proxy, github_action, locs_added_checked):
 
     locations = ' and '.join(locs_added_checked)
 
-    message = f"New appointments have just been added for {locations}!."
+    message = f"New appointments have just been added for {locations}!"
 
     api.update_status(status=message,
                       media_ids=[media.media_id],
