@@ -258,7 +258,13 @@ def pipeline(first=True):
     url = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     driver = get_page(url, 1)
     if driver is not None:
-        driver_info = input_information(driver)
+        try:
+            driver_info = input_information(driver)
+        except NoSuchElementException:
+            run_selenium_code("29224896", is_github_action)
+            print("Error. Will try again.")
+            return None
+
         appointments_df = get_appointments(driver_info)
         number_of_days_forward = 28
         nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
