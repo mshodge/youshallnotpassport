@@ -19,7 +19,7 @@ from scripts.utils.webpage import get_body, click_page_element, enter_page_eleme
 chromedriver_autoinstaller.install()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = True
 
 
@@ -68,7 +68,7 @@ def get_page(the_url, wait_time=1):
         if "System busy" in body.text:
             print(f"System Busy, will try again in {wait_time} seconds")
             time.sleep(wait_time)
-        if "service is busy" in body.text:
+        elif "service is busy" in body.text:
             print(f"System Busy, will try again in {wait_time} seconds")
             time.sleep(wait_time)
         elif "no available appointments" in body.text:
