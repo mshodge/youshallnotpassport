@@ -280,48 +280,48 @@ def pipeline(first=True):
             #//TODO: If first time seeing this, update appointments csv on GitHub and add in a tweet post to
             # say appointments have run out
             return None
-
-        number_of_days_forward = 28
-        nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
-        if nice_appointments_df is None:
-            run_selenium_code("29224896", is_github_action)
-            print("Error. Will try again.")
-            return None
-
-        print(nice_appointments_df)
-
-        appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
-        appointments_per_location.columns = ['location', 'count']
-
-        if first is False:
-            locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
-            if len(locs_added_checked) == 0:
-                # time.sleep(5 * 60)  # wait 5 mins before calling again
-                run_selenium_code("29224896", is_github_action)
-                print("No new appointments added, will, check again in 5 mins")
-                return None
         else:
-            locs_added_checked = []
+            number_of_days_forward = 28
+            nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
+            if nice_appointments_df is None:
+                run_selenium_code("29224896", is_github_action)
+                print("Error. Will try again.")
+                return None
 
-        make_figure(nice_appointments_df, number_of_days_forward)
+            print(nice_appointments_df)
 
-        # Posts a first graph
-        if is_twitter and first:
-            post_media(is_proxy, is_github_action, "fast track")
+            appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
+            appointments_per_location.columns = ['location', 'count']
 
-        # Posts a graph if new appointments have been added
-        if is_twitter and len(locs_added_checked) > 0:
-            post_media_update(is_proxy, is_github_action, locs_added_checked)
+            if first is False:
+                locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
+                if len(locs_added_checked) == 0:
+                    # time.sleep(5 * 60)  # wait 5 mins before calling again
+                    run_selenium_code("29224896", is_github_action)
+                    print("No new appointments added, will, check again in 5 mins")
+                    return None
+            else:
+                locs_added_checked = []
 
-        long_appointments_df = long_dataframe(nice_appointments_df)
-        update_csv(long_appointments_df, is_github_action,
-                   "data/fast_track_appointments.csv",
-                   "updating fast track appointment data", replace=False)
-        update_csv(appointments_per_location, is_github_action,
-                   "data/fast_track_appointments_locations.csv",
-                   "updating fast track appointment location data", replace=True)
-        time.sleep(2*60)  # wait 2 mins before calling again
-        run_selenium_code("29224896", is_github_action)
+            make_figure(nice_appointments_df, number_of_days_forward)
+
+            # Posts a first graph
+            if is_twitter and first:
+                post_media(is_proxy, is_github_action, "fast track")
+
+            # Posts a graph if new appointments have been added
+            if is_twitter and len(locs_added_checked) > 0:
+                post_media_update(is_proxy, is_github_action, locs_added_checked)
+
+            long_appointments_df = long_dataframe(nice_appointments_df)
+            update_csv(long_appointments_df, is_github_action,
+                       "data/fast_track_appointments.csv",
+                       "updating fast track appointment data", replace=False)
+            update_csv(appointments_per_location, is_github_action,
+                       "data/fast_track_appointments_locations.csv",
+                       "updating fast track appointment location data", replace=True)
+            time.sleep(2*60)  # wait 2 mins before calling again
+            run_selenium_code("29224896", is_github_action)
 
 
 if __name__ == "__main__":
