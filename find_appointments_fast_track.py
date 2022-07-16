@@ -68,7 +68,7 @@ def get_page(the_url, wait_time=1):
         if "System busy" in body.text:
             print(f"System Busy, will try again in {wait_time} seconds")
             time.sleep(wait_time)
-        elif "service is busy" in body.text:
+        elif "Error" in body.text:
             print(f"System Busy, will try again in {wait_time} seconds")
             time.sleep(wait_time)
         elif "no available appointments" in body.text:
@@ -219,29 +219,32 @@ def get_appointments(the_driver):
     for i in range(0, 6):
         time.sleep(2)
         html = the_driver.page_source
-        table = pd.read_html(html)
-        df_tmp = table[0]
-        df_tmp = clean_dataframe(df_tmp)
-        print(df_tmp)
-
-        if i != 0:
-            cols_to_use = df_tmp.columns.difference(df.columns)
-            df = pd.merge(df, df_tmp[cols_to_use], left_index=True, right_index=True, how='outer')
-            df_col_order += list(df_tmp.columns)
+        if "There are no appointments available" in html:
+            return None
         else:
-            df = df_tmp
-            df_col_order = list(df_tmp.columns)
-        time.sleep(1)
+            table = pd.read_html(html)
+            df_tmp = table[0]
+            df_tmp = clean_dataframe(df_tmp)
+            print(df_tmp)
 
-        try:
-            # the_driver.find_element(by=By.CLASS_NAME, value='datetablenext')
-            the_driver.find_element(by=By.XPATH, value='//*[@id="Date_Table_Next_6__link"]')
-            # click_page_element(the_driver, 'datetablenext', 4, by_what="class")
-            click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 1, by_what="xpath")
-        except NoSuchElementException:
-            df_col_order = list(dict.fromkeys(df_col_order))
-            df = df.reindex(df_col_order, axis=1)
-            return df
+            if i != 0:
+                cols_to_use = df_tmp.columns.difference(df.columns)
+                df = pd.merge(df, df_tmp[cols_to_use], left_index=True, right_index=True, how='outer')
+                df_col_order += list(df_tmp.columns)
+            else:
+                df = df_tmp
+                df_col_order = list(df_tmp.columns)
+            time.sleep(1)
+
+            try:
+                # the_driver.find_element(by=By.CLASS_NAME, value='datetablenext')
+                the_driver.find_element(by=By.XPATH, value='//*[@id="Date_Table_Next_6__link"]')
+                # click_page_element(the_driver, 'datetablenext', 4, by_what="class")
+                click_page_element(the_driver, '//*[@id="Date_Table_Next_6__link"]', 1, by_what="xpath")
+            except NoSuchElementException:
+                df_col_order = list(dict.fromkeys(df_col_order))
+                df = df.reindex(df_col_order, axis=1)
+                return df
 
 
 def check_diff_in_loc_counts(df):
@@ -268,7 +271,13 @@ def pipeline(first=True):
             print("Error. Will try again.")
             return None
 
+
         appointments_df = get_appointments(driver_info)
+        if appointments_df == None:
+            run_selenium_code("29224896", is_github_action)
+            print("No appointments at the moment.")
+            return None
+
         number_of_days_forward = 28
         nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
         if nice_appointments_df is None:
