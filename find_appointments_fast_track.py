@@ -273,9 +273,12 @@ def pipeline(first=True):
 
 
         appointments_df = get_appointments(driver_info)
+
         if appointments_df == None:
             run_selenium_code("29224896", is_github_action)
             print("No appointments at the moment.")
+            #//TODO: If first time seeing this, update appointments csv on GitHub and add in a tweet post to
+            # say appointments have run out
             return None
 
         number_of_days_forward = 28
