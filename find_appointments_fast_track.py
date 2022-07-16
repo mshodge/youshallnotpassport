@@ -68,6 +68,9 @@ def get_page(the_url, wait_time=1):
         if "System busy" in body.text:
             print(f"System Busy, will try again in {wait_time} seconds")
             time.sleep(wait_time)
+        if "service is busy" in body.text:
+            print(f"System Busy, will try again in {wait_time} seconds")
+            time.sleep(wait_time)
         elif "no available appointments" in body.text:
             print("Service is offline. Please try again when it's online.")
             return None
