@@ -163,7 +163,10 @@ def nice_dataframe(not_nice_df, numdays):
     except ValueError:
         return None
 
-
+#
+# def check_if_no_apps_before():
+#     no_app_check = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/no_apps.md").\
+#         text.replace("\n","")
 
 def long_dataframe(wide_df):
     """
@@ -208,6 +211,8 @@ def make_figure(the_df, numdays):
     appts.figure.tight_layout()
     fig = appts.get_figure()
     fig.savefig("out.png")
+
+
 
 def get_appointments(the_driver):
     """
@@ -293,6 +298,10 @@ def pipeline(first=True):
             appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
             appointments_per_location.columns = ['location', 'count']
 
+            update_csv(appointments_per_location, is_github_action,
+                       "data/fast_track_appointments_locations.csv",
+                       "updating fast track appointment location data", replace=True)
+
             if first is False:
                 locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
                 if len(locs_added_checked) == 0:
@@ -302,10 +311,6 @@ def pipeline(first=True):
                     return None
             else:
                 locs_added_checked = []
-
-            update_csv(appointments_per_location, is_github_action,
-                       "data/fast_track_appointments_locations.csv",
-                       "updating fast track appointment location data", replace=True)
 
             make_figure(nice_appointments_df, number_of_days_forward)
 
