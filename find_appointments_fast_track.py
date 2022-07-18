@@ -298,10 +298,14 @@ def pipeline(first=True):
                 if len(locs_added_checked) == 0:
                     # time.sleep(5 * 60)  # wait 5 mins before calling again
                     run_selenium_code("29224896", is_github_action)
-                    print("No new appointments added, will, check again in 5 mins")
+                    print("No new bulk appointments added, will check again in 5 mins")
                     return None
             else:
                 locs_added_checked = []
+
+            update_csv(appointments_per_location, is_github_action,
+                       "data/fast_track_appointments_locations.csv",
+                       "updating fast track appointment location data", replace=True)
 
             make_figure(nice_appointments_df, number_of_days_forward)
 
@@ -317,10 +321,7 @@ def pipeline(first=True):
             update_csv(long_appointments_df, is_github_action,
                        "data/fast_track_appointments.csv",
                        "updating fast track appointment data", replace=False)
-            update_csv(appointments_per_location, is_github_action,
-                       "data/fast_track_appointments_locations.csv",
-                       "updating fast track appointment location data", replace=True)
-            time.sleep(2*60)  # wait 2 mins before calling again
+            time.sleep(4*60)  # wait 4 mins before calling again
             run_selenium_code("29224896", is_github_action)
 
 
