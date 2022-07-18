@@ -121,7 +121,7 @@ def update_no_app(github_action, todays_date, are_no_apps):
     content_string = f"{todays_date} {are_no_apps}"
 
     repo.update_file(path=file_path,
-                     message="updating online status",
+                     message="updating no app status",
                      content=content_string,
                      branch=branch,
                      sha=contents.sha)
