@@ -187,3 +187,89 @@ def online_status_on_last_check_twitter(service, github_action, proxy):
             return 'True'
         else:
             return 'False'
+
+
+def post_media_update(proxy, github_action, locs_added_checked):
+    """
+    Posts response to Twitter
+    :param proxy: <Boolean> Whether to use a proxy or not, default is False
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :param locs_added_checked: <list> Locations added
+    :return: <string> The response of whether the service is online or not
+    """
+
+    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
+        text.replace("\n","")
+
+    api = authenticate_twitter(github_action, proxy)
+
+    # Posts status to Twitter
+    media = api.media_upload(filename='out.png')
+
+    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
+
+    locations = ' and '.join(locs_added_checked)
+
+    message = f"New appointments have just been added for {locations}!"
+
+    api.update_status(status=message,
+                      media_ids=[media.media_id],
+                      in_reply_to_status_id=tweetid)
+
+    print("Posted update to Twitter")
+
+def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
+    """
+    Update Twitter Bio
+    :param github_action: <Boolean> Whether a GitHub action or not, for auth
+    :param proxy: <Boolean> Whether using a proxy or not
+    :param one_week_status: <string> The status of the one week service
+    :param premium_status: <string> The status of the premium service
+    """
+    timestamp = get_timestamp(github_action, timestamp_string_format='%H:%M')
+
+    api = authenticate_twitter(github_action, proxy)
+
+    if premium_status == "Error":
+        premium_status_symbol = f"OP ️is error,"
+    elif premium_status == "True":
+        premium_status_symbol = f"OP is online,"
+    else:
+        premium_status_symbol = f"OP is offline,"
+
+    if one_week_status == "Error":
+        one_week_status_symbol = f"FT is error"
+    elif one_week_status == "True":
+        one_week_status_symbol = f"FT is online"
+    else:
+        one_week_status_symbol = f"FT is offline"
+
+    new_bio = f"Non-profit bot. Runs every minute. Please check http://gov.uk/get-a-passport-urgently before " \
+              f"booking. {premium_status_symbol} {one_week_status_symbol} (updated {timestamp})."
+
+    # Posts status to Twitter
+    api.update_profile(description=new_bio)
+
+    print("Updated bio on Twitter")
+
+
+def post_status_update(proxy, github_action):
+    """
+    Posts response to Twitter
+    :param proxy: <Boolean> Whether to use a proxy or not, default is False
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :param locs_added_checked: <list> Locations added
+    :return: <string> The response of whether the service is online or not
+    """
+
+    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
+        text.replace("\n","")
+
+    api = authenticate_twitter(github_action, proxy)
+
+    message = f"No appointments available at the moment. The bot will keep checking and post when " \
+              f"appointments are added."
+
+    api.update_status(status=message, in_reply_to_status_id=tweetid)
+
+    print("Posted update to Twitter")

@@ -1,5 +1,5 @@
 import chromedriver_autoinstaller
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import numpy as np
 import os
 import pandas as pd
@@ -12,9 +12,10 @@ from selenium.webdriver.chrome.options import Options
 import sys
 import time
 
-from scripts.utils.twitter import post_media, post_media_update
+from scripts.utils.twitter import post_media, post_media_update, post_status_update
 from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.webpage import get_body, click_page_element, enter_page_element
+from scripts.utils.github import update_no_app
 
 chromedriver_autoinstaller.install()
 
@@ -163,10 +164,14 @@ def nice_dataframe(not_nice_df, numdays):
     except ValueError:
         return None
 
-#
-# def check_if_no_apps_before():
-#     no_app_check = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/no_apps.md").\
-#         text.replace("\n","")
+
+def check_if_no_apps_before():
+    no_app_check = requests.get(
+        "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/no_apps.md").text\
+        .replace("\n", "").split(" ")
+    no_app_check_date = no_app_check[0]
+    no_app_check_result = no_app_check[1]
+    return no_app_check_date, no_app_check_result
 
 def long_dataframe(wide_df):
     """
@@ -279,13 +284,25 @@ def pipeline(first=True):
 
         appointments_df = get_appointments(driver_info)
 
+        today = date.today()
+        todays_date_is = today.strftime("%d/%m/%Y")
+
         if appointments_df is None:
             run_selenium_code("29224896", is_github_action)
             print("No appointments at the moment.")
-            #//TODO: If first time seeing this, update appointments csv on GitHub and add in a tweet post to
+            date_checked, result_checked = check_if_no_apps_before()
+
+            if date_checked != todays_date_is:
+                post_status_update(is_proxy, is_github_action)
+                update_no_app(is_github_action, todays_date_is, "True")
+            else:
+                if result_checked != 'False':
+                    post_status_update(is_proxy, is_github_action)
+                    update_no_app(is_github_action, todays_date_is, "True")
             # say appointments have run out
             return None
         else:
+            update_no_app(is_github_action, todays_date_is, "False")
             number_of_days_forward = 28
             nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
             if nice_appointments_df is None:
