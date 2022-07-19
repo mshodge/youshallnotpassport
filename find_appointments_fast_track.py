@@ -302,7 +302,6 @@ def pipeline(first=True):
             # say appointments have run out
             return None
         else:
-            update_no_app(is_github_action, todays_date_is, "False")
             number_of_days_forward = 28
             nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
             if nice_appointments_df is None:
@@ -334,10 +333,12 @@ def pipeline(first=True):
             # Posts a first graph
             if is_twitter and first:
                 post_media(is_proxy, is_github_action, "fast track")
+                update_no_app(is_github_action, todays_date_is, "False")
 
             # Posts a graph if new appointments have been added
             if is_twitter and len(locs_added_checked) > 0:
                 post_media_update(is_proxy, is_github_action, locs_added_checked)
+                update_no_app(is_github_action, todays_date_is, "False")
 
             long_appointments_df = long_dataframe(nice_appointments_df)
             update_csv(long_appointments_df, is_github_action,
