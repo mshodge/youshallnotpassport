@@ -262,13 +262,15 @@ def post_status_update(proxy, github_action):
     :return: <string> The response of whether the service is online or not
     """
 
+    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
+
     tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
         text.replace("\n","")
 
     api = authenticate_twitter(github_action, proxy)
 
     message = f"No appointments available at the moment. The bot will keep checking and post when " \
-              f"appointments are added."
+              f"appointments are added ({timestamp})."
 
     api.update_status(status=message, in_reply_to_status_id=tweetid)
 
