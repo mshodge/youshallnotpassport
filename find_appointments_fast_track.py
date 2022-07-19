@@ -296,7 +296,7 @@ def pipeline(first=True):
                 post_status_update(is_proxy, is_github_action)
                 update_no_app(is_github_action, todays_date_is, "True")
             else:
-                if result_checked != 'False':
+                if result_checked == 'False':
                     post_status_update(is_proxy, is_github_action)
                     update_no_app(is_github_action, todays_date_is, "True")
             # say appointments have run out
