@@ -288,8 +288,8 @@ def pipeline(first=True):
         todays_date_is = today.strftime("%d/%m/%Y")
 
         if appointments_df is None:
-            run_selenium_code("29224896", is_github_action)
             print("No appointments at the moment.")
+
             date_checked, result_checked = check_if_no_apps_before()
 
             if date_checked != todays_date_is:
@@ -300,13 +300,16 @@ def pipeline(first=True):
                     post_status_update(is_proxy, is_github_action)
                     update_no_app(is_github_action, todays_date_is, "True")
             # say appointments have run out
+            time.sleep(4 * 60)  # wait 4 mins before calling again
+            run_selenium_code("29224896", is_github_action)
             return None
         else:
             number_of_days_forward = 28
             nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
             if nice_appointments_df is None:
-                run_selenium_code("29224896", is_github_action)
                 print("Error. Will try again.")
+                time.sleep(4 * 60)  # wait 4 mins before calling again
+                run_selenium_code("29224896", is_github_action)
                 return None
 
             print(nice_appointments_df)
@@ -322,8 +325,9 @@ def pipeline(first=True):
                 locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
                 if len(locs_added_checked) == 0:
                     # time.sleep(5 * 60)  # wait 5 mins before calling again
-                    run_selenium_code("29224896", is_github_action)
                     print("No new bulk appointments added, will check again in 5 mins")
+                    time.sleep(4 * 60)  # wait 4 mins before calling again
+                    run_selenium_code("29224896", is_github_action)
                     return None
             else:
                 locs_added_checked = []
