@@ -1,10 +1,10 @@
-Hello 👋, my name is **Michael**. I run [@ukpassportcheck](twitter.com/ukpassportcheck)
+Hello 👋, my name is **Michael**. I run [@ukpassportcheck](www.twitter.com/ukpassportcheck)
 
 <img src="img/me.jpeg" height=400>
 
 > Me and our eldest
 
-I created [@ukpassportcheck](twitter.com/ukpassportcheck) at the start of May 2022. I wanted to use this space to let you know why I created the account and the impact it has had.
+I created [@ukpassportcheck](www.twitter.com/ukpassportcheck) at the start of May 2022. I wanted to use this space to let you know why I created the account and the impact it has had.
 
 A little about me first. I am 33, live in Cardiff with my wife and our two boys. I try and teach our eldest, who is almost four, the most important thing in life is to leave a positive impact on the planet. We often go litter-picking outside the shops opposite our house. There is a barbers there, and they often give him a sweet or two for his efforts. 
 
