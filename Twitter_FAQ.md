@@ -18,6 +18,8 @@ The UK Government Official website on getting an urgent passport.</a>
 <blockquote>
 The bot checks the Premium and Fast Track websites every minute. If the websites 
 have a status change (online to offline, or offline to online) the bot will post a tweet.
+The bot then posts the appointments table it sees. The bot keeps checking, and if more
+appointments are added it will post again to Twitter.
 <br><br>
 <p align="center">
   <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/youshallnotpass.png" alt="Process diagram"/>
@@ -62,43 +64,6 @@ No, I do not book for other people.
 </blockquote>
 <br><br>
 </details>
-
-<details>
-<summary>I have X number of days until I travel. What shall I do?
-</summary>
-<br>
-<blockquote>
-This is just my advice and so please use your own judgement.
-<br><br>
-<b><u>If under 2 weeks</u></b><br>
-If you can use the Premium Service you may be able to get an appointment in time.
-However, it is hard to get Premium appointments at the moment.
-Fast Track is unlikely as it takes a week from the appointment to receive the passport.
-However, sometimes same week appointments do come up.
-Another option is to contact the
-<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> 
-to get an emergency appointment as you are within 2 weeks of travel.
-<br><br>
-<b><u>If 2-6 weeks</u></b><br>
-It might be best to book a Fast Track appointment (released up to 3 weeks in advance). 
-Although closer to 6 weeks you are the more likely it is you will get your passport back in time
-using the standard service. If you fall within 2 weeks of travel you can contact the
-<a href="https://www.gov.uk/passport-advice-line">passport advice line</a> to ask for a Fast Track upgrade.
-<br><br>
-<b><u>If 6-10 weeks</u></b><br>
-There is no real advice or perfect option for this time-frame I'm afraid. The closer to
-10 weeks you are the more likely it is you will get your passport back in time
-using the standard service. If you fall within 2 weeks of travel you can contact the
-<a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
-<br><br>
-<b><u>10+ weeks</u></b><br>
-For this, you should be able to get your passport back in time using the standard
-service. If you fall within 2 weeks of travel you can contact the
-<a href="https://www.gov.uk/passport-advice-line">passport advice line</a>  to ask for a Fast Track upgrade.
-</blockquote>
-<br><br>
-</details>
-<br><br>
 
 <img alt="Other questions" src="img/other.png" width = 200>
 <br><br>
@@ -178,18 +143,11 @@ But below is a small infographic which may also help.
 <summary>When do services go online?</summary>
 <br>
 <blockquote>
-There is no set time. Typically, they go online during working hours during weekdays.
+There is no set time. Typically, they go online every day of the week.
 <br><br>
-Lately (as of 04/06/2022), some patterns may be emerging with:<br>
-1. Fast Track going online at around 15:00<br>
-2. Premium going online at 08:00<br>
-<br><br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_one_week_fast_track_plot_for_the_whole_time-series.png" alt="When was fast track online?"/>
-</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mshodge/youshallnotpassport/gh_pages/img/latest_premium_plot_for_the_whole_time-series.png" alt="When was premium online?"/>
-</p>
+Lately (as of 04/08/2022), the patterns seem to be:<br>
+1. Fast Track going online at around 09:00<br>
+2. Premium going online at 10:00<br>
 </blockquote>
 <br><br>
 </details>
@@ -209,6 +167,8 @@ that the services go online at midnight, or any set time. See above.
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of when they will go online next.
+I produce a weekly newsletter, every Sunday, that will contain the statistics
+from the previous week: <a href="https://www.getrevue.co/profile/ukpassportcheck">here</a>
 </blockquote>
 <br><br>
 </details>
@@ -218,6 +178,8 @@ I'm afraid I don't have any knowledge of when they will go online next.
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of what offices the appointments will go online for.
+I produce a weekly newsletter, every Sunday, that will contain the statistics
+from the previous week: <a href="https://www.getrevue.co/profile/ukpassportcheck">here</a>
 </blockquote>
 <br><br>
 </details>
@@ -366,7 +328,7 @@ No. You can use the Fast Track Service though.
 </summary>
 <br>
 <blockquote>
-Yes. You can.
+Yes. You can if you're now 16 or older.
 </blockquote>
 <br><br>
 </details>
