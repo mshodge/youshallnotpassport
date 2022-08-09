@@ -1,6 +1,6 @@
 Hello 👋, my name is **Michael**. I run [@ukpassportcheck](www.twitter.com/ukpassportcheck)
 
-<img src="img/me.jpeg" height=400>
+<img src="../img/me.jpeg" height=400>
 
 > Me and our eldest
 
@@ -10,7 +10,7 @@ A little about me first. I am 33, live in Cardiff with my wife and our two boys.
 
 I created the account because my Mum needed to get an urgent passport appointment. At the time, there was confusion around when the 6-month rule from passport expiry was taken from: the expiry date or ten years from the issue date. This had led to several stories in the media about passengers being turned away at the airport from certain airlines – wrongly it turns out. My Mum fell into this grey area, and we had a big family holiday at the start of June. Coupled with this, when urgent appointments are added was very random. There were some reports of appointments being added at midnight – which turned out to be wrong.
 
-<img src="img/no_apps.png" height=200>
+<img src="../img/no_apps.png" height=200>
 
 > A familiar site to many: no appointments available on GOV.UK
 
@@ -18,7 +18,7 @@ I decided to create a fairly simple web-scraping Python tool to scrape the appoi
 
 Since May the account has grown massively. The code behind the account has changed too. Initially it was running every 30 minutes, but I then changed this to run every minute instead. After this, I added some code to scrape the appointments tables and post to Twitter. Lastly, as appointments sometimes were added throughout the day, whilst the service was online, I added some code to check for new appointments and post to Twitter if new appointments were uploaded.
 
-<img src="img/process.png" height=300>
+<img src="../img/process.png" height=300>
 
 > The process chart of how it works. First the bot checks if the service is online. Then it gets the appointment table. Then it keeps checking if new appointments are added.
 
