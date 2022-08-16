@@ -1,4 +1,4 @@
-name: fasttrackcheck
+name: premiumcheck
 
 on:
   repository_dispatch:
