@@ -270,7 +270,10 @@ def check_diff_in_loc_counts(df):
 
 
 def pipeline(first=True):
-    print(first)
+    service = "fast track"
+
+    print(f"Is first time running since going online: {first}")
+
     url = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     driver = get_page(url, 1)
     if driver is not None:
@@ -294,15 +297,16 @@ def pipeline(first=True):
 
             if date_checked != todays_date_is:
                 post_status_update(is_proxy, is_github_action)
-                update_no_app(is_github_action, todays_date_is, "True")
+                update_no_app(is_github_action, todays_date_is, "True", service)
             else:
                 if result_checked == 'False':
                     post_status_update(is_proxy, is_github_action)
-                    update_no_app(is_github_action, todays_date_is, "True")
+                    update_no_app(is_github_action, todays_date_is, "True", service)
             # say appointments have run out
             time.sleep(4 * 60)  # wait 4 mins before calling again
             run_selenium_code("29224896", is_github_action)
             return None
+
         else:
             number_of_days_forward = 28
             nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
@@ -336,13 +340,13 @@ def pipeline(first=True):
 
             # Posts a first graph
             if is_twitter and first:
-                post_media(is_proxy, is_github_action, "fast track")
-                update_no_app(is_github_action, todays_date_is, "False")
+                post_media(is_proxy, is_github_action, service)
+                update_no_app(is_github_action, todays_date_is, "False", service)
 
             # Posts a graph if new appointments have been added
             if is_twitter and len(locs_added_checked) > 0:
-                post_media_update(is_proxy, is_github_action, locs_added_checked)
-                update_no_app(is_github_action, todays_date_is, "False")
+                post_media_update(is_proxy, is_github_action, locs_added_checked, service)
+                update_no_app(is_github_action, todays_date_is, "False", service)
 
             long_appointments_df = long_dataframe(nice_appointments_df)
             update_csv(long_appointments_df, is_github_action,

@@ -189,7 +189,7 @@ def online_status_on_last_check_twitter(service, github_action, proxy):
             return 'False'
 
 
-def post_media_update(proxy, github_action, locs_added_checked):
+def post_media_update(proxy, github_action, locs_added_checked, service):
     """
     Posts response to Twitter
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
@@ -198,8 +198,12 @@ def post_media_update(proxy, github_action, locs_added_checked):
     :return: <string> The response of whether the service is online or not
     """
 
-    tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
-        text.replace("\n","")
+    if service == "fast track":
+        tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
+            text.replace("\n","")
+    else:
+        tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_op.md").\
+            text.replace("\n","")
 
     api = authenticate_twitter(github_action, proxy)
 
@@ -210,7 +214,10 @@ def post_media_update(proxy, github_action, locs_added_checked):
 
     locations = ' and '.join(locs_added_checked)
 
-    message = f"New appointments have just been added for {locations}!"
+    if service == "fast track":
+        message = f"New Fast Track appointments have just been added for {locations}!"
+    else:
+        message = f"New or unbooked Premium appointments have just been added for {locations}!"
 
     api.update_status(status=message,
                       media_ids=[media.media_id],

@@ -91,7 +91,7 @@ def update_tweet_id(github_action, tweet_id, service):
                      sha=contents.sha)
 
 
-def update_no_app(github_action, todays_date, are_no_apps):
+def update_no_app(github_action, todays_date, service, are_no_apps):
     """
     Updates csv file on GitHub and local
     :param df_status: <DataFrame> The DataFrame from the current check
@@ -105,7 +105,10 @@ def update_no_app(github_action, todays_date, are_no_apps):
     org = "mshodge"
     repo = "youshallnotpassport"
     branch = "main"
-    file_path = "data/no_apps.md"
+    if service == "fast track":
+        file_path = "data/no_apps.md"
+    else:
+        file_path = "data/premium_no_apps.md"
 
     if github_action:
         token = os.environ['access_token_github']
