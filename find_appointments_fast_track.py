@@ -323,11 +323,6 @@ def get_appointment_data(the_url):
 
         else:
             nice_appointments_df = nice_dataframe(appointments_df)
-            if nice_appointments_df is None:
-                print("Error. Will try again.")
-                time.sleep(4 * 60)  # wait 4 mins before calling again
-                run_github_action("29224896") if IS_GITHUB_ACTION else None
-                return None
             return nice_appointments_df
 
 
@@ -340,6 +335,12 @@ def pipeline(first):
     print(f"Is first time running since going online: {first}")
 
     nice_appointments_df = get_appointment_data(MAIN_URL)  ## USMANS CODE TO REPLACE THIS FUNCTION
+
+    if nice_appointments_df is None:
+        print("Error. Will try again.")
+        time.sleep(4 * 60)  # wait 4 mins before calling again
+        run_github_action("29224896") if IS_GITHUB_ACTION else None
+        return None
 
     print(nice_appointments_df)
 

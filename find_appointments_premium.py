@@ -19,12 +19,23 @@ from scripts.utils.github import update_no_app
 
 chromedriver_autoinstaller.install()
 
-is_proxy = False
-is_github_action = True
-is_twitter = True
+today = date.today()
+TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
+MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
+SERVICE = "premium"
+IS_PROXY = False
+IS_GITHUB_ACTION = True
+IS_TWITTER = True
 
 
 def check_diff_in_loc_counts(df):
+    """
+    Checks the difference in the counts of appointments at each office, if an office has 10 or more new appointments
+    then the bot will flag this to be posted to Twitter
+    :input df: <pandas.DataFrame> The pandas dataframe of latest results
+    :return locs_added: <list> List of offices with new appointments added, is blank if None
+    """
+
     df_old = get_csv("data/premium_appointments_locations.csv")
     df_diff = df_old.copy()
     df_diff['count'] = df['count'] - df_old['count']
@@ -36,19 +47,14 @@ def check_diff_in_loc_counts(df):
     return locs_added
 
 
-def run_selenium_code(id, github_action):
+def run_github_action(id):
     """
     Returns value from dataframe
     :param id: <string> the workflow id for github actions
     :param github_action: <Boolean> If using github actions or not
     """
 
-    if github_action:
-        token = os.environ['access_token_github']
-    else:
-        import config.github_credentials as github_credentials
-        token = github_credentials.access_token
-
+    token = os.environ['access_token_github']
     url = f"https://api.github.com/repos/mshodge/youshallnotpassport/actions/workflows/{id}/dispatches"
     headers = {"Authorization": "bearer " + token}
     json = {"ref": "main"}
@@ -57,6 +63,12 @@ def run_selenium_code(id, github_action):
 
 
 def check_if_no_apps_before():
+    """
+    Checks if the bot has already seen a return of no appointments in the table already today
+    :return no_app_check_date: <string> The date checked last
+    :return no_app_check_result: <string> The result checked last
+    """
+
     no_app_check = requests.get(
         "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/premium_no_apps.md").text \
         .replace("\n", "").split(" ")
@@ -77,7 +89,7 @@ def get_page(the_url, wait_time, sleep_time):
     keep_trying = True
 
     options = Options()
-    if is_github_action:
+    if IS_GITHUB_ACTION:
         options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
@@ -197,17 +209,16 @@ def long_dataframe(wide_df):
     return long_df
 
 
-def nice_dataframe(not_nice_df, numdays):
+def nice_dataframe(not_nice_df):
     """
     Makes a nice dataframe
     :param not_nice_df: <pandas.dataframe> The pandas dataframe
-    :param numdays: <int> The number of days forward from today
     :return df: <pandas.dataframe> The pandas dataframe
     """
 
     base = datetime.today()
-    date_list = [(base + timedelta(days=x)).strftime("%A %-d %B") for x in range(numdays)]
-    better_date_list = [(base + timedelta(days=x)).strftime("%a %-d %b") for x in range(numdays)]
+    date_list = [(base + timedelta(days=x)).strftime("%A %-d %B") for x in range(28)]
+    better_date_list = [(base + timedelta(days=x)).strftime("%a %-d %b") for x in range(28)]
 
     nice_df = pd.DataFrame(columns=date_list,
                            index=["London", "Peterborough", "Newport", "Liverpool", "Durham", "Glasgow", "Belfast",
@@ -277,13 +288,14 @@ def get_appointments(the_driver):
                 return df
 
 
-def make_figure(the_df, numdays):
+def make_figure(the_df):
     """
     Makes a seaborn heatmap figure from appointments dataframe
     :param the_df: <pandas.dataframe> The pandas dataframe
     """
+
     days_list = list(range(0, 10))
-    days_list2 = list(range(10, numdays))
+    days_list2 = list(range(10, 28))
     the_df[the_df.eq(0)] = np.nan
     appts = sns.heatmap(the_df, annot=True,
                         cbar=False, cmap="Blues", linewidths=1, linecolor="white",
@@ -301,86 +313,98 @@ def make_figure(the_df, numdays):
     fig.savefig("out.png")
 
 
-def pipeline(first=True):
-    service = "premium"
-    print(f"Is first time running since going online: {first}")
-    url = "https://www.passport.service.gov.uk/urgent/"
-    driver = get_page(url, 1, 1)
+def get_appointment_data(the_url):
+    """
+    The main function to get the appointment data from the table at the end of the process
+    :input the_url: <string> The url to parse
+    :return nice_appointments_df: <pandas.DataFrame> A pandas DataFrame of appointments, or None
+    """
+
+    driver = get_page(the_url, 1, 1)
     if driver is not None:
         try:
             driver_info = input_information(driver)
         except NoSuchElementException:
-            run_selenium_code("28968845", is_github_action)
+            run_github_action("28968845", IS_GITHUB_ACTION)
             print("Error. Will try again.")
             return None
 
         appointments_df = get_appointments(driver_info)
-
-        today = date.today()
-        todays_date_is = today.strftime("%d/%m/%Y")
 
         if appointments_df is None:
             print("No appointments at the moment.")
 
             date_checked, result_checked = check_if_no_apps_before()
 
-            if date_checked != todays_date_is:
-                post_status_update(is_proxy, is_github_action)
-                update_no_app(is_github_action, todays_date_is, "True", service)
+            if date_checked != TODAYS_DATE_IS:
+                post_status_update(IS_PROXY, IS_GITHUB_ACTION)
+                update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "True", SERVICE)
             else:
                 if result_checked == 'False':
-                    post_status_update(is_proxy, is_github_action)
-                    update_no_app(is_github_action, todays_date_is, "True", service)
+                    post_status_update(IS_PROXY, IS_GITHUB_ACTION)
+                    update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "True", SERVICE)
             # say appointments have run out
             time.sleep(4 * 60)  # wait 4 mins before calling again
-            run_selenium_code("32513748", is_github_action)
+            run_github_action("32513748", IS_GITHUB_ACTION)
             return None
 
         else:
-            number_of_days_forward = 28
-            nice_appointments_df = nice_dataframe(appointments_df, number_of_days_forward)
-            if nice_appointments_df is None:
-                print("Error. Will try again.")
-                time.sleep(4 * 60)  # wait 4 mins before calling again
-                run_selenium_code("32513748", is_github_action)
-                return None
+            nice_appointments_df = nice_dataframe(appointments_df)
+            return nice_appointments_df
 
-            print(nice_appointments_df)
 
-            appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
-            appointments_per_location.columns = ['location', 'count']
+def pipeline(first=True):
+    """
+    The main function to get the appointment data from the table at the end of the process
+    :input first: <Boolean> The first run after the service has gone online?
+    """
 
-            update_csv(appointments_per_location, is_github_action,
-                       "data/premium_appointments_locations.csv",
-                       "updating premium appointment location data", replace=True)
+    print(f"Is first time running since going online: {first}")
 
-            if first is False:
-                locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
-                if len(locs_added_checked) == 0:
-                    # time.sleep(5 * 60)  # wait 5 mins before calling again
-                    print("No new bulk Premium appointments have been added, will check again in 5 mins")
-                    time.sleep(4 * 60)  # wait 4 mins before calling again
-                    run_selenium_code("32513748", is_github_action)
-                    return None
-            else:
-                locs_added_checked = []
+    nice_appointments_df = get_appointment_data(MAIN_URL)  ## USMANS CODE TO REPLACE THIS FUNCTION
 
-            make_figure(nice_appointments_df, number_of_days_forward)
-            if is_twitter and first:
-                post_media(is_proxy, is_github_action, service)
-                update_no_app(is_github_action, todays_date_is, "False", service)
+    if nice_appointments_df is None:
+        print("Error. Will try again.")
+        time.sleep(4 * 60)  # wait 4 mins before calling again
+        run_github_action("32513748") if IS_GITHUB_ACTION else None
+        return None
 
-            # Posts a graph if new appointments have been added
-            if is_twitter and len(locs_added_checked) > 0:
-                post_media_update(is_proxy, is_github_action, locs_added_checked, service)
-                update_no_app(is_github_action, todays_date_is, "False", service)
+    print(nice_appointments_df)
 
-            long_appointments_df = long_dataframe(nice_appointments_df)
-            update_csv(long_appointments_df, is_github_action,
-                       "data/premium_appointments.csv",
-                       "updating premium appointment data", replace=False)
+    appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
+    appointments_per_location.columns = ['location', 'count']
+
+    update_csv(appointments_per_location, IS_GITHUB_ACTION,
+               "data/premium_appointments_locations.csv",
+               "updating premium appointment location data", replace=True)
+
+    if first is False:
+        locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
+        if len(locs_added_checked) == 0:
+            # time.sleep(5 * 60)  # wait 5 mins before calling again
+            print("No new bulk Premium appointments have been added, will check again in 5 mins")
             time.sleep(4 * 60)  # wait 4 mins before calling again
-            run_selenium_code("32513748", is_github_action)
+            run_github_action("32513748") if IS_GITHUB_ACTION else None
+            return None
+    else:
+        locs_added_checked = []
+
+    make_figure(nice_appointments_df)
+    if IS_TWITTER and first:
+        post_media(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
+        update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+
+    # Posts a graph if new appointments have been added
+    if IS_TWITTER and len(locs_added_checked) > 0:
+        post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
+        update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+
+    long_appointments_df = long_dataframe(nice_appointments_df)
+    update_csv(long_appointments_df, IS_GITHUB_ACTION,
+               "data/premium_appointments.csv",
+               "updating premium appointment data", replace=False)
+    time.sleep(4 * 60)  # wait 4 mins before calling again
+    run_github_action("32513748") if IS_GITHUB_ACTION else None
 
 
 if __name__ == "__main__":
