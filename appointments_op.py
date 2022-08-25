@@ -8,6 +8,7 @@ from tabulate import tabulate
 
 __author__ = ['Dr. Usman Kayani']
 
+MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 session = requests.Session()
 session.headers = {    
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0',
@@ -125,14 +126,14 @@ def clean_df(df) -> pd.DataFrame:
 
     for x in locations:
         df = df.replace(x, '', regex=True)
-        
+
     df = df.replace(' Unavailable', 0, regex=True)
     df = df.replace(' Available', 1, regex=True)
         
     return df.loc[:, ~df.columns.duplicated()]
 
 if __name__ == '__main__':
-    data = get_appointment_data()
+    data = get_appointment_data(MAIN_URL)
     if isinstance(data, pd.DataFrame):
         display(tabulate(data, headers='keys', tablefmt='psql'))
     else:
