@@ -339,7 +339,7 @@ def pipeline(first):
 
     print(f"Is first time running since going online: {first}")
 
-    nice_appointments_df = get_appointment_data(MAIN_URL)  ## Usmans Code to be replace this function
+    nice_appointments_df = get_appointment_data(MAIN_URL)  ## USMANS CODE TO REPLACE THIS FUNCTION
 
     print(nice_appointments_df)
 
