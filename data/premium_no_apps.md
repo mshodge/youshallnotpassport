@@ -1,1 +1,1 @@
-25/08/2022 premium
+25/08/2022 fast track
