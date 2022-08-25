@@ -127,7 +127,8 @@ def clean_df(df) -> pd.DataFrame:
         df = df.replace(x, '', regex=True)
         df = df.replace(' Unavailable', 0, regex=True)
         df = df.replace(' Available', 1, regex=True)
-    return df
+        
+    return df.loc[:, ~df.columns.duplicated()]
 
 if __name__ == '__main__':
     data = get_appointment_data()
