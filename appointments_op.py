@@ -34,7 +34,7 @@ def get_token(data: str) -> dict:
     else:
         return None
 
-def get_appointment_data() -> pd.DataFrame:
+def get_appointment_data(MAIN_URL) -> pd.DataFrame:
     form_datas = [
         {'is-uk-application' : 'true'},
         {
@@ -57,7 +57,7 @@ def get_appointment_data() -> pd.DataFrame:
     ]
 
     start_urls = [
-        'https://www.passport.service.gov.uk/urgent/', 
+        MAIN_URL, 
         'https://www.passport.service.gov.uk/filter/start/urgent'
     ]
 
