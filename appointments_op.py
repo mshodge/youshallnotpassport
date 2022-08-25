@@ -125,8 +125,9 @@ def clean_df(df) -> pd.DataFrame:
 
     for x in locations:
         df = df.replace(x, '', regex=True)
-        df = df.replace(' Unavailable', 0, regex=True)
-        df = df.replace(' Available', 1, regex=True)
+        
+    df = df.replace(' Unavailable', 0, regex=True)
+    df = df.replace(' Available', 1, regex=True)
         
     return df.loc[:, ~df.columns.duplicated()]
 
