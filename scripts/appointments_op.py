@@ -19,13 +19,14 @@ from tabulate import tabulate
 __author__ = ['Dr. Usman Kayani']
 
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
-session = requests.Session()
-session.headers = {    
+MAIN_HEADERS = {    
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     'Accept-Encoding': 'gzip, deflate, br',
 }
+
+session = requests.Session()
 
 def form_data(data: dict) -> str:
     """Form the data for a POST request.
@@ -66,6 +67,7 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
         pd.DataFrame
             The dataframe with the appointment data.
     """
+    session.headers = MAIN_HEADERS
     form_datas = [
         {'is-uk-application' : 'true'},
         {
@@ -105,7 +107,6 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
     form_headers = {
         'Referer': 'https://www.passport.service.gov.uk/filter/overseas',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': '72',
         'Origin': 'https://www.passport.service.gov.uk'
     }
     session.headers.update(form_headers)
@@ -119,7 +120,7 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
         curr_url = data.url
         csrf_token = get_token(data)
 
-    session.headers = dict(set(session.headers.items()) - set(form_headers.items()))
+    session.headers = MAIN_HEADERS
     curr_year = dt.today().year
 
     first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{curr_year}-01-01/previous'

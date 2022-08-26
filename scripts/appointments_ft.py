@@ -26,14 +26,14 @@ import pandas as pd
 __author__ = ['Dr. Usman Kayani']
 
 MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml'
-
-session = requests.Session()
-session.headers = {
+MAIN_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     'Accept-Encoding': 'gzip, deflate, br',
 }
+
+session = requests.Session()
 
 def get_insthash() -> str:
     """
@@ -85,6 +85,8 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
     Returns:
         None
     """
+    session.headers = MAIN_HEADERS
+
     r = session.get(MAIN_URL)
     no_appt_text = 'Sorry, there are no available appointments'
     if no_appt_text in r.text:
@@ -336,8 +338,6 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
 if __name__ == '__main__':
     data = get_appointment_data()
     if isinstance(data, pd.DataFrame):
-        #display(tabulate(data, headers='keys', tablefmt='psql'))
-        print(data)
-        print(data.columns)
+        display(tabulate(data, headers='keys', tablefmt='psql'))
     else:
         print(data)
