@@ -1,5 +1,4 @@
 beautifulsoup4
-datetime
 html5lib
 ipython
 lxml
