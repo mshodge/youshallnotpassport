@@ -1,13 +1,13 @@
 beautifulsoup4
-chromedriver-autoinstaller
-datetime
 html5lib
+ipython
 lxml
 numpy
 pandas
 pygithub
+python-dateutil
 requests
 seaborn
-selenium
+tabulate
 tweepy
 urllib3
