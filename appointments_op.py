@@ -1,3 +1,13 @@
+"""
+Module to obtain free slots for premium passport appointments.
+
+Provides the functions:
+
+*func*: `get_appointment_data` (main entry point)
+*func*: `clean_df`
+*func*: `get_token`
+*func*: `form_data`
+"""
 from datetime import date as dt
 from datetime import datetime, timedelta
 import requests
@@ -26,7 +36,17 @@ def form_data(data: dict) -> str:
     """
     return '&'.join(['{}={}'.format(k, v) for k, v in data.items()])
 
-def get_token(data: str) -> dict:
+def get_token(data: str) -> str:
+    """Get the token from the data.
+
+    Args:
+        data: str
+            The data to get the token from.
+    
+    Returns:
+        str
+            The token.
+    """
     soup = BeautifulSoup(data.text, 'html.parser')
     token_data = soup.find('input', {'name': 'x-csrf-token'})
     if token_data:
@@ -36,6 +56,16 @@ def get_token(data: str) -> dict:
         return None
 
 def get_appointment_data(MAIN_URL) -> pd.DataFrame:
+    """Get the appointment data.
+
+    Args:
+        MAIN_URL: str
+            The main URL to get the data from.
+
+    Returns:
+        pd.DataFrame
+            The dataframe with the appointment data.
+    """
     form_datas = [
         {'is-uk-application' : 'true'},
         {
@@ -113,6 +143,17 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
     return clean_df(pd.concat([df, curr_df], axis=1))
 
 def clean_df(df) -> pd.DataFrame:
+    """
+    Clean the dataframe.
+
+    Args:
+        df: pd.DataFrame
+            The dataframe to clean.
+    
+    Returns:
+        pd.DataFrame
+            The cleaned dataframe.
+    """
     locations = [
         "London", 
         "Peterborough", 
