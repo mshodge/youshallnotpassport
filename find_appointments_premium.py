@@ -70,7 +70,6 @@ def check_if_no_apps_before():
     return no_app_check_date, no_app_check_result
 
 
-
 def long_dataframe(wide_df):
     """
     Make a long dataframe
@@ -121,6 +120,7 @@ def nice_dataframe(not_nice_df):
     nice_df = nice_df.astype(float)
     return nice_df
 
+
 def make_figure(the_df):
     """
     Makes a seaborn heatmap figure from appointments dataframe
@@ -144,6 +144,7 @@ def make_figure(the_df):
     appts.text(10, -0.5, "(Days from Today)", fontsize=10)
     fig = appts.get_figure()
     fig.savefig("out.png")
+
 
 def pipeline(first=True):
     """

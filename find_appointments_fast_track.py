@@ -42,6 +42,7 @@ def run_github_action(id):
     r = requests.post(url, headers=headers, json=json)
     print(r)
 
+
 def check_if_no_apps_before():
     """
     Checks if the bot has already seen a return of no appointments in the table already today
@@ -99,6 +100,7 @@ def make_figure(the_df):
     appts.figure.tight_layout()
     fig = appts.get_figure()
     fig.savefig("out.png")
+
 
 def check_diff_in_loc_counts(df):
     """
