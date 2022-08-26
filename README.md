@@ -15,8 +15,12 @@ A simple `requests` script to check whether the following [UK Passport](https://
 - [1 week fast track](https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service)
 
 #### Appointments table check
-Uses the Python package `selenium` to get the appointments table when the service is online. Then
-keeps checking and posts again if more appointments are added.
+Once a service goes online, the bot checks what appointments are available. For Fast Track, we use 
+Ajax requests to pass information to the server 
+([about Ajax requests](https://towardsdatascience.com/using-python-flask-and-ajax-to-pass-information-between-the-client-and-server-90670c64d688)). 
+For Premium, we use a series of `POST` and `GET` requests. We used to use `selenium` but our new method is 
+much faster and has fewer errors! Then bot keeps checking and posts again if more appointments are added 
+on either service.
 
 ## Using the code
 
