@@ -180,8 +180,32 @@ def clean_df(df) -> pd.DataFrame:
         .replace(' Unavailable', 0, regex=True)
         .replace(' Available', 1, regex=True)
     )
-        
-    return df.loc[:, ~df.columns.duplicated()]
+
+    base = datetime.today()
+    date_list = [(base + timedelta(days=x)).strftime("%A %-d %B") for x in range(28)]
+    better_date_list = [(base + timedelta(days=x)).strftime("%a %-d %b") for x in range(28)]
+
+    nice_df = pd.DataFrame(columns=date_list,
+                           index=locations)
+
+    df.columns = df.columns.str.replace("  ", " ")
+    df = df.loc[:, ~df.columns.duplicated()]
+
+    col_dates = list(df.columns)
+
+    df = df.reset_index()
+    for col in col_dates:
+        for idx in df.index:
+            location = df.iloc[idx]["index"]
+
+            number_of_appts = df.iloc[idx][col]
+            nice_df.at[location, col] = number_of_appts
+
+    nice_df.columns = better_date_list
+    nice_df = nice_df.fillna(0)
+    nice_df = nice_df.astype(float)
+
+    return nice_df
 
 if __name__ == '__main__':
     data = get_appointment_data(MAIN_URL)
