@@ -98,21 +98,27 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
     df = pd.read_html(data.text)[0]
     last_date = datetime.strptime(df.columns[-1], '%A  %d %B') + timedelta(days=1)
     start_dates = [
-        (last_date + timedelta(days=7*i)).strftime(f'{curr_year}-%m-%d')
-        for i in range(3)
+        (last_date + timedelta(days=6*i)).strftime(f'{curr_year}-%m-%d')
+        for i in range(4)
     ]
 
+    data_list = []
+    data_list.append(df)
     for date in start_dates:
         first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{date}/next'
         data = session.get(first_page)
         try:
             curr_df = pd.read_html(data.text)[0]
+            data_list.append(curr_df)
         except:
             pass
 
-    return clean_df(pd.concat([df, curr_df], axis=1))
+    return clean_df(pd.concat(data_list, axis=1))
 
 def clean_df(df) -> pd.DataFrame:
+    if "Birmingham" not in df:
+        df.loc[len(df)] = "Birmingham  Unavailable"
+
     locations = [
         "London", 
         "Peterborough", 
@@ -120,7 +126,8 @@ def clean_df(df) -> pd.DataFrame:
         "Liverpool", 
         "Durham", 
         "Glasgow", 
-        "Belfast", 
+        "Belfast",
+        "Birmingham"
     ]
     df.index = locations
 

@@ -154,7 +154,7 @@ def pipeline(first=True):
 
     print(f"Is first time running since going online: {first}")
 
-    nice_appointments_df = get_appointment_data(MAIN_URL)  ## USMANS CODE TO REPLACE THIS FUNCTION
+    nice_appointments_df = get_appointment_data(MAIN_URL)
 
     if nice_appointments_df is None:
         print("Error. Will try again.")
