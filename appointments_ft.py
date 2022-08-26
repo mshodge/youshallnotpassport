@@ -100,9 +100,6 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
             time.sleep(1)
         else:
 
-            ## MH EDIT ABOVE: Not that important when it first goes online but sometimes the system gets busy during
-            ## subsequent checks for new appointments. So I use this while statement to check for the System Busy text
-
             keep_trying = False
             insthash = get_insthash()
             section_hash = insthash.split('-')[-1]
@@ -248,21 +245,34 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
             if no_appt_text in r.text:
                 return None
 
-            ## MH EDIT ABOVE: Can't remember the text precisely, but if appts run out it says something like
-            ## no available appointments. In my code I return a None. Will have to test this when its live and when
-            ## this happens next
-
             else:
-                data1 = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+                appt_page = 1
+                data_list = []
+                data_first = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+                data_list.append(data_first[0])
 
-                r = session.post(
-                    MAIN_URL,
-                    headers={'Content-Type' : 'text/xml'},
-                    data=get_ajax(insthash, appointments2),
-                )
-                data2 = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+                get_another_page = True
 
-                return clean_df(pd.concat([data1[0], data2[0]], axis=1))
+                while get_another_page:
+                    if appt_page == 1:
+                        data_previous = data_first
+                    else:
+                        data_previous = data_next
+
+                    r = session.post(
+                        MAIN_URL,
+                        headers={'Content-Type': 'text/xml'},
+                        data=get_ajax(insthash, appointments2),
+                    )
+
+                    data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+
+                    if data_next[0].equals(data_previous[0]) == True:
+                        get_another_page = False
+                        return clean_df(pd.concat(data_list, axis=1))
+                    else:
+                        data_list.append(data_next[0])
+                        appt_page += 1
 
 def clean_df(df: pd.DataFrame) -> pd.DataFrame:
     """
