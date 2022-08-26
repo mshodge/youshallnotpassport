@@ -7,11 +7,10 @@ import seaborn as sns
 import sys
 import time
 
-from scripts.utils.twitter import post_media, post_media_update, post_status_update
+from scripts.utils.twitter import post_media, post_media_update
 from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.github import update_no_app
-
-from appointments_op import get_appointment_data
+from scripts.appointments_op import get_appointment_data
 
 today = date.today()
 TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
@@ -158,7 +157,7 @@ def pipeline(first=True):
 
     if nice_appointments_df is None:
         print("Error. Will try again.")
-        time.sleep(4 * 60)  # wait 4 mins before calling again
+        time.sleep(2 * 60)  # wait 2 mins before calling again
         run_github_action("32513748") if IS_GITHUB_ACTION else None
         return None
 
@@ -174,9 +173,8 @@ def pipeline(first=True):
     if first is False:
         locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
         if len(locs_added_checked) == 0:
-            # time.sleep(5 * 60)  # wait 5 mins before calling again
-            print("No new bulk Premium appointments have been added, will check again in 5 mins")
-            time.sleep(4 * 60)  # wait 4 mins before calling again
+            print("No new bulk Premium appointments have been added, will check again in 2 mins")
+            time.sleep(2 * 60)  # wait 2 mins before calling again
             run_github_action("32513748") if IS_GITHUB_ACTION else None
             return None
     else:
@@ -196,7 +194,7 @@ def pipeline(first=True):
     update_csv(long_appointments_df, IS_GITHUB_ACTION,
                "data/premium_appointments.csv",
                "updating premium appointment data", replace=False)
-    time.sleep(4 * 60)  # wait 4 mins before calling again
+    time.sleep(2 * 60)  # wait 2 mins before calling again
     run_github_action("32513748") if IS_GITHUB_ACTION else None
 
 
