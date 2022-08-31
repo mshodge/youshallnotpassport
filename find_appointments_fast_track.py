@@ -150,7 +150,7 @@ def pipeline(first):
         locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
         if len(locs_added_checked) == 0:
             print("No new bulk appointments added, will check again in 2 mins")
-            time.sleep(2 * 60)  # wait 2 mins before calling again
+            time.sleep(3 * 60)  # wait 3 mins before calling again
             run_github_action("29224896") if IS_GITHUB_ACTION else None
             return None
     else:
@@ -172,7 +172,7 @@ def pipeline(first):
     update_csv(long_appointments_df, IS_GITHUB_ACTION,
                "data/fast_track_appointments.csv",
                "updating fast track appointment data", replace=False)
-    time.sleep(2 * 60)  # wait 2 mins before calling again
+    time.sleep(3 * 60)  # wait 3 mins before calling again
     run_github_action("29224896") if IS_GITHUB_ACTION else None
 
 
