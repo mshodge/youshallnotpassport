@@ -17,8 +17,8 @@ TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 SERVICE = "premium"
 IS_PROXY = False
-IS_GITHUB_ACTION = False
-IS_TWITTER = False
+IS_GITHUB_ACTION = True
+IS_TWITTER = True
 
 
 def check_diff_in_loc_counts(df):
