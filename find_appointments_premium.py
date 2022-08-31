@@ -17,8 +17,8 @@ TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 SERVICE = "premium"
 IS_PROXY = False
-IS_GITHUB_ACTION = True
-IS_TWITTER = True
+IS_GITHUB_ACTION = False
+IS_TWITTER = False
 
 
 def check_diff_in_loc_counts(df):
@@ -154,7 +154,13 @@ def pipeline(first=True):
 
     print(f"Is first time running since going online: {first}")
 
-    nice_appointments_df = get_appointment_data(MAIN_URL)
+    try:
+        nice_appointments_df = get_appointment_data(MAIN_URL)
+    except ValueError:
+        if first:
+            run_github_action("28968845") if IS_GITHUB_ACTION else None
+        else:
+            run_github_action("32513748") if IS_GITHUB_ACTION else None
 
     if nice_appointments_df is None:
         print("Error. Will try again.")
