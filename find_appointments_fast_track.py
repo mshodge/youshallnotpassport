@@ -129,7 +129,15 @@ def pipeline(first):
 
     print(f"Is first time running since going online: {first}")
 
-    nice_appointments_df = get_appointment_data()  ## USMANS CODE TO REPLACE THIS FUNCTION
+    try:
+        nice_appointments_df = get_appointment_data()
+    except ValueError:
+        if first:
+            run_github_action("28775018") if IS_GITHUB_ACTION else None
+            return None
+        else:
+            run_github_action("29224896") if IS_GITHUB_ACTION else None
+            return None
 
     if nice_appointments_df is None:
         print("Error. Will try again.")
