@@ -159,8 +159,10 @@ def pipeline(first=True):
     except ValueError:
         if first:
             run_github_action("28968845") if IS_GITHUB_ACTION else None
+            return None
         else:
             run_github_action("32513748") if IS_GITHUB_ACTION else None
+            return None
 
     if nice_appointments_df is None:
         print("Error. Will try again.")
