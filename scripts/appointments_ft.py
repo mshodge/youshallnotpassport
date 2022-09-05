@@ -97,9 +97,9 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
         if "System busy" in r.text:
             print(f"System Busy, will try again in 1 second")
             time.sleep(1)
-        elif "Error " in r.text:
-            print(f"System Busy, will try again in 1 second")
-            time.sleep(1)
+        # elif "Error " in r.text:
+        #     print(f"System Busy, will try again in 1 second")
+        #     time.sleep(1)
         else:
 
             keep_trying = False
