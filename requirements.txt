@@ -1,7 +1,7 @@
 beautifulsoup4==4.11.1
 html5lib==1.1
 ipython==8.4.0
-lxml==4.9.0
+lxml==4.9.1
 numpy==1.22.3
 pandas==1.4.2
 pygithub==1.55
