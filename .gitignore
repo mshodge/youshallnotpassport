@@ -15,5 +15,12 @@ config/*_credentials.py
 *.tsv
 *.spacy
 *.hyper
+webpages/*
+*.eps
+*.pdf
 
 !data/data.csv
+*.DS_Store
+
+scripts/local_*.py
+.vscode/
