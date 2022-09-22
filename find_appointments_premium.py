@@ -17,8 +17,8 @@ TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 SERVICE = "premium"
 IS_PROXY = False
-IS_GITHUB_ACTION = True
-IS_TWITTER = True
+IS_GITHUB_ACTION = False
+IS_TWITTER = False
 
 
 def check_diff_in_loc_counts(df):
@@ -154,57 +154,60 @@ def pipeline(first=True):
 
     print(f"Is first time running since going online: {first}")
 
-    try:
-        nice_appointments_df = get_appointment_data(MAIN_URL)
-    except ValueError:
-        if first:
-            run_github_action("28968845") if IS_GITHUB_ACTION else None
-            return None
-        else:
-            run_github_action("32513748") if IS_GITHUB_ACTION else None
-            return None
+    if "Sorry" in requests.get("https://www.passport.service.gov.uk/urgent/").text:
+        print("It's offline!")
+    else:
+        try:
+            nice_appointments_df = get_appointment_data(MAIN_URL)
+        except ValueError:
+            if first:
+                run_github_action("28968845") if IS_GITHUB_ACTION else None
+                return None
+            else:
+                run_github_action("32513748") if IS_GITHUB_ACTION else None
+                return None
 
-    if nice_appointments_df is None:
-        print("Error. Will try again.")
-        time.sleep(2 * 60)  # wait 2 mins before calling again
-        run_github_action("32513748") if IS_GITHUB_ACTION else None
-        return None
-
-    print(nice_appointments_df)
-
-    appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
-    appointments_per_location.columns = ['location', 'count']
-
-    update_csv(appointments_per_location, IS_GITHUB_ACTION,
-               "data/premium_appointments_locations.csv",
-               "updating premium appointment location data", replace=True)
-
-    if first is False:
-        locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
-        if len(locs_added_checked) == 0:
-            print("No new bulk Premium appointments have been added, will check again in 2 mins")
+        if nice_appointments_df is None:
+            print("Error. Will try again.")
             time.sleep(2 * 60)  # wait 2 mins before calling again
             run_github_action("32513748") if IS_GITHUB_ACTION else None
             return None
-    else:
-        locs_added_checked = []
 
-    make_figure(nice_appointments_df)
-    if IS_TWITTER and first:
-        post_media(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
-        update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+        print(nice_appointments_df)
 
-    # Posts a graph if new appointments have been added
-    if IS_TWITTER and len(locs_added_checked) > 0:
-        post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
-        update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+        appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
+        appointments_per_location.columns = ['location', 'count']
 
-    long_appointments_df = long_dataframe(nice_appointments_df)
-    update_csv(long_appointments_df, IS_GITHUB_ACTION,
-               "data/premium_appointments.csv",
-               "updating premium appointment data", replace=False)
-    time.sleep(2 * 60)  # wait 2 mins before calling again
-    run_github_action("32513748") if IS_GITHUB_ACTION else None
+        update_csv(appointments_per_location, IS_GITHUB_ACTION,
+                   "data/premium_appointments_locations.csv",
+                   "updating premium appointment location data", replace=True)
+
+        if first is False:
+            locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
+            if len(locs_added_checked) == 0:
+                print("No new bulk Premium appointments have been added, will check again in 2 mins")
+                time.sleep(2 * 60)  # wait 2 mins before calling again
+                run_github_action("32513748") if IS_GITHUB_ACTION else None
+                return None
+        else:
+            locs_added_checked = []
+
+        make_figure(nice_appointments_df)
+        if IS_TWITTER and first:
+            post_media(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
+            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+
+        # Posts a graph if new appointments have been added
+        if IS_TWITTER and len(locs_added_checked) > 0:
+            post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
+            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+
+        long_appointments_df = long_dataframe(nice_appointments_df)
+        update_csv(long_appointments_df, IS_GITHUB_ACTION,
+                   "data/premium_appointments.csv",
+                   "updating premium appointment data", replace=False)
+        time.sleep(2 * 60)  # wait 2 mins before calling again
+        run_github_action("32513748") if IS_GITHUB_ACTION else None
 
 
 if __name__ == "__main__":
