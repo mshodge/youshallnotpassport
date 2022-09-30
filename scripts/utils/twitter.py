@@ -224,6 +224,7 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
                       in_reply_to_status_id=tweetid)
 
     print("Posted update to Twitter")
+    return message
 
 def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     """

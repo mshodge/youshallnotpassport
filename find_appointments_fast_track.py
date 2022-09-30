@@ -10,6 +10,7 @@ import time
 from scripts.utils.twitter import post_media, post_media_update
 from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.github import update_no_app
+from scripts.utils.sms import call_sms
 from scripts.appointments_ft import get_appointment_data
 
 today = date.today()
@@ -173,7 +174,8 @@ def pipeline(first):
 
     # Posts a graph if new appointments have been added
     if IS_TWITTER and len(locs_added_checked) > 0:
-        post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
+        message = post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
+        call_sms(SERVICE.title(), type = "app", response=message)
         update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
 
     long_appointments_df = long_dataframe(nice_appointments_df)
