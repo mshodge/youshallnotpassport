@@ -36,6 +36,8 @@ def call_sms(service, type, response):
     param = {"service": service,
              "message": message}
 
+    url = 'https://europe-west2-youshallnotpassport.cloudfunctions.net/send_sms-http'
+
     r = requests.post(
         url,
         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
