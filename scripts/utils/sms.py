@@ -34,8 +34,7 @@ def call_sms(service, type, response):
     if service == "Fast Track":
         if type == "status":
             if "✅" in response:
-                message = f"HMPO Fast Track service is now online {timestamp}. If more appointments are added, " \
-                          f"you will receive another text. Booking link: " \
+                message = f"HMPO Fast Track service is now online {timestamp}. Booking link: " \
                           f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
             else:
                 message = f"HMPO Fast Track service is now offline {timestamp}. You will get another text when it goes " \
@@ -45,8 +44,7 @@ def call_sms(service, type, response):
     elif service == "Premium":
         if type == "status":
             if "✅" in response:
-                message = f"HMPO Premium service is now online {timestamp}. If more appointments are added, " \
-                          f"you will receive another text. Booking link: " \
+                message = f"HMPO Premium service is now online {timestamp}. Booking link: " \
                           f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
             else:
                 message = f"HMPO Premium service is now offline {timestamp}. You will get another text when it goes " \
