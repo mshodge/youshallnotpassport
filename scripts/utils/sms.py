@@ -1,6 +1,6 @@
 import json
 import requests
-
+import os
 
 def get_token():
     token = os.environ['gcp_token']
