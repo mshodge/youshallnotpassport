@@ -215,9 +215,9 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
     locations = ' and '.join(locs_added_checked)
 
     if service == "fast track":
-        message = f"New Fast Track appointments have just been added for {locations}!"
+        message = f"New Fast Track appointments have just been added for {locations}! See link above to book."
     else:
-        message = f"New or unbooked Premium appointments have just been added for {locations}!"
+        message = f"New or unbooked Premium appointments have just been added for {locations}! See link above to book."
 
     api.update_status(status=message,
                       media_ids=[media.media_id],
