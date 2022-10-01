@@ -262,7 +262,7 @@ if __name__ == '__main__':
                 print('\n\nPremium service status has changed, will post to Twitter!\n')
                 tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
                 update_tweet_id(is_github_action, tweet_id, 'premium')
-                call_sms('Premium', type="status", message=response_premium_check)
+                call_sms('Premium', type="status", response = response_premium_check)
                 run_appointments_code("28968845", is_github_action)
 
             update_online_status(df_status_is, is_github_action)
