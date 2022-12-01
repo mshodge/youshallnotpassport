@@ -122,9 +122,13 @@ def update_no_app(github_action, todays_date, service, are_no_apps):
     contents = repo.get_contents(file_path, ref=branch)
 
     content_string = f"{todays_date} {are_no_apps}"
-
-    repo.update_file(path=file_path,
-                     message="updating no app status",
-                     content=content_string,
-                     branch=branch,
-                     sha=contents.sha)
+    try:
+        repo.update_file(path=file_path,
+                         message="updating no app status",
+                         content=content_string,
+                         branch=branch,
+                         sha=contents.sha)
+        return False
+    except:
+        print("GitHub Message Error")
+        return True
