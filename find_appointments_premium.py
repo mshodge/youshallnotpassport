@@ -183,6 +183,10 @@ def pipeline(first=True):
                    "data/premium_appointments_locations.csv",
                    "updating premium appointment location data", replace=True)
 
+        if failed:
+            run_github_action("32513748")
+            return None
+
         if first is False:
             locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
             if len(locs_added_checked) == 0:
