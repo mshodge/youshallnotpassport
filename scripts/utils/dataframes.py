@@ -73,12 +73,16 @@ def update_csv(df, github_action, file_path, message, replace):
     repo = g.get_repo(f"{org}/{repo}")
     contents = repo.get_contents(file_path, ref=branch)
 
-    repo.update_file(path=file_path,
-                     message=message,
-                     content=df_string,
-                     branch=branch,
-                     sha=contents.sha)
-
+    try:
+        repo.update_file(path=file_path,
+                         message=message,
+                         content=df_string,
+                         branch=branch,
+                         sha=contents.sha)
+        return False
+    except:
+        print("GitHub Message Error")
+        return True
 
 
 def get_csv(file_path):

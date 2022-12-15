@@ -151,9 +151,12 @@ def pipeline(first):
     appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
     appointments_per_location.columns = ['location', 'count']
 
-    update_csv(appointments_per_location, IS_GITHUB_ACTION,
+    failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
                "data/fast_track_appointments_locations.csv",
                "updating fast track appointment location data", replace=True)
+    if failed:
+        run_github_action("29224896")
+        return None
 
     if first is False:
         locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
@@ -185,7 +188,7 @@ def pipeline(first):
             return None
 
     long_appointments_df = long_dataframe(nice_appointments_df)
-    update_csv(long_appointments_df, IS_GITHUB_ACTION,
+    failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
                "data/fast_track_appointments.csv",
                "updating fast track appointment data", replace=False)
     time.sleep(3 * 60)  # wait 3 mins before calling again

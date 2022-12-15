@@ -179,7 +179,7 @@ def pipeline(first=True):
         appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
         appointments_per_location.columns = ['location', 'count']
 
-        update_csv(appointments_per_location, IS_GITHUB_ACTION,
+        failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
                    "data/premium_appointments_locations.csv",
                    "updating premium appointment location data", replace=True)
 
@@ -205,7 +205,7 @@ def pipeline(first=True):
             update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
 
         long_appointments_df = long_dataframe(nice_appointments_df)
-        update_csv(long_appointments_df, IS_GITHUB_ACTION,
+        failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
                    "data/premium_appointments.csv",
                    "updating premium appointment data", replace=False)
         time.sleep(2 * 60)  # wait 2 mins before calling again
