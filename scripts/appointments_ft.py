@@ -15,7 +15,9 @@ Provides the functions:
 """
 import requests, re
 from typing import Dict, Union
+from dateutil import parser
 import dateutil.parser as dparser
+from dateutil.relativedelta import relativedelta
 from datetime import date as dt
 from datetime import datetime, timedelta
 import time
@@ -276,6 +278,39 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
                         data_list.append(data_next[0])
                         appt_page += 1
 
+
+def parse_future(timestr: str, default: datetime, **parse_kwargs):
+    """
+    Same as dateutil.parser.parse() but only returns future dates. So if you enter a new year it will recognise this
+
+    Params:
+        timestr: str
+            The string of the time you want to parse
+
+        default:
+            The default datetime
+
+    Returns:
+        dt
+            datetime
+    """
+    get_clean_string = ' '.join(re.sub( r"([A-Z])", r" \1", timestr).split()[-3:])
+
+    now = default
+    for _ in range(401):  # assume gregorian calendar repeats every 400 year
+        try:
+            dt = parser.parse(get_clean_string, default=default, **parse_kwargs)
+        except ValueError:
+            pass
+        else:
+            if dt > now: # found future date
+                break
+        default += relativedelta(years=+1)
+    else: # future date not found
+        raise ValueError('failed to find future date for %r' % (timestr,))
+    return dt
+
+
 def clean_df(df: pd.DataFrame) -> pd.DataFrame:
     """
     Clean the dataframe for the final output.
@@ -298,13 +333,12 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
         .replace(' appointment', '', regex=True)
     )
 
-    current_year = dt.today().year
-    df.columns = [
-        dparser
-        .parse(date, fuzzy=True)
-        .replace(year=current_year)
-        for date in df.columns
-    ]
+    new_dates = []
+
+    for date in df.columns:
+        new_dates.append(parse_future(date, default=datetime(2022, 12, 1)))
+
+    df.columns = new_dates
 
     locations = [
         "London",
