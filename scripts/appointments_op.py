@@ -127,9 +127,9 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
     data = session.get(first_page)
 
     df = pd.read_html(data.text)[0]
-    last_date = datetime.strptime(df.columns[-1], '%A  %d %B') + timedelta(days=1)
+    first_date = datetime.strptime(df.columns[0], '%A  %d %B').replace(year=curr_year) + timedelta(days=5)
     start_dates = [
-        (last_date + timedelta(days=6*i)).strftime(f'{curr_year}-%m-%d')
+        (first_date + timedelta(days=6*i)).strftime(f'%Y-%m-%d')
         for i in range(4)
     ]
 
