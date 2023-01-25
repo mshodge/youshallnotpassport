@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-
+import pytz
 
 def get_timestamp(github_action, timestamp_string_format='%H:%M'):
     """
@@ -8,11 +8,15 @@ def get_timestamp(github_action, timestamp_string_format='%H:%M'):
     :param timestamp_string_format: <string> The datetime format to return
     :return: timestamp <string> The formatted datetime
     """
-    if github_action:
-        timestamp = datetime.now() + timedelta(hours=1)
-        timestamp = timestamp.strftime(timestamp_string_format)
-    else:
-        timestamp = datetime.now().strftime(timestamp_string_format)
+    uk = pytz.timezone("Europe/London")
+    now = datetime.now(uk)
+    timestamp = now.astimezone(uk).strftime(timestamp_string_format)
+    #
+    # if github_action:
+    #     timestamp = datetime.now() + timedelta(hours=1)
+    #     timestamp = timestamp.strftime(timestamp_string_format)
+    # else:
+    #     timestamp = datetime.now().strftime(timestamp_string_format)
     return timestamp
 
 

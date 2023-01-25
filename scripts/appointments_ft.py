@@ -112,7 +112,6 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
 
             section_hash = insthash.split('-')[-1]
 
-
             applicant_details = {
                 'I_SUBMITCOUNT': '1',
                 'I_INSTHASH': insthash,
