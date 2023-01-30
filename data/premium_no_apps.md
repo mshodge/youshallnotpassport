@@ -1,1 +1,1 @@
-30/01/2023 premium
+30/01/2023 fast track
