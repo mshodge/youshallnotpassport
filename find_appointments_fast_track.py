@@ -173,7 +173,7 @@ def pipeline(first):
     # Posts a first graph
     if IS_TWITTER and first:
         post_media(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
-        failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+        failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
         if failed:
             run_github_action("29224896")
             return None
@@ -182,7 +182,7 @@ def pipeline(first):
     if IS_TWITTER and len(locs_added_checked) > 0:
         message = post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
         call_sms(SERVICE.title(), type = "app", response=message)
-        failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+        failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
         if failed:
             run_github_action("29224896")
             return None

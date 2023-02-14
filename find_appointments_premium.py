@@ -200,13 +200,13 @@ def pipeline(first=True):
         make_figure(nice_appointments_df)
         if IS_TWITTER and first:
             post_media(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
-            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
 
         # Posts a graph if new appointments have been added
         if IS_TWITTER and len(locs_added_checked) > 0:
             message = post_media_update(IS_PROXY, IS_GITHUB_ACTION, locs_added_checked, SERVICE)
             call_sms(SERVICE.title(), type="app", response=message)
-            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, "False", SERVICE)
+            update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
 
         long_appointments_df = long_dataframe(nice_appointments_df)
         failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
