@@ -132,10 +132,10 @@ def make_figure(the_df):
     days_list2 = list(range(10, 28))
     the_df[the_df.eq(0)] = np.nan
     appts = sns.heatmap(the_df, annot=True,
-                        cbar=False, cmap="Blues", linewidths=1, linecolor="white",
+                        cbar=False, cmap="Oranges", linewidths=1, linecolor="white",
                         vmin=0, vmax=30, annot_kws={"fontsize": 8})
 
-    appts.set_title("Premium availability per location and date (1 = Available)\n\n")
+    appts.set_title("The number of Premium appointments \n\n")
     for i in range(len(days_list)):
         appts.text(i + 0.3, -0.1, str(days_list[i]), fontsize=8)
     for i in range(len(days_list2)):
