@@ -78,7 +78,7 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
         pd.DataFrame
             The dataframe with the appointment data.
     """
-    # session.headers = MAIN_HEADERS
+    session.headers = MAIN_HEADERS
     form_datas = [
         {'is-uk-application': 'true'},
         {
