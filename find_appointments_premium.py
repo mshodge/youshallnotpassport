@@ -35,7 +35,7 @@ def check_diff_in_loc_counts(df):
     df_diff['count'] = df['count'] - df_old['count']
     locs_added = []
     for index, row in df_diff.iterrows():
-        if row['count'] > 1:
+        if row['count'] > 10:
             locs_added.append(row['location'])
 
     return locs_added
