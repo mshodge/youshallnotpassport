@@ -156,7 +156,7 @@ def pipeline(first):
                         "updating fast track appointment location data", replace=True)
     if failed:
         run_github_action("29224896")
-        raise Exception(f"Error. Failed to return the GitHub file. Will try again in {wait_mins} minutes.")
+        raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
     if first is False:
         locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
@@ -176,7 +176,7 @@ def pipeline(first):
         failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
         if failed:
             run_github_action("29224896")
-            raise Exception(f"Error. Failed to post to Twitter. Will try again in {wait_mins} minutes.")
+            raise Exception(f"Error. Failed to post to Twitter. Will try again.")
 
     # Posts a graph if new appointments have been added
     if IS_TWITTER and len(locations_added_checked) > 0:
@@ -185,7 +185,7 @@ def pipeline(first):
         failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
         if failed:
             run_github_action("29224896")
-            raise Exception(f"Error. Failed to post the SMS. Will try again in {wait_mins} minutes.")
+            raise Exception(f"Error. Failed to post the SMS. Will try again.")
 
     long_appointments_df = long_dataframe(nice_appointments_df)
     failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,

@@ -185,7 +185,7 @@ def pipeline(first=True):
 
         if failed:
             run_github_action("32513748")
-            raise Exception(f"Error. Failed to return the GitHub file. Will try again in {wait_mins} minutes.")
+            raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
         if first is False:
             locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
