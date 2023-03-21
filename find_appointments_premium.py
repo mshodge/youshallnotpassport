@@ -20,32 +20,34 @@ SERVICE = "premium"
 IS_PROXY = False
 IS_GITHUB_ACTION = True
 IS_TWITTER = True
+wait_mins = 3
+number_of_appointments_classed_as_bulk = 10
 
 
 def check_diff_in_loc_counts(df):
     """
     Checks the difference in the counts of appointments at each office, if an office has 10 or more new appointments
     then the bot will flag this to be posted to Twitter
-    :input df: <pandas.DataFrame> The pandas dataframe of latest results
-    :return locs_added: <list> List of offices with new appointments added, is blank if None
+    :input df: <pandas.DataFrame> The pandas dataframe of the latest results
+    :return locations_added: <list> List of offices with new appointments added, is blank if None
     """
 
     df_old = get_csv("data/premium_appointments_locations.csv")
     df_diff = df_old.copy()
     df_diff['count'] = df['count'] - df_old['count']
-    locs_added = []
+    locations_added = []
     for index, row in df_diff.iterrows():
-        if row['count'] > 10:
-            locs_added.append(row['location'])
+        if row['count'] > number_of_appointments_classed_as_bulk:
+            locations_added.append(row['location'])
 
-    return locs_added
+    return locations_added
 
 
 def run_github_action(id):
     """
     Returns value from dataframe
-    :param id: <string> the workflow id for github actions
-    :param github_action: <Boolean> If using github actions or not
+    :param id: <string> the workflow id for GitHub actions
+    :param github_action: <Boolean> If using GitHub actions or not
     """
 
     token = os.environ['access_token_github']
@@ -63,12 +65,12 @@ def check_if_no_apps_before():
     :return no_app_check_result: <string> The result checked last
     """
 
-    no_app_check = requests.get(
+    no_appointment_check = requests.get(
         "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/premium_no_apps.md").text \
         .replace("\n", "").split(" ")
-    no_app_check_date = no_app_check[0]
-    no_app_check_result = no_app_check[1]
-    return no_app_check_date, no_app_check_result
+    no_appointment_check_date = no_appointment_check[0]
+    no_appointment_check_result = no_appointment_check[1]
+    return no_appointment_check_date, no_appointment_check_result
 
 
 def long_dataframe(wide_df):
@@ -111,8 +113,8 @@ def nice_dataframe(not_nice_df):
         for idx in not_nice_df.index:
             location = not_nice_df.iloc[idx]["index"]
 
-            number_of_appts = not_nice_df.iloc[idx][col]
-            nice_df.at[location, col] = number_of_appts
+            number_of_appointments = not_nice_df.iloc[idx][col]
+            nice_df.at[location, col] = number_of_appointments
 
     nice_df = nice_df.drop(columns=['index'])
     nice_df.columns = better_date_list
@@ -131,19 +133,19 @@ def make_figure(the_df):
     days_list = list(range(0, 10))
     days_list2 = list(range(10, 28))
     the_df[the_df.eq(0)] = np.nan
-    appts = sns.heatmap(the_df, annot=True,
-                        cbar=False, cmap="Oranges", linewidths=1, linecolor="white",
-                        vmin=0, vmax=30, annot_kws={"fontsize": 8})
+    appointments = sns.heatmap(the_df, annot=True,
+                               cbar=False, cmap="Oranges", linewidths=1, linecolor="white",
+                               vmin=0, vmax=30, annot_kws={"fontsize": 8})
 
-    appts.set_title("The number of Premium appointments \n\n")
+    appointments.set_title("The number of Premium appointments \n\n")
     for i in range(len(days_list)):
-        appts.text(i + 0.3, -0.1, str(days_list[i]), fontsize=8)
+        appointments.text(i + 0.3, -0.1, str(days_list[i]), fontsize=8)
     for i in range(len(days_list2)):
-        appts.text(i + 10.1, -0.1, str(days_list2[i]), fontsize=8)
+        appointments.text(i + 10.1, -0.1, str(days_list2[i]), fontsize=8)
 
-    appts.figure.tight_layout()
-    appts.text(10, -0.5, "(Days from Today)", fontsize=10)
-    fig = appts.get_figure()
+    appointments.figure.tight_layout()
+    appointments.text(10, -0.5, "(Days from Today)", fontsize=10)
+    fig = appointments.get_figure()
     fig.savefig("out.png")
 
 
@@ -163,16 +165,14 @@ def pipeline(first=True):
         except ValueError:
             if first:
                 run_github_action("28968845") if IS_GITHUB_ACTION else None
-                return None
             else:
                 run_github_action("32513748") if IS_GITHUB_ACTION else None
-                return None
+            raise Exception('Error. Failed to get the appointments table.')
 
         if nice_appointments_df is None:
-            print("Error. Will try again.")
-            time.sleep(2 * 60)  # wait 2 mins before calling again
+            time.sleep(wait_mins * 60)  # wait 2 mins before calling again
             run_github_action("32513748") if IS_GITHUB_ACTION else None
-            return None
+            raise Exception(f"Error. Appointments table returned was none. Will try again in {wait_mins} minutes.")
 
         print(nice_appointments_df)
 
@@ -180,18 +180,18 @@ def pipeline(first=True):
         appointments_per_location.columns = ['location', 'count']
 
         failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
-                   "data/premium_appointments_locations.csv",
-                   "updating premium appointment location data", replace=True)
+                            "data/premium_appointments_locations.csv",
+                            "updating premium appointment location data", replace=True)
 
         if failed:
             run_github_action("32513748")
-            return None
+            raise Exception(f"Error. Failed to return the GitHub file. Will try again in {wait_mins} minutes.")
 
         if first is False:
             locs_added_checked = check_diff_in_loc_counts(appointments_per_location)
             if len(locs_added_checked) == 0:
-                print("No new bulk Premium appointments have been added, will check again in 2 mins")
-                time.sleep(2 * 60)  # wait 2 mins before calling again
+                print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
+                time.sleep(wait_mins * 60)  # wait 2 mins before calling again
                 run_github_action("32513748") if IS_GITHUB_ACTION else None
                 return None
         else:
@@ -210,9 +210,10 @@ def pipeline(first=True):
 
         long_appointments_df = long_dataframe(nice_appointments_df)
         failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
-                   "data/premium_appointments.csv",
-                   "updating premium appointment data", replace=False)
-        time.sleep(2 * 60)  # wait 2 mins before calling again
+                            "data/premium_appointments.csv",
+                            "updating premium appointment data", replace=False)
+        time.sleep(wait_mins * 60)  # wait 3 mins before calling again
+        print(f"Successfully found new appointments, will check again in {wait_mins} minutes")
         run_github_action("32513748") if IS_GITHUB_ACTION else None
 
 

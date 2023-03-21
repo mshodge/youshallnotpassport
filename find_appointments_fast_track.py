@@ -21,6 +21,7 @@ IS_PROXY = False
 IS_GITHUB_ACTION = True
 IS_TWITTER = True
 wait_mins = 3
+number_of_appointments_classed_as_bulk = 10
 
 session = requests.Session()
 session.headers = {
@@ -34,7 +35,7 @@ session.headers = {
 def run_github_action(id):
     """
     Runs the GitHub Action
-    :param id: <string> the workflow id for github actions
+    :param id: <string> the workflow id for GitHub actions
     """
 
     token = os.environ['access_token_github']
@@ -108,7 +109,7 @@ def check_diff_in_loc_counts(df):
     """
     Checks the difference in the counts of appointments at each office, if an office has 10 or more new appointments
     then the bot will flag this to be posted to Twitter
-    :input df: <pandas.DataFrame> The pandas dataframe of latest results
+    :input df: <pandas.DataFrame> The pandas dataframe of the latest results
     :return locations_added: <list> List of offices with new appointments added, is blank if None
     """
 
@@ -117,7 +118,7 @@ def check_diff_in_loc_counts(df):
     df_diff['count'] = df['count'] - df_old['count']
     locations_added = []
     for index, row in df_diff.iterrows():
-        if row['count'] > 10:
+        if row['count'] > number_of_appointments_classed_as_bulk:
             locations_added.append(row['location'])
 
     return locations_added
@@ -161,7 +162,7 @@ def pipeline(first):
         locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
         if len(locations_added_checked) == 0:
             print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
-            time.sleep(3 * 60)  # wait 3 mins before calling again
+            time.sleep(wait_mins * 60)  # wait 3 mins before calling again
             run_github_action("29224896") if IS_GITHUB_ACTION else None
             return None
     else:
