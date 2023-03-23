@@ -138,7 +138,7 @@ def pipeline(first):
     #     post_quick_check(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
 
     if "check again later" in requests.get("https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml").text:
-        print("It's offline!")
+        raise Exception(f"It's offline!")
 
     try:
         nice_appointments_df = get_appointment_data()
