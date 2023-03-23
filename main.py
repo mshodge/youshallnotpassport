@@ -162,7 +162,8 @@ def check(proxy, github_action, to_save_csv):
     timestamp_tweet = get_timestamp(github_action, timestamp_string_format='%d/%m %H:%M')
 
     # Reports if one week service is online or not
-    if "there are no available appointments" in page_one_text:
+    if "there are no available appointments" in page_one_text or \
+            "no Fast Track  appointments available" in page_one_text:
         response_one_week = f"One-week Fast Track is now offline ❌ ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \

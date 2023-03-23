@@ -132,10 +132,10 @@ def pipeline(first):
 
     print(f"Is first time running since going online: {first}")
 
-    appointments_check = quick_check()
-
-    if appointments_check:
-        post_quick_check(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
+    # appointments_check = quick_check()
+    #
+    # if appointments_check:
+    #     post_quick_check(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
 
     try:
         nice_appointments_df = get_appointment_data()
