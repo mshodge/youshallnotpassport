@@ -145,21 +145,11 @@ But below is a small infographic which may also help.
 <summary>When do services go online?</summary>
 <br>
 <blockquote>
-There is no set time. Typically, they go online every day of the week.
+There is no set time.
 <br><br>
-Lately (as of 04/08/2022), the patterns seem to be:<br>
-1. Fast Track going online at around 09:00<br>
-2. Premium going online at 10:00<br>
-</blockquote>
-<br><br>
-</details>
-
-<details>
-<summary>I heard that they go online at midnight, is this true?</summary>
-<br>
-<blockquote>
-Since the start of May this bot hasn't yet seen any evidence
-that the services go online at midnight, or any set time. See above.
+Lately (as of 23/03/2023), the patterns seem to be:<br>
+1. Fast Track has no set time<br>
+2. Premium going online at 08:15<br>
 </blockquote>
 <br><br>
 </details>
@@ -169,8 +159,6 @@ that the services go online at midnight, or any set time. See above.
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of when they will go online next.
-I produce a weekly newsletter, every Sunday, that will contain the statistics
-from the previous week: <a href="https://www.getrevue.co/profile/ukpassportcheck">here</a>
 </blockquote>
 <br><br>
 </details>
@@ -180,8 +168,6 @@ from the previous week: <a href="https://www.getrevue.co/profile/ukpassportcheck
 <br>
 <blockquote>
 I'm afraid I don't have any knowledge of what offices the appointments will go online for.
-I produce a weekly newsletter, every Sunday, that will contain the statistics
-from the previous week: <a href="https://www.getrevue.co/profile/ukpassportcheck">here</a>
 </blockquote>
 <br><br>
 </details>
