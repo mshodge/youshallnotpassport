@@ -58,6 +58,36 @@ def post_status(response, proxy, github_action):
 
     return tweet_id
 
+def post_quick_check(proxy, github_action, service):
+    """
+    Posts text response to Twitter
+    :param proxy: <Boolean> Whether to use a proxy or not, default is False
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :param service: <string> Premium or Fast Track
+    :return: <string> The response of whether the service is online or not
+    """
+
+    if service == 'fast track':
+        url = "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md"
+    elif service == 'premium':
+        url = "https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_op.md"
+
+    tweetid = requests.get(url).\
+        text.replace("\n","")
+
+    api = authenticate_twitter(github_action, proxy)
+
+    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
+
+    if service == "fast track":
+        message = f"Fast Track appointments seem to have been added at {timestamp}. The bot will try and get the " \
+                  f"number and location now."
+
+    api.update_status(status=message,
+                      in_reply_to_status_id=tweetid)
+
+    print("Posted text update to Twitter")
+
 def post_media(proxy, github_action, service):
     """
     Posts response to Twitter

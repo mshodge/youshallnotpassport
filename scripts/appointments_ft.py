@@ -80,6 +80,22 @@ def get_ajax(
     return open_tag + '&amp;'.join(params_list) + '</post></ajaxrequest>'
 
 
+def quick_check() -> str:
+    """
+    Get the appointment data.
+
+    Returns:
+        None
+    """
+    session.headers = MAIN_HEADERS
+
+    r = session.get(MAIN_URL)
+    no_appt_text = 'There are no Fast Track  appointments available'
+    if no_appt_text in r.text:
+        return False
+    else:
+        return True
+
 def get_appointment_data() -> Union[str, pd.DataFrame]:
     """
     Get the appointment data.
@@ -90,9 +106,10 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
     session.headers = MAIN_HEADERS
 
     r = session.get(MAIN_URL)
-    no_appt_text = 'Sorry, there are no available appointments'
+    no_appt_text = 'There are no Fast Track  appointments available'
     if no_appt_text in r.text:
         return no_appt_text
+
 
     keep_trying = True
     while keep_trying:

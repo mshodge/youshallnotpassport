@@ -7,11 +7,11 @@ import seaborn as sns
 import sys
 import time
 
-from scripts.utils.twitter import post_media, post_media_update
+from scripts.utils.twitter import post_media, post_media_update, post_quick_check
 from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.github import update_no_app
 from scripts.utils.sms import call_sms
-from scripts.appointments_ft import get_appointment_data
+from scripts.appointments_ft import get_appointment_data, quick_check
 
 today = date.today()
 TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
@@ -131,6 +131,11 @@ def pipeline(first):
     """
 
     print(f"Is first time running since going online: {first}")
+
+    appointments_check = quick_check()
+
+    if appointments_check:
+        post_quick_check(IS_PROXY, IS_GITHUB_ACTION, SERVICE)
 
     try:
         nice_appointments_df = get_appointment_data()
