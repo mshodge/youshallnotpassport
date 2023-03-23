@@ -108,7 +108,7 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
     r = session.get(MAIN_URL)
     no_appt_text = 'There are no Fast Track  appointments available'
     if no_appt_text in r.text:
-        return no_appt_text
+        return False
 
 
     keep_trying = True

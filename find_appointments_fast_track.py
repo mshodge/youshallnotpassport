@@ -147,9 +147,14 @@ def pipeline(first):
         raise Exception('Error. Failed to get the appointments table.')
 
     if nice_appointments_df is None:
-        time.sleep(wait_mins * 60)  # wait 2 mins before calling again
+        time.sleep(60)  # wait a minute before calling again
         run_github_action("29224896") if IS_GITHUB_ACTION else None
-        raise Exception(f"Error. Appointments table returned was none. Will try again in {wait_mins} minutes.")
+        raise Exception(f"Error. Appointments table returned was none. Will try again in one minute.")
+    elif nice_appointments_df is False:
+        time.sleep(60)  # wait a minute before calling again
+        run_github_action("29224896") if IS_GITHUB_ACTION else None
+        print(f"No Appointments were available. Will try again in one minute.")
+        return None
 
     print(nice_appointments_df)
 
