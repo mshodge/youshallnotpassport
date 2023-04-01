@@ -31371,7 +31371,5 @@ one week fast track,False,01/04/2023 09:01
 premium,False,01/04/2023 09:01
 one week fast track,False,01/04/2023 09:31
 premium,True,01/04/2023 09:31
-one week fast track,False,01/04/2023 09:59
-premium,False,01/04/2023 09:59
-one week fast track,False,01/04/2023 10:00
-premium,False,01/04/2023 10:00
+one week fast track,True,01/04/2023 10:01
+premium,False,01/04/2023 10:01
