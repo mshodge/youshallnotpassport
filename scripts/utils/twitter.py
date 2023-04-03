@@ -256,41 +256,6 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
     print("Posted update to Twitter")
     return message
 
-def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
-    """
-    Update Twitter Bio
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param proxy: <Boolean> Whether using a proxy or not
-    :param one_week_status: <string> The status of the one week service
-    :param premium_status: <string> The status of the premium service
-    """
-    timestamp = get_timestamp(github_action, timestamp_string_format='%H:%M')
-
-    api = authenticate_twitter(github_action, proxy)
-
-    if premium_status == "Error":
-        premium_status_symbol = f"OP ️is error,"
-    elif premium_status == "True":
-        premium_status_symbol = f"OP is online,"
-    else:
-        premium_status_symbol = f"OP is offline,"
-
-    if one_week_status == "Error":
-        one_week_status_symbol = f"FT is error"
-    elif one_week_status == "True":
-        one_week_status_symbol = f"FT is online"
-    else:
-        one_week_status_symbol = f"FT is offline"
-
-    new_bio = f"Non-profit, unofficial bot. Runs every minute. Please check http://gov.uk/get-a-passport-urgently before " \
-              f"booking. {premium_status_symbol} {one_week_status_symbol} (updated {timestamp})."
-
-    # Posts status to Twitter
-    api.update_profile(description=new_bio)
-
-    print("Updated bio on Twitter")
-
-
 def post_status_update(proxy, github_action):
     """
     Posts response to Twitter
