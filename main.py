@@ -167,10 +167,10 @@ def check(proxy, github_action, to_save_csv):
         response_one_week = f"One-week Fast Track is now offline ❌ ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"I will post again when it goes online next. Have some feedback, or got an appointment? " \
-                            f"Please fill in:" \
+                            f"I will post again when it goes online next. For more information or to submit  " \
+                            f" your passport wait-time:" \
                             f"\n" \
-                            f"https://forms.gle/o1hY5DzWy1thfXwV7"
+                            f"https://www.passportwaitingtime.co.uk/ukpassportcheck/"
         one_week_online = "False"
     elif "is temporarily unavailable" in page_one_text:
         response_one_week = None
@@ -185,7 +185,7 @@ def check(proxy, github_action, to_save_csv):
                             f"I will post again when it goes offline." \
                             f"\n" \
                             f"\n" \
-                            f"(If System Busy message, then keep Refreshing! If 503 error, then Wait!)" \
+                            f"(Still no luck? Go back and click button again.)" \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
@@ -195,10 +195,10 @@ def check(proxy, github_action, to_save_csv):
         response_premium = f"Same day Premium service is now offline ❌ ({timestamp_tweet})" \
                            f"\n" \
                            f"\n"\
-                           f"I will post again when it goes online next. Have some feedback, or got an appointment? " \
-                           f"Please fill in:" \
-                           f"\n" \
-                           f"https://forms.gle/o1hY5DzWy1thfXwV7"
+                           f"I will post again when it goes online next. For more information or to submit  " \
+                            f" your passport wait-time:" \
+                            f"\n" \
+                            f"https://www.passportwaitingtime.co.uk/ukpassportcheck/"
         premium_online = "False"
     else:
         response_premium = f"Same day Premium service is now online! ✅ ({timestamp_tweet})" \
@@ -206,7 +206,7 @@ def check(proxy, github_action, to_save_csv):
                            f"\n"\
                            f"I will post again when it goes offline." \
                            f"\n" \
-                           f"(If sent to normal route, go back and try again)" \
+                           f"(Sent to normal route? Go back and click button again.)" \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
