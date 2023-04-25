@@ -1,4 +1,5 @@
 import chromedriver_autoinstaller
+from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
@@ -50,14 +51,25 @@ def setup_selenium(url, is_github_action):
     options.add_argument('--headless')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
+    options.add_argument("--nogpu")
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--window-size=1920,1080')
     options.add_argument("--incognito")
+    options.add_argument("--enable-javascript")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_argument('--disable-blink-features=AutomationControlled')
     driver = webdriver.Chrome(options=options)
+
+    ua = UserAgent()
+    userAgent = ua.random
 
     driver.get(url)
     time.sleep(0.2)
+
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
 
     return driver
 
