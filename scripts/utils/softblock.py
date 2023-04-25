@@ -47,10 +47,9 @@ def setup_selenium(url, is_github_action):
     """
 
     options = Options()
-    if is_github_action:
-        options.add_argument('--headless')
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--allow-running-insecure-content')
+    options.add_argument('--headless')
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--allow-running-insecure-content')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--window-size=1920,1080')
@@ -58,8 +57,7 @@ def setup_selenium(url, is_github_action):
     driver = webdriver.Chrome(options=options)
 
     driver.get(url)
-    if is_github_action:
-        time.sleep(0.2)
+    time.sleep(0.2)
 
     return driver
 
