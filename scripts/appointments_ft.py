@@ -117,7 +117,7 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
     soft_block_text = 'data-pageid="softblock"'
 
     check_for_image = True
-
+    print(r.text)
     if soft_block_text in r.text:
         this_driver = setup_selenium(MAIN_URL, is_github_action)
         while check_for_image:
@@ -150,6 +150,7 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
         r = s.get(MAIN_URL)
 
     insthash = get_insthash(r)
+    print(insthash)
 
     if insthash is None:
         return None
