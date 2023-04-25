@@ -28,8 +28,14 @@ def check_diff_in_loc_counts(df):
     """
     Checks the difference in the counts of appointments at each office, if an office has 10 or more new appointments
     then the bot will flag this to be posted to Twitter
-    :input df: <pandas.DataFrame> The pandas dataframe of the latest results
-    :return locations_added: <list> List of offices with new appointments added, is blank if None
+
+    Args:
+        df: pd.DataFrame
+            The pandas dataframe of the latest results
+
+    Returns:
+        locations_added: list
+            List of offices with new appointments added, is blank if None
     """
 
     df_old = get_csv("data/premium_appointments_locations.csv")
@@ -46,8 +52,12 @@ def check_diff_in_loc_counts(df):
 def run_github_action(id):
     """
     Returns value from dataframe
-    :param id: <string> the workflow id for GitHub actions
-    :param github_action: <Boolean> If using GitHub actions or not
+
+    Args:
+        id: str
+            The workflow id for GitHub actions
+        github_action: Bool
+            If using GitHub actions or not
     """
 
     token = os.environ['access_token_github']
@@ -61,8 +71,12 @@ def run_github_action(id):
 def check_if_no_apps_before():
     """
     Checks if the bot has already seen a return of no appointments in the table already today
-    :return no_app_check_date: <string> The date checked last
-    :return no_app_check_result: <string> The result checked last
+
+    Returns:
+        no_app_check_date: str
+            The date checked last
+        no_appointment_check_result: str
+            The result checked last
     """
 
     no_appointment_check = requests.get(
@@ -76,7 +90,14 @@ def check_if_no_apps_before():
 def long_dataframe(wide_df):
     """
     Make a long dataframe
-    :param wide_df: <pandas.dataframe> The pandas dataframe
+
+    Args:
+        wide_df: pd.dataframe
+            The pandas dataframe in wide format
+
+    Returns:
+        long_df: pd.dataframe
+            The pandas dataframe in long format
     """
 
     wide_df['location'] = wide_df.index
@@ -94,8 +115,14 @@ def long_dataframe(wide_df):
 def nice_dataframe(not_nice_df):
     """
     Makes a nice dataframe
-    :param not_nice_df: <pandas.dataframe> The pandas dataframe
-    :return df: <pandas.dataframe> The pandas dataframe
+
+    Args:
+        not_nice_df: pd.dataframe
+            The pandas dataframe that is not nicely formatted
+
+    Returns:
+        df: pd.dataframe
+            A nicely formatted pandas dataframe
     """
 
     base = datetime.today()
@@ -127,7 +154,10 @@ def nice_dataframe(not_nice_df):
 def make_figure(the_df):
     """
     Makes a seaborn heatmap figure from appointments dataframe
-    :param the_df: <pandas.dataframe> The pandas dataframe
+
+    Args:
+        the_df: pd.dataframe
+            The pandas dataframe
     """
 
     days_list = list(range(0, 10))
@@ -152,7 +182,10 @@ def make_figure(the_df):
 def pipeline(first=True):
     """
     The main function to get the appointment data from the table at the end of the process
-    :input first: <Boolean> The first run after the service has gone online?
+
+    Args:
+        first: Bool
+            The first run after the service has gone online?
     """
 
     print(f"Is first time running since going online: {first}")
@@ -161,7 +194,7 @@ def pipeline(first=True):
         print("It's offline!")
     else:
         try:
-            nice_appointments_df = get_appointment_data(MAIN_URL)
+            nice_appointments_df = get_appointment_data(MAIN_URL, IS_GITHUB_ACTION)
         except ValueError:
             if first:
                 run_github_action("28968845") if IS_GITHUB_ACTION else None
