@@ -147,7 +147,7 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
         for cookie in this_driver.get_cookies():
             s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
-    r = s.get(MAIN_URL)
+        r = s.get(MAIN_URL)
 
     insthash = get_insthash(r)
 
