@@ -30,13 +30,15 @@ def get_azure_key(github_action) -> str:
     return token
 
 
-def setup_selenium(url):
+def setup_selenium(url, is_github_action):
     """
     Sets up the Selenium webdriver
 
     Params:
         url: str
             The web url to create the driver for
+        is_github_action: bool
+            Whether running as a GitHub Action or not
 
     Returns:
         driver:
@@ -44,6 +46,8 @@ def setup_selenium(url):
 
     """
     options = Options()
+    if is_github_action:
+        options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--window-size=1920,1080')

@@ -119,7 +119,7 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
     check_for_image = True
 
     if soft_block_text in r.text:
-        this_driver = setup_selenium(MAIN_URL)
+        this_driver = setup_selenium(MAIN_URL, is_github_action)
         while check_for_image:
             image_found = get_recapctha_image(this_driver)
             if image_found:
