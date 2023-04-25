@@ -21,6 +21,13 @@ def df_to_csv_string(df_to_convert):
     Converts a pandas DataFrame into a csv string for upload to GitHub
     :param df_to_convert: <DataFrame> The DataFrame
     :return: df_string <string> The rDa
+
+    Args:
+        df_to_convert: pd.DataFrame
+            The DataFrame
+
+    Returns:
+        df_string: str
     """
 
     df_string = ""
@@ -46,11 +53,22 @@ def df_to_csv_string(df_to_convert):
 def update_csv(df, github_action, file_path, message):
     """
     Updates csv file on GitHub and local
-    :param df: <DataFrame> The DataFrame from the current check
-    :param github_action: <Boolean> Whether a GitHub action or not, for auth
-    :param file_path: <string> The path to upload the file to
-    :param message: <string> The post message
-    :return: <string> The response of whether the service is online or not
+
+    Args:
+        df: pd.DataFrame
+            The DataFrame from the current check
+
+        github_action: Bool
+            Whether a GitHub action or not, for auth
+
+        file_path: str
+            The path to upload the file to
+
+        message: str
+            The post message
+    Returns:
+        str
+            The response of whether the service is online or not
     """
 
     print("Updating csv file both locally and on GitHub")
@@ -90,8 +108,13 @@ def update_csv(df, github_action, file_path, message):
 def run_appointments_code(id, github_action):
     """
     Returns value from dataframe
-    :param id: <string> the workflow id for github actions
-    :param github_action: <Boolean> If using github actions or not
+
+    Args:
+        id: str
+            The workflow id for github actions
+
+        github_action: github_action: Bool
+            If using github actions or not
     """
 
     if github_action:
@@ -102,7 +125,7 @@ def run_appointments_code(id, github_action):
 
     url = f"https://api.github.com/repos/mshodge/youshallnotpassport/actions/workflows/{id}/dispatches"
     headers = {"Authorization": "bearer " + token}
-    json = {"ref":"main"}
+    json = {"ref": "main"}
     r = requests.post(url, headers=headers, json=json)
     print(r)
 
@@ -110,9 +133,17 @@ def run_appointments_code(id, github_action):
 def online_status_on_last_check(df_old_online_status, service):
     """
     Returns value from dataframe
-    :param df_old_online_status: <DataFrame> The DataFrame of online status
-    :param service: <string> The service type
-    :return: <string> Whether the status is online ('True', 'Busy') or not ('False')
+
+    Args:
+        df_old_online_status: pd.DataFrame
+            The DataFrame of online status
+
+        service: str
+            The service type
+
+    Returns:
+        str
+            Whether the status is online ('True', 'Busy') or not ('False')
     """
 
     return str(df_old_online_status[df_old_online_status['service'] == service]['online'].values[0])
@@ -121,11 +152,17 @@ def online_status_on_last_check(df_old_online_status, service):
 def check(proxy, github_action, to_save_csv):
     """
     Checks if the passport services are online or not
-    :param proxy: <Boolean> Whether to use a proxy or not, default is False
-    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
-    :param to_save_csv: <Boolean>
-    :return: <string> The response of whether the service is online or not
+
+    Args:
+        proxy: Bool
+            Whether to use a proxy or not, default is False
+        github_action: Bool
+            Whether this will be deployed as an automated GitHub Action
+        to_save_csv: Bool
+            Whether to save to a csv
+
     """
+
     url_one_week = "https://www.passportappointment.service.gov.uk/outreach/publicbooking.ofml"
     url_premium = "https://www.passport.service.gov.uk/urgent/"
 
@@ -256,14 +293,14 @@ if __name__ == '__main__':
                 print('\n\nOne week service status has changed, will post to Twitter!\n')
                 tweet_id = post_status(response_one_week_check, is_proxy, is_github_action)
                 update_tweet_id(is_github_action, tweet_id, 'fast track')
-                call_sms('Fast Track', type = "status", response = response_one_week_check)
+                call_sms('Fast Track', type="status", response=response_one_week_check)
                 run_appointments_code("28775018", is_github_action)
 
             if premium_online_check != premium_online_check_last:
                 print('\n\nPremium service status has changed, will post to Twitter!\n')
                 tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
                 update_tweet_id(is_github_action, tweet_id, 'premium')
-                call_sms('Premium', type="status", response = response_premium_check)
+                call_sms('Premium', type="status", response=response_premium_check)
                 run_appointments_code("28968845", is_github_action)
 
             update_online_status(df_status_is, is_github_action)
