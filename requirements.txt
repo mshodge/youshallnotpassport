@@ -1,4 +1,6 @@
 beautifulsoup4==4.11.1
+bs4~=0.0.1
+chromedriver-autoinstaller==0.4.0
 google-auth==2.12.0
 google-auth-oauthlib==0.5.3
 html5lib==1.1
@@ -11,8 +13,7 @@ python-dateutil==2.8.2
 pytz==2022.1
 requests==2.27.1
 seaborn==0.11.2
+selenium~=4.8.2
 tabulate==0.8.10
 tweepy==4.9.0
 urllib3==1.26.9
-selenium~=4.8.2
-bs4~=0.0.1
