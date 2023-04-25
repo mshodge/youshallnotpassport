@@ -115,6 +115,7 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
         return False
 
     soft_block_text = 'data-pageid="softblock"'
+    queue_text = "You’re in a queue"
 
     check_for_image = True
     print(r.text)
@@ -136,6 +137,10 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
             else:
                 check_for_image = False
 
+    r = session.get(MAIN_URL)
+    print(r)
+
+    if queue_text in r.text:
         this_driver = wait_in_queue(this_driver)
 
         s = requests.Session()
