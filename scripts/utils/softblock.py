@@ -45,6 +45,11 @@ def setup_selenium(url, is_github_action):
             The selenium web driver
 
     """
+    if is_github_action:
+        from pyvirtualdisplay import Display
+        display = Display(visible=0, size=(800, 800))
+        display.start()
+
     options = Options()
     if is_github_action:
         options.add_argument('--headless')

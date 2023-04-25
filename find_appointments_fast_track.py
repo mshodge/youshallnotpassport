@@ -186,11 +186,11 @@ def pipeline(first):
         run_github_action("29224896") if IS_GITHUB_ACTION else None
         print(f"No Appointments were available. Will try again in one minute.")
         return None
-    elif nice_appointments_df == 'Block':
-        print(f"Softblocked. Will try again in one minute.")
-        time.sleep(10)  # wait a minute before calling again
-        run_github_action("29224896") if IS_GITHUB_ACTION else None
-        raise Exception(f"Error. Softblocked. Will try again in 10 seconds.")
+    # elif nice_appointments_df == 'Block':
+    #     print(f"Softblocked. Will try again in one minute.")
+    #     time.sleep(10)  # wait a minute before calling again
+    #     run_github_action("29224896") if IS_GITHUB_ACTION else None
+    #     raise Exception(f"Error. Softblocked. Will try again in 10 seconds.")
 
     print(nice_appointments_df)
 
