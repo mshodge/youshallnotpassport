@@ -16,16 +16,16 @@ Provides the functions:
 import requests, re
 from typing import Dict, Union
 from dateutil import parser
-import dateutil.parser as dparser
 from dateutil.relativedelta import relativedelta
-from datetime import date as dt
 from datetime import datetime, timedelta
 import time
+from selenium.webdriver.common.by import By
 
 from bs4 import BeautifulSoup
 import pandas as pd
 
-__author__ = ['Dr. Usman Kayani']
+from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url
+
 
 MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml'
 MAIN_HEADERS = {
@@ -37,16 +37,13 @@ MAIN_HEADERS = {
 
 session = requests.Session()
 
-def get_insthash() -> str:
+def get_insthash(response):
     """
     Get the insthash.
 
-    Returns:
-        str
-            Instance hash.
     """
-    data = session.get(MAIN_URL)
-    soup = BeautifulSoup(data.text, 'html.parser')
+
+    soup = BeautifulSoup(response.text, 'html.parser')
     insthash_data = soup.find('input', {'name': 'I_INSTHASH'})
     if insthash_data is None:
         return None
@@ -60,7 +57,7 @@ def get_ajax(
     """
     Get the ajax text to process JS request.
 
-    Params:
+    Args:
         insthash: str
             Instance hash.
         params: Dict
@@ -72,6 +69,7 @@ def get_ajax(
         str
             The ajax text for the post request.
     """
+
     open_tag = f"<ajaxrequest><insthash>{insthash}</insthash><post url='{MAIN_URL}'>"
     if init:
         return open_tag + "</post><saving>TRUE</saving></ajaxrequest>"
@@ -80,13 +78,14 @@ def get_ajax(
     return open_tag + '&amp;'.join(params_list) + '</post></ajaxrequest>'
 
 
-def quick_check() -> str:
+def quick_check() -> bool:
     """
     Get the appointment data.
 
     Returns:
         None
     """
+
     session.headers = MAIN_HEADERS
 
     r = session.get(MAIN_URL)
@@ -96,9 +95,14 @@ def quick_check() -> str:
     else:
         return True
 
-def get_appointment_data() -> Union[str, pd.DataFrame]:
+
+def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
     """
     Get the appointment data.
+
+    Args:
+        is_github_action: Bool
+            TRUE if it's running as a GitHub Action...
 
     Returns:
         None
@@ -110,201 +114,226 @@ def get_appointment_data() -> Union[str, pd.DataFrame]:
     if no_appt_text in r.text:
         return False
 
+    soft_block_text = 'data-pageid="softblock"'
 
-    keep_trying = True
-    while keep_trying:
-        if "System busy" in r.text:
-            print(f"System Busy, will try again in 1 second")
-            time.sleep(1)
-        # elif "Error " in r.text:
-        #     print(f"System Busy, will try again in 1 second")
-        #     time.sleep(1)
-        else:
+    check_for_image = True
 
-            keep_trying = False
-            insthash = get_insthash()
-
-            if insthash is None:
-                return None
-
-            section_hash = insthash.split('-')[-1]
-
-            applicant_details = {
-                'I_SUBMITCOUNT': '1',
-                'I_INSTHASH': insthash,
-                'I_PAGENUM': '1',
-                'I_JAVASCRIPTON': '1',
-                'I_UTFENCODED': 'TRUE',
-                'I_ACCESS': '',
-                'I_TABLELINK': '',
-                'I_AJAXMODE': '',
-                'I_SMALLSCREEN': '',
-                'I_SECTIONHASH': f'{section_hash}_Section_start',
-                'FHC_Passport_count': '',
-                'F_Passport_count': '1',
-                'F_Applicant1_firstname': 'm',
-                'F_Applicant1_lastname': 'm',
-                'FD_Applicant1_dob': '01',
-                'FM_Applicant1_dob': '01',
-                'FY_Applicant1_dob': '1990',
-                'F_Applicant2_firstname': '',
-                'F_Applicant2_lastname': '',
-                'FD_Applicant2_dob': '',
-                'FM_Applicant2_dob': '',
-                'FY_Applicant2_dob': '',
-                'F_Applicant3_firstname': '',
-                'F_Applicant3_lastname': '',
-                'FD_Applicant3_dob': '',
-                'FM_Applicant3_dob': '',
-                'FY_Applicant3_dob': '',
-                'F_Applicant4_firstname': '',
-                'F_Applicant4_lastname': '',
-                'FD_Applicant4_dob': '',
-                'FM_Applicant4_dob': '',
-                'FY_Applicant4_dob': '',
-                'F_Applicant5_firstname': '',
-                'F_Applicant5_lastname': '',
-                'FD_Applicant5_dob': '',
-                'FM_Applicant5_dob': '',
-                'FY_Applicant5_dob': '',
-                'BB_Next': ''
-            }
-
-            application_type = {
-                'I_SUBMITCOUNT': '1',
-                'I_INSTHASH': insthash,
-                'I_PAGENUM': '2',
-                'I_JAVASCRIPTON': '1',
-                'I_UTFENCODED': 'TRUE',
-                'I_ACCESS': '',
-                'I_TABLELINK': '',
-                'I_AJAXMODE': '',
-                'I_SMALLSCREEN': '',
-                'I_SECTIONHASH': f'{section_hash}_Section_current_passports',
-                'FHC_Applicant1_isadult': '',
-                'F_Applicant1_isadult': 'on',
-                'FHC_Applicant1_apptype_rb': '',
-                'F_Applicant1_apptype_rb': 'REPLACE',
-                'FHC_Applicant2_isadult': '',
-                'FHC_Applicant2_apptype_rb': '',
-                'FHC_Applicant3_isadult': '',
-                'FHC_Applicant3_apptype_rb': '',
-                'FHC_Applicant4_isadult': '',
-                'FHC_Applicant4_apptype_rb': '',
-                'FHC_Applicant5_isadult': '',
-                'FHC_Applicant5_apptype_rb': '',
-                'D_DEFBTN': 'BB_Reload'
-            }
-
-            service_type = {
-                'I_SUBMITCOUNT': '1',
-                'I_INSTHASH': insthash,
-                'I_PAGENUM': '3',
-                'I_JAVASCRIPTON': '1',
-                'I_UTFENCODED': 'TRUE',
-                'I_ACCESS': '',
-                'I_TABLELINK': '',
-                'I_AJAXMODE': '',
-                'I_SMALLSCREEN': '',
-                'I_SECTIONHASH': f'{section_hash}_Section_current_passports',
-                'FHC_Applicant1_isadult': '',
-                'F_Applicant1_isadult': 'on',
-                'FHC_Applicant1_apptype_rb': '',
-                'F_Applicant1_apptype_rb': 'REPLACE',
-                'FHC_Applicant2_isadult': '',
-                'FHC_Applicant2_apptype_rb': '',
-                'FHC_Applicant3_isadult': '',
-                'FHC_Applicant3_apptype_rb': '',
-                'FHC_Applicant4_isadult': '',
-                'FHC_Applicant4_apptype_rb': '',
-                'FHC_Applicant5_isadult': '',
-                'FHC_Applicant5_apptype_rb': '',
-                'D_DEFBTN': 'BB_Reload',
-                'BA_Bnconfirmapptypes__pca': ''
-            }
-
-            appointments1 = {
-                'I_SUBMITCOUNT': '1',
-                'I_INSTHASH': insthash,
-                'I_PAGENUM': '4',
-                'I_JAVASCRIPTON': '1',
-                'I_UTFENCODED': 'TRUE',
-                'I_ACCESS': '',
-                'I_TABLELINK': '',
-                'I_AJAXMODE': '',
-                'I_SMALLSCREEN': '',
-                'I_SECTIONHASH': f'{section_hash}_Section_selectservicetype',
-                'FHC_Has_selected_servicetype__nosumm': '',
-                'F_Selectedbuttonname_servicetype': '2',
-                'BA_Bn_select_service__pca': ''
-            }
-
-            appointments2 = {
-                'I_SUBMITCOUNT': '1',
-                'I_INSTHASH': insthash,
-                'I_PAGENUM': '5',
-                'I_JAVASCRIPTON': '1',
-                'I_UTFENCODED': 'TRUE',
-                'I_ACCESS': '',
-                'I_TABLELINK': '',
-                'I_AJAXMODE': '',
-                'I_SMALLSCREEN': '',
-                'I_SECTIONHASH': f'{section_hash}_Section_availabledates',
-                'FHC_Has_selected_date__nosumm': '',
-                'FHC_Has_javascript_enabled__nosumm': '',
-                'F_Has_javascript_enabled__nosumm': 'on',
-                'F_Selectedbuttonname_date__nosumm': '',
-                'F_Postcode__nosumm__sm': '',
-                'Date_Table_Next_6': ''
-            }
-
-            # Ajax requests need to be in sequence for the data to be available.
-            for stage in [applicant_details, application_type, service_type, appointments1]:
-                r = session.post(
-                    MAIN_URL,
-                    headers={'Content-Type' : 'text/xml'},
-                    data=get_ajax(insthash, stage)
-                )
-
-            no_appt_text = 'no available appointments'
-            if no_appt_text in r.text:
-                return None
-
+    if soft_block_text in r.text:
+        this_driver = setup_selenium(MAIN_URL)
+        while check_for_image:
+            image_found = get_recapctha_image(this_driver)
+            if image_found:
+                ocr_response = detect_text_url(is_github_action)
+                recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
+                element = this_driver.find_element(by=By.XPATH,
+                                                   value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
+                element.send_keys(recaptcha_text)
+                time.sleep(2)
+                element = this_driver.find_element(by=By.XPATH,
+                                                   value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')
+                element.click()
+                time.sleep(2)
             else:
-                appt_page = 1
-                data_list = []
-                data_first = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
-                data_list.append(data_first[0])
+                check_for_image = False
 
-                get_another_page = True
+        this_driver = wait_in_queue(this_driver)
 
-                while get_another_page:
-                    if appt_page == 1:
-                        data_previous = data_first
-                    else:
-                        data_previous = data_next
+        s = requests.Session()
 
-                    r = session.post(
-                        MAIN_URL,
-                        headers={'Content-Type': 'text/xml'},
-                        data=get_ajax(insthash, appointments2),
-                    )
+        # Set correct user agent
+        selenium_user_agent = this_driver.execute_script("return navigator.userAgent;")
+        s.headers.update({"user-agent": selenium_user_agent})
 
-                    data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+        for cookie in this_driver.get_cookies():
+            s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
-                    if data_next[0].equals(data_previous[0]) == True:
-                        get_another_page = False
-                        return clean_df(pd.concat(data_list, axis=1))
-                    else:
-                        data_list.append(data_next[0])
-                        appt_page += 1
+    r = s.get(MAIN_URL)
+
+    insthash = get_insthash(r)
+
+    if insthash is None:
+        return None
+
+    section_hash = insthash.split('-')[-1]
+
+    applicant_details = {
+        'I_SUBMITCOUNT': '1',
+        'I_INSTHASH': insthash,
+        'I_PAGENUM': '1',
+        'I_JAVASCRIPTON': '1',
+        'I_UTFENCODED': 'TRUE',
+        'I_ACCESS': '',
+        'I_TABLELINK': '',
+        'I_AJAXMODE': '',
+        'I_SMALLSCREEN': '',
+        'I_SECTIONHASH': f'{section_hash}_Section_start',
+        'FHC_Passport_count': '',
+        'F_Passport_count': '1',
+        'F_Applicant1_firstname': 'm',
+        'F_Applicant1_lastname': 'm',
+        'FD_Applicant1_dob': '01',
+        'FM_Applicant1_dob': '01',
+        'FY_Applicant1_dob': '1990',
+        'F_Applicant2_firstname': '',
+        'F_Applicant2_lastname': '',
+        'FD_Applicant2_dob': '',
+        'FM_Applicant2_dob': '',
+        'FY_Applicant2_dob': '',
+        'F_Applicant3_firstname': '',
+        'F_Applicant3_lastname': '',
+        'FD_Applicant3_dob': '',
+        'FM_Applicant3_dob': '',
+        'FY_Applicant3_dob': '',
+        'F_Applicant4_firstname': '',
+        'F_Applicant4_lastname': '',
+        'FD_Applicant4_dob': '',
+        'FM_Applicant4_dob': '',
+        'FY_Applicant4_dob': '',
+        'F_Applicant5_firstname': '',
+        'F_Applicant5_lastname': '',
+        'FD_Applicant5_dob': '',
+        'FM_Applicant5_dob': '',
+        'FY_Applicant5_dob': '',
+        'BB_Next': ''
+    }
+
+    application_type = {
+        'I_SUBMITCOUNT': '1',
+        'I_INSTHASH': insthash,
+        'I_PAGENUM': '2',
+        'I_JAVASCRIPTON': '1',
+        'I_UTFENCODED': 'TRUE',
+        'I_ACCESS': '',
+        'I_TABLELINK': '',
+        'I_AJAXMODE': '',
+        'I_SMALLSCREEN': '',
+        'I_SECTIONHASH': f'{section_hash}_Section_current_passports',
+        'FHC_Applicant1_isadult': '',
+        'F_Applicant1_isadult': 'on',
+        'FHC_Applicant1_apptype_rb': '',
+        'F_Applicant1_apptype_rb': 'REPLACE',
+        'FHC_Applicant2_isadult': '',
+        'FHC_Applicant2_apptype_rb': '',
+        'FHC_Applicant3_isadult': '',
+        'FHC_Applicant3_apptype_rb': '',
+        'FHC_Applicant4_isadult': '',
+        'FHC_Applicant4_apptype_rb': '',
+        'FHC_Applicant5_isadult': '',
+        'FHC_Applicant5_apptype_rb': '',
+        'D_DEFBTN': 'BB_Reload'
+    }
+
+    service_type = {
+        'I_SUBMITCOUNT': '1',
+        'I_INSTHASH': insthash,
+        'I_PAGENUM': '3',
+        'I_JAVASCRIPTON': '1',
+        'I_UTFENCODED': 'TRUE',
+        'I_ACCESS': '',
+        'I_TABLELINK': '',
+        'I_AJAXMODE': '',
+        'I_SMALLSCREEN': '',
+        'I_SECTIONHASH': f'{section_hash}_Section_current_passports',
+        'FHC_Applicant1_isadult': '',
+        'F_Applicant1_isadult': 'on',
+        'FHC_Applicant1_apptype_rb': '',
+        'F_Applicant1_apptype_rb': 'REPLACE',
+        'FHC_Applicant2_isadult': '',
+        'FHC_Applicant2_apptype_rb': '',
+        'FHC_Applicant3_isadult': '',
+        'FHC_Applicant3_apptype_rb': '',
+        'FHC_Applicant4_isadult': '',
+        'FHC_Applicant4_apptype_rb': '',
+        'FHC_Applicant5_isadult': '',
+        'FHC_Applicant5_apptype_rb': '',
+        'D_DEFBTN': 'BB_Reload',
+        'BA_Bnconfirmapptypes__pca': ''
+    }
+
+    appointments1 = {
+        'I_SUBMITCOUNT': '1',
+        'I_INSTHASH': insthash,
+        'I_PAGENUM': '4',
+        'I_JAVASCRIPTON': '1',
+        'I_UTFENCODED': 'TRUE',
+        'I_ACCESS': '',
+        'I_TABLELINK': '',
+        'I_AJAXMODE': '',
+        'I_SMALLSCREEN': '',
+        'I_SECTIONHASH': f'{section_hash}_Section_selectservicetype',
+        'FHC_Has_selected_servicetype__nosumm': '',
+        'F_Selectedbuttonname_servicetype': '2',
+        'BA_Bn_select_service__pca': ''
+    }
+
+    appointments2 = {
+        'I_SUBMITCOUNT': '1',
+        'I_INSTHASH': insthash,
+        'I_PAGENUM': '5',
+        'I_JAVASCRIPTON': '1',
+        'I_UTFENCODED': 'TRUE',
+        'I_ACCESS': '',
+        'I_TABLELINK': '',
+        'I_AJAXMODE': '',
+        'I_SMALLSCREEN': '',
+        'I_SECTIONHASH': f'{section_hash}_Section_availabledates',
+        'FHC_Has_selected_date__nosumm': '',
+        'FHC_Has_javascript_enabled__nosumm': '',
+        'F_Has_javascript_enabled__nosumm': 'on',
+        'F_Selectedbuttonname_date__nosumm': '',
+        'F_Postcode__nosumm__sm': '',
+        'Date_Table_Next_6': ''
+    }
+
+    # Ajax requests need to be in sequence for the data to be available.
+    for stage in [applicant_details, application_type, service_type, appointments1]:
+        r = s.post(
+            MAIN_URL,
+            headers={'Content-Type' : 'text/xml'},
+            data=get_ajax(insthash, stage)
+        )
+
+    no_appt_text = 'no available appointments'
+    if no_appt_text in r.text:
+        return None
+
+    else:
+        appt_page = 1
+        data_list = []
+        data_first = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+        data_list.append(data_first[0])
+
+        get_another_page = True
+
+        while get_another_page:
+            if appt_page == 1:
+                data_previous = data_first
+            else:
+                data_previous = data_next
+
+            r = session.post(
+                MAIN_URL,
+                headers={'Content-Type': 'text/xml'},
+                data=get_ajax(insthash, appointments2),
+            )
+            try:
+                data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+            except ValueError:
+                return clean_df(pd.concat(data_list, axis=1))
+
+            if data_next[0].equals(data_previous[0]) == True:
+                get_another_page = False
+                return clean_df(pd.concat(data_list, axis=1))
+            else:
+                data_list.append(data_next[0])
+                appt_page += 1
 
 
 def parse_future(timestr: str, default: datetime, **parse_kwargs):
     """
     Same as dateutil.parser.parse() but only returns future dates. So if you enter a new year it will recognise this
 
-    Params:
+    Args:
         timestr: str
             The string of the time you want to parse
 
@@ -338,7 +367,7 @@ def clean_df(df: pd.DataFrame) -> pd.DataFrame:
 
     Remove duplicates, redundant columns and reformatted data for each location.
 
-    Params:
+    Args:
         df: pd.DataFrame
             The dataframe to clean.
 

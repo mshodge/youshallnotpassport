@@ -14,3 +14,5 @@ seaborn==0.11.2
 tabulate==0.8.10
 tweepy==4.9.0
 urllib3==1.26.9
+selenium~=4.8.2
+bs4~=0.0.1
