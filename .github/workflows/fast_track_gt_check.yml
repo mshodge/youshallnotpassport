@@ -1,0 +1,40 @@
+name: fasttrackcheck
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo main
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: Install Google Chrome # Using shell script to install Google Chrome
+        run: |
+          chmod +x ./scripts/InstallChrome.sh
+          ./scripts/InstallChrome.sh
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 #install the python needed
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: execute py script # run the run.py to get the latest data
+        run: |
+          python find_golden_tickets.py False
+        env:
+          consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
+          consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
+          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          access_token_github: ${{ secrets.ACCESS_TOKEN_GITHUB }} # if run.py requires passwords..etc, set it as secrets
+          gcp_token: ${{ secrets.GCP_TOKEN }} # if run.py requires passwords..etc, set it as secrets
+          subscription_key: ${{ secrets.AZURE_KEY }} # if run.py requires passwords..etc, set it as secrets
+          change_url: ${{ secrets.CHANGE_URL }} # if run.py requires passwords..etc, set it as secrets
+
+
