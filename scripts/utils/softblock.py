@@ -31,7 +31,7 @@ def get_azure_key(github_action) -> str:
     return token
 
 
-def setup_selenium(url, is_github_action):
+def setup_selenium(url):
     """
     Sets up the Selenium webdriver
 
@@ -109,6 +109,25 @@ def wait_in_queue(driver):
             keep_trying = False
             return driver
 
+
+def get_queue_status(driver) -> bool:
+    """
+    Checks for a recaptcha image and returns TRUE/FALSE
+
+    Params:
+        driver
+            The selenium webdriver
+
+    Returns:
+        queue_found: Bool
+            TRUE or FALSE depending if an image was found
+
+    """
+    try:
+        driver.find_element(by=By.XPATH, value='/html/body/div[3]/div[3]/div[3]/div[2]/div[5]/div/p[3]/div[1]/span[2]')
+        return True
+    except NoSuchElementException:
+        return False
 
 def get_recapctha_image(driver) -> bool:
     """

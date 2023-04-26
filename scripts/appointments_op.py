@@ -16,15 +16,12 @@ import pandas as pd
 from IPython.display import display
 from tabulate import tabulate
 
-# For local testing - to delete
-# import chromedriver_autoinstaller
-# from selenium import webdriver
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.chrome.options import Options
-# from selenium.common.exceptions import NoSuchElementException
-# chromedriver_autoinstaller.install()
+import chromedriver_autoinstaller
+from selenium.webdriver.common.by import By
+chromedriver_autoinstaller.install()
 
-__author__ = ['Dr. Usman Kayani']
+from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url, get_queue_status
+
 
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 MAIN_HEADERS = {
@@ -67,17 +64,20 @@ def get_token(data: str) -> str:
         return None
 
 
-def get_appointment_data(MAIN_URL) -> pd.DataFrame:
+def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     """Get the appointment data.
 
     Args:
         MAIN_URL: str
             The main URL to get the data from.
+        is_github_action: Bool
+            TRUE if it's running as a GitHub Action...
 
     Returns:
         pd.DataFrame
             The dataframe with the appointment data.
     """
+
     session.headers = MAIN_HEADERS
     form_datas = [
         {'is-uk-application': 'true'},
@@ -100,36 +100,37 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
         {},
     ]
 
-    start_urls = [
-        MAIN_URL,
-        'https://www.passport.service.gov.uk/filter/start/urgent'
-    ]
+    check_for_image = True
+    this_driver = setup_selenium(MAIN_URL)
+    image_found = get_recapctha_image(this_driver)
+    while check_for_image:
+        if image_found:
+            ocr_response = detect_text_url(is_github_action)
+            recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
+            element = this_driver.find_element(by=By.XPATH,
+                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
+            element.send_keys(recaptcha_text)
+            element = this_driver.find_element(by=By.XPATH,
+                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')
+            element.click()
+        else:
+            check_for_image = False
 
-    # For local testing - to delete
-    # options = Options()
-    # options.add_argument('--disable-gpu')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('--window-size=1920,1080')
-    # the_driver = webdriver.Chrome(options=options)
+    queue_found = get_queue_status(this_driver)
 
-    for url in start_urls:
-        data = session.get(url)
-        # the_driver.get(url) # For local testing - to delete
+    if queue_found:
+        this_driver = wait_in_queue(this_driver)
 
-    # For local testing - to delete
-    # session = requests.Session()
-    # # Set correct user agent
-    # selenium_user_agent = the_driver.execute_script("return navigator.userAgent;")
-    # session.headers.update({"user-agent": selenium_user_agent})
-    #
-    # for cookie in the_driver.get_cookies():
-    #     session.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
-    #
-    # data = session.get(url)
+    s = requests.Session()
 
-    no_appt_text = 'Sorry, there are no available appointments'
-    if no_appt_text in data.text:
-        return no_appt_text
+    # Set correct user agent
+    selenium_user_agent = this_driver.execute_script("return navigator.userAgent;")
+    s.headers.update({"user-agent": selenium_user_agent})
+
+    for cookie in this_driver.get_cookies():
+        s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
+
+    data = s.get('https://www.passport.service.gov.uk/filter/overseas')
 
     csrf_token = get_token(data)
     curr_url = data.url
@@ -142,10 +143,10 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
 
     list_of_urls = []
 
-    session.headers.update(form_headers)
+    s.headers.update(form_headers)
 
     for form in form_datas:
-        data = session.post(
+        data = s.post(
             curr_url,
             data=form_data({**form, 'x-csrf-token': csrf_token}),
             allow_redirects=True
@@ -153,11 +154,11 @@ def get_appointment_data(MAIN_URL) -> pd.DataFrame:
         curr_url = data.url
         csrf_token = get_token(data)
 
-    session.headers = MAIN_HEADERS
+    s.headers = MAIN_HEADERS
     curr_year = dt.today().year
 
     first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{curr_year}-01-01/previous'
-    data = session.get(first_page)
+    data = s.get(first_page)
 
     df = pd.read_html(data.text)[0]
     first_date = datetime.strptime(df.columns[0], '%A  %d %B').replace(year=curr_year) + timedelta(days=5)

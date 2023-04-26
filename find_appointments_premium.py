@@ -20,7 +20,7 @@ SERVICE = "premium"
 IS_PROXY = False
 IS_GITHUB_ACTION = True
 IS_TWITTER = True
-wait_mins = 3
+wait_mins = 10
 number_of_appointments_classed_as_bulk = 10
 
 
