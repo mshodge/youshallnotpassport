@@ -1,4 +1,4 @@
-name: fasttrackcheck
+name: goldenticket
 
 on:
   repository_dispatch:
