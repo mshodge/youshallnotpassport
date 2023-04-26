@@ -24,7 +24,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import pandas as pd
 
-from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url
+from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url, get_queue_status
 
 
 MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml'
@@ -114,45 +114,39 @@ def get_appointment_data(is_github_action) -> Union[str, pd.DataFrame]:
     if no_appt_text in r.text:
         return False
 
-    soft_block_text = 'data-pageid="softblock"'
-    queue_text = "You’re in a queue"
-
     check_for_image = True
-    print(r.text)
-    if soft_block_text in r.text:
-        this_driver = setup_selenium(MAIN_URL, is_github_action)
-        while check_for_image:
-            image_found = get_recapctha_image(this_driver)
-            if image_found:
-                ocr_response = detect_text_url(is_github_action)
-                recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
-                element = this_driver.find_element(by=By.XPATH,
-                                                   value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
-                element.send_keys(recaptcha_text)
-                time.sleep(2)
-                element = this_driver.find_element(by=By.XPATH,
-                                                   value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')
-                element.click()
-                time.sleep(2)
-            else:
-                check_for_image = False
+    this_driver = setup_selenium(MAIN_URL)
+    while check_for_image:
+        image_found = get_recapctha_image(this_driver)
+        if image_found:
+            ocr_response = detect_text_url(is_github_action)
+            recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
+            element = this_driver.find_element(by=By.XPATH,
+                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
+            element.send_keys(recaptcha_text)
+            time.sleep(2)
+            element = this_driver.find_element(by=By.XPATH,
+                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')
+            element.click()
+            time.sleep(2)
+        else:
+            check_for_image = False
 
-    r = session.get(MAIN_URL)
-    print(r)
+    queue_found = get_queue_status(this_driver)
 
-    if queue_text in r.text:
+    if queue_found:
         this_driver = wait_in_queue(this_driver)
 
-        s = requests.Session()
+    s = requests.Session()
 
-        # Set correct user agent
-        selenium_user_agent = this_driver.execute_script("return navigator.userAgent;")
-        s.headers.update({"user-agent": selenium_user_agent})
+    # Set correct user agent
+    selenium_user_agent = this_driver.execute_script("return navigator.userAgent;")
+    s.headers.update({"user-agent": selenium_user_agent})
 
-        for cookie in this_driver.get_cookies():
-            s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
+    for cookie in this_driver.get_cookies():
+        s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
-        r = s.get(MAIN_URL)
+    r = s.get(MAIN_URL)
 
     insthash = get_insthash(r)
     print(insthash)

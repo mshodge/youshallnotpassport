@@ -112,8 +112,8 @@ def make_figure(the_df):
 
     the_df[the_df.eq(0)] = np.nan
     appointments = sns.heatmap(the_df, annot=True,
-                        cbar=False, cmap="Blues", linewidths=1, linecolor="white",
-                        vmin=0, vmax=30, annot_kws={"fontsize": 8})
+                               cbar=False, cmap="Blues", linewidths=1, linecolor="white",
+                               vmin=0, vmax=30, annot_kws={"fontsize": 8})
     appointments.set_title("The number of Fast Track appointments \n\n")
 
     for i in range(len(days_list)):
@@ -164,8 +164,7 @@ def pipeline(first):
 
     print(f"Is first time running since going online: {first}")
 
-
-    if "check again later" in requests.get("https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml").text:
+    if "check again later" in requests.get(MAIN_URL).text:
         raise Exception(f"It's offline!")
 
     try:

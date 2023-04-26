@@ -112,7 +112,7 @@ def wait_in_queue(driver):
 
 def get_queue_status(driver) -> bool:
     """
-    Checks for a recaptcha image and returns TRUE/FALSE
+    Checks for a queue and returns TRUE/FALSE
 
     Params:
         driver
