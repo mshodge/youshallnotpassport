@@ -222,8 +222,10 @@ def pipeline():
         run_github_action("55493219") if IS_GITHUB_ACTION else None
 
     else:
-        raise Exception(f"It's online for everyone, will check again in {wait_mins} minutes")
+        time.sleep(wait_mins * 60)
         run_github_action("55493219") if IS_GITHUB_ACTION else None
+        raise Exception(f"It's online for everyone, will check again in {wait_mins} minutes")
+
 
 if __name__ == "__main__":
     pipeline()
