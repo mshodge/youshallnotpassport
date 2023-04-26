@@ -73,6 +73,25 @@ def setup_selenium(url):
 
     return driver
 
+def click_to_change_appointment(driver):
+    """
+    Clicks to edit appointment
+
+    Params:
+        driver
+            The selenium webdriver
+
+    Returns:
+        driver:
+            The selenium web driver
+
+    """
+
+
+    element = driver.find_element(by=By.XPATH,
+                                       value='/html/body/div/div/form/div/div[6]/div[4]/div[3]/fieldset/div/div/div/div/div/div[3]/div/div/div/div/div/div/div[2]/div/div[8]/div[3]/a/span[2]')
+    element.click()
+    return driver
 
 def wait_in_queue(driver):
     """

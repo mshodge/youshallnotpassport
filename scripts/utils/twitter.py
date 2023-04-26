@@ -154,6 +154,33 @@ def post_media_update(proxy, github_action, locs_added_checked):
 
     print("Posted update to Twitter")
 
+
+def post_media_update_gt(proxy, github_action, locs_added_checked):
+    """
+    Posts response to Twitter
+    :param proxy: <Boolean> Whether to use a proxy or not, default is False
+    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
+    :param locs_added_checked: <list> Locations added
+    :return: <string> The response of whether the service is online or not
+    """
+
+    api = authenticate_twitter(github_action, proxy)
+
+    # Posts status to Twitter
+    media = api.media_upload(filename='out.png')
+
+    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
+
+    locations = ' and '.join(locs_added_checked)
+
+    message = f"🎫 (Golden Ticket) For those a Fast Track appointment already, new appointments have just " \
+              f"been added for {locations}! ({timestamp})"
+
+    api.update_status(status=message,
+                      media_ids=[media.media_id])
+
+    print("Posted update to Twitter")
+
 def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     """
     Update Twitter Bio

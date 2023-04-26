@@ -11,14 +11,14 @@ from scripts.utils.twitter import post_media, post_media_update, post_quick_chec
 from scripts.utils.dataframes import update_csv, get_csv
 from scripts.utils.github import update_no_app
 from scripts.utils.sms import call_sms
-from scripts.appointments_ft import get_appointment_data, quick_check
+from scripts.appointments_ft import get_appointment_data
 
 today = date.today()
 TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
 MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml'
 SERVICE = "fast track"
 IS_PROXY = False
-IS_GITHUB_ACTION = True
+IS_GITHUB_ACTION = False
 IS_TWITTER = True
 wait_mins = 10
 number_of_appointments_classed_as_bulk = 10
@@ -168,7 +168,7 @@ def pipeline(first):
         raise Exception(f"It's offline!")
 
     try:
-        nice_appointments_df = get_appointment_data(IS_GITHUB_ACTION)
+        nice_appointments_df = get_appointment_data(IS_GITHUB_ACTION, MAIN_URL)
     except ValueError:
         if first:
             run_github_action("28775018") if IS_GITHUB_ACTION else None
