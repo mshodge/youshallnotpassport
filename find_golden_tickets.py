@@ -168,57 +168,62 @@ def pipeline():
             The first run after the service has gone online?
     """
 
-    nice_appointments_df = get_appointment_data_gt(IS_GITHUB_ACTION, MAIN_URL)
+    if "check again later" in requests.get("https://www.passportappointment.service.gov.uk/outreach/PublicBooking.ofml").text:
 
-    if nice_appointments_df is None:
-        time.sleep(60)  # wait a minute before calling again
-        run_github_action("55493219") if IS_GITHUB_ACTION else None
-        raise Exception(f"Error. Appointments table returned was none. Will try again in one minute.")
-    elif nice_appointments_df is False:
-        time.sleep(60)  # wait a minute before calling again
-        run_github_action("55493219") if IS_GITHUB_ACTION else None
-        print(f"No Appointments were available. Will try again in one minute.")
-        return None
+        nice_appointments_df = get_appointment_data_gt(IS_GITHUB_ACTION, MAIN_URL)
 
-    print(nice_appointments_df)
+        if nice_appointments_df is None:
+            time.sleep(60)  # wait a minute before calling again
+            run_github_action("55493219") if IS_GITHUB_ACTION else None
+            raise Exception(f"Error. Appointments table returned was none. Will try again in one minute.")
+        elif nice_appointments_df is False:
+            time.sleep(60)  # wait a minute before calling again
+            run_github_action("55493219") if IS_GITHUB_ACTION else None
+            print(f"No Appointments were available. Will try again in one minute.")
+            return None
 
-    appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
-    appointments_per_location.columns = ['location', 'count']
+        print(nice_appointments_df)
 
-    failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
-                        "data/fast_track_appointments_locations_gt.csv",
-                        "updating fast track appointment location data", replace=True)
-    if failed:
-        run_github_action("55493219")
-        raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
+        appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
+        appointments_per_location.columns = ['location', 'count']
 
-    locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
-    if len(locations_added_checked) == 0:
-        print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
-        time.sleep(wait_mins * 60)  # wait 3 mins before calling again
-        run_github_action("55493219") if IS_GITHUB_ACTION else None
-        return None
-
-    make_figure(nice_appointments_df)
-
-    # Posts a graph if new appointments have been added
-    if IS_TWITTER and len(locations_added_checked) > 0:
-        message = post_media_update_gt(IS_PROXY, IS_GITHUB_ACTION, locations_added_checked, SERVICE)
-        # call_sms(SERVICE.title(), type="app", response=message)
-        failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
+        failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
+                            "data/fast_track_appointments_locations_gt.csv",
+                            "updating fast track appointment location data", replace=True)
         if failed:
             run_github_action("55493219")
-            raise Exception(f"Error. Failed to post the SMS. Will try again.")
+            raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
-    long_appointments_df = long_dataframe(nice_appointments_df)
-    failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
-                        "data/fast_track_appointments_gt.csv",
-                        "updating fast track appointment data", replace=False)
+        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
+        if len(locations_added_checked) == 0:
+            print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
+            time.sleep(wait_mins * 60)  # wait 3 mins before calling again
+            run_github_action("55493219") if IS_GITHUB_ACTION else None
+            return None
 
-    time.sleep(wait_mins * 60)  # wait 3 mins before calling again
-    print(f"Successfully found new appointments, will check again in {wait_mins} minutes")
-    run_github_action("55493219") if IS_GITHUB_ACTION else None
+        make_figure(nice_appointments_df)
 
+        # Posts a graph if new appointments have been added
+        if IS_TWITTER and len(locations_added_checked) > 0:
+            message = post_media_update_gt(IS_PROXY, IS_GITHUB_ACTION, locations_added_checked, SERVICE)
+            # call_sms(SERVICE.title(), type="app", response=message)
+            failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
+            if failed:
+                run_github_action("55493219")
+                raise Exception(f"Error. Failed to post the SMS. Will try again.")
+
+        long_appointments_df = long_dataframe(nice_appointments_df)
+        failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
+                            "data/fast_track_appointments_gt.csv",
+                            "updating fast track appointment data", replace=False)
+
+        time.sleep(wait_mins * 60)  # wait 3 mins before calling again
+        print(f"Successfully found new appointments, will check again in {wait_mins} minutes")
+        run_github_action("55493219") if IS_GITHUB_ACTION else None
+
+    else:
+        raise Exception(f"It's online for everyone, will check again in {wait_mins} minutes")
+        run_github_action("55493219") if IS_GITHUB_ACTION else None
 
 if __name__ == "__main__":
     pipeline()
