@@ -205,7 +205,7 @@ def pipeline():
 
         # Posts a graph if new appointments have been added
         if IS_TWITTER and len(locations_added_checked) > 0:
-            message = post_media_update_gt(IS_PROXY, IS_GITHUB_ACTION, locations_added_checked, SERVICE)
+            message = post_media_update_gt(IS_PROXY, IS_GITHUB_ACTION, locations_added_checked)
             # call_sms(SERVICE.title(), type="app", response=message)
             failed = update_no_app(IS_GITHUB_ACTION, TODAYS_DATE_IS, SERVICE, "False")
             if failed:
