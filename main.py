@@ -201,13 +201,12 @@ def check(proxy, github_action, to_save_csv):
     # Reports if one week service is online or not
     if "there are no available appointments" in page_one_text or \
             "no Fast Track  appointments available" in page_one_text:
-        response_one_week = f"One-week Fast Track is now offline ❌ ({timestamp_tweet})" \
+        response_one_week = f"❌ (FT) Fast Track service is now offline ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"I will post again when it goes online next. For more information or to submit  " \
-                            f" your passport wait-time:" \
+                            f"Say thanks with a ☕ at https://www.buymeacoffee.com/ukpassportcheck" \
                             f"\n" \
-                            f"https://www.passportwaitingtime.co.uk/ukpassportcheck/"
+                            f"Charity donations 💙 at https://www.justgiving.com/fundraising/Donationsforzahary"
         one_week_online = "False"
     elif "is temporarily unavailable" in page_one_text:
         response_one_week = None
@@ -216,34 +215,33 @@ def check(proxy, github_action, to_save_csv):
         response_one_week = None
         one_week_online = None
     else:
-        response_one_week = f"One-week Fast Track is now online! ✅ ({timestamp_tweet})" \
+        response_one_week = f"✅ (FT) Fast Track service is now online ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"I will post again when it goes offline." \
+                            f"I'll try and post the appointments now..." \
                             f"\n" \
                             f"\n" \
-                            f"(Still no luck? Go back and click button again.)" \
+                            f"(Still offline? Go back and click again)" \
                             f"\n" \
                             f"https://www.gov.uk/get-a-passport-urgently/1-week-fast-track-service"
         one_week_online = "True"
 
     # Reports if premium service is online or not
     if "there are no available appointments" in page_premium_text:
-        response_premium = f"Same day Premium service is now offline ❌ ({timestamp_tweet})" \
+        response_premium = f"❌ (OP) Premium service is now offline ({timestamp_tweet})"\
                            f"\n" \
                            f"\n"\
-                           f"I will post again when it goes online next. For more information or to submit  " \
-                            f" your passport wait-time:" \
-                            f"\n" \
-                            f"https://www.passportwaitingtime.co.uk/ukpassportcheck/"
+                           f"Say thanks with a ☕ at https://www.buymeacoffee.com/ukpassportcheck" \
+                           f"\n" \
+                           f"Charity donations 💙 at https://www.justgiving.com/fundraising/Donationsforzahary"
         premium_online = "False"
     else:
-        response_premium = f"Same day Premium service is now online! ✅ ({timestamp_tweet})" \
+        response_premium = f"✅ (OP) Premium service is now online ({timestamp_tweet})" \
                            f"\n" \
                            f"\n"\
-                           f"I will post again when it goes offline." \
+                           f"I'll try and post the appointments now..." \
                            f"\n" \
-                           f"(Sent to normal route? Go back and click button again.)" \
+                           f"(Sent to standard service? Go back and click again)" \
                            f"\n" \
                            f"https://www.gov.uk/get-a-passport-urgently/online-premium-service"
         premium_online = "True"
