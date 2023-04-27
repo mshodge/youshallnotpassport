@@ -147,7 +147,7 @@ def post_media_update_gt(proxy, github_action, locs_added_checked):
 
     locations = ' and '.join(locs_added_checked)
 
-    message = f"🎫 For those with a Fast Track appointment already, new appointments have just " \
+    message = f"🎫 If you want to change your Fast Track slot, new appointments have " \
               f"been added for {locations}." \
               f"\n" \
               f"\n" \
