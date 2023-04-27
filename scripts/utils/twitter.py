@@ -147,9 +147,11 @@ def post_media_update_gt(proxy, github_action, locs_added_checked):
 
     locations = ' and '.join(locs_added_checked)
 
-    message = f"🎫 If you want to change your Fast Track slot, new appointments have " \
+    message = f"🎫 (Golden Ticket) Want to change your Fast Track booking? New appointments have " \
               f"been added for {locations}." \
               f"\n" \
+              f"\n" \
+              f"🎫 explained here: https://twitter.com/ukpassportcheck/status/1646491695607840768" \
               f"\n" \
               f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
