@@ -114,10 +114,10 @@ def post_media(proxy, github_action, service):
 
     if service == "fast track":
         message = f"The latest Fast Track appointment slots as of {timestamp}. More may be added whilst the service" \
-                  f" is online. Keep checking yourself if no suitable ones are here."
+                  f" is online. I'll keep checking if more are added."
     elif service == "premium":
-        message = f"The following locations have Premium appointment slots as of {timestamp}. More may be added " \
-                  f"whilst the service is online"
+        message = f"The latest Premium appointment slots as of {timestamp}. More may be added " \
+                  f"whilst the service is online. I'll keep checking if more are added."
 
     api.update_status(status=message,
                       media_ids=[media.media_id],
@@ -125,7 +125,8 @@ def post_media(proxy, github_action, service):
 
     print("Posted update to Twitter")
 
-def post_media_update(proxy, github_action, locs_added_checked):
+
+def post_media_update_gt(proxy, github_action, locs_added_checked):
     """
     Posts response to Twitter
     :param proxy: <Boolean> Whether to use a proxy or not, default is False
@@ -146,38 +147,15 @@ def post_media_update(proxy, github_action, locs_added_checked):
 
     locations = ' and '.join(locs_added_checked)
 
-    message = f"New appointments have just been added for {locations}!"
+    message = f"🎫 For those with a Fast Track appointment already, new appointments have just " \
+              f"been added for {locations}." \
+              f"\n" \
+              f"\n" \
+              f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
     api.update_status(status=message,
                       media_ids=[media.media_id],
                       in_reply_to_status_id=tweetid)
-
-    print("Posted update to Twitter")
-
-
-def post_media_update_gt(proxy, github_action, locs_added_checked):
-    """
-    Posts response to Twitter
-    :param proxy: <Boolean> Whether to use a proxy or not, default is False
-    :param github_action: <Boolean> Whether this will be deployed as an automated GitHub Action
-    :param locs_added_checked: <list> Locations added
-    :return: <string> The response of whether the service is online or not
-    """
-
-    api = authenticate_twitter(github_action, proxy)
-
-    # Posts status to Twitter
-    media = api.media_upload(filename='out.png')
-
-    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
-
-    locations = ' and '.join(locs_added_checked)
-
-    message = f"🎫 (Golden Ticket) For those a Fast Track appointment already, new appointments have just " \
-              f"been added for {locations}! ({timestamp})"
-
-    api.update_status(status=message,
-                      media_ids=[media.media_id])
 
     print("Posted update to Twitter")
 
@@ -267,14 +245,18 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
     # Posts status to Twitter
     media = api.media_upload(filename='out.png')
 
-    timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
-
     locations = ' and '.join(locs_added_checked)
 
     if service == "fast track":
-        message = f"New Fast Track appointments have just been added for {locations}! See link above to book."
+        message = f"New Fast Track slots have been added for {locations}." \
+                  f"\n" \
+                  f"\n" \
+                  f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
     else:
-        message = f"New or unbooked Premium appointments have just been added for {locations}! See link above to book."
+        message = f"New or unbooked Premium slots have been added for {locations}." \
+                  f"\n" \
+                  f"\n" \
+                  f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
     api.update_status(status=message,
                       media_ids=[media.media_id],
