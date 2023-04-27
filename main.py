@@ -204,7 +204,7 @@ def check(proxy, github_action, to_save_csv):
         response_one_week = f"❌ (FT) Fast Track service is now offline ({timestamp_tweet})" \
                             f"\n" \
                             f"\n" \
-                            f"Say thanks with a ☕ at https://www.buymeacoffee.com/ukpassportcheck" \
+                            f"Follow @ukpassportgold for tweets for changing your booking." \
                             f"\n" \
                             f"Charity donations 💙 at https://www.justgiving.com/fundraising/Donationsforzahary"
         one_week_online = "False"
