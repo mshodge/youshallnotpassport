@@ -28,10 +28,10 @@ jobs:
         run: |
           python find_golden_tickets.py False
         env:
-          consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
-          consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
-          access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
-          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }} # if run.py requires passwords..etc, set it as secrets
+          consumer_key: ${{ secrets.CONSUMER_KEY_GT }} # if run.py requires passwords..etc, set it as secrets
+          consumer_secret: ${{ secrets.CONSUMER_SECRET_GT }} # if run.py requires passwords..etc, set it as secrets
+          access_token: ${{ secrets.ACCESS_TOKEN_GT }} # if run.py requires passwords..etc, set it as secrets
+          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET_GT }} # if run.py requires passwords..etc, set it as secrets
           access_token_github: ${{ secrets.ACCESS_TOKEN_GITHUB }} # if run.py requires passwords..etc, set it as secrets
           gcp_token: ${{ secrets.GCP_TOKEN }} # if run.py requires passwords..etc, set it as secrets
           subscription_key: ${{ secrets.AZURE_KEY }} # if run.py requires passwords..etc, set it as secrets

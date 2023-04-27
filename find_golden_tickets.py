@@ -17,7 +17,7 @@ today = date.today()
 TODAYS_DATE_IS = today.strftime("%d/%m/%Y")
 SERVICE = "fast track"
 IS_PROXY = False
-IS_GITHUB_ACTION = True
+IS_GITHUB_ACTION = False
 IS_TWITTER = True
 wait_mins = 5
 number_of_appointments_classed_as_bulk = 10
@@ -187,6 +187,8 @@ def pipeline():
         appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
         appointments_per_location.columns = ['location', 'count']
 
+        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
+
         failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
                             "data/fast_track_appointments_locations_gt.csv",
                             "updating fast track appointment location data", replace=True)
@@ -194,7 +196,6 @@ def pipeline():
             run_github_action("55493219")
             raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
-        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
         if len(locations_added_checked) == 0:
             print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
             time.sleep(wait_mins * 60)  # wait 3 mins before calling again
