@@ -21,10 +21,11 @@ import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
 chromedriver_autoinstaller.install()
 
-from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url, get_queue_status
-
+from scripts.utils.softblock import setup_selenium, wait_in_queue, get_recapctha_image, detect_text_url, \
+    get_queue_status
 
 MAIN_URL = 'https://www.passport.service.gov.uk/urgent/'
 MAIN_HEADERS = {
@@ -36,12 +37,14 @@ MAIN_HEADERS = {
 
 session = requests.Session()
 
+
 def get_cookies(driver):
     cookies = {}
     selenium_cookies = driver.get_cookies()
     for cookie in selenium_cookies:
         cookies[cookie['name']] = cookie['value']
     return cookies
+
 
 def form_data(data: dict) -> str:
     """Form the data for a POST request.
@@ -109,10 +112,11 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
         {},
     ]
 
+    first_try = True
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
     while check_for_image:
-        time.sleep(5)
+        if not first_try: time.sleep(60)
         image_found = get_recapctha_image(this_driver)
         if image_found:
             print("Found an image, will now try and solve it")
@@ -122,14 +126,15 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
                 return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
             print(recaptcha_text)
-            WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
+            WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))). \
                 send_keys(recaptcha_text)
             time.sleep(3)
-            WebDriverWait(this_driver, 10).\
+            WebDriverWait(this_driver, 10). \
                 until(EC.presence_of_element_located((
                 By.XPATH,
-                '/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')))\
+                '/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button'))) \
                 .click()
+            first_try = False
         else:
             check_for_image = False
 

@@ -122,10 +122,11 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     if no_appt_text in r.text:
         return False
 
+    first_try = True
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
     while check_for_image:
-        time.sleep(5)
+        if not first_try: time.sleep(60)
         image_found = get_recapctha_image(this_driver)
         if image_found:
             print("Found an image, will now try and solve it")
@@ -143,6 +144,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
                 By.XPATH,
                 '/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')))\
                 .click()
+            first_try = False
         else:
             check_for_image = False
 
