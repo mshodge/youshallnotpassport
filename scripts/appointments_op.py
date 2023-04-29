@@ -141,6 +141,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     csrf_token = get_token(data)
     curr_url = data.url
 
+    print(csrf_token)
     form_headers = {
         'Referer': 'https://www.passport.service.gov.uk/filter/overseas',
         'Content-Type': 'application/x-www-form-urlencoded',
