@@ -102,8 +102,8 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
 
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
-    image_found = get_recapctha_image(this_driver)
     while check_for_image:
+        image_found = get_recapctha_image(this_driver)
         if image_found:
             ocr_response = detect_text_url(is_github_action)
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
@@ -173,7 +173,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     data_list.append(df)
     for date in start_dates:
         first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{date}/next'
-        data = session.get(first_page)
+        data = s.get(first_page)
         list_of_urls = update_list_of_urls(data, list_of_urls)
         try:
             curr_df = pd.read_html(data.text)[0]
@@ -185,7 +185,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     print(f"Checking actual number of appointments.")
 
     for url in list_of_urls:
-        data_table_data = session.get("https://www.passport.service.gov.uk" + url)
+        data_table_data = s.get("https://www.passport.service.gov.uk" + url)
         df_table = pd.read_html(data_table_data.text)[0]
         date_is = datetime.strptime(url.split("/")[-1], '%Y-%m-%d').strftime('%a %-e %b')
         location_is = url.split("/")[-2].capitalize()
