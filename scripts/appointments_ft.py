@@ -120,6 +120,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     while check_for_image:
         image_found = get_recapctha_image(this_driver)
         if image_found:
+            print("Found an image, will now try and solve it")
             try:
                 ocr_response = detect_text_url(is_github_action)
             except ValueError:
@@ -138,6 +139,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     queue_found = get_queue_status(this_driver)
 
     if queue_found:
+        print("Found an queue, will now wait in it")
         this_driver = wait_in_queue(this_driver)
 
     s = requests.Session()
@@ -152,6 +154,8 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     r = s.get(MAIN_URL)
 
     insthash = get_insthash(r)
+
+    print(insthash)
 
     if insthash is None:
         return None
