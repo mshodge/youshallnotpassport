@@ -37,6 +37,13 @@ MAIN_HEADERS = {
 
 session = requests.Session()
 
+def get_cookies(driver):
+    cookies = {}
+    selenium_cookies = driver.get_cookies()
+    for cookie in selenium_cookies:
+        cookies[cookie['name']] = cookie['value']
+    return cookies
+
 def get_insthash(response):
     """
     Get the insthash.
@@ -123,7 +130,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
             print("Found an image, will now try and solve it")
             try:
                 ocr_response = detect_text_url(is_github_action)
-            except ValueError:
+            except (ValueError, KeyError) as e:
                 return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
             WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
@@ -142,6 +149,8 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         print("Found an queue, will now wait in it")
         this_driver = wait_in_queue(this_driver)
 
+    cookies = get_cookies()
+
     s = requests.Session()
 
     # Set correct user agent
@@ -151,7 +160,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     for cookie in this_driver.get_cookies():
         s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
-    r = s.get(MAIN_URL)
+    r = s.get(MAIN_URL, cookies=cookies)
 
     insthash = get_insthash(r)
 
@@ -296,6 +305,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         r = s.post(
             MAIN_URL,
             headers={'Content-Type' : 'text/xml'},
+            cookies = cookies,
             data=get_ajax(MAIN_URL, insthash, stage)
         )
 
@@ -321,6 +331,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
             r = session.post(
                 MAIN_URL,
                 headers={'Content-Type': 'text/xml'},
+                cookies=cookies,
                 data=get_ajax(MAIN_URL, insthash, appointments2),
             )
             try:
