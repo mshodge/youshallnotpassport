@@ -133,6 +133,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
             except (ValueError, KeyError) as e:
                 return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
+            print(recaptcha_text)
             WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
                 send_keys(recaptcha_text)
             WebDriverWait(this_driver, 10).\
@@ -149,7 +150,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         print("Found an queue, will now wait in it")
         this_driver = wait_in_queue(this_driver)
 
-    cookies = get_cookies()
+    cookies = get_cookies(this_driver)
 
     s = requests.Session()
 
