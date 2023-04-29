@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from IPython.display import display
 from tabulate import tabulate
+import time
 
 import chromedriver_autoinstaller
 from selenium.webdriver.common.by import By
@@ -35,6 +36,12 @@ MAIN_HEADERS = {
 
 session = requests.Session()
 
+def get_cookies(driver):
+    cookies = {}
+    selenium_cookies = driver.get_cookies()
+    for cookie in selenium_cookies:
+        cookies[cookie['name']] = cookie['value']
+    return cookies
 
 def form_data(data: dict) -> str:
     """Form the data for a POST request.
@@ -105,15 +112,19 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
     while check_for_image:
+        time.sleep(5)
         image_found = get_recapctha_image(this_driver)
         if image_found:
+            print("Found an image, will now try and solve it")
             try:
                 ocr_response = detect_text_url(is_github_action)
-            except ValueError:
+            except (ValueError, KeyError) as e:
                 return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
+            print(recaptcha_text)
             WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
                 send_keys(recaptcha_text)
+            time.sleep(3)
             WebDriverWait(this_driver, 10).\
                 until(EC.presence_of_element_located((
                 By.XPATH,
@@ -125,7 +136,10 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     queue_found = get_queue_status(this_driver)
 
     if queue_found:
+        print("Found an queue, will now wait in it")
         this_driver = wait_in_queue(this_driver)
+
+    cookies = get_cookies(this_driver)
 
     s = requests.Session()
 
@@ -136,7 +150,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     for cookie in this_driver.get_cookies():
         s.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
-    data = s.get('https://www.passport.service.gov.uk/filter/overseas')
+    data = s.get('https://www.passport.service.gov.uk/filter/overseas', cookies=cookies)
 
     csrf_token = get_token(data)
     curr_url = data.url
@@ -156,6 +170,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
         data = s.post(
             curr_url,
             data=form_data({**form, 'x-csrf-token': csrf_token}),
+            cookies=cookies,
             allow_redirects=True
         )
         curr_url = data.url
@@ -165,7 +180,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     curr_year = dt.today().year
 
     first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{curr_year}-01-01/previous'
-    data = s.get(first_page)
+    data = s.get(first_page, cookies=cookies)
 
     df = pd.read_html(data.text)[0]
     print(df)
@@ -183,7 +198,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     data_list.append(df)
     for date in start_dates:
         first_page = f'https://www.passport.service.gov.uk/booking/choose-date-and-place/{date}/next'
-        data = s.get(first_page)
+        data = s.get(first_page, cookies=cookies)
         list_of_urls = update_list_of_urls(data, list_of_urls)
         try:
             curr_df = pd.read_html(data.text)[0]
@@ -195,7 +210,7 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     print(f"Checking actual number of appointments.")
 
     for url in list_of_urls:
-        data_table_data = s.get("https://www.passport.service.gov.uk" + url)
+        data_table_data = s.get("https://www.passport.service.gov.uk" + url, cookies=cookies)
         df_table = pd.read_html(data_table_data.text)[0]
         date_is = datetime.strptime(url.split("/")[-1], '%Y-%m-%d').strftime('%a %-e %b')
         location_is = url.split("/")[-2].capitalize()
