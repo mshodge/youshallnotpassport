@@ -20,6 +20,8 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -123,14 +125,13 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
             except ValueError:
                 return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
-            element = this_driver.find_element(by=By.XPATH,
-                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
-            element.send_keys(recaptcha_text)
-            time.sleep(2)
-            element = this_driver.find_element(by=By.XPATH,
-                                               value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')
-            element.click()
-            time.sleep(2)
+            WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
+                send_keys(recaptcha_text)
+            WebDriverWait(this_driver, 10).\
+                until(EC.presence_of_element_located((
+                By.XPATH,
+                '/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/button')))\
+                .click()
         else:
             check_for_image = False
 
