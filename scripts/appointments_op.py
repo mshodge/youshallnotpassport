@@ -105,7 +105,10 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     while check_for_image:
         image_found = get_recapctha_image(this_driver)
         if image_found:
-            ocr_response = detect_text_url(is_github_action)
+            try:
+                ocr_response = detect_text_url(is_github_action)
+            except ValueError:
+                return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
             element = this_driver.find_element(By.NAME, 'CaptchaCode')
             element.send_keys(recaptcha_text)
