@@ -303,6 +303,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         appt_page = 1
         data_list = []
         data_first = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+        print(data_first)
         data_list.append(data_first[0])
 
         get_another_page = True

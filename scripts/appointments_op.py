@@ -168,6 +168,8 @@ def get_appointment_data(MAIN_URL, is_github_action) -> pd.DataFrame:
     data = s.get(first_page)
 
     df = pd.read_html(data.text)[0]
+    print(df)
+
     first_date = datetime.strptime(df.columns[0], '%A  %d %B').replace(year=curr_year) + timedelta(days=5)
 
     list_of_urls = update_list_of_urls(data, list_of_urls)
