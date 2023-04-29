@@ -196,6 +196,9 @@ def pipeline(first):
     appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
     appointments_per_location.columns = ['location', 'count']
 
+    if first is False:
+        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
+
     failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
                         "data/fast_track_appointments_locations.csv",
                         "updating fast track appointment location data", replace=True)
@@ -204,7 +207,6 @@ def pipeline(first):
         raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
     if first is False:
-        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
         if len(locations_added_checked) == 0:
             print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
             time.sleep(wait_mins * 60)  # wait 3 mins before calling again
