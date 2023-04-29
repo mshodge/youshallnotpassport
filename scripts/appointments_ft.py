@@ -125,6 +125,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
     while check_for_image:
+        time.sleep(5)
         image_found = get_recapctha_image(this_driver)
         if image_found:
             print("Found an image, will now try and solve it")
@@ -136,6 +137,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
             print(recaptcha_text)
             WebDriverWait(this_driver, 10).until(EC.presence_of_element_located((By.NAME, 'CaptchaCode'))).\
                 send_keys(recaptcha_text)
+            time.sleep(3)
             WebDriverWait(this_driver, 10).\
                 until(EC.presence_of_element_located((
                 By.XPATH,
