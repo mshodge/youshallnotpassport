@@ -118,7 +118,10 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     while check_for_image:
         image_found = get_recapctha_image(this_driver)
         if image_found:
-            ocr_response = detect_text_url(is_github_action)
+            try:
+                ocr_response = detect_text_url(is_github_action)
+            except ValueError:
+                return False
             recaptcha_text = ocr_response.get('analyzeResult').get('readResults')[0].get('lines')[0].get('text')
             element = this_driver.find_element(by=By.XPATH,
                                                value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[2]/div[2]/input')
