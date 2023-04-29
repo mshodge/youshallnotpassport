@@ -8,6 +8,7 @@ import urllib.request
 import requests
 import time
 import os
+import undetected_chromedriver as uc
 
 
 def get_azure_key(github_action) -> str:
@@ -46,8 +47,9 @@ def setup_selenium(url):
             The selenium web driver
 
     """
+    options = uc.ChromeOptions()
+    options.headless = True
 
-    options = Options()
     options.add_argument('--headless')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
@@ -57,10 +59,10 @@ def setup_selenium(url):
     options.add_argument('--window-size=1920,1080')
     options.add_argument("--incognito")
     options.add_argument("--enable-javascript")
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    options.add_experimental_option('useAutomationExtension', False)
-    options.add_argument('--disable-blink-features=AutomationControlled')
-    driver = webdriver.Chrome(options=options)
+    # options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    # options.add_experimental_option('useAutomationExtension', False)
+    # options.add_argument('--disable-blink-features=AutomationControlled')
+    driver = uc.Chrome(options=options)
 
     ua = UserAgent()
     userAgent = ua.random
