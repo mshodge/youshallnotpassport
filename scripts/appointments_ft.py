@@ -286,10 +286,10 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         'BA_Bn_select_service__pca': ''
     }
 
-    appointments2 = {
+    appointments_next = {
         'I_SUBMITCOUNT': '1',
         'I_INSTHASH': insthash,
-        'I_PAGENUM': '5',
+        'I_PAGENUM': '',
         'I_JAVASCRIPTON': '1',
         'I_UTFENCODED': 'TRUE',
         'I_ACCESS': '',
@@ -302,8 +302,10 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         'F_Has_javascript_enabled__nosumm': 'on',
         'F_Selectedbuttonname_date__nosumm': '',
         'F_Postcode__nosumm__sm': '',
-        'Date_Table_Next_6': ''
+        'Date_Table_Next_5': ''
     }
+
+
 
     # Ajax requests need to be in sequence for the data to be available.
     for stage in [applicant_details, application_type, service_type, appointments1]:
@@ -330,21 +332,25 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
         while get_another_page:
             if appt_page == 1:
                 data_previous = data_first
+                data_previous_two = data_first
             else:
+                data_previous_two = data_previous
                 data_previous = data_next
+
+            appointments_next['I_PAGENUM'] = str(3 + appt_page)
 
             r = session.post(
                 MAIN_URL,
                 headers={'Content-Type': 'text/xml'},
                 cookies=cookies,
-                data=get_ajax(MAIN_URL, insthash, appointments2),
+                data=get_ajax(MAIN_URL, insthash, appointments_next),
             )
-            try:
-                data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
-            except ValueError:
-                return clean_df(pd.concat(data_list, axis=1))
+            # try:
+            data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+            # except ValueError:
+            #     return clean_df(pd.concat(data_list, axis=1))
 
-            if data_next[0].equals(data_previous[0]) == True:
+            if data_next[0].equals(data_previous[0]) and data_next[0].equals(data_previous_two[0]):
                 get_another_page = False
                 return clean_df(pd.concat(data_list, axis=1))
             else:
