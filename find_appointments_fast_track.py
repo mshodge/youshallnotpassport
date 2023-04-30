@@ -19,7 +19,7 @@ MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBookin
 SERVICE = "fast track"
 IS_PROXY = False
 IS_GITHUB_ACTION = True
-IS_TWITTER = True
+IS_TWITTER = False
 wait_mins = 10
 number_of_appointments_classed_as_bulk = 10
 
@@ -207,6 +207,11 @@ def pipeline(first):
         run_github_action("29224896")
         raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
+    long_appointments_df = long_dataframe(nice_appointments_df)
+    failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
+                        "data/fast_track_appointments.csv",
+                        "updating fast track appointment data", replace=False)
+
     if first is False:
         if len(locations_added_checked) == 0:
             print(f"No new bulk appointments added. Will check again in {wait_mins} minutes.")
@@ -234,11 +239,6 @@ def pipeline(first):
         if failed:
             run_github_action("29224896")
             raise Exception(f"Error. Failed to post the SMS. Will try again.")
-
-    long_appointments_df = long_dataframe(nice_appointments_df)
-    failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
-                        "data/fast_track_appointments.csv",
-                        "updating fast track appointment data", replace=False)
 
     time.sleep(wait_mins * 60)  # wait 3 mins before calling again
     print(f"Successfully found new appointments, will check again in {wait_mins} minutes")
