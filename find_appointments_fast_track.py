@@ -19,7 +19,7 @@ MAIN_URL = 'https://www.passportappointment.service.gov.uk/outreach/PublicBookin
 SERVICE = "fast track"
 IS_PROXY = False
 IS_GITHUB_ACTION = True
-IS_TWITTER = False
+IS_TWITTER = True
 wait_mins = 10
 number_of_appointments_classed_as_bulk = 10
 
