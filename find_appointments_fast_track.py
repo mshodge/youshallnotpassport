@@ -192,7 +192,9 @@ def pipeline(first):
     #     run_github_action("29224896") if IS_GITHUB_ACTION else None
     #     raise Exception(f"Error. Softblocked. Will try again in 10 seconds.")
 
-    print(nice_appointments_df)
+
+    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+        print(nice_appointments_df)
 
     appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
     appointments_per_location.columns = ['location', 'count']
