@@ -112,7 +112,11 @@ def make_figure(the_df):
     days_list2 = list(range(10, 28))
 
     the_df[the_df.eq(0)] = np.nan
-    appointments = sns.heatmap(the_df, annot=True,
+    try:
+        plot_df = the_df.drop(['location'], axis=1)
+    except KeyError:
+        plot_df = the_df
+    appointments = sns.heatmap(plot_df, annot=True,
                                cbar=False, cmap="Blues", linewidths=1, linecolor="white",
                                vmin=0, vmax=30, annot_kws={"fontsize": 8})
     appointments.set_title("The number of Fast Track appointments \n\n")
