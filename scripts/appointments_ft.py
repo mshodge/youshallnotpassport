@@ -125,6 +125,7 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
     first_try = True
     check_for_image = True
     this_driver = setup_selenium(MAIN_URL)
+    time.sleep(1)
     while check_for_image:
         if not first_try: time.sleep(60)
         image_found = get_recapctha_image(this_driver)

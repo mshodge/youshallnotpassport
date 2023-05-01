@@ -68,7 +68,7 @@ def setup_selenium(url):
     userAgent = ua.random
 
     driver.get(url)
-    time.sleep(0.2)
+    time.sleep(1)
 
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": userAgent})
@@ -164,6 +164,7 @@ def get_recapctha_image(driver) -> bool:
 
     """
     try:
+        time.sleep(1)
         element = driver.find_element(by=By.XPATH,
                                            value='/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/div/fieldset/div[1]/img')
         img_url = element.get_attribute("src")
