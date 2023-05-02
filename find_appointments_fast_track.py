@@ -21,7 +21,7 @@ IS_PROXY = False
 IS_GITHUB_ACTION = True
 IS_TWITTER = True
 wait_mins = 10
-number_of_appointments_classed_as_bulk = 10
+number_of_appointments_classed_as_bulk = 5
 
 
 session = requests.Session()
@@ -147,13 +147,18 @@ def check_diff_in_loc_counts(df):
             List of offices with new appointments added, is blank if None
     """
 
-    df_old = get_csv("data/fast_track_appointments_locations.csv")
-    df_diff = df_old.copy()
-    df_diff['count'] = df['count'] - df_old['count']
+    df_old = get_csv("data/fast_track_appointments_cal.csv")
+    dates_in_both = [i for i, j in zip(df_old.columns, df.columns) if i == j]
+    dates_in_both.remove('location')
+
     locations_added = []
-    for index, row in df_diff.iterrows():
-        if row['count'] > number_of_appointments_classed_as_bulk:
-            locations_added.append(row['location'])
+
+    for date_in_both in dates_in_both:
+        diff_series = df[date_in_both] - df_old[date_in_both]
+        for _, val in diff_series.iteritems():
+            if val > number_of_appointments_classed_as_bulk:
+                if df.loc[_,'location'] not in locations_added:
+                    locations_added.append(df.loc[_,'location'])
 
     return locations_added
 
@@ -203,12 +208,14 @@ def pipeline(first):
     appointments_per_location = nice_appointments_df.sum(axis=1).to_frame().reset_index()
     appointments_per_location.columns = ['location', 'count']
 
-    if first is False:
-        locations_added_checked = check_diff_in_loc_counts(appointments_per_location)
+    cal_df = nice_appointments_df.reset_index().rename(columns={'index': 'location'})
 
-    failed = update_csv(appointments_per_location, IS_GITHUB_ACTION,
-                        "data/fast_track_appointments_locations.csv",
-                        "updating fast track appointment location data", replace=True)
+    if first is False:
+        locations_added_checked = check_diff_in_loc_counts(cal_df)
+
+    failed = update_csv(cal_df, IS_GITHUB_ACTION,
+                        "data/fast_track_appointments_cal.csv",
+                        "updating fast track appointment cal data", replace=True)
     if failed:
         run_github_action("29224896")
         raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
