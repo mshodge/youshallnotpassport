@@ -38,7 +38,15 @@ def check_diff_in_loc_counts(df):
             List of offices with new appointments added, is blank if None
     """
 
-    df_old = get_csv("data/premium_appointments_cal.csv")
+    org = "mshodge"
+    repo = "youshallnotpassport"
+    branch = "main"
+    file_path = "data/premium_appointments_cal.csv"
+
+    csv_url = f'https://raw.githubusercontent.com/{org}/{repo}/{branch}/{file_path}'
+
+    df_old = pd.read_csv(csv_url)
+
     dates_in_both = [i for i, j in zip(df_old.columns, df.columns) if i == j]
     dates_in_both.remove('location')
 
