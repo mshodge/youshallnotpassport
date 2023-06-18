@@ -7,12 +7,13 @@ import urllib3
 from scripts.utils.twitter import post_status, update_twitter_bio, online_status_on_last_check_twitter
 from scripts.utils.time import get_timestamp, check_if_half_hour_or_hour
 from scripts.utils.github import read_online_status, update_online_status, update_tweet_id
+from scripts.utils.gcp import online_status_on_last_google_storage, update_status
 from scripts.utils.sms import call_sms
 
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = True
+is_github_action = False
 is_twitter = True
 
 
@@ -280,8 +281,8 @@ if __name__ == '__main__':
 
         if is_twitter:
             # Now only posts if there has been a status change
-            one_week_online_check_last = online_status_on_last_check_twitter("fast track", is_github_action, is_proxy)
-            premium_online_check_last = online_status_on_last_check_twitter("premium", is_github_action,
+            one_week_online_check_last = online_status_on_last_google_storage("fast track", is_github_action, is_proxy)
+            premium_online_check_last = online_status_on_last_google_storage("premium", is_github_action,
                                                                             is_proxy)
 
             print(f'\n\nNew one week status is {one_week_online_check}, old was {one_week_online_check_last}\n')
@@ -301,5 +302,5 @@ if __name__ == '__main__':
                 call_sms('Premium', type="status", response=response_premium_check)
                 run_appointments_code("28968845", is_github_action)
 
-            update_online_status(df_status_is, is_github_action)
-            update_twitter_bio(is_github_action, is_proxy, one_week_online_check, premium_online_check)
+            update_status(df_status_is, is_github_action)
+            update_status(is_github_action, is_proxy, one_week_online_check, premium_online_check)
