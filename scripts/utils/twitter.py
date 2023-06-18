@@ -14,11 +14,18 @@ def authenticate_twitter(github_action, proxy, gt):
 
     # Uses GitHub Secrets to store and load credentials
     if github_action:
-        api = tweepy.Client(bearer_token=os.environ['bearer_token'],
+        api_v2 = tweepy.Client(bearer_token=os.environ['bearer_token'],
                             consumer_key=os.environ['consumer_key'],
                             consumer_secret=os.environ['consumer_secret'],
                             access_token=os.environ['access_token'],
                             access_token_secret=os.environ['access_token_secret'])
+
+        auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
+        auth.set_access_token(os.environ['access_token'], os.environ['access_token_secret'])
+
+        api_v1 = tweepy.API(auth, wait_on_rate_limit=True)
+
+
     # Else uses local twitter_credentials.py file
     else:
         if gt:
@@ -26,13 +33,18 @@ def authenticate_twitter(github_action, proxy, gt):
         else:
             import config.twitter_credentials as twitter_credentials
 
-        api = tweepy.Client(bearer_token=twitter_credentials.bearer_token,
+        api_v2 = tweepy.Client(bearer_token=twitter_credentials.bearer_token,
                             consumer_key=twitter_credentials.consumer_key,
                             consumer_secret=twitter_credentials.consumer_secret,
                             access_token=twitter_credentials.access_token,
                             access_token_secret=twitter_credentials.access_token_secret)
 
-    return api
+        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
+        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
+
+        api_v1 = tweepy.API(auth, wait_on_rate_limit=True)
+
+    return api_v1, api_v2
 
 
 def post_status(response, proxy, github_action):
@@ -44,10 +56,10 @@ def post_status(response, proxy, github_action):
     :return: <string> The tweet id
     """
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     # Posts status to Twitter
-    tweet = api.create_tweet(text=response)
+    tweet = api_v2.create_tweet(text=response)
     tweet_id = tweet.data['id']
 
     print("Posted update to Twitter")
@@ -71,7 +83,7 @@ def post_quick_check(proxy, github_action, service):
     tweetid = requests.get(url).\
         text.replace("\n","")
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
 
@@ -79,7 +91,7 @@ def post_quick_check(proxy, github_action, service):
         message = f"Fast Track appointments seem to have been added at {timestamp}. The bot will try and get the " \
                   f"number and location now."
 
-    api.create_tweet(text=message,
+    api_v2.create_tweet(text=message,
                       in_reply_to_tweet_id=tweetid)
 
     print("Posted text update to Twitter")
@@ -101,10 +113,10 @@ def post_media(proxy, github_action, service):
     tweetid = requests.get(url).\
         text.replace("\n","")
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     # Posts status to Twitter
-    media = api.media_upload(filename='out.png')
+    media = api_v1.media_upload(filename='out.png')
 
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
 
@@ -115,7 +127,7 @@ def post_media(proxy, github_action, service):
         message = f"The latest Premium appointment slots as of {timestamp}. More may be added " \
                   f"whilst the service is online. I'll keep checking if more are added."
 
-    api.create_tweet(text=message,
+    api_v2.create_tweet(text=message,
                       media_ids=[media.media_id],
                       in_reply_to_tweet_id=tweetid)
 
@@ -131,10 +143,10 @@ def post_media_update_gt(proxy, github_action, locs_added_checked):
     :return: <string> The response of whether the service is online or not
     """
 
-    api = authenticate_twitter(github_action, proxy, gt = True)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = True)
 
     # Posts status to Twitter
-    media = api.media_upload(filename='out.png')
+    media = api_v1.media_upload(filename='out.png')
 
     timestamp = get_timestamp(github_action, timestamp_string_format='%d/%m/%Y %H:%M')
 
@@ -148,7 +160,7 @@ def post_media_update_gt(proxy, github_action, locs_added_checked):
               f"\n" \
               f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
-    api.create_tweet(text=message,
+    api_v2.create_tweet(text=message,
                       media_ids=[media.media_id])
 
     print("Posted update to Twitter")
@@ -163,7 +175,7 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
     """
     timestamp = get_timestamp(github_action, timestamp_string_format='%H:%M')
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     if premium_status == "Error":
         premium_status_symbol = f"OP ️is error,"
@@ -183,7 +195,7 @@ def update_twitter_bio(github_action, proxy, one_week_status, premium_status):
               f". {premium_status_symbol} {one_week_status_symbol} (at {timestamp}). Charity link below"
 
     # Posts status to Twitter
-    api.update_profile(description=new_bio)
+    api_v1.update_profile(description=new_bio)
 
     print("Updated bio on Twitter")
 
@@ -197,10 +209,10 @@ def online_status_on_last_check_twitter(service, github_action, proxy):
     :return: <string> True or False string based on what is in the bio
     """
     # Uses GitHub Secrets to store and load credentials
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     id = "1521412356361920516"
-    user = api.get_user(user_id=id)
+    user = api_v1.get_user(user_id=id)
     bio_desc = user.description
 
     if service == "fast track":
@@ -234,10 +246,10 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
         tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_op.md").\
             text.replace("\n","")
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     # Posts status to Twitter
-    media = api.media_upload(filename='out.png')
+    media = api_v1.media_upload(filename='out.png')
 
     locations = ' and '.join(locs_added_checked)
 
@@ -252,7 +264,7 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
                   f"\n" \
                   f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
-    api.create_tweet(text=message,
+    api_v2.create_tweet(text=message,
                       media_ids=[media.media_id],
                       in_reply_to_tweet_id=tweetid)
 
@@ -273,11 +285,11 @@ def post_status_update(proxy, github_action):
     tweetid = requests.get("https://raw.githubusercontent.com/mshodge/youshallnotpassport/main/data/tweet_id_ft.md").\
         text.replace("\n","")
 
-    api = authenticate_twitter(github_action, proxy, gt = False)
+    api_v1, api_v2 = authenticate_twitter(github_action, proxy, gt = False)
 
     message = f"No appointments available at the moment. The bot will keep checking and post when " \
               f"appointments are added ({timestamp})."
 
-    api.create_tweet(text=message, in_reply_to_tweet_id=tweetid)
+    api_v2.create_tweet(text=message, in_reply_to_tweet_id=tweetid)
 
     print("Posted update to Twitter")
