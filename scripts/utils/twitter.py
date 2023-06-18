@@ -54,7 +54,7 @@ def post_status(response, proxy, github_action):
     api = authenticate_twitter(github_action, proxy, gt = False)
 
     # Posts status to Twitter
-    tweet = api.update_status(response)
+    tweet = api.create_tweet(response)
     tweet_id = tweet.id_str
 
     print("Posted update to Twitter")
@@ -86,8 +86,8 @@ def post_quick_check(proxy, github_action, service):
         message = f"Fast Track appointments seem to have been added at {timestamp}. The bot will try and get the " \
                   f"number and location now."
 
-    api.update_status(status=message,
-                      in_reply_to_status_id=tweetid)
+    api.create_tweet(text=message,
+                      in_reply_to_tweet_id=tweetid)
 
     print("Posted text update to Twitter")
 
@@ -122,9 +122,9 @@ def post_media(proxy, github_action, service):
         message = f"The latest Premium appointment slots as of {timestamp}. More may be added " \
                   f"whilst the service is online. I'll keep checking if more are added."
 
-    api.update_status(status=message,
+    api.create_tweet(text=message,
                       media_ids=[media.media_id],
-                      in_reply_to_status_id=tweetid)
+                      in_reply_to_tweet_id=tweetid)
 
     print("Posted update to Twitter")
 
@@ -155,7 +155,7 @@ def post_media_update_gt(proxy, github_action, locs_added_checked):
               f"\n" \
               f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
-    api.update_status(status=message,
+    api.create_tweet(text=message,
                       media_ids=[media.media_id])
 
     print("Posted update to Twitter")
@@ -259,9 +259,9 @@ def post_media_update(proxy, github_action, locs_added_checked, service):
                   f"\n" \
                   f"(contribute a ☕ to help running costs at: https://www.buymeacoffee.com/ukpassportcheck)"
 
-    api.update_status(status=message,
+    api.create_tweet(text=message,
                       media_ids=[media.media_id],
-                      in_reply_to_status_id=tweetid)
+                      in_reply_to_tweet_id=tweetid)
 
     print("Posted update to Twitter")
     return message
@@ -285,6 +285,6 @@ def post_status_update(proxy, github_action):
     message = f"No appointments available at the moment. The bot will keep checking and post when " \
               f"appointments are added ({timestamp})."
 
-    api.update_status(status=message, in_reply_to_status_id=tweetid)
+    api.create_tweet(text=message, in_reply_to_tweet_id=tweetid)
 
     print("Posted update to Twitter")
