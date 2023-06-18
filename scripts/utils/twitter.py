@@ -37,7 +37,7 @@ def authenticate_twitter(github_action, proxy, gt):
         api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
         api.session.verify = False
     else:
-        api = tweepy.API(auth, wait_on_rate_limit=True)
+        api = tweepy.Client(auth, wait_on_rate_limit=True)
 
     return api
 
