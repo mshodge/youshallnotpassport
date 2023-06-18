@@ -292,15 +292,15 @@ if __name__ == '__main__':
                 print('\n\nOne week service status has changed, will post to Twitter!\n')
                 tweet_id = post_status(response_one_week_check, is_proxy, is_github_action)
                 update_tweet_id(is_github_action, tweet_id, 'fast track')
-                call_sms('Fast Track', type="status", response=response_one_week_check)
+                # call_sms('Fast Track', type="status", response=response_one_week_check)
                 run_appointments_code("28775018", is_github_action)
 
             if premium_online_check != premium_online_check_last:
                 print('\n\nPremium service status has changed, will post to Twitter!\n')
                 tweet_id = post_status(response_premium_check, is_proxy, is_github_action)
                 update_tweet_id(is_github_action, tweet_id, 'premium')
-                call_sms('Premium', type="status", response=response_premium_check)
+                # call_sms('Premium', type="status", response=response_premium_check)
                 run_appointments_code("28968845", is_github_action)
 
-            update_status(df_status_is, is_github_action)
+            update_online_status(df_status_is, is_github_action)
             update_status(is_github_action, is_proxy, one_week_online_check, premium_online_check)

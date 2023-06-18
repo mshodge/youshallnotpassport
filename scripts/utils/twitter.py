@@ -47,8 +47,8 @@ def post_status(response, proxy, github_action):
     api = authenticate_twitter(github_action, proxy, gt = False)
 
     # Posts status to Twitter
-    tweet = api.create_tweet(response)
-    tweet_id = tweet.id_str
+    tweet = api.create_tweet(text=response)
+    tweet_id = tweet.data['id']
 
     print("Posted update to Twitter")
 
