@@ -14,30 +14,23 @@ def authenticate_twitter(github_action, proxy, gt):
 
     # Uses GitHub Secrets to store and load credentials
     if github_action:
-        auth = tweepy.OAuthHandler(os.environ['consumer_key'], os.environ['consumer_secret'])
-        auth.set_access_token(os.environ['access_token'], os.environ['access_token_secret'])
-
+        api = tweepy.Client(bearer_token=os.environ['bearer_token'],
+                            consumer_key=os.environ['consumer_key'],
+                            consumer_secret=os.environ['consumer_secret'],
+                            access_token=os.environ['access_token'],
+                            access_token_secret=os.environ['access_token_secret'])
     # Else uses local twitter_credentials.py file
     else:
         if gt:
             import config.twitter_credentials_gt as twitter_credentials
         else:
             import config.twitter_credentials as twitter_credentials
-        auth = tweepy.OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
-        auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
 
-    headers = requests.utils.default_headers()
-    headers.update({
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
-    })
-
-    if proxy:
-        import config.proxies as set_proxies
-        proxies = set_proxies.set_ons_proxies(ssl=False, headers=headers)
-        api = tweepy.API(auth, wait_on_rate_limit=True, proxy=proxies.get('https'))
-        api.session.verify = False
-    else:
-        api = tweepy.Client(auth, wait_on_rate_limit=True)
+        api = tweepy.Client(bearer_token=twitter_credentials.bearer_token,
+                            consumer_key=twitter_credentials.consumer_key,
+                            consumer_secret=twitter_credentials.consumer_secret,
+                            access_token=twitter_credentials.access_token,
+                            access_token_secret=twitter_credentials.access_token_secret)
 
     return api
 

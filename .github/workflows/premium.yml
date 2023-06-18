@@ -28,6 +28,7 @@ jobs:
         run: |
           python find_appointments_premium.py True
         env:
+          bearer_token: ${{ secrets.BEARER_TOKEN }} # if run.py requires passwords..etc, set it as secrets
           consumer_key: ${{ secrets.CONSUMER_KEY }} # if run.py requires passwords..etc, set it as secrets
           consumer_secret: ${{ secrets.CONSUMER_SECRET }} # if run.py requires passwords..etc, set it as secrets
           access_token: ${{ secrets.ACCESS_TOKEN }} # if run.py requires passwords..etc, set it as secrets
