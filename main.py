@@ -13,7 +13,7 @@ from scripts.utils.sms import call_sms
 urllib3.disable_warnings()
 
 is_proxy = False
-is_github_action = False
+is_github_action = True
 is_twitter = True
 
 
