@@ -346,8 +346,14 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
                 cookies=cookies,
                 data=get_ajax(MAIN_URL, insthash, appointments_next),
             )
+
+            if r.status_code != 200:
+                print(r.status_code)
+                print(r.text)
+
             # try:
             data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+            print(data_next)
             # except ValueError:
             #     return clean_df(pd.concat(data_list, axis=1))
 
