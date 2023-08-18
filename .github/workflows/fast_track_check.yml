@@ -24,6 +24,7 @@ jobs:
           python -m pip install pip==22.0.4
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install --upgrade webdriver-manager
       - name: execute py script # run the run.py to get the latest data
         run: |
           python find_appointments_fast_track.py False
