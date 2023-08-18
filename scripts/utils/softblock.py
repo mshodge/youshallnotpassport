@@ -1,14 +1,13 @@
-import chromedriver_autoinstaller
 from fake_useragent import UserAgent
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from seleniumbase import Driver
+
 import urllib.request
 import requests
 import time
 import os
-import undetected_chromedriver as uc
+# import undetected_chromedriver as uc
 
 
 def get_azure_key(github_action) -> str:
@@ -47,22 +46,22 @@ def setup_selenium(url):
             The selenium web driver
 
     """
-    options = uc.ChromeOptions()
-    options.headless = True
+    # options = uc.ChromeOptions()
+    # options.headless = True
 
-    options.add_argument('--headless')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--allow-running-insecure-content')
-    options.add_argument("--nogpu")
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--window-size=1920,1080')
-    options.add_argument("--incognito")
-    options.add_argument("--enable-javascript")
+    # options.add_argument('--headless')
+    # options.add_argument('--ignore-certificate-errors')
+    # options.add_argument('--allow-running-insecure-content')
+    # options.add_argument("--nogpu")
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--no-sandbox')
+    # options.add_argument('--window-size=1920,1080')
+    # options.add_argument("--incognito")
+    # options.add_argument("--enable-javascript")
     # options.add_experimental_option("excludeSwitches", ["enable-automation"])
     # options.add_experimental_option('useAutomationExtension', False)
     # options.add_argument('--disable-blink-features=AutomationControlled')
-    driver = uc.Chrome(options=options)
+    driver = Driver(uc=True, headless=True, incognito=True)
 
     ua = UserAgent()
     userAgent = ua.random

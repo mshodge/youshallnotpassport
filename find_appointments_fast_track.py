@@ -6,6 +6,7 @@ import requests
 import seaborn as sns
 import sys
 import time
+from urllib.error import HTTPError
 
 from scripts.utils.twitter import post_media, post_media_update, post_quick_check
 from scripts.utils.dataframes import update_csv, get_csv
@@ -22,7 +23,6 @@ IS_GITHUB_ACTION = True
 IS_TWITTER = True
 wait_mins = 10
 number_of_appointments_classed_as_bulk = 5
-
 
 session = requests.Session()
 session.headers = {
@@ -166,8 +166,8 @@ def check_diff_in_loc_counts(df):
         diff_series = df[date_in_both] - df_old[date_in_both]
         for _, val in diff_series.iteritems():
             if val > number_of_appointments_classed_as_bulk:
-                if df.loc[_,'location'] not in locations_added:
-                    locations_added.append(df.loc[_,'location'])
+                if df.loc[_, 'location'] not in locations_added:
+                    locations_added.append(df.loc[_, 'location'])
 
     return locations_added
 
@@ -210,7 +210,6 @@ def pipeline(first):
     #     run_github_action("29224896") if IS_GITHUB_ACTION else None
     #     raise Exception(f"Error. Softblocked. Will try again in 10 seconds.")
 
-
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):
         print(nice_appointments_df)
 
@@ -220,7 +219,12 @@ def pipeline(first):
     cal_df = nice_appointments_df.reset_index().rename(columns={'index': 'location'})
 
     if first is False:
-        locations_added_checked = check_diff_in_loc_counts(cal_df)
+        try:
+            locations_added_checked = check_diff_in_loc_counts(cal_df)
+        except HTTPError as err:
+            time.sleep(60)
+            run_github_action("29224896") if IS_GITHUB_ACTION else None
+            raise Exception(f"Error. {err}. Will try again in one minute.")
 
     failed = update_csv(cal_df, IS_GITHUB_ACTION,
                         "data/fast_track_appointments_cal.csv",
