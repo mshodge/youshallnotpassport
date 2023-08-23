@@ -351,11 +351,11 @@ def get_appointment_data(is_github_action, MAIN_URL) -> Union[str, pd.DataFrame]
                 print(r.status_code)
                 print(r.text)
 
-            # try:
-            data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
-            print(data_next)
-            # except ValueError:
-            #     return clean_df(pd.concat(data_list, axis=1))
+            try:
+                data_next = pd.read_html(r.text.replace('&lt;', '<').replace('&gt;', '>'))
+                print(data_next)
+            except ValueError:
+                return None
 
             if data_next[0].equals(data_previous[0]) and data_next[0].equals(data_previous_two[0]):
                 get_another_page = False
