@@ -226,17 +226,29 @@ def pipeline(first):
             run_github_action("29224896") if IS_GITHUB_ACTION else None
             raise Exception(f"Error. {err}. Will try again in one minute.")
 
-    failed = update_csv(cal_df, IS_GITHUB_ACTION,
+    try:
+        failed = update_csv(cal_df, IS_GITHUB_ACTION,
                         "data/fast_track_appointments_cal.csv",
                         "updating fast track appointment cal data", replace=True)
+    except HTTPError as err:
+        time.sleep(60)
+        run_github_action("29224896") if IS_GITHUB_ACTION else None
+        raise Exception(f"Error. {err}. Will try again in one minute.")
+
     if failed:
         run_github_action("29224896")
         raise Exception(f"Error. Failed to return the GitHub file. Will try again.")
 
     long_appointments_df = long_dataframe(nice_appointments_df)
-    failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
+
+    try:
+        failed = update_csv(long_appointments_df, IS_GITHUB_ACTION,
                         "data/fast_track_appointments.csv",
                         "updating fast track appointment data", replace=False)
+    except HTTPError as err:
+        time.sleep(60)
+        run_github_action("29224896") if IS_GITHUB_ACTION else None
+        raise Exception(f"Error. {err}. Will try again in one minute.")
 
     if first is False:
         if len(locations_added_checked) == 0:
